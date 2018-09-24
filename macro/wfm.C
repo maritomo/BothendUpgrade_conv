@@ -8,11 +8,13 @@ void draw(int entry) {
   TFile* fin = new TFile(Form("../run%d_conv.root", g_runID));
   TTree* tree = (TTree*) fin->Get("tree");
 
+
+  TCut cut = "trackID == 1";
+
+
   // top layer
   TH2F* h1[12];
   int maxcount = pow(2, 14) - 1;
-
-  TCut cut = "trackID == 1";
 
   tree->Draw(">>ls1", cut);
   TEventList* ls = (TEventList*) gDirectory->Get("ls1");
@@ -28,7 +30,7 @@ void draw(int entry) {
 	       Form("Entry$==%d",ls->GetEntry(entry)));
   }
 
-  c1->Print(Form("./pict/run%d/entry%d_top.pdf", g_runID, entry));
+  c1->Print(Form("./pict/wfm_run%d_%d_top.C", g_runID, entry));
 
 
   // bottom layer
@@ -47,5 +49,5 @@ void draw(int entry) {
 	       Form("Entry$==%d",ls->GetEntry(entry)));
   }
 
-  c2->Print(Form("./pict/run%d/entry%d_btm.pdf", g_runID, entry));
+  c2->Print(Form("./pict/run%d_%d_btm.C", g_runID, entry));
 }

@@ -22,7 +22,7 @@ void peak() {
       tree->Draw(Form("peak[0][%d][%d]>>h1_%d", ch, lr, id), Form("isHit[0][%d]", ch));
     }
   }
-  c1->Print(Form("./pict/run%d/peak_btm.pdf", g_runID));
+  c1->Print(Form("./pict/peak_btm_run%d.C", g_runID));
 
 
   // Top layer
@@ -41,5 +41,5 @@ void peak() {
     }
   }
 
-  c2->Print(Form("./pict/run%d/peak_top.pdf", g_runID));
+  c2->Print(Form("./pict/peak_top_run%d.C", g_runID));
 }

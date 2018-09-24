@@ -20,6 +20,6 @@ void TD() {
       tree->Draw(Form("TD[%d][%d]*8>>h1_%d", layer, ch, id), Form("isHit[%d][%d]", layer, ch));
     }
   }
-  c1->Print(Form("./pict/run%d/TD.pdf", g_runID));
+  c1->Print(Form("./pict/TD_run%d.C", g_runID));
 
 }

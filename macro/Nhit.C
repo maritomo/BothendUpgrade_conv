@@ -51,7 +51,7 @@ void Nhit() {
   tree->Draw("trackID", "trackID==1||trackID==8||trackID==15||trackID==22||trackID==29||trackID==36");
 
   gStyle->SetOptStat(0);
-  c1->Print(Form("./pict/run%d/Nhit.pdf", g_runID));
+  c1->Print(Form("./pict/Nhit_run%d.C", g_runID));
 
   int nTrackedEvent = tree->GetEntries("trackID>0");
   std::cout << "# of successfully tracked event\t" << nTrackedEvent << Form(" (%.1f%%)\n", (double)nTrackedEvent/tree->GetEntries());
