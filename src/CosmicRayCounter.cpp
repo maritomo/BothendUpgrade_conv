@@ -37,35 +37,10 @@ CosmicRayCounter::CosmicRayCounter(int layer, int ch, int scintiID, int dir, con
  * Setter
  */
 
-bool CosmicRayCounter::SetCalibConst(const double* TD_to_x) {
+void CosmicRayCounter::SetCalibConst(const double* TD_to_x) {
   for(int i = 0; i < 2; ++i) {
     m_TD_to_x[i] = TD_to_x[i] * m_dir;
   }
-  return true;
-}
-
-bool CosmicRayCounter::SetHitCondition(const double* peak_thr, const double* coin_range) {
-
-  for(int k = 0; k < 2; ++k) {
-    m_peak_thr[k] = peak_thr[k];
-
-    if(peak_thr[k] < 0 || peak_thr[k] > pow(2, 14) - 1) {
-      std::cout << "Error: peak threshold is out of ADC range\n";
-      return false;
-    }
-
-    m_coin_range[k] = coin_range[k];
-
-    if(m_coin_range[k] < 0 || m_coin_range[k] > 63) {
-      std::cout << "Error: coincidence range is out of window\n";
-      return false;
-    }
-  }
-
-  if(m_coin_range[0] > m_coin_range[1]) {
-    std::cout << "Warning: coin_range[0] > coin_range[1]\n";
-  }
-
   return true;
 }
 

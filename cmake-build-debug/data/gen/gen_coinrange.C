@@ -1,5 +1,5 @@
 {
-  double coin_range[2] = {25, 35};
+  double coin_range[2] = {26, 34};
   
   std::ofstream ofs("../coincidence_range.txt");
   

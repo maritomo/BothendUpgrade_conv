@@ -39,7 +39,7 @@ void pedestal() {
       rms = fg->GetParameter(2);
       h[layer][ch][side]->Fit("fg", "", "", mean - 2 * rms, mean + 2 * rms);
 
-      ofs << layer << " " << ch << " " << h[layer][ch][side]->GetMean() << " " << h[layer][ch][side]->GetRMS() << "\n";
+      ofs << slot << " " << adcch << " " << h[layer][ch][side]->GetMean() << " " << h[layer][ch][side]->GetRMS() << "\n";
 
       c1->Print(Form("./pict/pedestal_run%d.pdf", runID));
     }

@@ -15,8 +15,10 @@ public:
   void Reconstruct();
   void HitDecision();
 
-  bool SetCalibConst(const double* TD_x);
-  bool SetHitCondition(const double* peak_thr, const double* coin_range);
+  void SetCalibConst(const double* TD_x);
+  void SetPeakThreshold(int side, double peak_thr) { m_peak_thr[side] = peak_thr; }
+  void SetCoinRange_min(double coin_range_min) { m_coin_range[0] = coin_range_min; }
+  void SetCoinRange_max(double coin_range_max) { m_coin_range[1] = coin_range_max; }
 
   int GetScintiID() { return m_scintiID; }
 

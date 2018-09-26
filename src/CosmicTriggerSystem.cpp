@@ -15,7 +15,7 @@
 CosmicTriggerSystem::CosmicTriggerSystem(int runID) : m_runID(runID) {
 
   if(!Init()) {
-    std::cout << "Error: CosmicTriggerSystem instance was not initialized\n";
+    std::cout << "Error: CosmicTriggerSystem was not initialized\n";
   }
 
   for(int plane = 0; plane < 3; ++plane) {
@@ -78,7 +78,7 @@ bool CosmicTriggerSystem::Init_map() {
   std::ifstream ifs(filename.c_str());
 
   if(!ifs) {
-    std::cout << filename << " not found !\n";
+    std::cout << filename << " not found\n";
     return false;
   }
 
@@ -104,13 +104,13 @@ bool CosmicTriggerSystem::Init_channelDelay() {
   std::ifstream ifs(filename.c_str());
 
   if(!ifs) {
-    std::cout << filename << " not found !\n";
+    std::cout << filename << " not found\n";
     return false;
   }
 
   int slot, adcch, delay;
 
-  while(ifs >>slot >> adcch >> delay) {
+  while(ifs >> slot >> adcch >> delay) {
     int layer = slot;
     int ch = adcch / 2;
     int side = adcch % 2;
@@ -129,7 +129,7 @@ bool CosmicTriggerSystem::Init_calibConst() {
   std::ifstream ifs(filename.c_str());
 
   if(!ifs) {
-    std::cout << filename << " not found !\n";
+    std::cout << filename << " not found\n";
     return false;
   }
 
@@ -152,11 +152,11 @@ bool CosmicTriggerSystem::Init_calibConst() {
 
 bool CosmicTriggerSystem::Init_hitCondition() {
 
-  std::stringstream ss;
-  ss << "./data/run" << m_runID << "/pedestal.txt";
+  double nSigma = 5; // peak threhold = pedestalRMS * nSigma
 
-  std::string filename;
-  ss >> filename;
+  std::stringstream ss;
+  ss << "./data/pedestal/pedestal_run" << m_runID << ".txt";
+  std::string filename = ss.str();
 
 #ifdef COMMON_THRESHOLD
   filename = "./data/common_threshold.txt";
@@ -164,35 +164,51 @@ bool CosmicTriggerSystem::Init_hitCondition() {
 
   std::ifstream ifs(filename.c_str());
   if(!ifs) {
-    std::cout << filename << " not found !\n";
+    std::cout << filename << " not found\n";
     return false;
   }
 
-  double coin_range[2] = {20, 40};
+  int slot, adcch;
+  int layer, ch, side;
+  double ped_mean, ped_sigma;
 
-  int layer;
-  int pmtID;
-  double mean[2], sigma[2];
-
-  int ch;
-
-  for(int k = 0; k < 24; ++k) {
-    ifs >> layer >> pmtID >> mean[k % 2] >> sigma[k % 2];
+  while(ifs >> slot >> adcch >> ped_mean >> ped_sigma) {
+    layer = slot;
+    ch = adcch / 2;
+    side = adcch % 2;
 
 #ifndef COMMON_THRESHOLD
-    sigma[k % 2] *= 5;
+    ped_sigma *= nSigma;
 #endif
 
-    if(k % 2==1) {
-      ch = pmtID / 2;
-      m_crc[layer][ch]->SetHitCondition(sigma, coin_range);
-    }
-
+    m_crc[layer][ch]->SetPeakThreshold(side, ped_sigma);
   }
 
   ifs.close();
-  std::cout << "Hit condition parameters        [OK]\n";
 
+
+  filename = "./data/coincidence_range.txt";
+  std::ifstream ifs2(filename.c_str());
+  if(!ifs2) {
+    std::cout << filename << " not found\n";
+    return false;
+  }
+
+  double coin_range[2];
+
+  while(ifs2 >> slot >> adcch >> coin_range[0] >> coin_range[1]) {
+    int layer = slot;
+    int ch = adcch / 2;
+    int side = adcch % 2;
+
+    m_crc[layer][ch]->SetCoinRange_min(coin_range[0]);
+    m_crc[layer][ch]->SetCoinRange_max(coin_range[1]);
+  }
+
+  ifs2.close();
+
+
+  std::cout << "Hit condition parameters        [OK]\n";
   return true;
 }
 
