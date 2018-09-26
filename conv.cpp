@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
   int runID;
   ss1 >> runID;
 
-  std::string comment = "";
+  std::string comment = "No comments";
   if(argc==3) {
     comment = argv[2];
   }
@@ -152,6 +152,7 @@ int main(int argc, char** argv) {
 #ifdef DEBUG
     if(evt==0) break;
 #endif
+
   }
 
 
@@ -163,11 +164,15 @@ int main(int argc, char** argv) {
   tout->Write();
 
   TText note1(0, 0, "comment");
-  note1.SetName("comments");
+  note1.SetName("Comments");
   note1.Write();
 
-
   fout->Close();
+
+
+#ifdef DEBUG
+  std::cout << ">>>>> DEBUG mode <<<<<\n";
+#endif
 
   return 0;
 }

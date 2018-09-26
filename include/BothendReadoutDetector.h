@@ -29,6 +29,8 @@ public:
   int GetIsHit() { return m_isHit; }
   int GetHitPos(int axis) { return m_hitpos[axis]; }
 
+  void SetDelay(int side, int delay) { m_delay[side] = delay; }
+
   void GetCFTime(int side, const short* data);
 
   void GetVisAxis(int plane, int& axis_h, int& axis_v);
@@ -38,6 +40,8 @@ public:
 protected:
   double m_pos[3];   // location (x, y, z)
   double m_size[3];  // size (x, y, z)
+
+  int m_delay[2];   // Channel delay
 
   double m_ped[2];    // ch (even, odd)
   double m_peak[2];   // ch (even, odd)

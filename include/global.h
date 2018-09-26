@@ -1,4 +1,3 @@
-#define DEBUG
-
-#define COMMON_THRESHOLD
+//#define DEBUG
 #define VISUALIZE
+#define COMMON_THRESHOLD

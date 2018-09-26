@@ -1,6 +1,7 @@
 //
 // Created by Tomoo MARI on 2018/09/18.
 //
+
 #include "global.h"
 #include "CosmicTriggerSystem.h"
 
@@ -22,13 +23,13 @@ CosmicTriggerSystem::CosmicTriggerSystem(int runID) : m_runID(runID) {
   }
 
   double worldsize[3] = {1100, 1500, 300};
-  for(int axis=0; axis<3; ++axis) {
-    for(int i=0; i<2; ++i) {
+  for(int axis = 0; axis < 3; ++axis) {
+    for(int i = 0; i < 2; ++i) {
       m_world[axis][i] = worldsize[axis];
       if(i==0) m_world[axis][i] *= -1;
     }
   }
-  
+
 }
 
 CosmicTriggerSystem::~CosmicTriggerSystem() {
@@ -55,6 +56,7 @@ bool CosmicTriggerSystem::Init() {
   std::cout << "---------------------------------------------\n";
 
   if(!Init_map()) return false;
+  if(!Init_channelDelay()) return false;
   if(!Init_calibConst()) return false;
   if(!Init_hitCondition()) return false;
 
@@ -81,8 +83,7 @@ bool CosmicTriggerSystem::Init_map() {
   }
 
   int scintiID, dir;
-  double pos[3] = {1000, 1000, 0};
-
+  double pos[3];
 
   for(int layer = 0; layer < m_nLayer; ++layer) {
     for(int ch = 0; ch < m_nCRC; ++ch) {
@@ -94,6 +95,31 @@ bool CosmicTriggerSystem::Init_map() {
   ifs.close();
 
   std::cout << "Trigger counter map             [OK]\n";
+  return true;
+}
+
+bool CosmicTriggerSystem::Init_channelDelay() {
+
+  std::string filename = "./data/channel_delay.txt";
+  std::ifstream ifs(filename.c_str());
+
+  if(!ifs) {
+    std::cout << filename << " not found !\n";
+    return false;
+  }
+
+  int slot, adcch, delay;
+
+  while(ifs >>slot >> adcch >> delay) {
+    int layer = slot;
+    int ch = adcch / 2;
+    int side = adcch % 2;
+    m_crc[layer][ch]->SetDelay(side, delay);
+  }
+
+  ifs.close();
+
+  std::cout << "Channel delays                  [OK]\n";
   return true;
 }
 
@@ -211,9 +237,9 @@ void CosmicTriggerSystem::Tracking() {
 
   m_trackID = m_hitCh[1] * m_nCRC + m_hitCh[0] + 1;
 
-  TOF = sqrt((m_hitpos[1][0]-m_hitpos[0][0])*(m_hitpos[1][0]-m_hitpos[0][0])+
-             (m_hitpos[1][1]-m_hitpos[0][1])*(m_hitpos[1][1]-m_hitpos[0][1])+
-             (m_hitpos[1][2]-m_hitpos[0][2])*(m_hitpos[1][2]-m_hitpos[0][2])) / TMath::C();
+  TOF = sqrt((m_hitpos[1][0] - m_hitpos[0][0]) * (m_hitpos[1][0] - m_hitpos[0][0]) +
+             (m_hitpos[1][1] - m_hitpos[0][1]) * (m_hitpos[1][1] - m_hitpos[0][1]) +
+             (m_hitpos[1][2] - m_hitpos[0][2]) * (m_hitpos[1][2] - m_hitpos[0][2])) / TMath::C();
 
   int axis_h; // index of horizontal axis
   int axis_v; // index of vertical axis
@@ -313,7 +339,7 @@ void CosmicTriggerSystem::SetTrackLine(int plane) {
     if(h[i] < m_world[axis_h][0]) {
       h[i] = m_world[axis_h][0];
     }
-    if (h[i] > m_world[axis_h][1]) {
+    if(h[i] > m_world[axis_h][1]) {
       h[i] = m_world[axis_h][1];
     }
 
@@ -355,11 +381,17 @@ void CosmicTriggerSystem::Display() {
       }
     }
 
+    m_canv->Update();
+    m_canv->Modified();
+
     // Track
     if(m_trackID==0) continue;
 
     SetTrackLine(plane);
     m_lTrack[plane]->Draw("same");
+
+    m_canv->Update();
+    m_canv->Modified();
   }
 
 }

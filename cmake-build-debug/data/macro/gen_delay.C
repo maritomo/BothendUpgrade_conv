@@ -1,5 +1,5 @@
 {
-  int delay = 15; // must be 0 - 15
+  int delay = 14; // must be 0 - 15
   
   std::ofstream ofs("../channel_delay.txt");
   

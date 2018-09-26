@@ -122,12 +122,9 @@ void BothendReadoutDetector::Display(int plane) {
 
   if(!m_isVis[plane]) return;
 
-  if(!m_isHit) {
-    m_box_det[plane]->Draw("same");
-    return;
-  }
-
   m_box_det[plane]->Draw("same");
+
+  if(!m_isHit) return;
 
   int axis_h; // index of horizontal axis
   int axis_v; // index of vertical axis

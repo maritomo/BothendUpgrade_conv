@@ -31,9 +31,9 @@ public:
 
   bool Init();
   bool Init_map();
+  bool Init_channelDelay();
   bool Init_calibConst();
   bool Init_hitCondition();
-  bool Init_trackTable();
 
   void Process();
   void HitDecision();
@@ -78,7 +78,7 @@ private:
   double m_hitpos[2][3];
 
   int m_trackID;
-  double m_track[3][2]; // (xy, yz, zx) plane, (constant, slope)
+  double m_track[3][2]; // (xy, zy, xz) plane, (constant, slope)
   double TOF; // time of flight
 
   int m_isVis[3];
