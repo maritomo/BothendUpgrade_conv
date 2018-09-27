@@ -152,7 +152,7 @@ bool CosmicTriggerSystem::Init_calibConst() {
 
 bool CosmicTriggerSystem::Init_hitCondition() {
 
-  double nSigma = 5; // peak threhold = pedestalRMS * nSigma
+  m_fPedSig = 5; // peak threhold = pedestalRMS * fPedSig
 
   std::stringstream ss;
   ss << "./data/pedestal/pedestal_run" << m_runID << ".txt";
@@ -176,8 +176,10 @@ bool CosmicTriggerSystem::Init_hitCondition() {
     layer = slot;
     ch = adcch / 2;
     side = adcch % 2;
-
-#ifndef COMMON_THRESHOLD
+    
+#ifdef COMMON_THRESHOLD
+    m_comthr = ped_sigma;
+#else
     ped_sigma *= nSigma;
 #endif
 
@@ -201,8 +203,8 @@ bool CosmicTriggerSystem::Init_hitCondition() {
     int ch = adcch / 2;
     int side = adcch % 2;
 
-    m_crc[layer][ch]->SetCoinRange_min(coin_range[0]);
-    m_crc[layer][ch]->SetCoinRange_max(coin_range[1]);
+    m_crc[layer][ch]->SetCoinRange_min(side, coin_range[0]);
+    m_crc[layer][ch]->SetCoinRange_max(side, coin_range[1]);
   }
 
   ifs2.close();

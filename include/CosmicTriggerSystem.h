@@ -51,6 +51,9 @@ public:
   bool GetLocationID(int scintiID, int& layerID, int& ch);
   CosmicRayCounter* GetCRC(int layer, int ch) { return m_crc[layer][ch]; }
 
+  double GetCommonThreshold() { return m_comthr; }
+  double GetfPedestalSigma() { return m_fPedSig; }
+
   int GetNhit(int layer) { return m_nHit[layer]; }
   int GetHit(int layer) { return m_hitCh[layer]; }
   double GetHitPos(int layer, int axis) { return m_hitpos[layer][axis]; }
@@ -72,6 +75,9 @@ private:
   int m_runID;
 
   CosmicRayCounter* m_crc[m_nLayer][m_nCRC];
+
+  double m_comthr; // common peak threshold
+  double m_fPedSig; // peak threshold = fPedSig * pedestalRMS
 
   int m_nHit[2];
   int m_hitCh[2];

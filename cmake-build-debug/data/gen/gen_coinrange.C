@@ -1,5 +1,8 @@
 {
-  double coin_range[2] = {26, 34};
+  double mean = 31;
+  double width = 2;
+
+  double coin_range[2] = {mean-width, mean+width};
   
   std::ofstream ofs("../coincidence_range.txt");
   
