@@ -128,6 +128,8 @@ int main(int argc, char** argv) {
         isHit[layer][ch] = counter->GetIsHit();
       }
 
+      nHit[layer] = trg_sys->GetNhit(layer);
+
       for(int axis = 0; axis < 3; ++axis) {
         hitpos[layer][axis] = counter->GetHitPos(axis);
       }
@@ -160,19 +162,34 @@ int main(int argc, char** argv) {
    * Write
    */
 
-  fout->cd();
-  tout->Write();
+  TString note_threshold;
+#ifdef COMMON_THRESHOLD
+  note_threshold = Form("%.1f (common)", trg_sys->GetCommonThreshold());
+#else
+  note_threshold = Form("%.1f * pedestal", trg_sys->GetfPedestalSigma());
+#endif
+  TText note2(0, 0, note_threshold);
+  note2.SetName("Peak threshold");
 
   TText note1(0, 0, "comment");
   note1.SetName("Comments");
-  note1.Write();
 
-  fout->Close();
+
+  fout->cd();
+  tout->Write();
+  note1.Write();
+  note2.Write();
 
 
 #ifdef DEBUG
-  std::cout << ">>>>> DEBUG mode <<<<<\n";
+  std::cout << "########## DEBUG mode ##########\n";
 #endif
 
+#ifdef COMMON_THRESHOLD
+  std::cout << "######## COMMON_THRESHLD ########\n";
+#endif
+
+
+  fout->Close();
   return 0;
 }

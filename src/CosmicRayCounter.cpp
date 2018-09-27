@@ -41,7 +41,6 @@ void CosmicRayCounter::SetCalibConst(const double* TD_to_x) {
   for(int i = 0; i < 2; ++i) {
     m_TD_to_x[i] = TD_to_x[i] * m_dir;
   }
-  return true;
 }
 
 /*
@@ -63,8 +62,7 @@ void CosmicRayCounter::Reconstruct() {
 
 void CosmicRayCounter::HitDecision() {
 
-  double f_far = 0; // arbitrary factor for peak threshold at far side
-  m_isHit = 0;
+  double f_far = 0; // arbitrary factor for peak threshold in far side
 
   for(int k = 0; k < 2; ++k) {
     int k1 = k % 2;        // index of one side
@@ -72,17 +70,22 @@ void CosmicRayCounter::HitDecision() {
 
     // hit condition (near side)
     if(m_peak[k1] > m_peak_thr[k1] &&
-       m_pt[k1] > m_coin_range[0] &&
-       m_pt[k1] < m_coin_range[1]) {
+       m_pt[k1] > m_coin_range[k1][0] &&
+       m_pt[k1] < m_coin_range[k1][1]) {
 
       // hit condition (far side)
+      /*
       if(m_peak[k2] > f_far * m_peak_thr[k2] &&
-         m_pt[k2] > m_coin_range[0] &&
-         m_pt[k2] < m_coin_range[1]) {
-        m_isHit = 1;
-        break;
+         m_pt[k2] > m_coin_range[k2][0] &&
+         m_pt[k2] < m_coin_range[k2][1]) {
+      */
+      if(1) {
+	m_isHit = 1;
+        return;
       }
     }
   }
+
+  m_isHit = 0;
 
 }
