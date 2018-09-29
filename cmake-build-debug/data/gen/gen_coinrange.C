@@ -1,6 +1,6 @@
 {
   double mean = 31;
-  double width = 2;
+  double width = 4;
 
   double coin_range[2] = {mean-width, mean+width};
   
