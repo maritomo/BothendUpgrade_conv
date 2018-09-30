@@ -12,10 +12,9 @@ class BothendReadoutDetector {
     virtual ~BothendReadoutDetector();
 
     virtual void SetData(int side, const short* data);
-    virtual void Process() = 0;
 
     double GetPos(int axis) { return m_pos[axis]; }
-
+    const int* GetData(int side) { return m_data[side]; }
     double GetPed(int side) { return m_ped[side]; }
     double GetPeak(int side) { return m_peak[side]; }
     double GetInteg(int side) { return m_integ[side]; }
@@ -31,7 +30,8 @@ class BothendReadoutDetector {
 
     void SetDelay(int side, int delay) { m_delay[side] = delay; }
 
-    void GetCFTime(int side, const short* data);
+    void GetCFTime(int side);
+    short GetMax(int nSmpl, const short* data);
 
     void GetVisAxis(int plane, int& axis_h, int& axis_v);
     void Visualize(int plane);
@@ -43,6 +43,7 @@ class BothendReadoutDetector {
 
     int m_delay[2];   // Channel delay
 
+    int m_data[2][64];  // ch (even, odd)
     double m_ped[2];    // ch (even, odd)
     double m_peak[2];   // ch (even, odd)
     double m_integ[2];  // ch (even, odd)

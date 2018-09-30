@@ -6,7 +6,6 @@
 #include <sstream>
 #include <cmath>
 
-#include "global.h"
 #include "CosmicRayCounter.h"
 
 CosmicRayCounter::CosmicRayCounter(int layer, int ch, int scintiID, int dir, const double* pos) :
@@ -39,9 +38,16 @@ CosmicRayCounter::CosmicRayCounter(int layer, int ch, int scintiID, int dir, con
 
 void CosmicRayCounter::SetCalibConst(const double* TD_to_x) {
     for(int i = 0; i < 2; ++i) {
-        m_TD_to_x[i] = TD_to_x[i] * m_dir;
+        m_ccX[i] = TD_to_x[i] * m_dir;
     }
 }
+
+void CosmicRayCounter::SetCoinRange(int side, double* coin_range) {
+    for(int i = 0; i < 2; ++i) {
+        m_coin_range[side][i] = coin_range[i];
+    }
+}
+
 
 /*
  * Process
@@ -50,12 +56,15 @@ void CosmicRayCounter::SetCalibConst(const double* TD_to_x) {
 void CosmicRayCounter::Process() {
     Reconstruct();
     HitDecision();
+    for(int side = 0; side < 2; ++side) {
+        OnlineHitDecision(side);
+    }
 }
 
 void CosmicRayCounter::Reconstruct() {
     m_TD = m_pt[0] - m_pt[1];
     m_MT = (m_pt[0] + m_pt[1]) / 2;
-    m_hitpos[0] = (m_TD - m_TD_to_x[0]) / m_TD_to_x[1];
+    m_hitpos[0] = (m_TD - m_ccX[0]) / m_ccX[1];
     m_hitpos[1] = m_pos[1];
     m_hitpos[2] = m_pos[2];
 }
@@ -87,5 +96,40 @@ void CosmicRayCounter::HitDecision() {
     }
 
     m_isHit = 0;
+}
+
+// Imitation of the online trigger
+void CosmicRayCounter::OnlineHitDecision(int side) {
+
+    // local time window
+    int window_l[2] = {-2, 2};
+    const int nSmpl_l = window_l[1] - window_l[0] + 1;
+
+    // global time window
+    int window_g[2] = {-2, 3};
+    const int nSmpl_g = window_g[1] - window_g[0] + 1;
+
+    short data_g[nSmpl_g];
+    short data_l[nSmpl_l];
+
+    for(int smpl = 0; smpl < 64; ++smpl) {
+        m_isOnlineHit[side][smpl] = 0;
+
+        if(smpl < 0 - window_g[0] || smpl >= 64 - window_g[1])
+            continue;
+
+        for(int k = 0; k < nSmpl_g; ++k) {
+            int index = k + window_g[0];
+            data_g[k] = m_data[side][smpl + index];
+            if(k < nSmpl_l) data_l[k] = m_data[side][smpl + index];
+        }
+
+        short max_l = GetMax(nSmpl_l, data_l);
+        short max_g = GetMax(nSmpl_g, data_g);
+
+        if(max_l == max_g && max_l-m_ped[side] > m_peak_thr[side]) {
+            m_isOnlineHit[side][smpl] = 1;
+        }
+    }
 
 }

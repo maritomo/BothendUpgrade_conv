@@ -15,14 +15,16 @@ BothendReadoutDetector::~BothendReadoutDetector() {
 }
 
 void BothendReadoutDetector::SetData(int side, const short* data) {
-    if(side!=0 && side!=1) {
-        std::cout << "Channel should be 0 or 1 ! Data were not set\n";
-        return;
-    }
-    GetCFTime(side, data);
+    for(int smpl = 0; smpl < 64; ++smpl)
+        m_data[side][smpl] = data[smpl];
+
+    GetCFTime(side);
+
+    m_pt[side] += 15 - m_delay[side];
+    m_cft[side] += 15 - m_delay[side];
 }
 
-void BothendReadoutDetector::GetCFTime(int side, const short* data) {
+void BothendReadoutDetector::GetCFTime(int side) {
 
     m_ped[side] = 0;
     m_peak[side] = 0;
@@ -39,20 +41,21 @@ void BothendReadoutDetector::GetCFTime(int side, const short* data) {
 
     for(int i = 0; i < n; ++i) {
         if(i < nPed)
-            m_ped[side] += (float) data[i] / nPed;
-        if(m_peak[side] < data[i]) {
-            m_peak[side] = data[i];
+
+            m_ped[side] += (float) m_data[side][i] / nPed;
+        if(m_peak[side] < m_data[side][i]) {
+            m_peak[side] = m_data[side][i];
             ipeak = i;
         }
         if(i < n - 1)
-            m_integ[side] += data[i] * (time[i + 1] - time[i]);
+            m_integ[side] += m_data[side][i] * (time[i + 1] - time[i]);
     }
 
     m_integ[side] -= m_ped[side] * (time[n - 1] - time[0]);
 
-    float yb = data[ipeak - 1];
-    float y = data[ipeak];
-    float yf = data[ipeak + 1];
+    float yb = m_data[side][ipeak - 1];
+    float y = m_data[side][ipeak];
+    float yf = m_data[side][ipeak + 1];
 
     m_pt[side] = ipeak - (yf - yb) / 2 / (yf + yb - 2 * y);
     m_peak[side] = y - (yf - yb) * (yf - yb) / 8 / (yf + yb - 2 * y);
@@ -66,13 +69,20 @@ void BothendReadoutDetector::GetCFTime(int side, const short* data) {
     float threshold = m_peak[side] / 2 + m_ped[side];
 
     for(int i = ipeak; i > 0; --i) {
-        if(data[i] > threshold && data[i - 1] < threshold) {
-            m_cft[side] = time[i - 1] + (float) (time[i] - time[i - 1]) / (data[i] - data[i - 1]) * (threshold - data[i]);
+        if(m_data[side][i] > threshold && m_data[side][i - 1] < threshold) {
+            m_cft[side] = time[i - 1] + (float) (time[i] - time[i - 1]) / (m_data[side][i] - m_data[side][i - 1]) * (threshold - m_data[side][i]);
             m_errflag[side] = 0;
             return;
         }
     }
+}
 
+short BothendReadoutDetector::GetMax(int nSmpl, const short* data) {
+    short max = -1 * (pow(2, 15) - 1);
+    for(int i = 0; i < nSmpl; ++i) {
+        if(max < data[i]) max = data[i];
+    }
+    return max;
 }
 
 /*
@@ -90,14 +100,14 @@ void BothendReadoutDetector::GetVisAxis(int plane, int& axis_h, int& axis_v) {
         axis_h = 0;
         axis_v = 2;
     } else {
-        std::cout << "plane: 0 (xy), 1 (yz), 2 (zx)\n";
+        std::cout << "plane: 0 (xy), 1 (zy), 2 (xz)\n";
     }
 }
 
 void BothendReadoutDetector::Visualize(int plane) {
 
     if(plane!=0 && plane!=1 && plane!=2) {
-        std::cout << "plane: 0 (xy), 1 (yz), 2 (zx)\n";
+        std::cout << "plane: 0 (xy), 1 (zy), 2 (xz)\n";
         m_isVis[plane] = 0;
     }
 

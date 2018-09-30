@@ -17,10 +17,13 @@ class CosmicRayCounter : public BothendReadoutDetector {
 
     void SetCalibConst(const double* TD_x);
     void SetPeakThreshold(int side, double peak_thr) { m_peak_thr[side] = peak_thr; }
-    void SetCoinRange_min(int side, double coin_range_min) { m_coin_range[side][0] = coin_range_min; }
-    void SetCoinRange_max(int side, double coin_range_max) { m_coin_range[side][1] = coin_range_max; }
+    void SetCoinRange(int side, double* coin_range);
 
     int GetScintiID() { return m_scintiID; }
+
+    // Imitation of the online trigger
+    void OnlineHitDecision(int side);
+    const int* GetIsOnlineHit(int side) { return m_isOnlineHit[side]; }
 
   private:
     int m_layer;    // 0: bottom, 1: top
@@ -30,10 +33,12 @@ class CosmicRayCounter : public BothendReadoutDetector {
     //    They are still used to calibrate Tdif to x-position,
     //    because the calibration constants are same as that in the pre-test at Tsukuba.
 
-    double m_TD_to_x[2];     // calibration constant for TD -> x, (constant, slope)
+    double m_ccX[2];     // calibration constant for TD -> x, (constant, slope)
 
-    double m_peak_thr[2];   // threshold of pulse height, (even, odd) ch
-    double m_coin_range[2][2]; // coincidence time window, (even, odd) ch, (min, max)
+    double m_peak_thr[2];       // threshold of pulse height, (even, odd) ch
+    double m_coin_range[2][2];  // coincidence window, (even, odd) ch, (min, max)
+
+    int m_isOnlineHit[2][64];
 };
 
 

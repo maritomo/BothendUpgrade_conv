@@ -2,7 +2,6 @@
 // Created by Tomoo MARI on 2018/09/18.
 //
 
-#include "global.h"
 #include "CosmicTriggerSystem.h"
 
 #include <string>
@@ -12,7 +11,8 @@
 #include <TMath.h>
 
 
-CosmicTriggerSystem::CosmicTriggerSystem(int runID) : m_runID(runID) {
+CosmicTriggerSystem::CosmicTriggerSystem(int runID, int isCommonThreshold) :
+        m_runID(runID), m_isCommonThreshold(isCommonThreshold) {
 
     if(!Init()) {
         std::cout << "Error: CosmicTriggerSystem was not initialized\n";
@@ -158,9 +158,8 @@ bool CosmicTriggerSystem::Init_hitCondition() {
     ss << "./data/pedestal/pedestal_run" << m_runID << ".txt";
     std::string filename = ss.str();
 
-#ifdef COMMON_THRESHOLD
-    filename = "./data/common_threshold.txt";
-#endif
+    if(m_isCommonThreshold)
+        filename = "./data/common_threshold.txt";
 
     std::ifstream ifs(filename.c_str());
     if(!ifs) {
@@ -168,26 +167,25 @@ bool CosmicTriggerSystem::Init_hitCondition() {
         return false;
     }
 
-    int slot, adcch;
-    int layer, ch, side;
+    int slot, adcch, layer, ch, side;
     double ped_mean, ped_sigma;
+
+    m_fPedSig = 5; // peak threhold = pedestalRMS * fPedSig
 
     while(ifs >> slot >> adcch >> ped_mean >> ped_sigma) {
         layer = slot;
         ch = adcch / 2;
         side = adcch % 2;
 
-#ifdef COMMON_THRESHOLD
-        m_comthr = ped_sigma;
-#else
-        ped_sigma *= nSigma;
-#endif
+        if(m_isCommonThreshold)
+            m_comthr = ped_sigma;
+        else
+            ped_sigma *= m_fPedSig;
 
         m_crc[layer][ch]->SetPeakThreshold(side, ped_sigma);
     }
 
     ifs.close();
-
 
     filename = "./data/coincidence_range.txt";
     std::ifstream ifs2(filename.c_str());
@@ -202,13 +200,10 @@ bool CosmicTriggerSystem::Init_hitCondition() {
         int layer = slot;
         int ch = adcch / 2;
         int side = adcch % 2;
-
-        m_crc[layer][ch]->SetCoinRange_min(side, coin_range[0]);
-        m_crc[layer][ch]->SetCoinRange_max(side, coin_range[1]);
+        m_crc[layer][ch]->SetCoinRange(side, coin_range);
     }
 
     ifs2.close();
-
 
     std::cout << "Hit condition parameters        [OK]\n";
     return true;
@@ -221,6 +216,7 @@ bool CosmicTriggerSystem::Init_hitCondition() {
 void CosmicTriggerSystem::Process() {
     HitDecision();
     Tracking();
+    OnlineHitDecision();
 }
 
 void CosmicTriggerSystem::HitDecision() {
@@ -255,9 +251,9 @@ void CosmicTriggerSystem::Tracking() {
 
     m_trackID = m_hitCh[1] * m_nCRC + m_hitCh[0] + 1;
 
-    TOF = sqrt((m_hitpos[1][0] - m_hitpos[0][0]) * (m_hitpos[1][0] - m_hitpos[0][0]) +
-               (m_hitpos[1][1] - m_hitpos[0][1]) * (m_hitpos[1][1] - m_hitpos[0][1]) +
-               (m_hitpos[1][2] - m_hitpos[0][2]) * (m_hitpos[1][2] - m_hitpos[0][2])) / TMath::C();
+    m_TOF = sqrt((m_hitpos[1][0] - m_hitpos[0][0]) * (m_hitpos[1][0] - m_hitpos[0][0]) +
+                 (m_hitpos[1][1] - m_hitpos[0][1]) * (m_hitpos[1][1] - m_hitpos[0][1]) +
+                 (m_hitpos[1][2] - m_hitpos[0][2]) * (m_hitpos[1][2] - m_hitpos[0][2])) / TMath::C();
 
     int axis_h; // index of horizontal axis
     int axis_v; // index of vertical axis
@@ -280,9 +276,9 @@ void CosmicTriggerSystem::SetData(int slot, int ch, const short* data) {
 
     int layer = slot;
     int channel = ch / 2;
-    int LR = ch % 2;
+    int side = ch % 2;
 
-    m_crc[layer][channel]->SetData(LR, data);
+    m_crc[layer][channel]->SetData(side, data);
 }
 
 /*
@@ -303,6 +299,35 @@ bool CosmicTriggerSystem::GetLocationID(int scintiID, int& layerID, int& chID) {
     std::cout << "(scinti. " << scintiID << " not found)\n";
     return false;
 }
+
+
+/*
+ * Imitation of the online trigger
+ */
+
+void CosmicTriggerSystem::OnlineHitDecision() {
+    for(int smpl = 0; smpl < 64; ++smpl) {
+        m_isOnlineTriggered[smpl] = 0;
+
+        for(int layer = 0; layer < m_nLayer; ++layer) {
+            m_nOnlineHit[layer][smpl] = 0;
+
+            for(int ch = 0; ch < m_nCRC; ++ch) {
+                for(int side = 0; side < 2; ++side) {
+                    if(m_crc[layer][ch]->GetIsOnlineHit(side)[smpl]) {
+                        ++m_nOnlineHit[layer][smpl];
+                    }
+                }
+            }
+
+        } // layer loop
+
+        if(m_nOnlineHit[0][smpl] && m_nOnlineHit[1][smpl]) {
+            m_isOnlineTriggered[smpl] = 1;
+        }
+    } // smpl loop
+}
+
 
 /*
  * Visuallization

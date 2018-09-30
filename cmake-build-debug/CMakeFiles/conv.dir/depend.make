@@ -4,7 +4,6 @@
 CMakeFiles/conv.dir/conv.cpp.o: ../include/BothendReadoutDetector.h
 CMakeFiles/conv.dir/conv.cpp.o: ../include/CosmicRayCounter.h
 CMakeFiles/conv.dir/conv.cpp.o: ../include/CosmicTriggerSystem.h
-CMakeFiles/conv.dir/conv.cpp.o: ../include/global.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/Buttons.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/DllImport.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/ESTLType.h
@@ -126,7 +125,6 @@ CMakeFiles/conv.dir/src/BothendReadoutDetector.cpp.o: ../src/BothendReadoutDetec
 
 CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o: ../include/BothendReadoutDetector.h
 CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o: ../include/CosmicRayCounter.h
-CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o: ../include/global.h
 CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o: /Users/mari/local/root/pro/include/DllImport.h
 CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o: /Users/mari/local/root/pro/include/GuiTypes.h
 CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o: /Users/mari/local/root/pro/include/RConfig.h
@@ -153,7 +151,6 @@ CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o: ../src/CosmicRayCounter.cpp
 CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o: ../include/BothendReadoutDetector.h
 CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o: ../include/CosmicRayCounter.h
 CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o: ../include/CosmicTriggerSystem.h
-CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o: ../include/global.h
 CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o: /Users/mari/local/root/pro/include/Buttons.h
 CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o: /Users/mari/local/root/pro/include/DllImport.h
 CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o: /Users/mari/local/root/pro/include/ESTLType.h

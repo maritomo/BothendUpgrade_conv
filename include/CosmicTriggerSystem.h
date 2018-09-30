@@ -24,9 +24,8 @@
 
 
 class CosmicTriggerSystem {
-
   public:
-    CosmicTriggerSystem(int runID);
+    CosmicTriggerSystem(int runID, int isCommonThreshold);
     ~CosmicTriggerSystem();
 
     bool Init();
@@ -47,6 +46,7 @@ class CosmicTriggerSystem {
 
     int GetIsInit() { return m_isInit; }
     int GetRunID() { return m_runID; }
+    int GetIsCommonThreshold() { return m_isCommonThreshold; }
 
     bool GetLocationID(int scintiID, int& layerID, int& ch);
     CosmicRayCounter* GetCRC(int layer, int ch) { return m_crc[layer][ch]; }
@@ -59,7 +59,15 @@ class CosmicTriggerSystem {
     double GetHitPos(int layer, int axis) { return m_hitpos[layer][axis]; }
 
     int GetTrackID() { return m_trackID; }
+    const double* GetTrack(int plane) { return m_track[plane]; }
+    double GetTOF() { return m_TOF; }
 
+    // Imitation of the online trigger
+    void OnlineHitDecision();
+    int* GetNOnlineHit(int layer) { return m_nOnlineHit[layer]; }
+    int* GetIsOnlineTriggered() { return m_isOnlineTriggered; }
+
+    // Visualization
     void GetVisAxis(int plane, int& axis_h, int& axis_v);
     void Visualize();
     void SetTrackLine(int plane);
@@ -73,6 +81,7 @@ class CosmicTriggerSystem {
 
     int m_isInit;
     int m_runID;
+    int m_isCommonThreshold;
 
     CosmicRayCounter* m_crc[m_nLayer][m_nCRC];
 
@@ -85,8 +94,14 @@ class CosmicTriggerSystem {
 
     int m_trackID;
     double m_track[3][2]; // (xy, zy, xz) plane, (constant, slope)
-    double TOF; // time of flight
+    double m_TOF; // time of flight
 
+    // Imitation of the online trigger
+    int m_nOnlineHit[m_nLayer][64]; // # of fired channel in online at each sample
+    int m_isOnlineTriggered[64]; // online trigger decision at each sample
+
+
+    // Visualization
     int m_isVis[3];
     double m_world[3][2]; // (x, y, z)
 

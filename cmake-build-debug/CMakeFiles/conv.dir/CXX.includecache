@@ -28,8 +28,6 @@ TH1.h
 BothendReadoutDetector.h
 ../include/BothendReadoutDetector.h
 
-../include/global.h
-
 /Users/mari/local/root/pro/include/Buttons.h
 
 /Users/mari/local/root/pro/include/DllImport.h
@@ -771,8 +769,6 @@ sys/types.h
 -
 
 /Users/mari/work/cosmiTrigger/conv/conv.cpp
-global.h
-/Users/mari/work/cosmiTrigger/conv/global.h
 CosmicTriggerSystem.h
 /Users/mari/work/cosmiTrigger/conv/CosmicTriggerSystem.h
 iostream
@@ -803,14 +799,10 @@ sstream
 -
 cmath
 -
-global.h
-/Users/mari/work/cosmiTrigger/conv/src/global.h
 CosmicRayCounter.h
 /Users/mari/work/cosmiTrigger/conv/src/CosmicRayCounter.h
 
 /Users/mari/work/cosmiTrigger/conv/src/CosmicTriggerSystem.cpp
-global.h
-/Users/mari/work/cosmiTrigger/conv/src/global.h
 CosmicTriggerSystem.h
 /Users/mari/work/cosmiTrigger/conv/src/CosmicTriggerSystem.h
 string
