@@ -28,6 +28,12 @@ TH1.h
 BothendReadoutDetector.h
 ../include/BothendReadoutDetector.h
 
+../include/RawdataManager.h
+vector
+-
+TTree.h
+../include/TTree.h
+
 /Users/mari/local/root/pro/include/Buttons.h
 
 /Users/mari/local/root/pro/include/DllImport.h
@@ -769,6 +775,8 @@ sys/types.h
 -
 
 /Users/mari/work/cosmiTrigger/conv/conv.cpp
+RawdataManager.h
+/Users/mari/work/cosmiTrigger/conv/RawdataManager.h
 CosmicTriggerSystem.h
 /Users/mari/work/cosmiTrigger/conv/CosmicTriggerSystem.h
 iostream
@@ -776,6 +784,8 @@ iostream
 fstream
 -
 sstream
+-
+RawdataManager.h
 -
 TFile.h
 /Users/mari/work/cosmiTrigger/conv/TFile.h
@@ -820,5 +830,11 @@ TMath.h
 CsI.h
 /Users/mari/work/cosmiTrigger/conv/src/CsI.h
 fstream
+-
+
+/Users/mari/work/cosmiTrigger/conv/src/RawdataManager.cpp
+RawdataManager.h
+/Users/mari/work/cosmiTrigger/conv/src/RawdataManager.h
+iostream
 -
 

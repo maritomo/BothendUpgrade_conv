@@ -107,6 +107,9 @@
 		<Unit filename="/Users/mari/work/cosmiTrigger/conv/src/CsI.cpp">
 			<Option target="conv"/>
 		</Unit>
+		<Unit filename="/Users/mari/work/cosmiTrigger/conv/src/RawdataManager.cpp">
+			<Option target="conv"/>
+		</Unit>
 		<Unit filename="/Users/mari/work/cosmiTrigger/conv/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
