@@ -1,0 +1,4 @@
+
+# DO NOT DELETE
+./re_synchro_C.so: /Users/mari/local/root/root_v6.12.04/include/RVersion.h /Users/mari/local/root/root_v6.12.04/include/RConfig.h /Users/mari/local/root/root_v6.12.04/include/TClass.h /Users/mari/local/root/root_v6.12.04/include/TDictAttributeMap.h /Users/mari/local/root/root_v6.12.04/include/TInterpreter.h /Users/mari/local/root/root_v6.12.04/include/TROOT.h /Users/mari/local/root/root_v6.12.04/include/TBuffer.h /Users/mari/local/root/root_v6.12.04/include/TMemberInspector.h /Users/mari/local/root/root_v6.12.04/include/TError.h /Users/mari/local/root/root_v6.12.04/include/RtypesImp.h /Users/mari/local/root/root_v6.12.04/include/TIsAProxy.h /Users/mari/local/root/root_v6.12.04/include/TFileMergeInfo.h /Users/mari/local/root/root_v6.12.04/include/TCollectionProxyInfo.h /Users/mari/local/root/pro/bin/rootcling
+re_synchro_C__ROOTBUILDVERSION= 6.12/04

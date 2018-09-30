@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/mari/work/cosmiTrigger/conv/src/CosmicRayCounter.cpp" "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o"
   "/Users/mari/work/cosmiTrigger/conv/src/CosmicTriggerSystem.cpp" "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o"
   "/Users/mari/work/cosmiTrigger/conv/src/CsI.cpp" "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CsI.cpp.o"
+  "/Users/mari/work/cosmiTrigger/conv/src/RawdataManager.cpp" "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/RawdataManager.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 

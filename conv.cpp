@@ -1,13 +1,14 @@
 #define IS_COMMON_THRESHOLD 1
-
 //#define DEBUG
 //#define VISUALIZE
 
+#include "RawdataManager.h"
 #include "CosmicTriggerSystem.h"
 
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <RawdataManager.h>
 
 #include "TFile.h"
 #include "TTree.h"
@@ -51,10 +52,35 @@ int main(int argc, char** argv) {
      */
 
     TFile* fin = new TFile(Form("./rootfile/run%d.root", runID));
-    TTree* tin = (TTree*) fin->Get("Crate3");
 
-    Short_t Data[16][16][64];
-    tin->SetBranchAddress("Data", Data);
+    const int nCrate = 3;
+
+//    TTree* Crate3 = (TTree*) fin->Get("Crate3");
+//    UInt_t ts;
+//    Crate3->SetBranchAddress("Timestamp", &ts);
+
+    TTree* tin[nCrate];
+    TString treename[nCrate] = {"Crate3", "Crate4", "Crate5"};
+
+    RawdataManager* man = new RawdataManager();
+
+    for(int k = 0; k < nCrate; ++k) {
+        tin[k] = (TTree*) fin->Get(treename[k]);
+        man->AddTree(tin[k]);
+    }
+
+    man->Synchronize();
+
+    // "SetBranchAddress()" should be done AFTER "man->CheckTimeStamps()"
+    Short_t Data[16][16][64]={{{}}};
+    UInt_t Timestamp[nCrate]={};
+
+    for(int k = 0; k < nCrate; ++k) {
+        if(k==0) {
+            tin[k]->SetBranchAddress("Data", Data);
+        }
+        tin[k]->SetBranchAddress("Timestamp", &Timestamp[k]);
+    }
 
 
     /*
@@ -113,13 +139,13 @@ int main(int argc, char** argv) {
     tout->Branch("nOnlineHit", nOnlineHit, "nOnlineHit[2][64]/S");
     tout->Branch("isOnlineTriggered", isOnlineTriggered, "isOnlineTriggered[64]/S");
 
+
     /*
      * Scan events
      */
 
-    for(int evt = 0, entry = tin->GetEntries(); evt < entry; ++evt) {
-        //if(evt % 30==0) continue; // skip delta trigger events
-        tin->GetEntry(evt);
+    for(int entry = 0; entry < man->GetEntries(); ++entry) {
+        man->GetEntry(entry);
 
         for(int slot = 0; slot < 16; ++slot) {
             for(int ch = 0; ch < 16; ++ch) {
@@ -180,19 +206,19 @@ int main(int argc, char** argv) {
 
         tout->Fill();
 
-        if(evt % 1000==0) std::cout << evt << "th\n";
+        if(entry % 1000==0) std::cout << entry << "th\n";
 
 #ifdef VISUALIZE
         TString filename;
         if(trackID>0) {
           trg_sys->Display();
-          filename = Form("./test_%d.pdf", evt);
+          filename = Form("./test_%d.pdf", entry);
           //trg_sys->Print(filename);
         }
 #endif
 
 #ifdef DEBUG
-        if(evt==0) break;
+        if(entry==0) break;
 #endif
 
     }

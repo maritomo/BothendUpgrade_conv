@@ -5,6 +5,7 @@ CMakeFiles/conv.dir/conv.cpp.o
  ../include/BothendReadoutDetector.h
  ../include/CosmicRayCounter.h
  ../include/CosmicTriggerSystem.h
+ ../include/RawdataManager.h
  /Users/mari/local/root/pro/include/Buttons.h
  /Users/mari/local/root/pro/include/DllImport.h
  /Users/mari/local/root/pro/include/ESTLType.h
@@ -248,3 +249,56 @@ CMakeFiles/conv.dir/src/CsI.cpp.o
  /Users/mari/local/root/pro/include/snprintf.h
  /Users/mari/local/root/pro/include/strlcpy.h
  /Users/mari/work/cosmiTrigger/conv/src/CsI.cpp
+CMakeFiles/conv.dir/src/RawdataManager.cpp.o
+ ../include/RawdataManager.h
+ /Users/mari/local/root/pro/include/DllImport.h
+ /Users/mari/local/root/pro/include/ESTLType.h
+ /Users/mari/local/root/pro/include/RConfig.h
+ /Users/mari/local/root/pro/include/RConfigure.h
+ /Users/mari/local/root/pro/include/ROOT/TIOFeatures.hxx
+ /Users/mari/local/root/pro/include/RStringView.h
+ /Users/mari/local/root/pro/include/RVersion.h
+ /Users/mari/local/root/pro/include/RWrap_libcpp_string_view.h
+ /Users/mari/local/root/pro/include/Rtypes.h
+ /Users/mari/local/root/pro/include/RtypesCore.h
+ /Users/mari/local/root/pro/include/TArray.h
+ /Users/mari/local/root/pro/include/TArrayD.h
+ /Users/mari/local/root/pro/include/TArrayI.h
+ /Users/mari/local/root/pro/include/TAttFill.h
+ /Users/mari/local/root/pro/include/TAttLine.h
+ /Users/mari/local/root/pro/include/TAttMarker.h
+ /Users/mari/local/root/pro/include/TBasket.h
+ /Users/mari/local/root/pro/include/TBranch.h
+ /Users/mari/local/root/pro/include/TBuffer.h
+ /Users/mari/local/root/pro/include/TClass.h
+ /Users/mari/local/root/pro/include/TCollection.h
+ /Users/mari/local/root/pro/include/TDataType.h
+ /Users/mari/local/root/pro/include/TDatime.h
+ /Users/mari/local/root/pro/include/TDictionary.h
+ /Users/mari/local/root/pro/include/TDirectory.h
+ /Users/mari/local/root/pro/include/TGenericClassInfo.h
+ /Users/mari/local/root/pro/include/TIsAProxy.h
+ /Users/mari/local/root/pro/include/TIterator.h
+ /Users/mari/local/root/pro/include/TKey.h
+ /Users/mari/local/root/pro/include/TList.h
+ /Users/mari/local/root/pro/include/TMathBase.h
+ /Users/mari/local/root/pro/include/TNamed.h
+ /Users/mari/local/root/pro/include/TObjArray.h
+ /Users/mari/local/root/pro/include/TObjString.h
+ /Users/mari/local/root/pro/include/TObject.h
+ /Users/mari/local/root/pro/include/TSchemaHelper.h
+ /Users/mari/local/root/pro/include/TSeqCollection.h
+ /Users/mari/local/root/pro/include/TStorage.h
+ /Users/mari/local/root/pro/include/TString.h
+ /Users/mari/local/root/pro/include/TTree.h
+ /Users/mari/local/root/pro/include/TUUID.h
+ /Users/mari/local/root/pro/include/TVersionCheck.h
+ /Users/mari/local/root/pro/include/TVirtualIsAProxy.h
+ /Users/mari/local/root/pro/include/TVirtualMutex.h
+ /Users/mari/local/root/pro/include/TVirtualRWMutex.h
+ /Users/mari/local/root/pro/include/TVirtualTreePlayer.h
+ /Users/mari/local/root/pro/include/ThreadLocalStorage.h
+ /Users/mari/local/root/pro/include/libcpp_string_view.h
+ /Users/mari/local/root/pro/include/snprintf.h
+ /Users/mari/local/root/pro/include/strlcpy.h
+ /Users/mari/work/cosmiTrigger/conv/src/RawdataManager.cpp
