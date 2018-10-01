@@ -57,32 +57,21 @@ void RawdataManager::Synchronize(){
         }
         if(endflag) break; // the last spill are not used
 
-//        std::cout << "SpillNo\t" << spillNo[0] << " " << spillNo[1] << " " << spillNo[2] << "\n";
-
         for(int entry = 0; entry < nEventPerSpill; ++entry) {
-            // GetEntry
-//            std::cout << "\t" << entry << "\t|";
             for(int k = 0; k < nTree; ++k) {
                 m_tree[k]->GetEntry(nEventPerSpill * spillNo[k] + entry);
-//                std::cout << "\t" << timestamp[k];
             }
-//            std::cout << "\t|";
-
             // Dif
             for(int k = 0; k < nTree; ++k) {
                 dif[k] = timestamp[(k + 1) % nTree] - timestamp[(k + 2) % nTree];
                 if(entry==0) {
                     dif_delta[k] = dif[k]; // delta trigger
                 }
-//                std::cout << "\t" << dif[k];
             }
 
             if(entry==0) {  // delta trigger
-//                std::cout << "\n";
                 continue;
             }
-
-//            std::cout << "\t|";
 
             // Flag
             for(int k = 0; k < nTree; ++k) {
@@ -93,11 +82,9 @@ void RawdataManager::Synchronize(){
                 // unsynchronization in k-th crate
                 if(dif[index[0]]!=dif_delta[index[0]] && dif[index[1]]!=dif_delta[index[1]])
                     flag[k] = 1;
-//                std::cout << " " << flag[k];
             }
-//            std::cout << std::endl;
 
-            // if unsynchronized
+            // if unsynchronization exists
             if(Sum(nTree, flag) > 0) {
                 for(int k = 0; k < nTree; ++k) {
                     // synchronized crate
@@ -110,7 +97,6 @@ void RawdataManager::Synchronize(){
                         m_lost[k].push_back(spillNo[k]);
                         std::cout << ">>>>>>> Crate " << k+3 << ", Spill " << spillNo[k] << " skipped <<<<<<<\n";
                     } else { // find
-//                        std::cout << "******* Crate " << k + 3 << " unsynchronized *******\n";
                         ++spillNo[k];
                         ++nRetry[k];
                     }
@@ -132,7 +118,6 @@ void RawdataManager::Synchronize(){
                 ++spillNo[k];
             }
         }
-//        std::cout << std::endl;
 
     } // spill loop
 
@@ -151,6 +136,10 @@ void RawdataManager::Synchronize(){
 }
 
 void RawdataManager::GetEntry(int entry) {
+    if(!m_isSynchronized) {
+        std::cout << "Use Synchronize() function at first\n";
+        return;
+    }
     if(entry >= m_entry[0].size()) {
         std::cout << "Total # of events " << m_entry[0].size() << "\n";
         return;
@@ -161,6 +150,10 @@ void RawdataManager::GetEntry(int entry) {
 }
 
 void RawdataManager::GetLostEntry(int entry){
+    if(!m_isSynchronized) {
+        std::cout << "Use Synchronize() function at first\n";
+        return;
+    }
     if(entry >= m_lost[0].size()) {
         std::cout << "Total # of events " << m_lost[0].size() << "\n";
         return;
@@ -171,10 +164,18 @@ void RawdataManager::GetLostEntry(int entry){
 }
 
 int RawdataManager::GetEntries() {
+    if(!m_isSynchronized) {
+        std::cout << "Use Synchronize() function at first\n";
+        return;
+    }
     return m_entry[0].size();
 }
 
 int RawdataManager::GetLostEntries(){
+    if(!m_isSynchronized) {
+        std::cout << "Use Synchronize() function at first\n";
+        return;
+    }
     return m_lost[0].size();
 }
 
