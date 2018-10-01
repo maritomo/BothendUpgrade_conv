@@ -5,16 +5,10 @@
 #include "CsI.h"
 
 #include <fstream>
+#include <CosmicTriggerSystem.h>
 
-CsI::CsI(int locationID) : m_locationID(locationID) {
-  std::ifstream ifs("./data/map_csi.txt");
+CsI::CsI(int locID, int lineID, int posx, int posy, int size) : m_locationID(locID) {
 
-  int locID, lineID, posx, posy, size;
-
-  for(int id = 0; id < nCSI; ++id) {
-    ifs >> locID >> lineID >> posx >> posy >> size;
-    if(m_locationID==locID) break;
-  }
 
   m_lineID = lineID;
 
@@ -53,11 +47,20 @@ void CsI::HitDecision() {
   m_isHit = 0;
 }
 
+
 void CsI::SetHitPos(int trackID) {
   if(!m_isHit) return;
-
+  CsI* CSI;
+  double trackid[3][2];
+  trackid[1][0] = CSI ->
   m_hitpos[0] = m_pos[0];
   m_hitpos[1] = m_pos[1];
-  // m_hitpos[2] = ???
+  m_hitpos[2] = m_pos[1];
 
+}
+
+void CsI::SetADC(int crate, int slot, int ch) {
+  m_crate = crate;
+  m_slot = slot;
+  m_ch = ch;
 }

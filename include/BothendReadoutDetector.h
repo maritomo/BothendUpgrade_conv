@@ -61,6 +61,7 @@ protected:
 
   TBox* m_box_det[3]; // detector, (xy, yz, zx) plane
   TBox* m_box_hit[3]; // hit point (xy, yz, zx) plane
+
   int m_col;          // detector color
 };
 

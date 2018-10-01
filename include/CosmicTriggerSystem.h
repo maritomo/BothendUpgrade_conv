@@ -6,6 +6,7 @@
 #define CONV_COSMICTRIGGERSYSTEM_H
 
 #include "CosmicRayCounter.h"
+#include "CsI.h"
 
 #include "TCanvas.h"
 #include "TLine.h"
@@ -31,6 +32,7 @@ public:
 
   bool Init();
   bool Init_map();
+  bool Init_useCsI();
   bool Init_channelDelay();
   bool Init_calibConst();
   bool Init_hitCondition();
@@ -38,18 +40,22 @@ public:
   void Process();
   void HitDecision();
   void Tracking();
-
   void SetData(int slot, int ch, const short* data);
+  void SetData_CsI(int slot, int ch, const short* data);
 
   int GetNCRC() { return m_nCRC; }
   int GetNLayer() { return m_nLayer; }
   int GetNTrack() { return m_nTrack; }
+  int GetNCsI() { return m_nCsI;}
 
   int GetIsInit() { return m_isInit; }
   int GetRunID() { return m_runID; }
+  double GetTrack(int plane, int slope) { return m_track[plane][slope] ;}
 
   bool GetLocationID(int scintiID, int& layerID, int& ch);
+
   CosmicRayCounter* GetCRC(int layer, int ch) { return m_crc[layer][ch]; }
+  CsI* GetCSI(int locID){return m_csi[locID]; }
 
   double GetCommonThreshold() { return m_comthr; }
   double GetfPedestalSigma() { return m_fPedSig; }
@@ -63,6 +69,7 @@ public:
   void GetVisAxis(int plane, int& axis_h, int& axis_v);
   void Visualize();
   void SetTrackLine(int plane);
+  void SetTrack();
   void Display();
   void Print(const char* filename);
 
@@ -70,12 +77,14 @@ private:
   static const int m_nLayer = 2;  // # of layer (top, bottom)
   static const int m_nCRC = 6;  // # of cosmic ray counter in 1 layer
   static const int m_nTrack = 36;
+  static const int m_nCsI = 2716;
+
 
   int m_isInit;
   int m_runID;
 
   CosmicRayCounter* m_crc[m_nLayer][m_nCRC];
-
+  CsI* m_csi[m_nCsI];
   double m_comthr; // common peak threshold
   double m_fPedSig; // peak threshold = fPedSig * pedestalRMS
 
@@ -89,6 +98,7 @@ private:
 
   int m_isVis[3];
   double m_world[3][2]; // (x, y, z)
+  int m_isRead[2710];
 
   TCanvas* m_canv;
   TH1* m_frame[3];

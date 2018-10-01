@@ -56,6 +56,9 @@ int main(int argc, char** argv) {
 
   const int nLayer = trg_sys->GetNLayer();
   const int nCRC = trg_sys->GetNCRC();
+  const int nCsI = trg_sys->GetNCsI();
+  const int nline = 4;
+  const int num = 10;
 
   TFile* fout = new TFile(Form("./convfile/run%d_conv.root", runID), "recreate");
   TTree* tout = new TTree("tree", Form("run%d", runID));
@@ -91,7 +94,39 @@ int main(int argc, char** argv) {
   tout->Branch("hitpos", hitpos, Form("hitpos[%d][3]/F", nLayer));
   tout->Branch("trackID", &trackID, "trackID/S");
 
+  /*
+   * Input tree (CsI)
+   */
+  TTree* tCsI = new TTree("tCsI",Form("run%d_CsI",runID));
 
+  Float_t ped_CsI[nCsI][2];
+  Float_t peak_CsI[nCsI][2];
+  Float_t integ_CsI[nCsI][2];
+  Float_t pt_CsI[nCsI][2];
+  Float_t cft_CsI[nCsI][2];
+
+  Float_t MT_CsI[nCsI][2];
+
+  Short_t isHit_CsI[nCsI];
+  Short_t nHit_CsI[nline];
+  //Float_t hitpos[nLayer][3];
+  //Short_t trackID;
+
+  tCsI->Branch("data", data, "data[16][16][64]/S");
+  tCsI->Branch("ped", ped, Form("ped[%d][2]/F", nCsI));
+  tCsI->Branch("peak", peak, Form("peak[%d][2]/F", nCsI));
+  tCsI->Branch("integ", integ, Form("integ[%d][2]/F", nCsI));
+  tCsI->Branch("pt", pt, Form("pt[%d][2]/F", nCsI));
+  tCsI->Branch("cft", cft, Form("cft[%d][2]/F", nCsI));
+
+  tCsI->Branch("TD", TD, Form("TD[%d]/F", nCsI));
+  tCsI->Branch("MT", MT, Form("MT[%d]/F", nCsI));
+  tCsI->Branch("recX", recX, Form("recX[%d]/F", nCsI));
+  tCsI->Branch("isHit", isHit, Form("isHit[%d]/S", nCsI));
+
+  tCsI->Branch("nHit", nHit, Form("nHit[%d]/S", nline));
+  //tCsI->Branch("hitpos", hitpos, Form("hitpos[%d][3]/F", nLayer));
+  //tCsI->Branch("trackID", &trackID, "trackID/S");
   /*
    * Scan events
    */
@@ -103,12 +138,13 @@ int main(int argc, char** argv) {
     for(int slot = 0; slot < 16; ++slot) {
       for(int ch = 0; ch < 16; ++ch) {
         trg_sys->SetData(slot, ch, data[slot][ch]);
-      }
+    }
     }
 
     trg_sys->Process();
 
     CosmicRayCounter* counter;
+    CsI* csi;
 
     for(int layer = 0; layer < nLayer; ++layer) {
       for(int ch = 0; ch < nCRC; ++ch) {
@@ -139,6 +175,7 @@ int main(int argc, char** argv) {
     trackID = trg_sys->GetTrackID();
 
     tout->Fill();
+
 
     if(evt % 1000==0) std::cout << evt << "th\n";
 

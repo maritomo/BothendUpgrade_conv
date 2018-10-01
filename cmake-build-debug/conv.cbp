@@ -5,122 +5,114 @@
 		<Option title="conv"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\local\;CMake Files\..\..\..\local\root\;CMake Files\..\..\..\local\root\pro\;CMake Files\..\..\..\local\root\pro\cmake\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\local\;CMake Files\..\..\..\..\..\..\..\local\root\;CMake Files\..\..\..\..\..\..\..\local\root\pro\;CMake Files\..\..\..\..\..\..\..\local\root\pro\cmake\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/mari/work/cosmiTrigger/conv/cmake-build-debug"/>
+				<Option working_dir="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/Users/mari/work/cosmiTrigger/conv/cmake-build-debug"/>
+				<Option working_dir="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/Users/mari/work/cosmiTrigger/conv/cmake-build-debug"/>
+				<Option working_dir="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="conv">
-				<Option output="/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/conv" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/mari/work/cosmiTrigger/conv/cmake-build-debug"/>
+				<Option output="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/conv" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/mari/work/cosmiTrigger/conv/include"/>
-					<Add directory="/Users/mari/local/root/pro/include"/>
-					<Add directory="."/>
-					<Add directory="/Users/mari/work/cpplib/include"/>
-					<Add directory="/Applications/PicoScope6.app/Contents/Resources/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/include"/>
+					<Add directory="/Users/ohsugi/local/root/pro/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/usr/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
 					<Add directory="/System/Library/Frameworks"/>
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 conv"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 conv"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="conv/fast">
-				<Option output="/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/conv" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/mari/work/cosmiTrigger/conv/cmake-build-debug"/>
+				<Option output="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/conv" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/mari/work/cosmiTrigger/conv/include"/>
-					<Add directory="/Users/mari/local/root/pro/include"/>
-					<Add directory="."/>
-					<Add directory="/Users/mari/work/cpplib/include"/>
-					<Add directory="/Applications/PicoScope6.app/Contents/Resources/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/include"/>
+					<Add directory="/Users/ohsugi/local/root/pro/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/usr/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
 					<Add directory="/System/Library/Frameworks"/>
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 conv/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 conv/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/mari/work/cosmiTrigger/conv/conv.cpp">
+		<Unit filename="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/conv.cpp">
 			<Option target="conv"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/cosmiTrigger/conv/src/BothendReadoutDetector.cpp">
+		<Unit filename="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/src/BothendReadoutDetector.cpp">
 			<Option target="conv"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/cosmiTrigger/conv/src/CosmicRayCounter.cpp">
+		<Unit filename="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/src/CosmicRayCounter.cpp">
 			<Option target="conv"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/cosmiTrigger/conv/src/CosmicTriggerSystem.cpp">
+		<Unit filename="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/src/CosmicTriggerSystem.cpp">
 			<Option target="conv"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/cosmiTrigger/conv/src/CsI.cpp">
+		<Unit filename="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/src/CsI.cpp">
 			<Option target="conv"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/cosmiTrigger/conv/CMakeLists.txt">
+		<Unit filename="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/cosmiTrigger/conv/../../../local/root/pro/cmake/ROOTConfig-version.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\local\root\pro\cmake\"/>
+		<Unit filename="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/../../../../../../../local/root/pro/cmake/ROOTConfig-targets-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\local\root\pro\cmake\"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/cosmiTrigger/conv/../../../local/root/pro/cmake/ROOTConfig.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\local\root\pro\cmake\"/>
+		<Unit filename="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/../../../../../../../local/root/pro/cmake/ROOTConfig-targets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\local\root\pro\cmake\"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/cosmiTrigger/conv/../../../local/root/pro/cmake/ROOTConfig-targets.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\local\root\pro\cmake\"/>
+		<Unit filename="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/../../../../../../../local/root/pro/cmake/ROOTConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\local\root\pro\cmake\"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/cosmiTrigger/conv/../../../local/root/pro/cmake/ROOTConfig-targets-release.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\local\root\pro\cmake\"/>
+		<Unit filename="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/../../../../../../../local/root/pro/cmake/ROOTConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\local\root\pro\cmake\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>

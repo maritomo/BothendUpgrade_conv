@@ -6,10 +6,9 @@
 #define CONV_COSMICRAYCOUNTER_H
 
 #include "BothendReadoutDetector.h"
-
 class CosmicRayCounter : public BothendReadoutDetector {
 public:
-  CosmicRayCounter(int layer, int ch, int scintiID, int dir, const double* pos);
+   CosmicRayCounter(int layer, int ch, int scintiID, int dir, const double* pos);
 
   void Process();
   void Reconstruct();
