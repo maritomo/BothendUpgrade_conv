@@ -26,6 +26,8 @@ class RawdataManager {
 
   private:
     std::vector<TTree*> m_tree;
+    std::vector<TString> m_tname;
+
     std::vector<int> m_entries;
     std::vector<std::vector<int>> m_entry; // event# of synchronized events
     std::vector<std::vector<int>> m_lost;  // event# of un-synchronized events

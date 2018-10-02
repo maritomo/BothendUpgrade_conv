@@ -54,11 +54,6 @@ int main(int argc, char** argv) {
     TFile* fin = new TFile(Form("./rootfile/run%d.root", runID));
 
     const int nCrate = 3;
-
-//    TTree* Crate3 = (TTree*) fin->Get("Crate3");
-//    UInt_t ts;
-//    Crate3->SetBranchAddress("Timestamp", &ts);
-
     TTree* tin[nCrate];
     TString treename[nCrate] = {"Crate3", "Crate4", "Crate5"};
 

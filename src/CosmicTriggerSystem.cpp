@@ -51,18 +51,14 @@ bool CosmicTriggerSystem::Init() {
 
     m_isInit = 0;
 
-    std::cout << "---------------------------------------------\n";
-    std::cout << "      Initialize cosmic trigger system       \n";
-    std::cout << "---------------------------------------------\n";
+    std::cout << "Initializing cosmic trigger system ----------\n";
 
     if(!Init_map()) return false;
     if(!Init_channelDelay()) return false;
     if(!Init_calibConst()) return false;
     if(!Init_hitCondition()) return false;
 
-    std::cout << "---------------------------------------------\n";
-    std::cout << "      Cosmic trigger system initialized      \n";
-    std::cout << "---------------------------------------------\n";
+    std::cout << "----------- Cosmic trigger system initialized\n\n";
 
     m_isInit = 1;
     return true;
