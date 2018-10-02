@@ -258,6 +258,33 @@ src/CsI.cpp.s:
 	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CsI.cpp.s
 .PHONY : src/CsI.cpp.s
 
+src/RawdataManager.o: src/RawdataManager.cpp.o
+
+.PHONY : src/RawdataManager.o
+
+# target to build an object file
+src/RawdataManager.cpp.o:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/RawdataManager.cpp.o
+.PHONY : src/RawdataManager.cpp.o
+
+src/RawdataManager.i: src/RawdataManager.cpp.i
+
+.PHONY : src/RawdataManager.i
+
+# target to preprocess a source file
+src/RawdataManager.cpp.i:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/RawdataManager.cpp.i
+.PHONY : src/RawdataManager.cpp.i
+
+src/RawdataManager.s: src/RawdataManager.cpp.s
+
+.PHONY : src/RawdataManager.s
+
+# target to generate assembly for a file
+src/RawdataManager.cpp.s:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/RawdataManager.cpp.s
+.PHONY : src/RawdataManager.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -282,6 +309,9 @@ help:
 	@echo "... src/CsI.o"
 	@echo "... src/CsI.i"
 	@echo "... src/CsI.s"
+	@echo "... src/RawdataManager.o"
+	@echo "... src/RawdataManager.i"
+	@echo "... src/RawdataManager.s"
 .PHONY : help
 
 

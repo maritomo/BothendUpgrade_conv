@@ -12,7 +12,7 @@ include_directories(${ROOT_INCLUDE_DIRS})
 
 link_directories($ENV{ROOTSYS}/lib)
 
-set(SOURCE_FILES conv.cpp ./src/BothendReadoutDetector.cpp ./src/CosmicRayCounter.cpp ./src/CosmicTriggerSystem.cpp ./src/CsI.cpp)
+set(SOURCE_FILES conv.cpp ./src/BothendReadoutDetector.cpp ./src/CosmicRayCounter.cpp ./src/CosmicTriggerSystem.cpp ./src/CsI.cpp ./src/RawdataManager.cpp)
 add_executable(conv ${SOURCE_FILES})
 
 target_link_libraries(conv ${ROOT_LIBRARIES})

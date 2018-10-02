@@ -48,14 +48,12 @@ void CsI::HitDecision() {
 }
 
 
-void CsI::SetHitPos(int trackID) {
+void CsI::SetHitPos(double trackid[3][2]) {
   if(!m_isHit) return;
-  CsI* CSI;
-  double trackid[3][2];
-  trackid[1][0] = CSI ->
+
   m_hitpos[0] = m_pos[0];
   m_hitpos[1] = m_pos[1];
-  m_hitpos[2] = m_pos[1];
+  m_hitpos[2] = trackid[1][0]+m_pos[1]*trackid[1][1];
 
 }
 
@@ -63,4 +61,8 @@ void CsI::SetADC(int crate, int slot, int ch) {
   m_crate = crate;
   m_slot = slot;
   m_ch = ch;
+}
+
+void CsI::SetIsUsed(int IsUsed) {
+    m_isUsed = IsUsed;
 }

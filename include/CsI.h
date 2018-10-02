@@ -16,7 +16,8 @@ public:
   void ZTrack();
   void SetADC(int crate, int slot, int ch);
   void SetIsUsed(int isUsed);
-  void SetHitPos(int trackID); // trackID (yz plane) -> z hit position
+  int GetIsUsed(){ return m_isUsed; }
+  void SetHitPos(double trackid[3][2]); // trackID (yz plane) -> z hit position
   int GetLocID(){ return m_locationID; }
   int GetCrate(){ return m_crate; }
   int GetSlot(){ return m_slot; }

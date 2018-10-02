@@ -99,6 +99,9 @@
 		<Unit filename="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/src/CsI.cpp">
 			<Option target="conv"/>
 		</Unit>
+		<Unit filename="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/src/RawdataManager.cpp">
+			<Option target="conv"/>
+		</Unit>
 		<Unit filename="/Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

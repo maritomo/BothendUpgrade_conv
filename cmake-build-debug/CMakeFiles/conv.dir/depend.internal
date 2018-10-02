@@ -6,7 +6,7 @@ CMakeFiles/conv.dir/conv.cpp.o
  ../include/CosmicRayCounter.h
  ../include/CosmicTriggerSystem.h
  ../include/CsI.h
- ../include/global.h
+ ../include/RawdataManager.h
  /Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/conv.cpp
  /Users/ohsugi/local/root/pro/include/Buttons.h
  /Users/ohsugi/local/root/pro/include/DllImport.h
@@ -137,7 +137,6 @@ CMakeFiles/conv.dir/src/BothendReadoutDetector.cpp.o
 CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o
  ../include/BothendReadoutDetector.h
  ../include/CosmicRayCounter.h
- ../include/global.h
  /Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/src/CosmicRayCounter.cpp
  /Users/ohsugi/local/root/pro/include/DllImport.h
  /Users/ohsugi/local/root/pro/include/GuiTypes.h
@@ -165,7 +164,6 @@ CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o
  ../include/CosmicRayCounter.h
  ../include/CosmicTriggerSystem.h
  ../include/CsI.h
- ../include/global.h
  /Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/src/CosmicTriggerSystem.cpp
  /Users/ohsugi/local/root/pro/include/Buttons.h
  /Users/ohsugi/local/root/pro/include/DllImport.h
@@ -315,6 +313,64 @@ CMakeFiles/conv.dir/src/CsI.cpp.o
  /Users/ohsugi/local/root/pro/include/TVirtualQConnection.h
  /Users/ohsugi/local/root/pro/include/TVirtualRWMutex.h
  /Users/ohsugi/local/root/pro/include/TVirtualX.h
+ /Users/ohsugi/local/root/pro/include/ThreadLocalStorage.h
+ /Users/ohsugi/local/root/pro/include/snprintf.h
+ /Users/ohsugi/local/root/pro/include/strlcpy.h
+CMakeFiles/conv.dir/src/RawdataManager.cpp.o
+ ../include/RawdataManager.h
+ /Users/ohsugi/Documents/KOTO/MPPC_upgrade/Cosmicray_test/DAQ/git/BothendUpgrade_conv/src/RawdataManager.cpp
+ /Users/ohsugi/local/root/pro/include/DllImport.h
+ /Users/ohsugi/local/root/pro/include/ESTLType.h
+ /Users/ohsugi/local/root/pro/include/RConfigure.h
+ /Users/ohsugi/local/root/pro/include/ROOT/RConfig.h
+ /Users/ohsugi/local/root/pro/include/ROOT/RSpan.hxx
+ /Users/ohsugi/local/root/pro/include/ROOT/RStringView.hxx
+ /Users/ohsugi/local/root/pro/include/ROOT/RWrap_libcpp_string_view.h
+ /Users/ohsugi/local/root/pro/include/ROOT/TIOFeatures.hxx
+ /Users/ohsugi/local/root/pro/include/ROOT/TypeTraits.hxx
+ /Users/ohsugi/local/root/pro/include/ROOT/libcpp_string_view.h
+ /Users/ohsugi/local/root/pro/include/ROOT/span.hxx
+ /Users/ohsugi/local/root/pro/include/RVersion.h
+ /Users/ohsugi/local/root/pro/include/Rtypes.h
+ /Users/ohsugi/local/root/pro/include/RtypesCore.h
+ /Users/ohsugi/local/root/pro/include/TArray.h
+ /Users/ohsugi/local/root/pro/include/TArrayD.h
+ /Users/ohsugi/local/root/pro/include/TArrayI.h
+ /Users/ohsugi/local/root/pro/include/TAttFill.h
+ /Users/ohsugi/local/root/pro/include/TAttLine.h
+ /Users/ohsugi/local/root/pro/include/TAttMarker.h
+ /Users/ohsugi/local/root/pro/include/TBasket.h
+ /Users/ohsugi/local/root/pro/include/TBits.h
+ /Users/ohsugi/local/root/pro/include/TBranch.h
+ /Users/ohsugi/local/root/pro/include/TBranchCacheInfo.h
+ /Users/ohsugi/local/root/pro/include/TBuffer.h
+ /Users/ohsugi/local/root/pro/include/TClass.h
+ /Users/ohsugi/local/root/pro/include/TCollection.h
+ /Users/ohsugi/local/root/pro/include/TDataType.h
+ /Users/ohsugi/local/root/pro/include/TDatime.h
+ /Users/ohsugi/local/root/pro/include/TDictionary.h
+ /Users/ohsugi/local/root/pro/include/TDirectory.h
+ /Users/ohsugi/local/root/pro/include/TGenericClassInfo.h
+ /Users/ohsugi/local/root/pro/include/TIsAProxy.h
+ /Users/ohsugi/local/root/pro/include/TIterator.h
+ /Users/ohsugi/local/root/pro/include/TKey.h
+ /Users/ohsugi/local/root/pro/include/TList.h
+ /Users/ohsugi/local/root/pro/include/TMathBase.h
+ /Users/ohsugi/local/root/pro/include/TNamed.h
+ /Users/ohsugi/local/root/pro/include/TObjArray.h
+ /Users/ohsugi/local/root/pro/include/TObjString.h
+ /Users/ohsugi/local/root/pro/include/TObject.h
+ /Users/ohsugi/local/root/pro/include/TSchemaHelper.h
+ /Users/ohsugi/local/root/pro/include/TSeqCollection.h
+ /Users/ohsugi/local/root/pro/include/TStorage.h
+ /Users/ohsugi/local/root/pro/include/TString.h
+ /Users/ohsugi/local/root/pro/include/TTree.h
+ /Users/ohsugi/local/root/pro/include/TUUID.h
+ /Users/ohsugi/local/root/pro/include/TVersionCheck.h
+ /Users/ohsugi/local/root/pro/include/TVirtualIsAProxy.h
+ /Users/ohsugi/local/root/pro/include/TVirtualMutex.h
+ /Users/ohsugi/local/root/pro/include/TVirtualRWMutex.h
+ /Users/ohsugi/local/root/pro/include/TVirtualTreePlayer.h
  /Users/ohsugi/local/root/pro/include/ThreadLocalStorage.h
  /Users/ohsugi/local/root/pro/include/snprintf.h
  /Users/ohsugi/local/root/pro/include/strlcpy.h
