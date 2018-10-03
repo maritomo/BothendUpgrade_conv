@@ -55,25 +55,20 @@ int main(int argc, char** argv) {
 
     const int nCrate = 3;
 
-//    TTree* Crate3 = (TTree*) fin->Get("Crate3");
-//    UInt_t ts;
-//    Crate3->SetBranchAddress("Timestamp", &ts);
-
     TTree* tin[nCrate];
     TString treename[nCrate] = {"Crate3", "Crate4", "Crate5"};
 
+    // Check timestamps
     RawdataManager* man = new RawdataManager();
-
     for(int k = 0; k < nCrate; ++k) {
         tin[k] = (TTree*) fin->Get(treename[k]);
         man->AddTree(tin[k]);
     }
-
     man->Synchronize();
 
-    // "SetBranchAddress()" should be done AFTER "man->CheckTimeStamps()"
-    Short_t Data[16][16][64]={{{}}};
-    UInt_t Timestamp[nCrate]={};
+    // "SetBranchAddress()" should be done AFTER "RawdataManager::CheckTimeStamps()"
+    Short_t Data[16][16][64];
+    UInt_t Timestamp[nCrate];
 
     for(int k = 0; k < nCrate; ++k) {
         if(k==0) {
@@ -87,11 +82,13 @@ int main(int argc, char** argv) {
      * Output tree
      */
 
+    TFile* fout = new TFile(Form("./convfile/run%d_conv.root", runID), "recreate");
+
+    // Trigger
     const int nLayer = trg_sys->GetNLayer();
     const int nCRC = trg_sys->GetNCRC();
 
-    TFile* fout = new TFile(Form("./convfile/run%d_conv.root", runID), "recreate");
-    TTree* tout = new TTree("tree", Form("run%d", runID));
+    TTree* trTrig = new TTree("trigger", Form("run%d", runID));
 
     Short_t data[nLayer][nCRC][2][64];
     Float_t ped[nLayer][nCRC][2];
@@ -116,28 +113,34 @@ int main(int argc, char** argv) {
     Short_t nOnlineHit[2][64];
     Short_t isOnlineTriggered[64];
 
-    tout->Branch("data", data, Form("data[%d][%d][2][64]/S", nLayer, nCRC));
-    tout->Branch("ped", ped, Form("ped[%d][%d][2]/F", nLayer, nCRC));
-    tout->Branch("peak", peak, Form("peak[%d][%d][2]/F", nLayer, nCRC));
-    tout->Branch("integ", integ, Form("integ[%d][%d][2]/F", nLayer, nCRC));
-    tout->Branch("pt", pt, Form("pt[%d][%d][2]/F", nLayer, nCRC));
-    tout->Branch("cft", cft, Form("cft[%d][%d][2]/F", nLayer, nCRC));
+    trTrig->Branch("data", data, Form("data[%d][%d][2][64]/S", nLayer, nCRC));
+    trTrig->Branch("ped", ped, Form("ped[%d][%d][2]/F", nLayer, nCRC));
+    trTrig->Branch("peak", peak, Form("peak[%d][%d][2]/F", nLayer, nCRC));
+    trTrig->Branch("integ", integ, Form("integ[%d][%d][2]/F", nLayer, nCRC));
+    trTrig->Branch("pt", pt, Form("pt[%d][%d][2]/F", nLayer, nCRC));
+    trTrig->Branch("cft", cft, Form("cft[%d][%d][2]/F", nLayer, nCRC));
 
-    tout->Branch("TD", TD, Form("TD[%d][%d]/F", nLayer, nCRC));
-    tout->Branch("MT", MT, Form("MT[%d][%d]/F", nLayer, nCRC));
-    tout->Branch("recX", recX, Form("recX[%d][%d]/F", nLayer, nCRC));
+    trTrig->Branch("TD", TD, Form("TD[%d][%d]/F", nLayer, nCRC));
+    trTrig->Branch("MT", MT, Form("MT[%d][%d]/F", nLayer, nCRC));
+    trTrig->Branch("recX", recX, Form("recX[%d][%d]/F", nLayer, nCRC));
 
-    tout->Branch("isHit", isHit, Form("isHit[%d][%d]/S", nLayer, nCRC));
-    tout->Branch("nHit", nHit, Form("nHit[%d]/S", nLayer));
+    trTrig->Branch("isHit", isHit, Form("isHit[%d][%d]/S", nLayer, nCRC));
+    trTrig->Branch("nHit", nHit, Form("nHit[%d]/S", nLayer));
 
-    tout->Branch("hitpos", hitpos, Form("hitpos[%d][3]/F", nLayer));
-    tout->Branch("track", track, "track[3][2]/F");
-    tout->Branch("trackID", &trackID, "trackID/S");
-    tout->Branch("TOF", &TOF, "TOF/F");
+    trTrig->Branch("hitpos", hitpos, Form("hitpos[%d][3]/F", nLayer));
+    trTrig->Branch("track", track, "track[3][2]/F");
+    trTrig->Branch("trackID", &trackID, "trackID/S");
+    trTrig->Branch("TOF", &TOF, "TOF/F");
 
-    tout->Branch("isOnlineHit", isOnlineHit, Form("isOnlineHit[%d][%d][2][64]/S", nLayer, nCRC));
-    tout->Branch("nOnlineHit", nOnlineHit, "nOnlineHit[2][64]/S");
-    tout->Branch("isOnlineTriggered", isOnlineTriggered, "isOnlineTriggered[64]/S");
+    trTrig->Branch("isOnlineHit", isOnlineHit, Form("isOnlineHit[%d][%d][2][64]/S", nLayer, nCRC));
+    trTrig->Branch("nOnlineHit", nOnlineHit, "nOnlineHit[2][64]/S");
+    trTrig->Branch("isOnlineTriggered", isOnlineTriggered, "isOnlineTriggered[64]/S");
+
+    // timestamp
+    TTree* trTStamp = new TTree("timestamp", Form("run%d", runID));
+
+    trTStamp->Branch("timestamp", Timestamp, Form("timestamp[%d]/i", nCrate));
+
 
 
     /*
@@ -204,7 +207,9 @@ int main(int argc, char** argv) {
             isOnlineTriggered[smpl] = trg_sys->GetIsOnlineTriggered()[smpl];
         }
 
-        tout->Fill();
+
+        trTrig->Fill();
+        trTStamp->Fill();
 
         if(entry % 1000==0) std::cout << entry << "th\n";
 
@@ -238,17 +243,19 @@ int main(int argc, char** argv) {
     TText note2(0, 0, note_threshold);
     note2.SetName("Peak threshold");
 
-    TText note1(0, 0, "comment");
+    TText note1(0, 0, comment.c_str());
     note1.SetName("Comments");
 
     fout->cd();
-    tout->Write();
+    trTrig->Write();
+    trTStamp->Write();
     note1.Write();
     note2.Write();
-    fout->Close();
 
     if(trg_sys->GetIsCommonThreshold())
         std::cout << "************* COMMON_THRESHLD *************\n";
 
+
+    fout->Close();
     return 0;
 }

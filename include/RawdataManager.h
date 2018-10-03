@@ -25,12 +25,13 @@ class RawdataManager {
     int Sum(int N, const int* data);
 
   private:
+    int m_isSynchronized;   // whether is the "Synchronize()" completed
+
     std::vector<TTree*> m_tree;
     std::vector<int> m_entries;
+
     std::vector<std::vector<int>> m_entry; // event# of synchronized events
     std::vector<std::vector<int>> m_lost;  // event# of un-synchronized events
-
-    int m_isSynchronized;
 };
 
 

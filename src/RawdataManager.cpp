@@ -166,7 +166,7 @@ void RawdataManager::GetLostEntry(int entry){
 int RawdataManager::GetEntries() {
     if(!m_isSynchronized) {
         std::cout << "Use Synchronize() function at first\n";
-        return;
+        return 0;
     }
     return m_entry[0].size();
 }
@@ -174,7 +174,7 @@ int RawdataManager::GetEntries() {
 int RawdataManager::GetLostEntries(){
     if(!m_isSynchronized) {
         std::cout << "Use Synchronize() function at first\n";
-        return;
+        return 0;
     }
     return m_lost[0].size();
 }

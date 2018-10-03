@@ -1,5 +1,5 @@
 {
-  int threshold = 200;
+  int threshold = 1000;
   
   std::ofstream ofs("../common_threshold.txt");
   
