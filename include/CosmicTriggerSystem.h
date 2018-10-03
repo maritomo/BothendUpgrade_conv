@@ -42,8 +42,8 @@ class CosmicTriggerSystem {
     void ZCal();
 
 
-    void SetData(int slot, int ch, const short* data);
-    void SetData_CsI(int slot, int ch, const short* data);
+    void SetData(int crate, int slot, int ch, const short* data);
+    void SetData_CsI(int locID, const short* data);
     void SetTrack();
 
     int GetNCRC() { return m_nCRC; }

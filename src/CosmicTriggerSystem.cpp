@@ -132,10 +132,11 @@ bool CosmicTriggerSystem::Init_useCsI() {
   for(int id = 0; id < 2716; id++){
       m_csi[id] -> SetIsUsed(0);
   }
-  int locID, crate, slot, ch;
+  int locID, crate, slot, ch ,count;
   while(ifs >> locID >> crate >> slot >> ch){
       m_csi[locID]->SetADC(crate, slot, ch);
       m_csi[locID]->SetIsUsed(1);
+      count++;
   }
   return true;
 }
@@ -320,7 +321,7 @@ void CosmicTriggerSystem::Tracking() {
  * Setter
  */
 
-void CosmicTriggerSystem::SetData(int slot, int ch, const short* data) {
+void CosmicTriggerSystem::SetData(int crate, int slot, int ch, const short* data) {
     if(slot > 1) return;
     if(ch > 11) return;
 
@@ -329,18 +330,16 @@ void CosmicTriggerSystem::SetData(int slot, int ch, const short* data) {
     int side = ch % 2;
 
     m_crc[layer][channel]->SetData(side, data);
+
+
+
+
 }
 
-void CosmicTriggerSystem::SetData_CsI(int slot, int ch, const short *data) {
-  if (slot > 1) return;
-  if (ch > 11) return;
+void CosmicTriggerSystem::SetData_CsI(int locID, const short* data) {
 
-
-  int layer = slot - 2;
-  int channel = ch / 2;
-  int LR = 0;
-
-  //m_csi[]
+    int side = 1;
+    m_csi[locID] ->SetData(side, data);
 }
 
 /*

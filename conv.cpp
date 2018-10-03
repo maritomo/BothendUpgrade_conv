@@ -72,12 +72,12 @@ int main(int argc, char** argv) {
     man->Synchronize();
 
     // "SetBranchAddress()" should be done AFTER "man->CheckTimeStamps()"
-    Short_t Data[16][16][64]={{{}}};
+    Short_t Data[3][16][16][64]={{{}}};
     UInt_t Timestamp[nCrate]={};
 
     for(int k = 0; k < nCrate; ++k) {
         if(k==0) {
-            tin[k]->SetBranchAddress("Data", Data);
+            tin[k]->SetBranchAddress("Data", &Data[3]);
         }
         tin[k]->SetBranchAddress("Timestamp", &Timestamp[k]);
     }
@@ -115,6 +115,7 @@ int main(int argc, char** argv) {
    */
     TTree* tCsI = new TTree("tCsI",Form("run%d_CsI",runID));
 
+    Short_t data_CsI[nCsI][2][64];
     Float_t ped_CsI[nCsI][2];
     Float_t peak_CsI[nCsI][2];
     Float_t integ_CsI[nCsI][2];
@@ -124,24 +125,26 @@ int main(int argc, char** argv) {
     Float_t MT_CsI[nCsI][2];
 
     Short_t isHit_CsI[nCsI];
+    Short_t isUsed_CsI[nCsI];
     Short_t nHit_CsI[nline];
     Float_t hitpos_CsI[nCsI][3];
     //Short_t trackID;
 
-    tCsI->Branch("data_CsI", data, "data[16][16][64]/S");
-    tCsI->Branch("ped_CsI", ped_CsI, Form("ped[%d][2]/F", nCsI));
-    tCsI->Branch("peak_CsI", peak_CsI, Form("peak[%d][2]/F", nCsI));
-    tCsI->Branch("integ_CsI", integ_CsI, Form("integ[%d][2]/F", nCsI));
-    tCsI->Branch("pt_CsI", pt_CsI, Form("pt[%d][2]/F", nCsI));
-    tCsI->Branch("cft_CsI", cft_CsI, Form("cft[%d][2]/F", nCsI));
+    tCsI->Branch("data_CsI", data_CsI, Form("data_CsI[%d][2][64]/S", nCsI));
+    tCsI->Branch("ped_CsI", ped_CsI, Form("ped_CsI[%d][2]/F", nCsI));
+    tCsI->Branch("peak_CsI", peak_CsI, Form("peak_CsI[%d][2]/F", nCsI));
+    tCsI->Branch("integ_CsI", integ_CsI, Form("integ_CsI[%d][2]/F", nCsI));
+    tCsI->Branch("pt_CsI", pt_CsI, Form("pt_CsI[%d][2]/F", nCsI));
+    tCsI->Branch("cft_CsI", cft_CsI, Form("cft_CsI[%d][2]/F", nCsI));
 
     //tCsI->Branch("TD", TD, Form("TD[%d]/F", nCsI));
-    tCsI->Branch("MT_CsI", MT_CsI, Form("MT[%d]/F", nCsI));
+    tCsI->Branch("MT_CsI", MT_CsI, Form("MT_CsI[%d]/F", nCsI));
     //tCsI->Branch("recX", recX, Form("recX[%d]/F", nCsI));
-    tCsI->Branch("isHit_CsI", isHit_CsI, Form("isHit[%d]/S", nCsI));
+    tCsI->Branch("isHit_CsI", isHit_CsI, Form("isHit_CsI[%d]/S", nCsI));
+    tCsI->Branch("isUsed_CsI",isUsed_CsI, Form("isUsed_CsI[%d]/S", nCsI));
 
-    tCsI->Branch("nHit_CsI", nHit_CsI, Form("nHit[%d]/S", nline));
-    tCsI->Branch("hitpos_CsI", hitpos_CsI, Form("hitpos[%d][3]/F", nCsI));
+    tCsI->Branch("nHit_CsI", nHit_CsI, Form("nHit_CsI[%d]/S", nline));
+    tCsI->Branch("hitpos_CsI", hitpos_CsI, Form("hitpos_CsI[%d][3]/F", nCsI));
     //tCsI->Branch("trackID", &trackID, "trackID/S");
     /*
      * Scan events
@@ -185,19 +188,32 @@ int main(int argc, char** argv) {
 
         for(int slot = 0; slot < 16; ++slot) {
             for(int ch = 0; ch < 16; ++ch) {
-                trg_sys->SetData(slot, ch, Data[slot][ch]);
+                trg_sys->SetData(0, slot, ch, Data[0][slot][ch]);
             }
+        }
+        CsI* CsI;
+        for(int locID = 0; locID < nCsI; ++locID){
+            CsI = trg_sys -> GetCSI(locID);
+            int use, ADC[3], crate;
+            use = CsI -> GetIsUsed();
+            if(use){
+                for (int k = 0; k < 3 ; k++) {
+                    ADC[k] = CsI -> GetADC(k); //0 crate, 1 slot, 2 ch,
+                }
+            }
+            crate = ADC[0] - 3;
+            trg_sys->SetData_CsI(locID, Data[crate][ADC[1]][ADC[2]]);
+
         }
 
         trg_sys->Process();
 
         CosmicRayCounter* counter;
-        CsI* CsI;
+
 
         for(int layer = 0; layer < nLayer; ++layer) {
             for(int ch = 0; ch < nCRC; ++ch) {
                 counter = trg_sys->GetCRC(layer, ch);
-
                 for(int side = 0; side < 2; ++side) {
                     for(int smpl = 0; smpl < 64; ++smpl) {
                         data[layer][ch][side][smpl] = counter->GetData(side)[smpl];
@@ -248,7 +264,24 @@ int main(int argc, char** argv) {
 
         if(entry % 1000==0) std::cout << entry << "th\n";
 
-        for (int CsI = 0; CsI < nCsI; CsI++){
+        for (int locID = 0; locID < nCsI; locID++){
+            CsI = trg_sys -> GetCSI(locID);
+            isUsed_CsI[locID] = CsI -> GetIsUsed();
+            if(isUsed_CsI) {
+                for (int side = 0; side < 1; side++) {
+
+                    for (int smpl = 0; smpl < 64; smpl++) {
+                        data_CsI[locID][side][smpl] = CsI->GetData(side)[smpl];
+
+                    }
+                    ped_CsI[locID][side] = CsI->GetPed(side);
+                    peak_CsI[locID][side] = CsI->GetPeak(side);
+                    integ_CsI[locID][side] = CsI->GetInteg(side);
+                    pt_CsI[locID][side] = CsI->GetPT(side);
+                    cft_CsI[locID][side] = CsI->GetCFT(side);
+                }
+            }
+
 
         }
 

@@ -19,10 +19,8 @@ public:
   int GetIsUsed(){ return m_isUsed; }
   void SetHitPos(int plate, double* track); // trackID (yz plane) -> z hit position
   int GetLocID(){ return m_locationID; }
-  int GetCrate(){ return m_crate; }
-  int GetSlot(){ return m_slot; }
-  int GetCh() { return  m_ch; }
-  int GetIsused(){ return  m_isUsed;}
+  int GetADC(int k){ return m_ADC[k];} //k=0 crate, k=1 slot, k=2 ch
+
 
 private:
   static const int nCSI = 2716;
@@ -32,9 +30,9 @@ private:
   int m_locationID;
   int m_cristalID;
   int m_lineID;
-  int m_crate;
-  int m_slot;
-  int m_ch;
+  int m_ADC[3]; //crate,slot,ch
+  //int m_slot;
+  //int m_ch;
   int m_isUsed;
 
 

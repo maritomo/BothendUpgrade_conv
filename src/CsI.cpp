@@ -40,7 +40,7 @@ void CsI::Process() {
 
 void CsI::HitDecision() {
 
-  if(1) {         // some conditions
+  if(m_isUsed) {         // some conditions
     m_isHit = 1;
     return;
   }
@@ -59,9 +59,9 @@ void CsI::SetHitPos(int plate ,double* track) {
 }
 
 void CsI::SetADC(int crate, int slot, int ch) {
-  m_crate = crate;
-  m_slot = slot;
-  m_ch = ch;
+  m_ADC[0] = crate;
+  m_ADC[1] = slot;
+  m_ADC[2] = ch;
 }
 
 void CsI::SetIsUsed(int IsUsed) {
