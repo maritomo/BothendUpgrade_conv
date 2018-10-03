@@ -45,6 +45,10 @@ CosmicTriggerSystem::~CosmicTriggerSystem() {
             m_lTrack[plane]->Delete();
         }
     }
+
+    for(int CsI = 0; CsI < 2716; ++CsI) {
+        delete m_csi[CsI];
+    }
 }
 
 bool CosmicTriggerSystem::Init() {
@@ -102,43 +106,45 @@ bool CosmicTriggerSystem::Init_map() {
 
     {
         filename = "./data/map_csi.txt";
-
+        std::ifstream ifs(filename.c_str());
         if (!ifs) {
             std::cout << filename << " not found\n";
             return false;
         }
 
-        int locID, lineID, posx, posy, size;
+        int locID, lineID, size;
+        double posx=0, posy=0;
 
-        for (int CsIID = 0; CsIID < m_nCsI; ++CsIID) {
+        for (int CsIID = 0; CsIID < 2716; ++CsIID) {
             ifs >> locID >> lineID >> posx >> posy >> size;
             m_csi[locID] = new CsI(locID, lineID, posx, posy, size);
         }
         ifs.close();
 
-        std::cout << "Trigger counter map             [OK]\n";
+        std::cout << "CsI map                        [OK]\n";
 
         return true;
     }
 }
 
 bool CosmicTriggerSystem::Init_useCsI() {
-  std::string filename = "use_csi.txt";
-  std::ifstream ifs(filename.c_str());
-  if(!ifs) {
+    std::string filename = "./data/use_csi.txt";
+    std::cout << filename << std::endl;
+    std::ifstream ifs(filename.c_str());
+    if(!ifs) {
       std::cout << filename << " not found\n";
       return false;
-  }
-  for(int id = 0; id < 2716; id++){
-      m_csi[id] -> SetIsUsed(0);
-  }
-  int locID, crate, slot, ch ,count;
-  while(ifs >> locID >> crate >> slot >> ch){
-      m_csi[locID]->SetADC(crate, slot, ch);
-      m_csi[locID]->SetIsUsed(1);
-      count++;
-  }
-  return true;
+    }
+    /*for(int id = 0; id < 2716; id++){
+      m_csi[id] -> SetIsUsed(1);
+    }
+     */
+    int locID, crate, slot, ch;
+    while(ifs >> locID >> crate >> slot >> ch){
+        m_csi[locID]->SetADC(crate, slot, ch);
+        m_csi[locID]->SetIsUsed(1);
+    }
+    return true;
 }
 
 
@@ -338,9 +344,11 @@ void CosmicTriggerSystem::SetData(int crate, int slot, int ch, const short* data
 
 void CosmicTriggerSystem::SetData_CsI(int locID, const short* data) {
 
-    int side = 1;
+    int side = 0;
     m_csi[locID] ->SetData(side, data);
+
 }
+
 
 /*
  * Getter

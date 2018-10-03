@@ -9,7 +9,7 @@
 //#include "CosmicTriggerSystem.h"
 class CsI : public BothendReadoutDetector {
 public:
-  CsI(int locID, int lineID, int posx, int posy, int size);
+  CsI(int locID, int lineID, double posx, double posy, int size);
 
   void Process();
   void HitDecision();

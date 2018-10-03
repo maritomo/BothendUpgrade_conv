@@ -69,7 +69,7 @@ int main(int argc, char** argv) {
         man->AddTree(tin[k]);
     }
 
-    man->Synchronize();
+     man->Synchronize();
 
     // "SetBranchAddress()" should be done AFTER "man->CheckTimeStamps()"
     Short_t Data[3][16][16][64]={{{}}};
@@ -77,7 +77,7 @@ int main(int argc, char** argv) {
 
     for(int k = 0; k < nCrate; ++k) {
         if(k==0) {
-            tin[k]->SetBranchAddress("Data", &Data[3]);
+            tin[k]->SetBranchAddress("Data", Data[k]);
         }
         tin[k]->SetBranchAddress("Timestamp", &Timestamp[k]);
     }
@@ -109,6 +109,7 @@ int main(int argc, char** argv) {
 
     Short_t isHit[nLayer][nCRC];
     Short_t nHit[nLayer];
+
 
   /*
    * Input tree (CsI)
@@ -178,12 +179,12 @@ int main(int argc, char** argv) {
     tout->Branch("nOnlineHit", nOnlineHit, "nOnlineHit[2][64]/S");
     tout->Branch("isOnlineTriggered", isOnlineTriggered, "isOnlineTriggered[64]/S");
 
-
     /*
      * Scan events
-     */
+∂     */
 
-    for(int entry = 0; entry < man->GetEntries(); ++entry) {
+    for(int entry = 0; entry < man -> GetEntries(); ++entry) {
+//        std::cout << man -> GetEntries() << std::endl;
         man->GetEntry(entry);
 
         for(int slot = 0; slot < 16; ++slot) {
@@ -192,18 +193,18 @@ int main(int argc, char** argv) {
             }
         }
         CsI* CsI;
+        //std::cout << nCsI;
         for(int locID = 0; locID < nCsI; ++locID){
             CsI = trg_sys -> GetCSI(locID);
             int use, ADC[3], crate;
-            use = CsI -> GetIsUsed();
-            if(use){
-                for (int k = 0; k < 3 ; k++) {
-                    ADC[k] = CsI -> GetADC(k); //0 crate, 1 slot, 2 ch,
+                use = CsI -> GetIsUsed();
+            if(use) {
+                for (int k = 0; k < 3; k++) {
+                    ADC[k] = CsI->GetADC(k); //0 crate, 1 slot, 2 ch,
                 }
             }
-            crate = ADC[0] - 3;
-            trg_sys->SetData_CsI(locID, Data[crate][ADC[1]][ADC[2]]);
-
+            crate = 3;//= ADC[0] - 3;
+            trg_sys->SetData_CsI(locID, Data[0][ADC[1]][ADC[2]]);
         }
 
         trg_sys->Process();
@@ -267,7 +268,7 @@ int main(int argc, char** argv) {
         for (int locID = 0; locID < nCsI; locID++){
             CsI = trg_sys -> GetCSI(locID);
             isUsed_CsI[locID] = CsI -> GetIsUsed();
-            if(isUsed_CsI) {
+            if(isUsed_CsI[locID]) {
                 for (int side = 0; side < 1; side++) {
 
                     for (int smpl = 0; smpl < 64; smpl++) {
@@ -284,6 +285,7 @@ int main(int argc, char** argv) {
 
 
         }
+        tCsI -> Fill();
 
 
 #ifdef VISUALIZE
@@ -321,6 +323,7 @@ int main(int argc, char** argv) {
 
     fout->cd();
     tout->Write();
+    tCsI->Write();
     note1.Write();
     note2.Write();
     fout->Close();

@@ -7,10 +7,11 @@
 #include <fstream>
 #include <CosmicTriggerSystem.h>
 
-CsI::CsI(int locID, int lineID, int posx, int posy, int size) : m_locationID(locID) {
+CsI::CsI(int locID, int lineID, double posx, double posy, int size) : m_locationID(locID) {
 
 
   m_lineID = lineID;
+  m_cristalID = 0;
 
   m_pos[0] = posx;
   m_pos[1] = posy;
@@ -25,6 +26,9 @@ CsI::CsI(int locID, int lineID, int posx, int posy, int size) : m_locationID(loc
   m_posres[2] = m_size[2]/4;
 
   m_isHit = 0;
+  m_isUsed = 0;
+  m_ADC[3] = {};
+
 
   for(int plane = 0; plane < 3; ++plane) {
     m_isVis[plane] = 0;
@@ -40,7 +44,7 @@ void CsI::Process() {
 
 void CsI::HitDecision() {
 
-  if(m_isUsed) {         // some conditions
+  if(1) {         // some conditions
     m_isHit = 1;
     return;
   }

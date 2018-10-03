@@ -144,8 +144,7 @@ void RawdataManager::GetEntry(int entry) {
         std::cout << "Total # of events " << m_entry[0].size() << "\n";
         return;
     }
-    for(int k = 0; k < m_tree.size(); ++k) {
-        m_tree[k]->GetEntry(m_entry[k][entry]);
+    for(int k = 0; k < m_tree.size(); ++k) { m_tree[k]->GetEntry(m_entry[k][entry]);
     }
 }
 
