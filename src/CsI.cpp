@@ -35,6 +35,7 @@ CsI::CsI(int locID, int lineID, int posx, int posy, int size) : m_locationID(loc
 
 void CsI::Process() {
   HitDecision();
+  //SetHitPos();
 }
 
 void CsI::HitDecision() {
@@ -48,12 +49,12 @@ void CsI::HitDecision() {
 }
 
 
-void CsI::SetHitPos(double trackid[3][2]) {
+void CsI::SetHitPos(int plate ,double* track) {
   if(!m_isHit) return;
 
   m_hitpos[0] = m_pos[0];
   m_hitpos[1] = m_pos[1];
-  m_hitpos[2] = trackid[1][0]+m_pos[1]*trackid[1][1];
+  m_hitpos[2] = *track + (1 / m_pos[1] ) * *(track + 1);
 
 }
 

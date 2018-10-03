@@ -301,15 +301,19 @@ void CosmicTriggerSystem::Tracking() {
 
     int axis_h; // index of horizontal axis
     int axis_v; // index of vertical axis
-
+    double* track;
     for(int plane = 0; plane < 3; ++plane) {
         GetVisAxis(plane, axis_h, axis_v);
         m_track[plane][1] = (m_hitpos[1][axis_v] - m_hitpos[0][axis_v]) / (m_hitpos[1][axis_h] - m_hitpos[0][axis_h]);
         m_track[plane][0] = m_hitpos[1][axis_v] - m_track[plane][1] * m_hitpos[1][axis_h];
+        track = m_track[1];
+
     }
-
+    for(int id = 0; id < m_nCsI; id++) {
+        int plane = 1;
+            m_csi[id]->SetHitPos(plane, track);
+    }
 }
-
 
 
 /*
@@ -454,6 +458,11 @@ void CosmicTriggerSystem::SetTrackLine(int plane) {
     m_lTrack[plane]->SetY2(v[1]);
 }
 
+void SetTrack(){
+    for(int id = 0; id < 2716; id++){
+
+    }
+}
 
 void CosmicTriggerSystem::Display() {
     if(m_isVis[0]==0 && m_isVis[1]==0 && m_isVis[2]==0) {
