@@ -41,6 +41,7 @@ void BothendReadoutDetector::GetCFTime(int side) {
 
     for(int i = 0; i < n; ++i) {
         if(i < nPed)
+
             m_ped[side] += (float) m_data[side][i] / nPed;
         if(m_peak[side] < m_data[side][i]) {
             m_peak[side] = m_data[side][i];

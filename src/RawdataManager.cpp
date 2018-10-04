@@ -1,6 +1,8 @@
 //
 // Created by Tomoo MARI on 2018/09/30.
 //
+//#define DEBUG
+
 
 #include "RawdataManager.h"
 
@@ -11,178 +13,234 @@ RawdataManager::RawdataManager() : m_isSynchronized(0) {}
 
 RawdataManager::~RawdataManager() {}
 
-void RawdataManager::Synchronize(){
+
+// Assume un-synchronization occurs only in 1 crate
+void RawdataManager::CheckTimeStamp() {
 
     const int nTree = m_tree.size();
     if(nTree < 2) {
-        std::cout << "# of trees should be >= 2\n";
+        std::cout << "Error: # of trees should be >= 2\n";
         return;
     }
 
-    m_entries.resize(nTree);
-    m_entry.resize(nTree);
-    m_lost.resize(nTree);
-
-    for(int k = 0; k < nTree; ++k) {
-        m_entries[k] = m_tree[k]->GetEntries();
-    }
+    std::cout << "Checking timestamps -------------------------\n";
 
     UInt_t* timestamp = new UInt_t[nTree];
     for(int k = 0; k < nTree; ++k) {
         m_tree[k]->SetBranchAddress("Timestamp", &timestamp[k]);
     }
 
+    m_entry.resize(nTree);
+    m_timestamp_delta.resize(nTree);
 
-    int* spillNo = new int[nTree];
-    int* dif = new int[nTree];
-    int* dif_delta = new int[nTree];
-    int* flag = new int[nTree];
+    int* entry = new int[nTree];
+    int* tdif_delta = new int[nTree - 1];
 
-    int endflag = 0;
-    int nMAxRetry = 5;
-    int* nRetry = new int[nTree];
-
+    // The first event in a run must be the delta triggers
+    // and timestamp difference between crates can be references
+    m_tree[nTree - 1]->GetEntry(0);
     for(int k = 0; k < nTree; ++k) {
-        spillNo[k] = 0;
-        flag[k] = 0;
-        nRetry[k] = 0;
+        m_tree[k]->GetEntry(0);
+        m_timestamp_delta[k] = timestamp[k];
+        if(k < nTree - 1) {
+            tdif_delta[k] = timestamp[nTree - 1] - timestamp[k];
+        }
     }
 
-    int nEventPerSpill = 30;
+    // Initialize entry#
+    for(int k = 0; k < nTree; ++k)
+        entry[k] = 1;
+
+
+    /* Scan all entries */
+
+#ifdef DEBUG
+    for(int k = 0; k < nTree; ++k) {
+        std::cout << m_tree[k]->GetName() << " / ";
+    }
+    std::cout << "\n";
+#endif
+    
+    int count = 0;
 
     while(1) {
+        // end
+        int end_flag = 0;
         for(int k = 0; k < nTree; ++k) {
-            if(spillNo[k] * nEventPerSpill > m_entries[k])
-                endflag = 1;
-        }
-        if(endflag) break; // the last spill are not used
-
-        for(int entry = 0; entry < nEventPerSpill; ++entry) {
-            for(int k = 0; k < nTree; ++k) {
-                m_tree[k]->GetEntry(nEventPerSpill * spillNo[k] + entry);
-            }
-            // Dif
-            for(int k = 0; k < nTree; ++k) {
-                dif[k] = timestamp[(k + 1) % nTree] - timestamp[(k + 2) % nTree];
-                if(entry==0) {
-                    dif_delta[k] = dif[k]; // delta trigger
-                }
-            }
-
-            if(entry==0) {  // delta trigger
-                continue;
-            }
-
-            // Flag
-            for(int k = 0; k < nTree; ++k) {
-                flag[k] = 0;
-                int offset = nTree - 2;
-                int index[2] = {(k + offset) % nTree, (k + 1 + offset) % nTree};
-
-                // unsynchronization in k-th crate
-                if(dif[index[0]]!=dif_delta[index[0]] && dif[index[1]]!=dif_delta[index[1]])
-                    flag[k] = 1;
-            }
-
-            // if unsynchronization exists
-            if(Sum(nTree, flag) > 0) {
-                for(int k = 0; k < nTree; ++k) {
-                    // synchronized crate
-                    if(!flag[k])
-                        continue;
-                    // unsynchronized crate
-                    if(nRetry[k] > nMAxRetry) { // give up
-                        spillNo[k] -= nRetry[k];
-                        nRetry[k] = 0;
-                        m_lost[k].push_back(spillNo[k]);
-                        std::cout << ">>>>>>> Crate " << k+3 << ", Spill " << spillNo[k] << " skipped <<<<<<<\n";
-                    } else { // find
-                        ++spillNo[k];
-                        ++nRetry[k];
-                    }
-                }
+            if(entry[k] >= m_tree[k]->GetEntries()) {
+                end_flag = 1;
                 break;
-            } else { // except delta trigger
-                for(int k = 0; k < 3; ++k)
-                    nRetry[k] = 0;
+            }
+        }
+        if(end_flag) break;
+
+        // skip some events
+        int continue_flag = 0;
+        
+        // delta trigger events
+        for(int k = 0; k < nTree; ++k) {
+            m_tree[k]->GetEntry(entry[k]);
+            if(timestamp[k]==m_timestamp_delta[k]) {
+                ++entry[k];
+                continue_flag = 1;
+            }
+        }
+        if(continue_flag) continue;
+
+        // Skip the last event in each Jay-spill
+        // Timestamp does not change from one event before... I don't know why
+        for(int k = 0; k < nTree; ++k) {
+            if(entry[k] % 30==29) {
+                ++entry[k];
+                continue_flag = 1;
+            }
+        }
+        if(continue_flag) continue;
+
+
+        // If un-synchronization recovered
+        int recover_flag = 1;
+        int maxEntry = Max(nTree, entry);
+        m_tree[nTree-1]->GetEntry(maxEntry);
+
+        for(int k = 0; k < nTree-1; ++k) {
+            if(maxEntry >= m_tree[k]->GetEntries()) {
+                recover_flag = 0;
+                break;
             }
 
-        } // entry loop
-
-        // if synchronized spills found
-        if(nRetry[0] + nRetry[1] + nRetry[2]==0) {
-            for(int k = 0; k < 3; ++k) {
-                for(int entry = 0; entry < nEventPerSpill; ++entry) {
-                    m_entry[k].push_back(spillNo[k]*nEventPerSpill + entry);
-                }
-                ++spillNo[k];
+            m_tree[k]->GetEntry(maxEntry);
+            if(timestamp[k]+tdif_delta[k]!=timestamp[nTree-1]) {
+                recover_flag = 0;
+                break;
             }
         }
 
-    } // spill loop
+        if(recover_flag) {
+            for(int k = 0; k < nTree; ++k) {
+                entry[k] = maxEntry;
+                m_entry[k].push_back(entry[k]);
 
-    delete[] spillNo;
+#ifdef DEBUG
+                std::cout << k << ":" << entry[k] << "\t";
+#endif
+                ++entry[k];
+            }
+#ifdef DEBUG
+            std::cout << "\n";
+#endif
+            int current_entry = m_entry[0].size();
+            if(current_entry%1000==0)
+                std::cout << current_entry << "th\n";
+
+            continue;
+        }
+
+        // (nTree-1)th tree is used as reference
+        int find_flag = 1;
+        m_tree[nTree - 1]->GetEntry(entry[nTree - 1]);
+
+        for(int k = 0; k < nTree - 1; ++k) {
+            for(int i = 0, maxloop = 300; i < maxloop; ++i) {
+                int nextentry = entry[k] + i;
+
+                // if not found
+                if(i==maxloop - 1 || nextentry > m_tree[k]->GetEntries()-1) {
+                    find_flag = 0;
+                    break;
+                }
+
+                // skip the last event in each Jay-spill
+                if(nextentry%30==29) {
+                    continue;
+                }
+
+                m_tree[k]->GetEntry(nextentry);
+
+                // skip delta trigger events
+                if(timestamp[k]==m_timestamp_delta[k]) {
+                    continue;
+                }
+
+                // if found
+                if(timestamp[k] + tdif_delta[k]==timestamp[nTree - 1]) {
+                    entry[k] = nextentry;
+                    break;
+                }
+
+            }
+        }
+
+        // if found
+        if(find_flag) {
+            for(int k = 0; k < nTree; ++k) {
+                m_entry[k].push_back(entry[k]);
+                ++entry[k];
+#ifdef DEBUG
+                std::cout << k << "::" << entry[k] << "\t";
+#endif
+            }
+            int current_entry = m_entry[0].size();
+            if(current_entry%1000==0)
+                std::cout << current_entry << "th\n";
+#ifdef DEBUG
+            std::cout << std::endl;
+#endif
+
+        } else {
+
+#ifdef DEBUG
+            for(int k = 0; k < nTree; ++k) {
+                std::cout << k << "->" << entry[k] << "\t";
+            }
+            std::cout << std::endl;
+#endif
+            ++entry[nTree - 1];
+            for(int k = 0; k < nTree - 1; ++k) {
+                if(entry[k] < entry[nTree-1]) {
+                    entry[k] = entry[nTree-1];
+                }
+            }
+        }
+
+
+    } // while
+
     delete[] timestamp;
-    delete[] dif;
-    delete[] dif_delta;
-    delete[] flag;
-    delete[] nRetry;
+    delete[] entry;
+    delete[] tdif_delta;
 
     m_isSynchronized = 1;
 
-    std::cout << "---------------------------------------------\n";
-    std::cout << "        Unsynchronized events removed        \n";
-    std::cout << "---------------------------------------------\n";
+    std::cout << "------------------------- Synchronization fin\n\n";
 }
 
-void RawdataManager::GetEntry(int entry) {
+void RawdataManager::GetEntry(int spill) {
     if(!m_isSynchronized) {
-        std::cout << "Use Synchronize() function at first\n";
+        std::cout << "Use CheckTimeStamp() function at first\n";
         return;
     }
-    if(entry >= m_entry[0].size()) {
+    if(spill >= m_entry[0].size()) {
         std::cout << "Total # of events " << m_entry[0].size() << "\n";
         return;
     }
     for(int k = 0; k < m_tree.size(); ++k) {
-        m_tree[k]->GetEntry(m_entry[k][entry]);
-    }
-}
-
-void RawdataManager::GetLostEntry(int entry){
-    if(!m_isSynchronized) {
-        std::cout << "Use Synchronize() function at first\n";
-        return;
-    }
-    if(entry >= m_lost[0].size()) {
-        std::cout << "Total # of events " << m_lost[0].size() << "\n";
-        return;
-    }
-    for(int k = 0; k < m_tree.size(); ++k) {
-        m_tree[k]->GetEntry(m_lost[k][entry]);
+        m_tree[k]->GetEntry(m_entry[k][spill]);
     }
 }
 
 int RawdataManager::GetEntries() {
     if(!m_isSynchronized) {
-        std::cout << "Use Synchronize() function at first\n";
+        std::cout << "Use CheckTimeStamp() function at first\n";
         return 0;
     }
     return m_entry[0].size();
 }
 
-int RawdataManager::GetLostEntries(){
-    if(!m_isSynchronized) {
-        std::cout << "Use Synchronize() function at first\n";
-        return 0;
-    }
-    return m_lost[0].size();
-}
-
-int RawdataManager::Sum(int N, const int* data) {
-    int sum = 0;
+int RawdataManager::Max(int N, const int* data) {
+    int max = -1000000;
     for(int i = 0; i < N; ++i) {
-        sum += data[i];
+        if(max < data[i]) max = data[i];
     }
-    return sum;
+    return max;
 }

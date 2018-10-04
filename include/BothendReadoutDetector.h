@@ -12,10 +12,8 @@ class BothendReadoutDetector {
     virtual ~BothendReadoutDetector();
 
     virtual void SetData(int side, const short* data);
-//    virtual void Process() = 0;
 
     double GetPos(int axis) { return m_pos[axis]; }
-
     const int* GetData(int side) { return m_data[side]; }
     double GetPed(int side) { return m_ped[side]; }
     double GetPeak(int side) { return m_peak[side]; }

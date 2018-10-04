@@ -13,6 +13,7 @@
 
 CosmicTriggerSystem::CosmicTriggerSystem(int runID, int isCommonThreshold) :
         m_runID(runID), m_isCommonThreshold(isCommonThreshold) {
+
     if(!Init()) {
         std::cout << "Error: CosmicTriggerSystem was not initialized\n";
     }
@@ -50,18 +51,14 @@ bool CosmicTriggerSystem::Init() {
 
     m_isInit = 0;
 
-    std::cout << "---------------------------------------------\n";
-    std::cout << "      Initialize cosmic trigger system       \n";
-    std::cout << "---------------------------------------------\n";
+    std::cout << "Initializing cosmic trigger system ----------\n";
 
     if(!Init_map()) return false;
     if(!Init_channelDelay()) return false;
     if(!Init_calibConst()) return false;
     if(!Init_hitCondition()) return false;
 
-    std::cout << "---------------------------------------------\n";
-    std::cout << "      Cosmic trigger system initialized      \n";
-    std::cout << "---------------------------------------------\n";
+    std::cout << "----------- Cosmic trigger system initialized\n\n";
 
     m_isInit = 1;
     return true;
@@ -150,6 +147,8 @@ bool CosmicTriggerSystem::Init_calibConst() {
 }
 
 bool CosmicTriggerSystem::Init_hitCondition() {
+
+    m_fPedSig = 5; // peak threhold = pedestalRMS * fPedSig
 
     std::stringstream ss;
     ss << "./data/pedestal/pedestal_run" << m_runID << ".txt";

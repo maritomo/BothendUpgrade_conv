@@ -8,7 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <RawdataManager.h>
+#include <iomanip>
 
 #include "TFile.h"
 #include "TTree.h"
@@ -54,7 +54,6 @@ int main(int argc, char** argv) {
     TFile* fin = new TFile(Form("./rootfile/run%d.root", runID));
 
     const int nCrate = 3;
-
     TTree* tin[nCrate];
     TString treename[nCrate] = {"Crate3", "Crate4", "Crate5"};
 
@@ -64,7 +63,10 @@ int main(int argc, char** argv) {
         tin[k] = (TTree*) fin->Get(treename[k]);
         man->AddTree(tin[k]);
     }
-    man->Synchronize();
+    man->CheckTimeStamp();
+    std::cout << "# of surviving events    "
+              << man->GetEntries() << " (" << std::setprecision(3)
+              << 100. * man->GetEntries() / tin[0]->GetEntries() << "%)\n";
 
     // "SetBranchAddress()" should be done AFTER "RawdataManager::CheckTimeStamps()"
     Short_t Data[16][16][64];
@@ -88,7 +90,7 @@ int main(int argc, char** argv) {
     const int nLayer = trg_sys->GetNLayer();
     const int nCRC = trg_sys->GetNCRC();
 
-    TTree* trTrig = new TTree("trigger", Form("run%d", runID));
+    TTree* tout = new TTree("tree", Form("run%d", runID));
 
     Short_t data[nLayer][nCRC][2][64];
     Float_t ped[nLayer][nCRC][2];
@@ -113,28 +115,28 @@ int main(int argc, char** argv) {
     Short_t nOnlineHit[2][64];
     Short_t isOnlineTriggered[64];
 
-    trTrig->Branch("data", data, Form("data[%d][%d][2][64]/S", nLayer, nCRC));
-    trTrig->Branch("ped", ped, Form("ped[%d][%d][2]/F", nLayer, nCRC));
-    trTrig->Branch("peak", peak, Form("peak[%d][%d][2]/F", nLayer, nCRC));
-    trTrig->Branch("integ", integ, Form("integ[%d][%d][2]/F", nLayer, nCRC));
-    trTrig->Branch("pt", pt, Form("pt[%d][%d][2]/F", nLayer, nCRC));
-    trTrig->Branch("cft", cft, Form("cft[%d][%d][2]/F", nLayer, nCRC));
+    tout->Branch("data", data, Form("data[%d][%d][2][64]/S", nLayer, nCRC));
+    tout->Branch("ped", ped, Form("ped[%d][%d][2]/F", nLayer, nCRC));
+    tout->Branch("peak", peak, Form("peak[%d][%d][2]/F", nLayer, nCRC));
+    tout->Branch("integ", integ, Form("integ[%d][%d][2]/F", nLayer, nCRC));
+    tout->Branch("pt", pt, Form("pt[%d][%d][2]/F", nLayer, nCRC));
+    tout->Branch("cft", cft, Form("cft[%d][%d][2]/F", nLayer, nCRC));
 
-    trTrig->Branch("TD", TD, Form("TD[%d][%d]/F", nLayer, nCRC));
-    trTrig->Branch("MT", MT, Form("MT[%d][%d]/F", nLayer, nCRC));
-    trTrig->Branch("recX", recX, Form("recX[%d][%d]/F", nLayer, nCRC));
+    tout->Branch("TD", TD, Form("TD[%d][%d]/F", nLayer, nCRC));
+    tout->Branch("MT", MT, Form("MT[%d][%d]/F", nLayer, nCRC));
+    tout->Branch("recX", recX, Form("recX[%d][%d]/F", nLayer, nCRC));
 
-    trTrig->Branch("isHit", isHit, Form("isHit[%d][%d]/S", nLayer, nCRC));
-    trTrig->Branch("nHit", nHit, Form("nHit[%d]/S", nLayer));
+    tout->Branch("isHit", isHit, Form("isHit[%d][%d]/S", nLayer, nCRC));
+    tout->Branch("nHit", nHit, Form("nHit[%d]/S", nLayer));
 
-    trTrig->Branch("hitpos", hitpos, Form("hitpos[%d][3]/F", nLayer));
-    trTrig->Branch("track", track, "track[3][2]/F");
-    trTrig->Branch("trackID", &trackID, "trackID/S");
-    trTrig->Branch("TOF", &TOF, "TOF/F");
+    tout->Branch("hitpos", hitpos, Form("hitpos[%d][3]/F", nLayer));
+    tout->Branch("track", track, "track[3][2]/F");
+    tout->Branch("trackID", &trackID, "trackID/S");
+    tout->Branch("TOF", &TOF, "TOF/F");
 
-    trTrig->Branch("isOnlineHit", isOnlineHit, Form("isOnlineHit[%d][%d][2][64]/S", nLayer, nCRC));
-    trTrig->Branch("nOnlineHit", nOnlineHit, "nOnlineHit[2][64]/S");
-    trTrig->Branch("isOnlineTriggered", isOnlineTriggered, "isOnlineTriggered[64]/S");
+    tout->Branch("isOnlineHit", isOnlineHit, Form("isOnlineHit[%d][%d][2][64]/S", nLayer, nCRC));
+    tout->Branch("nOnlineHit", nOnlineHit, "nOnlineHit[2][64]/S");
+    tout->Branch("isOnlineTriggered", isOnlineTriggered, "isOnlineTriggered[64]/S");
 
     // timestamp
     TTree* trTStamp = new TTree("timestamp", Form("run%d", runID));
@@ -149,6 +151,7 @@ int main(int argc, char** argv) {
 
     for(int entry = 0; entry < man->GetEntries(); ++entry) {
         man->GetEntry(entry);
+//        man->GetLostEntry(entry);
 
         for(int slot = 0; slot < 16; ++slot) {
             for(int ch = 0; ch < 16; ++ch) {
@@ -208,7 +211,7 @@ int main(int argc, char** argv) {
         }
 
 
-        trTrig->Fill();
+        tout->Fill();
         trTStamp->Fill();
 
         if(entry % 1000==0) std::cout << entry << "th\n";
@@ -247,7 +250,7 @@ int main(int argc, char** argv) {
     note1.SetName("Comments");
 
     fout->cd();
-    trTrig->Write();
+    tout->Write();
     trTStamp->Write();
     note1.Write();
     note2.Write();

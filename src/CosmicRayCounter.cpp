@@ -56,7 +56,6 @@ void CosmicRayCounter::SetCoinRange(int side, double* coin_range) {
 void CosmicRayCounter::Process() {
     Reconstruct();
     HitDecision();
-
     for(int side = 0; side < 2; ++side) {
         OnlineHitDecision(side);
     }

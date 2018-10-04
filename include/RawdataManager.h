@@ -15,23 +15,19 @@ class RawdataManager {
     ~RawdataManager();
 
     void AddTree(TTree* tree) { m_tree.push_back(tree); }
-    void Synchronize();
+    void CheckTimeStamp();
 
     void GetEntry(int entry);
-    void GetLostEntry(int entry);
     int GetEntries();
-    int GetLostEntries();
 
-    int Sum(int N, const int* data);
+    static int Max(int N, const int* data);
 
   private:
     int m_isSynchronized;   // whether is the "Synchronize()" completed
 
     std::vector<TTree*> m_tree;
-    std::vector<int> m_entries;
-
     std::vector<std::vector<int>> m_entry; // event# of synchronized events
-    std::vector<std::vector<int>> m_lost;  // event# of un-synchronized events
+    std::vector<int> m_timestamp_delta;
 };
 
 
