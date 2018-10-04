@@ -14,12 +14,14 @@ public:
   void Process();
   void HitDecision();
   void ZTrack();
-  void SetADC(int crate, int slot, int ch);
+  void SetADC(int side, int crate, int slot, int ch);
   void SetIsUsed(int isUsed);
   int GetIsUsed(){ return m_isUsed; }
-  void SetHitPos(int plate, double* track); // trackID (yz plane) -> z hit position
+  void SetHitPos(double* track); // trackID (yz plane) -> z hit position
   int GetLocID(){ return m_locationID; }
-  int GetADC(int k){ return m_ADC[k];} //k=0 crate, k=1 slot, k=2 ch
+  int GetCrate(int side){ return m_crate[side]; }
+  int GetSlot(int side){ return m_slot[side]; }
+  int Getch(int side){ return m_ch[side]; }
 
 
 private:
@@ -30,9 +32,9 @@ private:
   int m_locationID;
   int m_cristalID;
   int m_lineID;
-  int m_ADC[3]; //crate,slot,ch
-  //int m_slot;
-  //int m_ch;
+  int m_crate[2];//0 mppc 1 csi
+  int m_slot[2];
+  int m_ch[2];
   int m_isUsed;
 
 

@@ -105,19 +105,26 @@ bool CosmicTriggerSystem::Init_map() {
     }
 
     {
-        filename = "./data/map_csi.txt";
+        int locID, lineID, size, use_id = 0;
+        double posx=0, posy=0;
+
+        filename = "./data/csi_line_id.txt";
         std::ifstream ifs(filename.c_str());
+        std:: string filename_2 = "./data/map_csi.txt";
+        std::ifstream ss(filename_2.c_str());
         if (!ifs) {
             std::cout << filename << " not found\n";
             return false;
         }
 
-        int locID, lineID, size;
-        double posx=0, posy=0;
-
         for (int CsIID = 0; CsIID < 2716; ++CsIID) {
-            ifs >> locID >> lineID >> posx >> posy >> size;
-            m_csi[locID] = new CsI(locID, lineID, posx, posy, size);
+            ss >> locID >> lineID >> posx >> posy >> size;
+//            if(lineID==6) {
+
+                m_csi[locID] = new CsI(locID, lineID, posx, posy, size);
+//                std::cout << locID << '\t' <<use_id << std::endl;
+//                use_id++;
+//            }
         }
         ifs.close();
 
@@ -128,21 +135,30 @@ bool CosmicTriggerSystem::Init_map() {
 }
 
 bool CosmicTriggerSystem::Init_useCsI() {
-    std::string filename = "./data/use_csi.txt";
-    std::cout << filename << std::endl;
-    std::ifstream ifs(filename.c_str());
-    if(!ifs) {
-      std::cout << filename << " not found\n";
-      return false;
-    }
-    /*for(int id = 0; id < 2716; id++){
-      m_csi[id] -> SetIsUsed(1);
-    }
-     */
-    int locID, crate, slot, ch;
-    while(ifs >> locID >> crate >> slot >> ch){
-        m_csi[locID]->SetADC(crate, slot, ch);
-        m_csi[locID]->SetIsUsed(1);
+    for(int side = 0; side < 2; side++) {
+        int locID, crate[2], slot[2], ch[2];
+        std::string filename;
+        if(side == 0){
+            filename = "./data/use_csi_mppc.txt";
+        }
+        if(side == 1){
+            filename = "./data/use_csi.txt";
+        }
+
+        std::cout << filename << std::endl;
+        std::ifstream ifs(filename.c_str());
+        if (!ifs) {
+            std::cout << filename << " not found\n";
+            return false;
+        }
+        /*for(int id = 0; id < 2716; id++){
+          m_csi[id] -> SetIsUsed(1);
+        }
+         */
+        while (ifs >> locID >> crate[side] >> slot[side] >> ch[side]) {
+            m_csi[locID]->SetADC(side, crate[side], slot[side], ch[side]);
+            m_csi[locID]->SetIsUsed(1);
+        }
     }
     return true;
 }
@@ -317,8 +333,7 @@ void CosmicTriggerSystem::Tracking() {
 
     }
     for(int id = 0; id < m_nCsI; id++) {
-        int plane = 1;
-            m_csi[id]->SetHitPos(plane, track);
+            m_csi[id]->SetHitPos(track);
     }
 }
 
@@ -342,9 +357,8 @@ void CosmicTriggerSystem::SetData(int crate, int slot, int ch, const short* data
 
 }
 
-void CosmicTriggerSystem::SetData_CsI(int locID, const short* data) {
+void CosmicTriggerSystem::SetData_CsI(int locID, int side, const short* data) {
 
-    int side = 0;
     m_csi[locID] ->SetData(side, data);
 
 }

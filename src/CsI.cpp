@@ -27,7 +27,12 @@ CsI::CsI(int locID, int lineID, double posx, double posy, int size) : m_location
 
   m_isHit = 0;
   m_isUsed = 0;
-  m_ADC[3] = {};
+  m_crate[0] = 0;
+  m_crate[1] = 0;
+  m_slot[0] = 0;
+  m_slot[1] = 0;
+  m_ch[0] = 0;
+  m_ch[1] = 0;
 
 
   for(int plane = 0; plane < 3; ++plane) {
@@ -53,7 +58,7 @@ void CsI::HitDecision() {
 }
 
 
-void CsI::SetHitPos(int plate ,double* track) {
+void CsI::SetHitPos(double* track) {
   if(!m_isHit) return;
 
   m_hitpos[0] = m_pos[0];
@@ -62,10 +67,10 @@ void CsI::SetHitPos(int plate ,double* track) {
 
 }
 
-void CsI::SetADC(int crate, int slot, int ch) {
-  m_ADC[0] = crate;
-  m_ADC[1] = slot;
-  m_ADC[2] = ch;
+void CsI::SetADC(int side, int crate, int slot, int ch) {
+  m_crate[side] = crate;
+  m_slot[side] = slot;
+  m_ch[side] = ch;
 }
 
 void CsI::SetIsUsed(int IsUsed) {
