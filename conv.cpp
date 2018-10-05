@@ -151,7 +151,6 @@ int main(int argc, char** argv) {
 
     for(int entry = 0; entry < man->GetEntries(); ++entry) {
         man->GetEntry(entry);
-//        man->GetLostEntry(entry);
 
         for(int slot = 0; slot < 16; ++slot) {
             for(int ch = 0; ch < 16; ++ch) {
