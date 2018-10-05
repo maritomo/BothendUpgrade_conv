@@ -26,7 +26,7 @@ class BothendReadoutDetector {
     double GetMT() { return m_MT; }
 
     int GetIsHit() { return m_isHit; }
-    int GetHitPos(int axis) { return m_hitpos[axis]; }
+    double GetHitPos(int axis) { return m_hitpos[axis]; }
 
     void SetDelay(int side, int delay) { m_delay[side] = delay; }
 

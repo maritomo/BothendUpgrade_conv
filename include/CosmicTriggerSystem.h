@@ -64,7 +64,6 @@ class CosmicTriggerSystem {
 
     int GetNhit(int layer) { return m_nHit[layer]; }
     int GetHit(int layer) { return m_hitCh[layer]; }
-    double GetHitPos(int layer, int axis) { return m_hitpos[layer][axis]; }
 
     int GetTrackID() { return m_trackID; }
     const double* GetTrack(int plane) { return m_track[plane]; }

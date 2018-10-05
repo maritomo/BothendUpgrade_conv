@@ -187,6 +187,16 @@ bool CosmicTriggerSystem::Init_channelDelay() {
     ifs.close();
 
     std::cout << "Channel delays                  [OK]\n";
+    std::string filename1 = "./data/use_csi.txt";
+    std::ifstream ss(filename1.c_str());
+    int locid, crate, ch;
+    while(ss >> locid >> crate >> slot >> ch) {
+        for (int side = 0; side < 2; side++) {
+            delay = 15;
+            m_csi[locid]->SetDelay(side, delay);
+        }
+    }
+    std::cout << "Channel delays CsI              [OK]\n";
     return true;
 }
 
@@ -300,6 +310,9 @@ void CosmicTriggerSystem::HitDecision() {
             }
         }
     }
+    for(int locID = 0; locID < m_nCsI; ++locID){
+        m_csi[locID] -> Process();
+    }
 
 }
 
@@ -329,11 +342,12 @@ void CosmicTriggerSystem::Tracking() {
         GetVisAxis(plane, axis_h, axis_v);
         m_track[plane][1] = (m_hitpos[1][axis_v] - m_hitpos[0][axis_v]) / (m_hitpos[1][axis_h] - m_hitpos[0][axis_h]);
         m_track[plane][0] = m_hitpos[1][axis_v] - m_track[plane][1] * m_hitpos[1][axis_h];
-        track = m_track[1];
-
+        //track = m_track[1];
+//        std::cout << *track << std::endl;
+//        std::cout << track << std::endl;
     }
     for(int id = 0; id < m_nCsI; id++) {
-            m_csi[id]->SetHitPos(track);
+            m_csi[id]->SetHitPos(m_track[1]);
     }
 }
 

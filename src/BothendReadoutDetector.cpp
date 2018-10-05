@@ -5,6 +5,8 @@
 #include <TString.h>
 #include <iostream>
 #include "BothendReadoutDetector.h"
+#include <cmath>
+
 
 BothendReadoutDetector::~BothendReadoutDetector() {
     for(int plane = 0; plane < 3; ++plane) {

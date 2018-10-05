@@ -5,6 +5,7 @@
 #include "CsI.h"
 
 #include <fstream>
+#include <iostream>
 #include <CosmicTriggerSystem.h>
 
 CsI::CsI(int locID, int lineID, double posx, double posy, int size) : m_locationID(locID) {
@@ -49,21 +50,23 @@ void CsI::Process() {
 
 void CsI::HitDecision() {
 
-  if(1) {         // some conditions
+        // some conditions
     m_isHit = 1;
     return;
-  }
 
-  m_isHit = 0;
+  //m_isHit = 0;
 }
 
 
 void CsI::SetHitPos(double* track) {
-  if(!m_isHit) return;
+  //if(!m_isHit) return;
 
   m_hitpos[0] = m_pos[0];
   m_hitpos[1] = m_pos[1];
-  m_hitpos[2] = *track + (1 / m_pos[1] ) * *(track + 1);
+  m_hitpos[2] = (m_pos[1] - (*track)) / (*(track + 1));
+//  std::cout << m_hitpos[2] << std::endl;
+//  std::cout<< m_isHit << std::endl;
+//  std::cout << *track << std::endl;
 
 }
 

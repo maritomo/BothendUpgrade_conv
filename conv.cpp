@@ -69,7 +69,7 @@ int main(int argc, char** argv) {
         man->AddTree(tin[k]);
     }
 
-     man->Synchronize();
+//     man->Synchronize();
 
     // "SetBranchAddress()" should be done AFTER "man->CheckTimeStamps()"
     Short_t Data[3][16][16][64]={{{}}};
@@ -135,6 +135,11 @@ int main(int argc, char** argv) {
     tout->Branch("isHit", isHit, Form("isHit[%d][%d]/S", nLayer, nCRC));
     tout->Branch("nHit", nHit, Form("nHit[%d]/S", nLayer));
 
+    tout->Branch("hitpos", hitpos, Form("hitpos[%d][3]/F", nLayer));
+    tout->Branch("track", track, "track[3][2]/F");
+    tout->Branch("trackID", &trackID, "trackID/S");
+    tout->Branch("TOF", &TOF, "TOF/F");
+
     tout->Branch("isOnlineHit", isOnlineHit, Form("isOnlineHit[%d][%d][2][64]/S", nLayer, nCRC));
     tout->Branch("nOnlineHit", nOnlineHit, "nOnlineHit[2][64]/S");
     tout->Branch("isOnlineTriggered", isOnlineTriggered, "isOnlineTriggered[64]/S");
@@ -169,15 +174,21 @@ int main(int argc, char** argv) {
 
     tCsI->Branch("nHit", nHit_CsI, Form("nHit[%d]/S", nline));
     tCsI->Branch("hitpos", hitpos_CsI, Form("hitpos[%d][3]/F", nCsI));
+    tCsI->Branch("track", track, "track[3][2]/F");
+    tCsI->Branch("trackID", &trackID, "trackID/S");
+//    tCsI->Branch("TOF", &TOF, "TOF/F");
+
 
     /*
      * Scan events
 ∂     */
 
-    for(int entry = 0; entry < man -> GetEntries(); ++entry) {
+    for(int entry = 0; entry < tin[2] -> GetEntries(); ++entry) {
 //        std::cout << man -> GetEntries() << std::endl;
-        man->GetEntry(entry);
-
+//        man->GetEntry(entry);
+        for(int k = 0; k < 3; k++){
+            tin[k]->GetEntry(entry);
+        }
         for(int slot = 0; slot < 16; ++slot) {
             for(int ch = 0; ch < 16; ++ch) {
                 trg_sys->SetData(0, slot, ch, Data[0][slot][ch]);
@@ -273,12 +284,15 @@ int main(int argc, char** argv) {
                     pt_CsI[locID][side] = CsI->GetPT(side);
                     cft_CsI[locID][side] = CsI->GetCFT(side);
                 }
+                for(int axis = 0; axis < 3; ++axis) {
+                    hitpos_CsI[locID][axis] = CsI ->GetHitPos(axis);
+                }
             }
 
         }
         tCsI -> Fill();
 
-        if(entry % 100==0) std::cout << entry << "th\n";
+        if(entry % 1000==0) std::cout << entry << "th\n";
 
 
 #ifdef VISUALIZE
