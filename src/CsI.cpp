@@ -8,11 +8,11 @@
 #include <iostream>
 #include <CosmicTriggerSystem.h>
 
-CsI::CsI(int locID, int lineID, double posx, double posy, int size) {
+CsI::CsI(int locationID, int crystalID, int lineID, double posx, double posy, int size) {
 
-  m_locationID = locID;
+  m_locationID = locationID;
   m_lineID = lineID;
-  m_crystalID = 0;
+  m_crystalID = crystalID;
 
   m_pos[0] = posx;
   m_pos[1] = posy;
@@ -28,12 +28,12 @@ CsI::CsI(int locID, int lineID, double posx, double posy, int size) {
 
   m_isHit = 0;
   m_isUsed = 0;
-  m_crate[0] = 0;
-  m_crate[1] = 0;
-  m_slot[0] = 0;
-  m_slot[1] = 0;
-  m_ch[0] = 0;
-  m_ch[1] = 0;
+
+  for(int side=0; side < 2; ++side) {
+    m_crate[side] = -1;
+    m_slot[side] = -1;
+    m_ch[side] = -1;
+  }
 
 
   for(int plane = 0; plane < 3; ++plane) {
@@ -56,22 +56,25 @@ void CsI::HitDecision() {
 
 void CsI::SetHitPos(double* track) {
   //if(!m_isHit) return;
-
   m_hitpos[0] = m_pos[0];
   m_hitpos[1] = m_pos[1];
-  m_hitpos[2] = (m_pos[1] - (*track)) / (*(track + 1));
-//  std::cout << m_hitpos[2] << std::endl;
-//  std::cout<< m_isHit << std::endl;
-//  std::cout << *track << std::endl;
-
+  m_hitpos[2] = (m_pos[1] - track[0]) / track[1];
 }
 
-void CsI::SetADC(int side, int crate, int slot, int ch) {
+void CsI::SetADCconfig(int side, int crate, int slot, int ch) {
+  int errflag = 0;
+  if(side!=0 && side!=1) errflag = 1;
+  if(crate<3 || crate > 5) errflag = 1;
+  if(slot<0 || slot > 15) errflag = 1;
+  if(ch<0 || ch>15) errflag = 1;
+
+  if(errflag) {
+    std::cout << "Error: FADC configuration is outside the range\n";
+    return;
+  }
+
   m_crate[side] = crate;
   m_slot[side] = slot;
   m_ch[side] = ch;
-}
-
-void CsI::SetIsUsed(int IsUsed) {
-    m_isUsed = IsUsed;
+  m_isUsed = 1;
 }

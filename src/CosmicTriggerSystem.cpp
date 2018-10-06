@@ -109,17 +109,16 @@ bool CosmicTriggerSystem::Init_map() {
             return false;
         }
 
-        int locID, lineID, size;
+        int locID, lineID, crysID, size;
         double posx, posy;
 
         for (int CsIID = 0; CsIID < 2716; ++CsIID) {
-            ifs >> locID >> lineID >> posx >> posy >> size;
-//            if(lineID==6) {
-             m_csi[locID] = new CsI(locID, lineID, posx, posy, size);
+            ifs >> lineID >> locID >> crysID >> posx >> posy >> size;
+             m_csi[locID] = new CsI(locID, crysID, lineID, posx, posy, size);
         }
         ifs.close();
 
-        std::cout << "CsI map                        [OK]\n";
+        std::cout << "CsI map                         [OK]\n";
     }
 
     return true;
@@ -127,7 +126,6 @@ bool CosmicTriggerSystem::Init_map() {
 
 bool CosmicTriggerSystem::Init_useCsI() {
     for(int side = 0; side < 2; side++) {
-
         std::string filename;
         if(side == 0){
             filename = "./data/use_csi_mppc.txt";
@@ -136,17 +134,15 @@ bool CosmicTriggerSystem::Init_useCsI() {
             filename = "./data/use_csi.txt";
         }
 
-        std::cout << filename << std::endl;
         std::ifstream ifs(filename.c_str());
         if (!ifs) {
             std::cout << " not found\n";
             return false;
         }
 
-        int locID, crate[2], slot[2], ch[2];
-        while (ifs >> locID >> crate[side] >> slot[side] >> ch[side]) {
-            m_csi[locID]->SetADC(side, crate[side], slot[side], ch[side]);
-            m_csi[locID]->SetIsUsed(1);
+        int locID, crate, slot, ch;
+        while (ifs >> locID >> crate >> slot >> ch) {
+            m_csi[locID]->SetADCconfig(side, crate, slot, ch);
         }
     }
 
@@ -172,8 +168,6 @@ bool CosmicTriggerSystem::Init_channelDelay() {
         int side = adcch % 2;
         m_crc[layer][ch]->SetDelay(side, delay);
     }
-
-    std::cout << "Channel delays                  [OK]\n";
     ifs.close();
 
     filename = "./data/use_csi.txt";
@@ -185,9 +179,9 @@ bool CosmicTriggerSystem::Init_channelDelay() {
             m_csi[locid]->SetDelay(side, delay);
         }
     }
-    std::cout << "Channel delays of CsI            [OK]\n";
     ifs2.close();
 
+    std::cout << "Channel delays                  [OK]\n";
     return true;
 }
 

@@ -9,17 +9,15 @@
 
 class CsI : public BothendReadoutDetector {
 public:
-  CsI(int locID, int lineID, double posx, double posy, int size);
+  CsI(int locationID, int crystalID, int lineID, double posx, double posy, int size);
 
   void Process();
   void HitDecision();
   void ZTrack();
 
-  void SetADC(int side, int crate, int slot, int ch);
-  void SetIsUsed(int isUsed);
-  void SetHitPos(double* track); // trackID (yz plane)->z hit position
-
-    int GetIsUsed(){ return m_isUsed; }
+  void SetADCconfig(int side, int crate, int slot, int ch);
+  void SetHitPos(double* track); // trackID -> z hit position
+  int GetIsUsed(){ return m_isUsed; }
   int GetLocationID(){ return m_locationID; }
 
   int GetCrate(int side){ return m_crate[side]; }
@@ -40,7 +38,6 @@ private:
   int m_slot[2];
   int m_ch[2];
   int m_isUsed;
-
 
   double m_cEne; // Integrated ADC->deposited energy
 };
