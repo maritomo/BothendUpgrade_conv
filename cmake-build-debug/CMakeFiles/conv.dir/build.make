@@ -81,9 +81,57 @@ CMakeFiles/conv.dir/conv.cpp.o.provides: CMakeFiles/conv.dir/conv.cpp.o.requires
 CMakeFiles/conv.dir/conv.cpp.o.provides.build: CMakeFiles/conv.dir/conv.cpp.o
 
 
+CMakeFiles/conv.dir/src/RawdataManager.cpp.o: CMakeFiles/conv.dir/flags.make
+CMakeFiles/conv.dir/src/RawdataManager.cpp.o: ../src/RawdataManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/conv.dir/src/RawdataManager.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/RawdataManager.cpp.o -c /Users/mari/work/cosmiTrigger/conv/src/RawdataManager.cpp
+
+CMakeFiles/conv.dir/src/RawdataManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/conv.dir/src/RawdataManager.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/cosmiTrigger/conv/src/RawdataManager.cpp > CMakeFiles/conv.dir/src/RawdataManager.cpp.i
+
+CMakeFiles/conv.dir/src/RawdataManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/conv.dir/src/RawdataManager.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/cosmiTrigger/conv/src/RawdataManager.cpp -o CMakeFiles/conv.dir/src/RawdataManager.cpp.s
+
+CMakeFiles/conv.dir/src/RawdataManager.cpp.o.requires:
+
+.PHONY : CMakeFiles/conv.dir/src/RawdataManager.cpp.o.requires
+
+CMakeFiles/conv.dir/src/RawdataManager.cpp.o.provides: CMakeFiles/conv.dir/src/RawdataManager.cpp.o.requires
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/RawdataManager.cpp.o.provides.build
+.PHONY : CMakeFiles/conv.dir/src/RawdataManager.cpp.o.provides
+
+CMakeFiles/conv.dir/src/RawdataManager.cpp.o.provides.build: CMakeFiles/conv.dir/src/RawdataManager.cpp.o
+
+
+CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o: CMakeFiles/conv.dir/flags.make
+CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o: ../src/CosmicTriggerSystem.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o -c /Users/mari/work/cosmiTrigger/conv/src/CosmicTriggerSystem.cpp
+
+CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/cosmiTrigger/conv/src/CosmicTriggerSystem.cpp > CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.i
+
+CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/cosmiTrigger/conv/src/CosmicTriggerSystem.cpp -o CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.s
+
+CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o.requires:
+
+.PHONY : CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o.requires
+
+CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o.provides: CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o.requires
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o.provides.build
+.PHONY : CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o.provides
+
+CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o.provides.build: CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o
+
+
 CMakeFiles/conv.dir/src/BothendReadoutDetector.cpp.o: CMakeFiles/conv.dir/flags.make
 CMakeFiles/conv.dir/src/BothendReadoutDetector.cpp.o: ../src/BothendReadoutDetector.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/conv.dir/src/BothendReadoutDetector.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/conv.dir/src/BothendReadoutDetector.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/BothendReadoutDetector.cpp.o -c /Users/mari/work/cosmiTrigger/conv/src/BothendReadoutDetector.cpp
 
 CMakeFiles/conv.dir/src/BothendReadoutDetector.cpp.i: cmake_force
@@ -107,7 +155,7 @@ CMakeFiles/conv.dir/src/BothendReadoutDetector.cpp.o.provides.build: CMakeFiles/
 
 CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o: CMakeFiles/conv.dir/flags.make
 CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o: ../src/CosmicRayCounter.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o -c /Users/mari/work/cosmiTrigger/conv/src/CosmicRayCounter.cpp
 
 CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.i: cmake_force
@@ -129,33 +177,9 @@ CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o.provides: CMakeFiles/conv.dir/src
 CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o.provides.build: CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o
 
 
-CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o: CMakeFiles/conv.dir/flags.make
-CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o: ../src/CosmicTriggerSystem.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o -c /Users/mari/work/cosmiTrigger/conv/src/CosmicTriggerSystem.cpp
-
-CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/cosmiTrigger/conv/src/CosmicTriggerSystem.cpp > CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.i
-
-CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/cosmiTrigger/conv/src/CosmicTriggerSystem.cpp -o CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.s
-
-CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o.requires:
-
-.PHONY : CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o.requires
-
-CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o.provides: CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o.requires
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o.provides.build
-.PHONY : CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o.provides
-
-CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o.provides.build: CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o
-
-
 CMakeFiles/conv.dir/src/CsI.cpp.o: CMakeFiles/conv.dir/flags.make
 CMakeFiles/conv.dir/src/CsI.cpp.o: ../src/CsI.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/conv.dir/src/CsI.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/conv.dir/src/CsI.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/CsI.cpp.o -c /Users/mari/work/cosmiTrigger/conv/src/CsI.cpp
 
 CMakeFiles/conv.dir/src/CsI.cpp.i: cmake_force
@@ -177,48 +201,24 @@ CMakeFiles/conv.dir/src/CsI.cpp.o.provides: CMakeFiles/conv.dir/src/CsI.cpp.o.re
 CMakeFiles/conv.dir/src/CsI.cpp.o.provides.build: CMakeFiles/conv.dir/src/CsI.cpp.o
 
 
-CMakeFiles/conv.dir/src/RawdataManager.cpp.o: CMakeFiles/conv.dir/flags.make
-CMakeFiles/conv.dir/src/RawdataManager.cpp.o: ../src/RawdataManager.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/conv.dir/src/RawdataManager.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/RawdataManager.cpp.o -c /Users/mari/work/cosmiTrigger/conv/src/RawdataManager.cpp
-
-CMakeFiles/conv.dir/src/RawdataManager.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/conv.dir/src/RawdataManager.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/cosmiTrigger/conv/src/RawdataManager.cpp > CMakeFiles/conv.dir/src/RawdataManager.cpp.i
-
-CMakeFiles/conv.dir/src/RawdataManager.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/conv.dir/src/RawdataManager.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/cosmiTrigger/conv/src/RawdataManager.cpp -o CMakeFiles/conv.dir/src/RawdataManager.cpp.s
-
-CMakeFiles/conv.dir/src/RawdataManager.cpp.o.requires:
-
-.PHONY : CMakeFiles/conv.dir/src/RawdataManager.cpp.o.requires
-
-CMakeFiles/conv.dir/src/RawdataManager.cpp.o.provides: CMakeFiles/conv.dir/src/RawdataManager.cpp.o.requires
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/RawdataManager.cpp.o.provides.build
-.PHONY : CMakeFiles/conv.dir/src/RawdataManager.cpp.o.provides
-
-CMakeFiles/conv.dir/src/RawdataManager.cpp.o.provides.build: CMakeFiles/conv.dir/src/RawdataManager.cpp.o
-
-
 # Object files for target conv
 conv_OBJECTS = \
 "CMakeFiles/conv.dir/conv.cpp.o" \
+"CMakeFiles/conv.dir/src/RawdataManager.cpp.o" \
+"CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o" \
 "CMakeFiles/conv.dir/src/BothendReadoutDetector.cpp.o" \
 "CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o" \
-"CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o" \
-"CMakeFiles/conv.dir/src/CsI.cpp.o" \
-"CMakeFiles/conv.dir/src/RawdataManager.cpp.o"
+"CMakeFiles/conv.dir/src/CsI.cpp.o"
 
 # External object files for target conv
 conv_EXTERNAL_OBJECTS =
 
 conv: CMakeFiles/conv.dir/conv.cpp.o
+conv: CMakeFiles/conv.dir/src/RawdataManager.cpp.o
+conv: CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o
 conv: CMakeFiles/conv.dir/src/BothendReadoutDetector.cpp.o
 conv: CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o
-conv: CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o
 conv: CMakeFiles/conv.dir/src/CsI.cpp.o
-conv: CMakeFiles/conv.dir/src/RawdataManager.cpp.o
 conv: CMakeFiles/conv.dir/build.make
 conv: /Users/mari/local/root/pro/lib/libCore.so
 conv: /Users/mari/local/root/pro/lib/libImt.so
@@ -247,11 +247,11 @@ CMakeFiles/conv.dir/build: conv
 .PHONY : CMakeFiles/conv.dir/build
 
 CMakeFiles/conv.dir/requires: CMakeFiles/conv.dir/conv.cpp.o.requires
+CMakeFiles/conv.dir/requires: CMakeFiles/conv.dir/src/RawdataManager.cpp.o.requires
+CMakeFiles/conv.dir/requires: CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o.requires
 CMakeFiles/conv.dir/requires: CMakeFiles/conv.dir/src/BothendReadoutDetector.cpp.o.requires
 CMakeFiles/conv.dir/requires: CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o.requires
-CMakeFiles/conv.dir/requires: CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o.requires
 CMakeFiles/conv.dir/requires: CMakeFiles/conv.dir/src/CsI.cpp.o.requires
-CMakeFiles/conv.dir/requires: CMakeFiles/conv.dir/src/RawdataManager.cpp.o.requires
 
 .PHONY : CMakeFiles/conv.dir/requires
 

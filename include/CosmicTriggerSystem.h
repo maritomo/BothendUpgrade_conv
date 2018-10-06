@@ -6,6 +6,7 @@
 #define CONV_COSMICTRIGGERSYSTEM_H
 
 #include "CosmicRayCounter.h"
+#include "CsI.h"
 
 #include "TCanvas.h"
 #include "TLine.h"
@@ -25,7 +26,7 @@
 
 class CosmicTriggerSystem {
   public:
-    CosmicTriggerSystem(int runID, int isCommonThreshold);
+    CosmicTriggerSystem(int runID);
     ~CosmicTriggerSystem();
 
     bool Init();
@@ -33,30 +34,34 @@ class CosmicTriggerSystem {
     bool Init_channelDelay();
     bool Init_calibConst();
     bool Init_hitCondition();
+    bool Init_useCsI();
 
-    void Process();
     void HitDecision();
+    void Process();
     void Tracking();
+    void ZCal();
 
-    void SetData(int slot, int ch, const short* data);
+
+    void SetData(int crate, int slot, int ch, const short* data);
+    void SetData_CsI(int locID, int side, const short* data);
+    void SetTrack();
 
     int GetNCRC() { return m_nCRC; }
     int GetNLayer() { return m_nLayer; }
     int GetNTrack() { return m_nTrack; }
+    int GetNCsI() { return m_nCsI;}
 
     int GetIsInit() { return m_isInit; }
     int GetRunID() { return m_runID; }
-    int GetIsCommonThreshold() { return m_isCommonThreshold; }
 
     bool GetLocationID(int scintiID, int& layerID, int& ch);
     CosmicRayCounter* GetCRC(int layer, int ch) { return m_crc[layer][ch]; }
+    CsI* GetCSI(int locID){return m_csi[locID]; }
 
     double GetCommonThreshold() { return m_comthr; }
-    double GetfPedestalSigma() { return m_fPedSig; }
 
     int GetNhit(int layer) { return m_nHit[layer]; }
     int GetHit(int layer) { return m_hitCh[layer]; }
-    double GetHitPos(int layer, int axis) { return m_hitpos[layer][axis]; }
 
     int GetTrackID() { return m_trackID; }
     const double* GetTrack(int plane) { return m_track[plane]; }
@@ -78,15 +83,14 @@ class CosmicTriggerSystem {
     static const int m_nLayer = 2;  // # of layer (top, bottom)
     static const int m_nCRC = 6;  // # of cosmic ray counter in 1 layer
     static const int m_nTrack = 36;
+    static const int m_nCsI = 2716;
 
     int m_isInit;
     int m_runID;
-    int m_isCommonThreshold;
 
     CosmicRayCounter* m_crc[m_nLayer][m_nCRC];
-
+    CsI* m_csi[m_nCsI];
     double m_comthr; // common peak threshold
-    double m_fPedSig; // peak threshold = fPedSig * pedestalRMS
 
     int m_nHit[2];
     int m_hitCh[2];
@@ -96,10 +100,11 @@ class CosmicTriggerSystem {
     double m_track[3][2]; // (xy, zy, xz) plane, (constant, slope)
     double m_TOF; // time of flight
 
+    int m_isRead[2710];
+
     // Imitation of the online trigger
     int m_nOnlineHit[m_nLayer][64]; // # of fired channel in online at each sample
     int m_isOnlineTriggered[64]; // online trigger decision at each sample
-
 
     // Visualization
     int m_isVis[3];

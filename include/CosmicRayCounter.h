@@ -6,10 +6,10 @@
 #define CONV_COSMICRAYCOUNTER_H
 
 #include "BothendReadoutDetector.h"
-
 class CosmicRayCounter : public BothendReadoutDetector {
   public:
     CosmicRayCounter(int layer, int ch, int scintiID, int dir, const double* pos);
+
 
     void Process();
     void Reconstruct();
@@ -26,14 +26,14 @@ class CosmicRayCounter : public BothendReadoutDetector {
     const int* GetIsOnlineHit(int side) { return m_isOnlineHit[side]; }
 
   private:
-    int m_layer;    // 0: bottom, 1: top
-    int m_ch;         // 0 to 5
+    int m_layer;      // 0: bottom, 1: top
+    int m_ch;         // 0 ~ 5
     int m_scintiID;   // scintillator ID
-    int m_dir;        //    Directions of the CRCs along x-axis (+1: parallel, -1: unti-parallel) used in the pre-test at Tsukuba campus[2].
-    //    They are still used to calibrate Tdif to x-position,
-    //    because the calibration constants are same as that in the pre-test at Tsukuba.
+    int m_dir;        //    Directions of the counters along x-axis (+1: parallel, -1: unti-parallel) used in the pre-test at Tsukuba campus[2].
+                      //    They are still used to calibrate Tdif to x-position,
+                      //    because the calibration constants are same as that in the pre-test at Tsukuba.
 
-    double m_ccX[2];     // calibration constant for TD -> x, (constant, slope)
+    double m_ccX[2];     // calibration constant for TD->x, (constant, slope)
 
     double m_peak_thr[2];       // threshold of pulse height, (even, odd) ch
     double m_coin_range[2][2];  // coincidence window, (even, odd) ch, (min, max)

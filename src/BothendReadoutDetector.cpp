@@ -5,6 +5,8 @@
 #include <TString.h>
 #include <iostream>
 #include "BothendReadoutDetector.h"
+#include <cmath>
+
 
 BothendReadoutDetector::~BothendReadoutDetector() {
     for(int plane = 0; plane < 3; ++plane) {
@@ -90,13 +92,13 @@ short BothendReadoutDetector::GetMax(int nSmpl, const short* data) {
  */
 
 void BothendReadoutDetector::GetVisAxis(int plane, int& axis_h, int& axis_v) {
-    if(plane==0) {          // xy plane -> (x, y)
+    if(plane==0) {          // xy plane->(x, y)
         axis_h = 0;
         axis_v = 1;
-    } else if(plane==1) {   // yz plane -> (z, y)
+    } else if(plane==1) {   // yz plane->(z, y)
         axis_h = 2;
         axis_v = 1;
-    } else if(plane==2) {   // zx plane -> (x, z)
+    } else if(plane==2) {   // zx plane->(x, z)
         axis_h = 0;
         axis_v = 2;
     } else {

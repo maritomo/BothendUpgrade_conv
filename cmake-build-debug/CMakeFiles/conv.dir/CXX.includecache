@@ -17,6 +17,8 @@ BothendReadoutDetector.h
 ../include/CosmicTriggerSystem.h
 CosmicRayCounter.h
 ../include/CosmicRayCounter.h
+CsI.h
+../include/CsI.h
 TCanvas.h
 ../include/TCanvas.h
 TLine.h
@@ -801,6 +803,8 @@ iostream
 -
 BothendReadoutDetector.h
 /Users/mari/work/cosmiTrigger/conv/src/BothendReadoutDetector.h
+cmath
+-
 
 /Users/mari/work/cosmiTrigger/conv/src/CosmicRayCounter.cpp
 iostream
@@ -830,6 +834,10 @@ TMath.h
 CsI.h
 /Users/mari/work/cosmiTrigger/conv/src/CsI.h
 fstream
+-
+iostream
+-
+CosmicTriggerSystem.h
 -
 
 /Users/mari/work/cosmiTrigger/conv/src/RawdataManager.cpp

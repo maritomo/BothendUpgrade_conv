@@ -11,8 +11,7 @@
 #include <TMath.h>
 
 
-CosmicTriggerSystem::CosmicTriggerSystem(int runID, int isCommonThreshold) :
-        m_runID(runID), m_isCommonThreshold(isCommonThreshold) {
+CosmicTriggerSystem::CosmicTriggerSystem(int runID) : m_runID(runID) {
 
     if(!Init()) {
         std::cout << "Error: CosmicTriggerSystem was not initialized\n";
@@ -45,6 +44,10 @@ CosmicTriggerSystem::~CosmicTriggerSystem() {
             m_lTrack[plane]->Delete();
         }
     }
+
+    for(int CsI = 0; CsI < 2716; ++CsI) {
+        delete m_csi[CsI];
+    }
 }
 
 bool CosmicTriggerSystem::Init() {
@@ -57,6 +60,7 @@ bool CosmicTriggerSystem::Init() {
     if(!Init_channelDelay()) return false;
     if(!Init_calibConst()) return false;
     if(!Init_hitCondition()) return false;
+    if(!Init_useCsI()) return false;
 
     std::cout << "----------- Cosmic trigger system initialized\n\n";
 
@@ -70,29 +74,85 @@ bool CosmicTriggerSystem::Init() {
 
 bool CosmicTriggerSystem::Init_map() {
 
-    std::string filename = "./data/map_crc.txt";
-    std::ifstream ifs(filename.c_str());
+    // Trigger counter map
+    {
+        std::string filename = "./data/map_crc.txt";
+        std::ifstream ifs(filename.c_str());
 
-    if(!ifs) {
-        std::cout << filename << " not found\n";
-        return false;
+        if (!ifs) {
+            std::cout << filename << " not found\n";
+            return false;
+        }
+
+
+        int scintiID, dir;
+        double pos[3];
+
+        for (int layer = 0; layer < m_nLayer; ++layer) {
+            for (int ch = 0; ch < m_nCRC; ++ch) {
+                ifs >> scintiID >> dir >> pos[0] >> pos[1] >> pos[2];
+                m_crc[layer][ch] = new CosmicRayCounter(layer, ch, scintiID, dir, pos);
+            }
+        }
+        ifs.close();
+
+        std::cout << "Trigger counter map             [OK]\n";
     }
 
-    int scintiID, dir;
-    double pos[3];
+    // CsI map
+    {
+        std::string filename = "./data/map_csi.txt";
+        std::ifstream ifs(filename.c_str());
 
-    for(int layer = 0; layer < m_nLayer; ++layer) {
-        for(int ch = 0; ch < m_nCRC; ++ch) {
-            ifs >> scintiID >> dir >> pos[0] >> pos[1] >> pos[2];
-            m_crc[layer][ch] = new CosmicRayCounter(layer, ch, scintiID, dir, pos);
+        if (!ifs) {
+            std::cout << filename << " not found\n";
+            return false;
+        }
+
+        int locID, lineID, size;
+        double posx, posy;
+
+        for (int CsIID = 0; CsIID < 2716; ++CsIID) {
+            ifs >> locID >> lineID >> posx >> posy >> size;
+//            if(lineID==6) {
+             m_csi[locID] = new CsI(locID, lineID, posx, posy, size);
+        }
+        ifs.close();
+
+        std::cout << "CsI map                        [OK]\n";
+    }
+
+    return true;
+}
+
+bool CosmicTriggerSystem::Init_useCsI() {
+    for(int side = 0; side < 2; side++) {
+
+        std::string filename;
+        if(side == 0){
+            filename = "./data/use_csi_mppc.txt";
+        }
+        if(side == 1){
+            filename = "./data/use_csi.txt";
+        }
+
+        std::cout << filename << std::endl;
+        std::ifstream ifs(filename.c_str());
+        if (!ifs) {
+            std::cout << " not found\n";
+            return false;
+        }
+
+        int locID, crate[2], slot[2], ch[2];
+        while (ifs >> locID >> crate[side] >> slot[side] >> ch[side]) {
+            m_csi[locID]->SetADC(side, crate[side], slot[side], ch[side]);
+            m_csi[locID]->SetIsUsed(1);
         }
     }
 
-    ifs.close();
-
-    std::cout << "Trigger counter map             [OK]\n";
     return true;
 }
+
 
 bool CosmicTriggerSystem::Init_channelDelay() {
 
@@ -113,9 +173,21 @@ bool CosmicTriggerSystem::Init_channelDelay() {
         m_crc[layer][ch]->SetDelay(side, delay);
     }
 
+    std::cout << "Channel delays                  [OK]\n";
     ifs.close();
 
-    std::cout << "Channel delays                  [OK]\n";
+    filename = "./data/use_csi.txt";
+    std::ifstream ifs2(filename.c_str());
+    int locid, crate, ch;
+    while(ifs2 >> locid >> crate >> slot >> ch) {
+        for (int side = 0; side < 2; side++) {
+            delay = 15;
+            m_csi[locid]->SetDelay(side, delay);
+        }
+    }
+    std::cout << "Channel delays of CsI            [OK]\n";
+    ifs2.close();
+
     return true;
 }
 
@@ -148,15 +220,7 @@ bool CosmicTriggerSystem::Init_calibConst() {
 
 bool CosmicTriggerSystem::Init_hitCondition() {
 
-    m_fPedSig = 5; // peak threhold = pedestalRMS * fPedSig
-
-    std::stringstream ss;
-    ss << "./data/pedestal/pedestal_run" << m_runID << ".txt";
-    std::string filename = ss.str();
-
-    if(m_isCommonThreshold)
-        filename = "./data/common_threshold.txt";
-
+    std::string filename = "./data/common_threshold.txt";
     std::ifstream ifs(filename.c_str());
     if(!ifs) {
         std::cout << filename << " not found\n";
@@ -166,18 +230,11 @@ bool CosmicTriggerSystem::Init_hitCondition() {
     int slot, adcch, layer, ch, side;
     double ped_mean, ped_sigma;
 
-    m_fPedSig = 5; // peak threhold = pedestalRMS * fPedSig
-
     while(ifs >> slot >> adcch >> ped_mean >> ped_sigma) {
         layer = slot;
         ch = adcch / 2;
         side = adcch % 2;
-
-        if(m_isCommonThreshold)
-            m_comthr = ped_sigma;
-        else
-            ped_sigma *= m_fPedSig;
-
+        m_comthr = ped_sigma;
         m_crc[layer][ch]->SetPeakThreshold(side, ped_sigma);
     }
 
@@ -229,6 +286,9 @@ void CosmicTriggerSystem::HitDecision() {
             }
         }
     }
+    for(int locID = 0; locID < m_nCsI; ++locID){
+        m_csi[locID]->Process();
+    }
 
 }
 
@@ -253,20 +313,26 @@ void CosmicTriggerSystem::Tracking() {
 
     int axis_h; // index of horizontal axis
     int axis_v; // index of vertical axis
-
+    double* track;
     for(int plane = 0; plane < 3; ++plane) {
         GetVisAxis(plane, axis_h, axis_v);
         m_track[plane][1] = (m_hitpos[1][axis_v] - m_hitpos[0][axis_v]) / (m_hitpos[1][axis_h] - m_hitpos[0][axis_h]);
         m_track[plane][0] = m_hitpos[1][axis_v] - m_track[plane][1] * m_hitpos[1][axis_h];
+        //track = m_track[1];
+//        std::cout << *track << std::endl;
+//        std::cout << track << std::endl;
     }
-
+    for(int id = 0; id < m_nCsI; id++) {
+            m_csi[id]->SetHitPos(m_track[1]);
+    }
 }
+
 
 /*
  * Setter
  */
 
-void CosmicTriggerSystem::SetData(int slot, int ch, const short* data) {
+void CosmicTriggerSystem::SetData(int crate, int slot, int ch, const short* data) {
     if(slot > 1) return;
     if(ch > 11) return;
 
@@ -275,7 +341,18 @@ void CosmicTriggerSystem::SetData(int slot, int ch, const short* data) {
     int side = ch % 2;
 
     m_crc[layer][channel]->SetData(side, data);
+
+
+
+
 }
+
+void CosmicTriggerSystem::SetData_CsI(int locID, int side, const short* data) {
+
+    m_csi[locID] ->SetData(side, data);
+
+}
+
 
 /*
  * Getter
@@ -330,13 +407,13 @@ void CosmicTriggerSystem::OnlineHitDecision() {
  */
 
 void CosmicTriggerSystem::GetVisAxis(int plane, int& axis_h, int& axis_v) {
-    if(plane==0) {          // xy plane -> (x, y)
+    if(plane==0) {          // xy plane->(x, y)
         axis_h = 0;
         axis_v = 1;
-    } else if(plane==1) {   // yz plane -> (z, y)
+    } else if(plane==1) {   // yz plane->(z, y)
         axis_h = 2;
         axis_v = 1;
-    } else if(plane==2) {   // zx plane -> (x, z)
+    } else if(plane==2) {   // zx plane->(x, z)
         axis_h = 0;
         axis_v = 2;
     } else {
@@ -390,6 +467,12 @@ void CosmicTriggerSystem::SetTrackLine(int plane) {
     m_lTrack[plane]->SetX2(h[1]);
     m_lTrack[plane]->SetY1(v[0]);
     m_lTrack[plane]->SetY2(v[1]);
+}
+
+void SetTrack(){
+    for(int id = 0; id < 2716; id++){
+
+    }
 }
 
 void CosmicTriggerSystem::Display() {

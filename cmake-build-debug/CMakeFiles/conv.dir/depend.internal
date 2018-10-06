@@ -5,6 +5,7 @@ CMakeFiles/conv.dir/conv.cpp.o
  ../include/BothendReadoutDetector.h
  ../include/CosmicRayCounter.h
  ../include/CosmicTriggerSystem.h
+ ../include/CsI.h
  ../include/RawdataManager.h
  /Users/mari/local/root/pro/include/Buttons.h
  /Users/mari/local/root/pro/include/DllImport.h
@@ -153,6 +154,7 @@ CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o
  ../include/BothendReadoutDetector.h
  ../include/CosmicRayCounter.h
  ../include/CosmicTriggerSystem.h
+ ../include/CsI.h
  /Users/mari/local/root/pro/include/Buttons.h
  /Users/mari/local/root/pro/include/DllImport.h
  /Users/mari/local/root/pro/include/ESTLType.h
@@ -226,26 +228,76 @@ CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o
  /Users/mari/work/cosmiTrigger/conv/src/CosmicTriggerSystem.cpp
 CMakeFiles/conv.dir/src/CsI.cpp.o
  ../include/BothendReadoutDetector.h
+ ../include/CosmicRayCounter.h
+ ../include/CosmicTriggerSystem.h
  ../include/CsI.h
+ /Users/mari/local/root/pro/include/Buttons.h
  /Users/mari/local/root/pro/include/DllImport.h
+ /Users/mari/local/root/pro/include/ESTLType.h
+ /Users/mari/local/root/pro/include/Fit/FitExecutionPolicy.h
+ /Users/mari/local/root/pro/include/Foption.h
  /Users/mari/local/root/pro/include/GuiTypes.h
  /Users/mari/local/root/pro/include/RConfig.h
  /Users/mari/local/root/pro/include/RConfigure.h
+ /Users/mari/local/root/pro/include/RStringView.h
  /Users/mari/local/root/pro/include/RVersion.h
+ /Users/mari/local/root/pro/include/RWrap_libcpp_string_view.h
  /Users/mari/local/root/pro/include/Rtypes.h
  /Users/mari/local/root/pro/include/RtypesCore.h
+ /Users/mari/local/root/pro/include/TArray.h
+ /Users/mari/local/root/pro/include/TArrayC.h
+ /Users/mari/local/root/pro/include/TArrayD.h
+ /Users/mari/local/root/pro/include/TArrayF.h
+ /Users/mari/local/root/pro/include/TArrayI.h
+ /Users/mari/local/root/pro/include/TArrayS.h
+ /Users/mari/local/root/pro/include/TAttAxis.h
  /Users/mari/local/root/pro/include/TAttBBox2D.h
+ /Users/mari/local/root/pro/include/TAttCanvas.h
  /Users/mari/local/root/pro/include/TAttFill.h
  /Users/mari/local/root/pro/include/TAttLine.h
+ /Users/mari/local/root/pro/include/TAttMarker.h
+ /Users/mari/local/root/pro/include/TAttPad.h
+ /Users/mari/local/root/pro/include/TAttText.h
+ /Users/mari/local/root/pro/include/TAxis.h
  /Users/mari/local/root/pro/include/TBox.h
+ /Users/mari/local/root/pro/include/TCanvas.h
+ /Users/mari/local/root/pro/include/TCanvasImp.h
+ /Users/mari/local/root/pro/include/TClass.h
+ /Users/mari/local/root/pro/include/TCollection.h
+ /Users/mari/local/root/pro/include/TDictionary.h
+ /Users/mari/local/root/pro/include/TError.h
+ /Users/mari/local/root/pro/include/TFitResultPtr.h
  /Users/mari/local/root/pro/include/TGenericClassInfo.h
+ /Users/mari/local/root/pro/include/TH1.h
+ /Users/mari/local/root/pro/include/TInterpreter.h
  /Users/mari/local/root/pro/include/TIsAProxy.h
+ /Users/mari/local/root/pro/include/TIterator.h
+ /Users/mari/local/root/pro/include/TLine.h
+ /Users/mari/local/root/pro/include/TList.h
+ /Users/mari/local/root/pro/include/TMathBase.h
+ /Users/mari/local/root/pro/include/TNamed.h
+ /Users/mari/local/root/pro/include/TObjArray.h
+ /Users/mari/local/root/pro/include/TObjString.h
  /Users/mari/local/root/pro/include/TObject.h
+ /Users/mari/local/root/pro/include/TPad.h
  /Users/mari/local/root/pro/include/TPoint.h
+ /Users/mari/local/root/pro/include/TQClass.h
+ /Users/mari/local/root/pro/include/TQObject.h
  /Users/mari/local/root/pro/include/TSchemaHelper.h
+ /Users/mari/local/root/pro/include/TSeqCollection.h
  /Users/mari/local/root/pro/include/TStorage.h
+ /Users/mari/local/root/pro/include/TString.h
+ /Users/mari/local/root/pro/include/TVectorDfwd.h
+ /Users/mari/local/root/pro/include/TVectorFfwd.h
  /Users/mari/local/root/pro/include/TVersionCheck.h
  /Users/mari/local/root/pro/include/TVirtualIsAProxy.h
+ /Users/mari/local/root/pro/include/TVirtualMutex.h
+ /Users/mari/local/root/pro/include/TVirtualPad.h
+ /Users/mari/local/root/pro/include/TVirtualQConnection.h
+ /Users/mari/local/root/pro/include/TVirtualRWMutex.h
+ /Users/mari/local/root/pro/include/TVirtualX.h
+ /Users/mari/local/root/pro/include/ThreadLocalStorage.h
+ /Users/mari/local/root/pro/include/libcpp_string_view.h
  /Users/mari/local/root/pro/include/snprintf.h
  /Users/mari/local/root/pro/include/strlcpy.h
  /Users/mari/work/cosmiTrigger/conv/src/CsI.cpp

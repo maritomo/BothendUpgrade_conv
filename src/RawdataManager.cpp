@@ -1,11 +1,10 @@
 //
 // Created by Tomoo MARI on 2018/09/30.
 //
+
 //#define DEBUG
 
-
 #include "RawdataManager.h"
-
 #include <iostream>
 
 
@@ -16,6 +15,11 @@ RawdataManager::~RawdataManager() {}
 
 // Assume un-synchronization occurs only in 1 crate
 void RawdataManager::CheckTimeStamp() {
+
+    if(m_isSynchronized) {
+        std::cout << "Timestamps are already checked\n";
+        return;
+    }
 
     const int nTree = m_tree.size();
     if(nTree < 2) {
@@ -212,7 +216,7 @@ void RawdataManager::CheckTimeStamp() {
 
     m_isSynchronized = 1;
 
-    std::cout << "------------------------- Synchronization fin\n\n";
+    std::cout << "----------------------------------------- fin\n\n";
 }
 
 void RawdataManager::GetEntry(int spill) {
@@ -226,6 +230,7 @@ void RawdataManager::GetEntry(int spill) {
     }
     for(int k = 0; k < m_tree.size(); ++k) {
         m_tree[k]->GetEntry(m_entry[k][spill]);
+
     }
 }
 

@@ -98,6 +98,9 @@ void CosmicRayCounter::HitDecision() {
     m_isHit = 0;
 }
 
+void ZCal(){
+
+}
 // Imitation of the online trigger
 void CosmicRayCounter::OnlineHitDecision(int side) {
 
