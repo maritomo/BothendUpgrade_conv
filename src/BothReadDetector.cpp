@@ -4,29 +4,54 @@
 
 #include <TString.h>
 #include <iostream>
-#include "BothendReadoutDetector.h"
 #include <cmath>
 
+#include "BothReadDetector.h"
 
-BothendReadoutDetector::~BothendReadoutDetector() {
+BothReadDetector::~BothReadDetector() {
     for(int plane = 0; plane < 3; ++plane) {
-        if(!m_isVis[plane]) continue;
         delete m_box_det[plane];
         delete m_box_hit[plane];
     }
 }
 
-void BothendReadoutDetector::SetData(int side, const short* data) {
-    for(int smpl = 0; smpl < 64; ++smpl)
-        m_data[side][smpl] = data[smpl];
+void BothReadDetector::SetADCconfig(int side, int crate, int slot, int ch) {
+    int flag = 0;
 
+    if(side!=0 && side!=1) flag = 1;
+    if(crate<3 || crate > 5) flag = 1;
+    if(slot<0 || slot > 15) flag = 1;
+    if(ch<0 || ch>15) flag = 1;
+
+    if(flag) {
+        std::cout << "Error: FADC configuration is outside the range\n";
+        m_isUsed = 0;
+        return;
+    }
+
+    m_crate[side] = crate;
+    m_slot[side] = slot;
+    m_ch[side] = ch;
+    m_pdata[side] = m_BRin[crate-3].Data[16][16];
+    m_isUsed = 1;
+}
+
+void BothReadDetector::GetADCconfig(int side, int& crate, int& slot, int& ch) {
+    crate = m_crate[side];
+    slot = m_slot[side];
+    ch = m_ch[side];
+}
+
+void BothReadDetector::SetData(int side) {
+    for(int smpl = 0; smpl < 64; ++smpl)
+        m_data[side][smpl] =m_BRin[m_crate[side]].Data[m_slot[side]][m_ch[side]][smpl];
     GetCFTime(side);
 
     m_pt[side] += 15 - m_delay[side];
     m_cft[side] += 15 - m_delay[side];
 }
 
-void BothendReadoutDetector::GetCFTime(int side) {
+void BothReadDetector::GetCFTime(int side) {
 
     m_ped[side] = 0;
     m_peak[side] = 0;
@@ -79,7 +104,7 @@ void BothendReadoutDetector::GetCFTime(int side) {
     }
 }
 
-short BothendReadoutDetector::GetMax(int nSmpl, const short* data) {
+short BothReadDetector::GetMax(int nSmpl, const short* data) {
     short max = -1 * (pow(2, 15) - 1);
     for(int i = 0; i < nSmpl; ++i) {
         if(max < data[i]) max = data[i];
@@ -91,62 +116,44 @@ short BothendReadoutDetector::GetMax(int nSmpl, const short* data) {
  * Visuallization
  */
 
-void BothendReadoutDetector::GetVisAxis(int plane, int& axis_h, int& axis_v) {
-    if(plane==0) {          // xy plane->(x, y)
-        axis_h = 0;
-        axis_v = 1;
-    } else if(plane==1) {   // yz plane->(z, y)
-        axis_h = 2;
-        axis_v = 1;
-    } else if(plane==2) {   // zx plane->(x, z)
-        axis_h = 0;
-        axis_v = 2;
-    } else {
-        std::cout << "plane: 0 (xy), 1 (zy), 2 (xz)\n";
-    }
-}
-
-void BothendReadoutDetector::Visualize(int plane) {
-
-    if(plane!=0 && plane!=1 && plane!=2) {
-        std::cout << "plane: 0 (xy), 1 (zy), 2 (xz)\n";
-        m_isVis[plane] = 0;
+void BothReadDetector::Visualize() {
+    if(m_isVis) {
+        std::cout << "Already visualized\n";
+        return;
     }
 
     int axis_h; // index of horizontal axis
     int axis_v; // index of vertical axis
+    for(int plane=0; plane < 3; ++plane) {
+        GetVisAxis(plane, axis_h, axis_v);
+        m_box_det[plane] = new TBox(m_pos[axis_h] - 0.5 * m_size[axis_h], m_pos[axis_v] - 0.5 * m_size[axis_v],
+                                    m_pos[axis_h] + 0.5 * m_size[axis_h], m_pos[axis_v] + 0.5 * m_size[axis_v]);
+        m_box_det[plane]->SetLineColor(m_col);
+        m_box_det[plane]->SetFillStyle(0);
 
-    GetVisAxis(plane, axis_h, axis_v);
+        m_box_hit[plane] = new TBox(m_pos[axis_h] - 0.5 * m_size[axis_h], m_pos[axis_v] - 0.5 * m_size[axis_v],
+                                    m_pos[axis_h] + 0.5 * m_size[axis_h], m_pos[axis_v] + 0.5 * m_size[axis_v]);
+        m_box_hit[plane]->SetFillColor(m_col);
+    }
 
-    m_box_det[plane] = new TBox(m_pos[axis_h] - 0.5 * m_size[axis_h], m_pos[axis_v] - 0.5 * m_size[axis_v],
-                                m_pos[axis_h] + 0.5 * m_size[axis_h], m_pos[axis_v] + 0.5 * m_size[axis_v]);
-    m_box_det[plane]->SetLineColor(m_col);
-    m_box_det[plane]->SetFillStyle(0);
-
-    m_box_hit[plane] = new TBox(m_pos[axis_h] - 0.5 * m_size[axis_h], m_pos[axis_v] - 0.5 * m_size[axis_v],
-                                m_pos[axis_h] + 0.5 * m_size[axis_h], m_pos[axis_v] + 0.5 * m_size[axis_v]);
-    m_box_hit[plane]->SetFillColor(m_col);
-
-    m_isVis[plane] = 1;
+    m_isVis = 1;
 }
 
-void BothendReadoutDetector::Display(int plane) {
-
-    if(!m_isVis[plane]) return;
-
+void BothReadDetector::Display(int plane) {
+    if(!m_isVis) {
+        std::cout << "Visualization not ready\n";
+        return;
+    }
     m_box_det[plane]->Draw("same");
-
     if(!m_isHit) return;
 
     int axis_h; // index of horizontal axis
     int axis_v; // index of vertical axis
-
     GetVisAxis(plane, axis_h, axis_v);
 
     m_box_hit[plane]->SetX1(m_hitpos[axis_h] - 0.5 * m_posres[axis_h]);
     m_box_hit[plane]->SetX2(m_hitpos[axis_h] + 0.5 * m_posres[axis_h]);
     m_box_hit[plane]->SetY1(m_hitpos[axis_v] - 0.5 * m_posres[axis_v]);
     m_box_hit[plane]->SetY2(m_hitpos[axis_v] + 0.5 * m_posres[axis_v]);
-
     m_box_hit[plane]->Draw("same");
 }

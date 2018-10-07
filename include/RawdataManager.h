@@ -23,7 +23,7 @@ class RawdataManager {
     static int Max(int N, const int* data);
 
   private:
-    int m_isSynchronized;   // whether is the "Synchronize()" completed
+    static int m_isSynchronized; // whether is the "Synchronize()" completed
 
     std::vector<TTree*> m_tree;
     std::vector<std::vector<int>> m_entry; // event# of synchronized events

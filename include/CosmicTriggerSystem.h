@@ -12,7 +12,7 @@
 #include "TLine.h"
 #include "TH1.h"
 
-/* new ID based on their location
+/*
  * --> z
  *
  *  6  7  8  9 10 11 : top
@@ -36,22 +36,23 @@ class CosmicTriggerSystem {
     bool Init_hitCondition();
     bool Init_useCsI();
 
-    void HitDecision();
     void Process();
+    void HitDecision();
     void Tracking();
-    void ZCal();
 
+    void ZCal();
 
     void SetData(int crate, int slot, int ch, const short* data);
     void SetData_CsI(int locID, int side, const short* data);
     void SetTrack();
 
-    int GetNCRC() { return m_nCRC; }
-    int GetNLayer() { return m_nLayer; }
-    int GetNTrack() { return m_nTrack; }
-    int GetNCsI() { return m_nCsI;}
+    int GetNCRC() { return nCRC; }
+    int GetNLayer() { return nLayer; }
+    int GetNTrack() { return nTrack; }
 
-    int GetIsInit() { return m_isInit; }
+    int GetNCsI() { return nCSI;}
+
+    int IsInit() { return m_isInit; }
     int GetRunID() { return m_runID; }
 
     bool GetLocationID(int scintiID, int& layerID, int& ch);
@@ -70,7 +71,7 @@ class CosmicTriggerSystem {
     // Imitation of the online trigger
     void OnlineHitDecision();
     int* GetNOnlineHit(int layer) { return m_nOnlineHit[layer]; }
-    int* GetIsOnlineTriggered() { return m_isOnlineTriggered; }
+    int* IsOnlineTriggered() { return m_isOnlineTriggered; }
 
     // Visualization
     void GetVisAxis(int plane, int& axis_h, int& axis_v);
@@ -80,16 +81,17 @@ class CosmicTriggerSystem {
     void Print(const char* filename);
 
   private:
-    static const int m_nLayer = 2;  // # of layer (top, bottom)
-    static const int m_nCRC = 6;  // # of cosmic ray counter in 1 layer
-    static const int m_nTrack = 36;
-    static const int m_nCsI = 2716;
+    static const int nLayer = 2;  // # of layer (top, bottom)
+    static const int nCRC = 6;  // # of cosmic ray counter in 1 layer
+    static const int nTrack = 36;
+    static const int nCSI = 2716;
+
+    CosmicRayCounter* m_crc[nLayer][nCRC];
+    CsI* m_csi[nCSI];
 
     int m_isInit;
     int m_runID;
 
-    CosmicRayCounter* m_crc[m_nLayer][m_nCRC];
-    CsI* m_csi[m_nCsI];
     double m_comthr; // common peak threshold
 
     int m_nHit[2];
@@ -103,7 +105,7 @@ class CosmicTriggerSystem {
     int m_isRead[2710];
 
     // Imitation of the online trigger
-    int m_nOnlineHit[m_nLayer][64]; // # of fired channel in online at each sample
+    int m_nOnlineHit[nLayer][64]; // # of fired channel in online at each sample
     int m_isOnlineTriggered[64]; // online trigger decision at each sample
 
     // Visualization

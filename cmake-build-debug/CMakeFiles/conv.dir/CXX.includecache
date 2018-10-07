@@ -6,13 +6,31 @@
 
 #IncludeRegexTransform: 
 
-../include/BothendReadoutDetector.h
+../include/BothReadDetector.h
 TBox.h
 ../include/TBox.h
+TreeManager.h
+../include/TreeManager.h
+Visualization.h
+../include/Visualization.h
+
+../include/CosmicMeasSystem.h
+TCanvas.h
+../include/TCanvas.h
+TH1.h
+../include/TH1.h
+TTree.h
+../include/TTree.h
+TreeManager.h
+../include/TreeManager.h
+TriggerManager.h
+../include/TriggerManager.h
+CsIManager.h
+../include/CsIManager.h
 
 ../include/CosmicRayCounter.h
-BothendReadoutDetector.h
-../include/BothendReadoutDetector.h
+BothReadDetector.h
+../include/BothReadDetector.h
 
 ../include/CosmicTriggerSystem.h
 CosmicRayCounter.h
@@ -27,14 +45,38 @@ TH1.h
 ../include/TH1.h
 
 ../include/CsI.h
-BothendReadoutDetector.h
-../include/BothendReadoutDetector.h
+BothReadDetector.h
+../include/BothReadDetector.h
 
-../include/RawdataManager.h
+../include/CsIManager.h
+TreeManager.h
+../include/TreeManager.h
+Visualization.h
+../include/Visualization.h
+CsI.h
+../include/CsI.h
+
+../include/TreeManager.h
 vector
 -
 TTree.h
 ../include/TTree.h
+
+../include/TriggerManager.h
+TLine.h
+../include/TLine.h
+TreeManager.h
+../include/TreeManager.h
+Visualization.h
+../include/Visualization.h
+CosmicRayCounter.h
+../include/CosmicRayCounter.h
+
+../include/Visualization.h
+TCanvas.h
+../include/TCanvas.h
+TH1.h
+../include/TH1.h
 
 /Users/mari/local/root/pro/include/Buttons.h
 
@@ -149,6 +191,18 @@ RConfig.h
 /Users/mari/local/root/pro/include/RConfig.h
 stddef.h
 -
+
+/Users/mari/local/root/pro/include/TApplication.h
+TObject.h
+/Users/mari/local/root/pro/include/TObject.h
+TQObject.h
+/Users/mari/local/root/pro/include/TQObject.h
+TApplicationImp.h
+/Users/mari/local/root/pro/include/TApplicationImp.h
+
+/Users/mari/local/root/pro/include/TApplicationImp.h
+TString.h
+/Users/mari/local/root/pro/include/TString.h
 
 /Users/mari/local/root/pro/include/TArray.h
 Rtypes.h
@@ -418,6 +472,14 @@ TCollection.h
 TString.h
 /Users/mari/local/root/pro/include/TString.h
 
+/Users/mari/local/root/pro/include/TInetAddress.h
+TObject.h
+/Users/mari/local/root/pro/include/TObject.h
+TString.h
+/Users/mari/local/root/pro/include/TString.h
+vector
+-
+
 /Users/mari/local/root/pro/include/TInterpreter.h
 TDictionary.h
 /Users/mari/local/root/pro/include/TDictionary.h
@@ -482,24 +544,6 @@ TCollection.h
 THashTable.h
 /Users/mari/local/root/pro/include/THashTable.h
 iterator
--
-
-/Users/mari/local/root/pro/include/TMath.h
-Rtypes.h
-/Users/mari/local/root/pro/include/Rtypes.h
-TMathBase.h
-/Users/mari/local/root/pro/include/TMathBase.h
-TError.h
-/Users/mari/local/root/pro/include/TError.h
-algorithm
--
-limits
--
-cmath
--
-float.h
--
-math.h
 -
 
 /Users/mari/local/root/pro/include/TMathBase.h
@@ -576,6 +620,12 @@ TVirtualQConnection.h
 TQClass.h
 /Users/mari/local/root/pro/include/TQClass.h
 
+/Users/mari/local/root/pro/include/TRint.h
+TApplication.h
+/Users/mari/local/root/pro/include/TApplication.h
+TString.h
+/Users/mari/local/root/pro/include/TString.h
+
 /Users/mari/local/root/pro/include/TSchemaHelper.h
 RtypesCore.h
 /Users/mari/local/root/pro/include/RtypesCore.h
@@ -606,6 +656,32 @@ stdio.h
 string
 -
 
+/Users/mari/local/root/pro/include/TSysEvtHandler.h
+TObject.h
+/Users/mari/local/root/pro/include/TObject.h
+TQObject.h
+/Users/mari/local/root/pro/include/TQObject.h
+
+/Users/mari/local/root/pro/include/TSystem.h
+stdio.h
+-
+ctype.h
+-
+fcntl.h
+-
+unistd.h
+-
+TNamed.h
+/Users/mari/local/root/pro/include/TNamed.h
+TString.h
+/Users/mari/local/root/pro/include/TString.h
+TInetAddress.h
+/Users/mari/local/root/pro/include/TInetAddress.h
+TTimer.h
+/Users/mari/local/root/pro/include/TTimer.h
+ThreadLocalStorage.h
+/Users/mari/local/root/pro/include/ThreadLocalStorage.h
+
 /Users/mari/local/root/pro/include/TText.h
 TAttText.h
 /Users/mari/local/root/pro/include/TAttText.h
@@ -617,6 +693,18 @@ TPoint.h
 /Users/mari/local/root/pro/include/TPoint.h
 GuiTypes.h
 /Users/mari/local/root/pro/include/GuiTypes.h
+
+/Users/mari/local/root/pro/include/TTime.h
+Rtypes.h
+/Users/mari/local/root/pro/include/Rtypes.h
+
+/Users/mari/local/root/pro/include/TTimer.h
+TSysEvtHandler.h
+/Users/mari/local/root/pro/include/TSysEvtHandler.h
+TTime.h
+/Users/mari/local/root/pro/include/TTime.h
+TString.h
+/Users/mari/local/root/pro/include/TString.h
 
 /Users/mari/local/root/pro/include/TTree.h
 ROOT/TIOFeatures.hxx
@@ -776,11 +864,9 @@ unistd.h
 sys/types.h
 -
 
-/Users/mari/work/cosmiTrigger/conv/conv.cpp
-RawdataManager.h
-/Users/mari/work/cosmiTrigger/conv/RawdataManager.h
-CosmicTriggerSystem.h
-/Users/mari/work/cosmiTrigger/conv/CosmicTriggerSystem.h
+/Users/mari/work/cosmiTrigger/conv/conv2.cpp
+CosmicMeasSystem.h
+/Users/mari/work/cosmiTrigger/conv/CosmicMeasSystem.h
 iostream
 -
 fstream
@@ -789,22 +875,34 @@ sstream
 -
 iomanip
 -
+TRint.h
+-
 TFile.h
 /Users/mari/work/cosmiTrigger/conv/TFile.h
 TTree.h
 /Users/mari/work/cosmiTrigger/conv/TTree.h
 TText.h
 /Users/mari/work/cosmiTrigger/conv/TText.h
+TApplication.h
+/Users/mari/work/cosmiTrigger/conv/TApplication.h
+TSystem.h
+/Users/mari/work/cosmiTrigger/conv/TSystem.h
 
-/Users/mari/work/cosmiTrigger/conv/src/BothendReadoutDetector.cpp
+/Users/mari/work/cosmiTrigger/conv/src/BothReadDetector.cpp
 TString.h
 -
 iostream
 -
-BothendReadoutDetector.h
-/Users/mari/work/cosmiTrigger/conv/src/BothendReadoutDetector.h
 cmath
 -
+BothReadDetector.h
+/Users/mari/work/cosmiTrigger/conv/src/BothReadDetector.h
+
+/Users/mari/work/cosmiTrigger/conv/src/CosmicMeasSystem.cpp
+iostream
+-
+CosmicMeasSystem.h
+/Users/mari/work/cosmiTrigger/conv/src/CosmicMeasSystem.h
 
 /Users/mari/work/cosmiTrigger/conv/src/CosmicRayCounter.cpp
 iostream
@@ -816,33 +914,41 @@ cmath
 CosmicRayCounter.h
 /Users/mari/work/cosmiTrigger/conv/src/CosmicRayCounter.h
 
-/Users/mari/work/cosmiTrigger/conv/src/CosmicTriggerSystem.cpp
-CosmicTriggerSystem.h
-/Users/mari/work/cosmiTrigger/conv/src/CosmicTriggerSystem.h
-string
--
+/Users/mari/work/cosmiTrigger/conv/src/CsI.cpp
 fstream
 -
 iostream
 -
-sstream
--
-TMath.h
--
-
-/Users/mari/work/cosmiTrigger/conv/src/CsI.cpp
 CsI.h
 /Users/mari/work/cosmiTrigger/conv/src/CsI.h
+CosmicTriggerSystem.h
+/Users/mari/work/cosmiTrigger/conv/src/CosmicTriggerSystem.h
+
+/Users/mari/work/cosmiTrigger/conv/src/CsIManager.cpp
+iostream
+-
 fstream
 -
-iostream
--
-CosmicTriggerSystem.h
--
+CsIManager.h
+/Users/mari/work/cosmiTrigger/conv/src/CsIManager.h
 
-/Users/mari/work/cosmiTrigger/conv/src/RawdataManager.cpp
-RawdataManager.h
-/Users/mari/work/cosmiTrigger/conv/src/RawdataManager.h
+/Users/mari/work/cosmiTrigger/conv/src/TreeManager.cpp
 iostream
 -
+TreeManager.h
+/Users/mari/work/cosmiTrigger/conv/src/TreeManager.h
+
+/Users/mari/work/cosmiTrigger/conv/src/TriggerManager.cpp
+iostream
+-
+fstream
+-
+TriggerManager.h
+/Users/mari/work/cosmiTrigger/conv/src/TriggerManager.h
+
+/Users/mari/work/cosmiTrigger/conv/src/Visualization.cpp
+iostream
+-
+Visualization.h
+/Users/mari/work/cosmiTrigger/conv/src/Visualization.h
 

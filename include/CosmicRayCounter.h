@@ -5,8 +5,8 @@
 #ifndef CONV_COSMICRAYCOUNTER_H
 #define CONV_COSMICRAYCOUNTER_H
 
-#include "BothendReadoutDetector.h"
-class CosmicRayCounter : public BothendReadoutDetector {
+#include "BothReadDetector.h"
+class CosmicRayCounter : public BothReadDetector {
   public:
     CosmicRayCounter(int layer, int ch, int scintiID, int dir, const double* pos);
 
@@ -23,7 +23,7 @@ class CosmicRayCounter : public BothendReadoutDetector {
 
     // Imitation of the online trigger
     void OnlineHitDecision(int side);
-    const int* GetIsOnlineHit(int side) { return m_isOnlineHit[side]; }
+    const int* IsOnlineHit(int side) { return m_isOnlineHit[side]; }
 
   private:
     int m_layer;      // 0: bottom, 1: top

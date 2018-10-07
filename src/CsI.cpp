@@ -2,11 +2,11 @@
 // Created by Tomoo MARI on 2018/09/24.
 //
 
-#include "CsI.h"
-
 #include <fstream>
 #include <iostream>
-#include <CosmicTriggerSystem.h>
+
+#include "CsI.h"
+#include "CosmicTriggerSystem.h"
 
 CsI::CsI(int locationID, int crystalID, int lineID, double posx, double posy, int size) {
 
@@ -35,46 +35,20 @@ CsI::CsI(int locationID, int crystalID, int lineID, double posx, double posy, in
     m_ch[side] = -1;
   }
 
-
-  for(int plane = 0; plane < 3; ++plane) {
-    m_isVis[plane] = 0;
-  }
-
-  m_col = kRed;
+  m_col = kBlack;
+  m_isVis = 0;
 }
 
-void CsI::Process() {
-  HitDecision();
-  //SetHitPos();
-}
+CsI::~CsI() {}
 
 void CsI::HitDecision() {
    // some conditions
     m_isHit = 1;
 }
 
-
 void CsI::SetHitPos(double* track) {
   //if(!m_isHit) return;
   m_hitpos[0] = m_pos[0];
   m_hitpos[1] = m_pos[1];
   m_hitpos[2] = (m_pos[1] - track[0]) / track[1];
-}
-
-void CsI::SetADCconfig(int side, int crate, int slot, int ch) {
-  int errflag = 0;
-  if(side!=0 && side!=1) errflag = 1;
-  if(crate<3 || crate > 5) errflag = 1;
-  if(slot<0 || slot > 15) errflag = 1;
-  if(ch<0 || ch>15) errflag = 1;
-
-  if(errflag) {
-    std::cout << "Error: FADC configuration is outside the range\n";
-    return;
-  }
-
-  m_crate[side] = crate;
-  m_slot[side] = slot;
-  m_ch[side] = ch;
-  m_isUsed = 1;
 }

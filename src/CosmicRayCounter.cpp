@@ -25,11 +25,8 @@ CosmicRayCounter::CosmicRayCounter(int layer, int ch, int scintiID, int dir, con
 
     m_isHit = 0;
 
-    for(int plane = 0; plane < 3; ++plane) {
-        m_isVis[plane] = 0;
-    }
-
-    m_col = kRed;
+    m_col = kBlue;
+    m_isVis = 0;
 }
 
 /*
@@ -98,9 +95,6 @@ void CosmicRayCounter::HitDecision() {
     m_isHit = 0;
 }
 
-void ZCal(){
-
-}
 // Imitation of the online trigger
 void CosmicRayCounter::OnlineHitDecision(int side) {
 

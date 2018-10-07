@@ -32,8 +32,8 @@ CosmicTriggerSystem::CosmicTriggerSystem(int runID) : m_runID(runID) {
 }
 
 CosmicTriggerSystem::~CosmicTriggerSystem() {
-    for(int layer = 0; layer < m_nLayer; ++layer) {
-        for(int ch = 0; ch < m_nCRC; ++ch) {
+    for(int layer = 0; layer < nLayer; ++layer) {
+        for(int ch = 0; ch < nCRC; ++ch) {
             delete m_crc[layer][ch];
         }
     }
@@ -84,12 +84,11 @@ bool CosmicTriggerSystem::Init_map() {
             return false;
         }
 
-
         int scintiID, dir;
         double pos[3];
 
-        for (int layer = 0; layer < m_nLayer; ++layer) {
-            for (int ch = 0; ch < m_nCRC; ++ch) {
+        for (int layer = 0; layer < nLayer; ++layer) {
+            for (int ch = 0; ch < nCRC; ++ch) {
                 ifs >> scintiID >> dir >> pos[0] >> pos[1] >> pos[2];
                 m_crc[layer][ch] = new CosmicRayCounter(layer, ch, scintiID, dir, pos);
             }
@@ -270,17 +269,17 @@ void CosmicTriggerSystem::HitDecision() {
     m_nHit[0] = 0;
     m_nHit[1] = 0;
 
-    for(int layer = 0; layer < m_nLayer; ++layer) {
-        for(int ch = 0; ch < m_nCRC; ++ch) {
+    for(int layer = 0; layer < nLayer; ++layer) {
+        for(int ch = 0; ch < nCRC; ++ch) {
             m_crc[layer][ch]->Process();
 
-            if(m_crc[layer][ch]->GetIsHit()) {
+            if(m_crc[layer][ch]->IsHit()) {
                 ++m_nHit[layer];
                 m_hitCh[layer] = ch;
             }
         }
     }
-    for(int locID = 0; locID < m_nCsI; ++locID){
+    for(int locID = 0; locID < nCSI; ++locID){
         m_csi[locID]->Process();
     }
 
@@ -293,13 +292,13 @@ void CosmicTriggerSystem::Tracking() {
         return;
     }
 
-    for(int layer = 0; layer < m_nLayer; ++layer) {
+    for(int layer = 0; layer < nLayer; ++layer) {
         for(int axis = 0; axis < 3; ++axis) {
             m_hitpos[layer][axis] = m_crc[layer][m_hitCh[layer]]->GetHitPos(axis);
         }
     }
 
-    m_trackID = m_hitCh[1] * m_nCRC + m_hitCh[0] + 1;
+    m_trackID = m_hitCh[1] * nCRC + m_hitCh[0] + 1;
 
     m_TOF = sqrt((m_hitpos[1][0] - m_hitpos[0][0]) * (m_hitpos[1][0] - m_hitpos[0][0]) +
                  (m_hitpos[1][1] - m_hitpos[0][1]) * (m_hitpos[1][1] - m_hitpos[0][1]) +
@@ -316,7 +315,7 @@ void CosmicTriggerSystem::Tracking() {
 //        std::cout << *track << std::endl;
 //        std::cout << track << std::endl;
     }
-    for(int id = 0; id < m_nCsI; id++) {
+    for(int id = 0; id < nCSI; id++) {
             m_csi[id]->SetHitPos(m_track[1]);
     }
 }
@@ -335,16 +334,10 @@ void CosmicTriggerSystem::SetData(int crate, int slot, int ch, const short* data
     int side = ch % 2;
 
     m_crc[layer][channel]->SetData(side, data);
-
-
-
-
 }
 
 void CosmicTriggerSystem::SetData_CsI(int locID, int side, const short* data) {
-
-    m_csi[locID] ->SetData(side, data);
-
+    m_csi[locID]->SetData(side, data);
 }
 
 
@@ -353,8 +346,8 @@ void CosmicTriggerSystem::SetData_CsI(int locID, int side, const short* data) {
  */
 
 bool CosmicTriggerSystem::GetLocationID(int scintiID, int& layerID, int& chID) {
-    for(int layer = 0; layer < m_nLayer; ++layer) {
-        for(int ch = 0; ch < m_nCRC; ++ch) {
+    for(int layer = 0; layer < nLayer; ++layer) {
+        for(int ch = 0; ch < nCRC; ++ch) {
             if(m_crc[layer][ch]->GetScintiID()==scintiID) {
                 layerID = layer;
                 chID = ch;
@@ -376,12 +369,12 @@ void CosmicTriggerSystem::OnlineHitDecision() {
     for(int smpl = 0; smpl < 64; ++smpl) {
         m_isOnlineTriggered[smpl] = 0;
 
-        for(int layer = 0; layer < m_nLayer; ++layer) {
+        for(int layer = 0; layer < nLayer; ++layer) {
             m_nOnlineHit[layer][smpl] = 0;
 
-            for(int ch = 0; ch < m_nCRC; ++ch) {
+            for(int ch = 0; ch < nCRC; ++ch) {
                 for(int side = 0; side < 2; ++side) {
-                    if(m_crc[layer][ch]->GetIsOnlineHit(side)[smpl]) {
+                    if(m_crc[layer][ch]->IsOnlineHit(side)[smpl]) {
                         ++m_nOnlineHit[layer][smpl];
                     }
                 }
@@ -421,8 +414,8 @@ void CosmicTriggerSystem::Visualize() {
 
     // xy and yz plane
     for(int plane = 0; plane < 2; ++plane) {
-        for(int layer = 0; layer < m_nLayer; ++layer) {
-            for(int ch = 0; ch < m_nCRC; ++ch) {
+        for(int layer = 0; layer < nLayer; ++layer) {
+            for(int ch = 0; ch < nCRC; ++ch) {
                 m_crc[layer][ch]->Visualize(plane);
             }
         }
@@ -432,7 +425,6 @@ void CosmicTriggerSystem::Visualize() {
 
         m_isVis[plane] = 1;
     }
-
 }
 
 void CosmicTriggerSystem::SetTrackLine(int plane) {
@@ -453,7 +445,6 @@ void CosmicTriggerSystem::SetTrackLine(int plane) {
             h[i] = m_world[axis_h][1];
         }
 
-
         v[i] = m_track[plane][1] * h[i] + m_track[plane][0];
     }
 
@@ -461,12 +452,6 @@ void CosmicTriggerSystem::SetTrackLine(int plane) {
     m_lTrack[plane]->SetX2(h[1]);
     m_lTrack[plane]->SetY1(v[0]);
     m_lTrack[plane]->SetY2(v[1]);
-}
-
-void SetTrack(){
-    for(int id = 0; id < 2716; id++){
-
-    }
 }
 
 void CosmicTriggerSystem::Display() {
@@ -491,8 +476,8 @@ void CosmicTriggerSystem::Display() {
                                          m_world[axis_h][1], m_world[axis_v][1], title[plane]);
 
         // Cosmic ray counters
-        for(int layer = 0; layer < m_nLayer; ++layer) {
-            for(int ch = 0; ch < m_nCRC; ++ch) {
+        for(int layer = 0; layer < nLayer; ++layer) {
+            for(int ch = 0; ch < nCRC; ++ch) {
                 m_crc[layer][ch]->Display(plane);
             }
         }

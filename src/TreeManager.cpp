@@ -1,38 +1,42 @@
 //
-// Created by Tomoo MARI on 2018/09/30.
+// Created by Tomoo MARI on 2018/10/07.
 //
 
-//#define DEBUG
-
-#include "RawdataManager.h"
 #include <iostream>
 
+#include "TreeManager.h"
 
-RawdataManager::RawdataManager() {}
-//RawdataManager::RawdataManager() : m_isSynchronized(0) {}
+std::vector<TTree*> TreeManager::m_tin;
+InputBranchContainer* TreeManager::m_BRin;
+std::vector<std::vector<int>> TreeManager::m_entry;
+std::vector<int> TreeManager::m_timestamp_delta;
 
-RawdataManager::~RawdataManager() {}
+TTree* TreeManager::m_tout = nullptr;
 
+int TreeManager::m_isSynchronized = 0;
 
-void RawdataManager::CheckTimeStamp() {
+void TreeManager::SetInputTrees(int num, TTree** tree) {
+    m_BRin = new InputBranchContainer[num];
 
-    if(m_isSynchronized) {
-        std::cout << "Timestamps are already checked\n";
-        return;
+    for(int i=0; i < num; ++i) {
+        m_tin.push_back(tree[i]);
+        m_tin[i]->SetBranchAddress("Data", m_BRin[i].Data);
+        m_tin[i]->SetBranchAddress("Timestamp", &m_BRin[i].Timestamp);
     }
 
-    const int nTree = m_tree.size();
+    if(!m_isSynchronized) CheckTimeStamp();
+}
+
+void TreeManager::CheckTimeStamp() {
+    std::cout << "\nChecking timestamps...\n";
+
+    const int nTree = m_tin.size();
     if(nTree < 2) {
         std::cout << "Error: # of trees should be >= 2\n";
         return;
     }
 
-    std::cout << "Checking timestamps -------------------------\n";
-
-    UInt_t* timestamp = new UInt_t[nTree];
-    for(int k = 0; k < nTree; ++k) {
-        m_tree[k]->SetBranchAddress("Timestamp", &timestamp[k]);
-    }
+//    UInt_t* timestamp = new UInt_t[nTree];
 
     m_entry.resize(nTree);
     m_timestamp_delta.resize(nTree);
@@ -42,36 +46,26 @@ void RawdataManager::CheckTimeStamp() {
 
     // The first event in a run must be the delta triggers
     // and timestamp difference between crates can be references
-    m_tree[nTree-1]->GetEntry(0);
+    m_tin[nTree-1]->GetEntry(0);
     for(int k = 0; k < nTree; ++k) {
-        m_tree[k]->GetEntry(0);
-        m_timestamp_delta[k] = timestamp[k];
+        m_tin[k]->GetEntry(0);
+        m_timestamp_delta[k] = m_BRin[k].Timestamp;
+//        m_timestamp_delta[k] = timestamp[k];
         if(k < nTree-1) {
-            tdif_delta[k] = timestamp[nTree-1] - timestamp[k];
+//            tdif_delta[k] = timestamp[nTree-1] - timestamp[k];
+            tdif_delta[k] = m_BRin[nTree-1].Timestamp - m_BRin[k].Timestamp;
         }
     }
 
     // Initialize entry#
-    for(int k = 0; k < nTree; ++k)
-        entry[k] = 1;
+    for(int k = 0; k < nTree; ++k) entry[k] = 1;
 
-
-    /* Scan all entries */
-
-#ifdef DEBUG
-    for(int k = 0; k < nTree; ++k) {
-        std::cout << m_tree[k]->GetName() << " / ";
-    }
-    std::cout << "\n";
-#endif
-    
-    int count = 0;
-
+    /* Scan all events */
     while(1) {
         // end
         int end_flag = 0;
         for(int k = 0; k < nTree; ++k) {
-            if(entry[k] >= m_tree[k]->GetEntries()) {
+            if(entry[k] >= m_tin[k]->GetEntries()) {
                 end_flag = 1;
                 break;
             }
@@ -80,11 +74,11 @@ void RawdataManager::CheckTimeStamp() {
 
         // skip some events
         int continue_flag = 0;
-        
+
         // delta trigger events
         for(int k = 0; k < nTree; ++k) {
-            m_tree[k]->GetEntry(entry[k]);
-            if(timestamp[k]==m_timestamp_delta[k]) {
+            m_tin[k]->GetEntry(entry[k]);
+            if(m_BRin[k].Timestamp==m_timestamp_delta[k]) {
                 ++entry[k];
                 continue_flag = 1;
             }
@@ -105,16 +99,16 @@ void RawdataManager::CheckTimeStamp() {
         // If un-synchronization recovered
         int recover_flag = 1;
         int maxEntry = Max(nTree, entry);
-        m_tree[nTree-1]->GetEntry(maxEntry);
+        m_tin[nTree-1]->GetEntry(maxEntry);
 
         for(int k = 0; k < nTree-1; ++k) {
-            if(maxEntry >= m_tree[k]->GetEntries()) {
+            if(maxEntry >= m_tin[k]->GetEntries()) {
                 recover_flag = 0;
                 break;
             }
-
-            m_tree[k]->GetEntry(maxEntry);
-            if(timestamp[k]+tdif_delta[k]!=timestamp[nTree-1]) {
+            m_tin[k]->GetEntry(maxEntry);
+//            if(timestamp[k]+tdif_delta[k]!=timestamp[nTree-1]) {
+            if(m_BRin[k].Timestamp+tdif_delta[k]!=m_BRin[nTree-1].Timestamp) {
                 recover_flag = 0;
                 break;
             }
@@ -124,15 +118,9 @@ void RawdataManager::CheckTimeStamp() {
             for(int k = 0; k < nTree; ++k) {
                 entry[k] = maxEntry;
                 m_entry[k].push_back(entry[k]);
-
-#ifdef DEBUG
-                std::cout << k << ":" << entry[k] << "\t";
-#endif
                 ++entry[k];
             }
-#ifdef DEBUG
-            std::cout << "\n";
-#endif
+
             int current_entry = m_entry[0].size();
             if(current_entry%1000==0)
                 std::cout << current_entry << "th\n";
@@ -140,16 +128,17 @@ void RawdataManager::CheckTimeStamp() {
             continue;
         }
 
+
         // (nTree-1)th tree is used as reference
         int find_flag = 1;
-        m_tree[nTree-1]->GetEntry(entry[nTree-1]);
+        m_tin[nTree-1]->GetEntry(entry[nTree-1]);
 
         for(int k = 0; k < nTree-1; ++k) {
             for(int i = 0, maxloop = 300; i < maxloop; ++i) {
                 int nextentry = entry[k] + i;
 
                 // if not found
-                if(i==maxloop - 1 || nextentry > m_tree[k]->GetEntries()-1) {
+                if(i==maxloop - 1 || nextentry > m_tin[k]->GetEntries()-1) {
                     find_flag = 0;
                     break;
                 }
@@ -159,15 +148,17 @@ void RawdataManager::CheckTimeStamp() {
                     continue;
                 }
 
-                m_tree[k]->GetEntry(nextentry);
+                m_tin[k]->GetEntry(nextentry);
 
                 // skip delta trigger events
-                if(timestamp[k]==m_timestamp_delta[k]) {
+//                if(timestamp[k]==m_timestamp_delta[k]) {
+                if(m_BRin[k].Timestamp==m_timestamp_delta[k]) {
                     continue;
                 }
 
                 // if found
-                if(timestamp[k] + tdif_delta[k]==timestamp[nTree-1]) {
+//                if(timestamp[k] + tdif_delta[k]==timestamp[nTree-1]) {
+                if(m_BRin[k].Timestamp + tdif_delta[k]==m_BRin[nTree-1].Timestamp) {
                     entry[k] = nextentry;
                     break;
                 }
@@ -180,25 +171,11 @@ void RawdataManager::CheckTimeStamp() {
             for(int k = 0; k < nTree; ++k) {
                 m_entry[k].push_back(entry[k]);
                 ++entry[k];
-#ifdef DEBUG
-                std::cout << k << "::" << entry[k] << "\t";
-#endif
             }
             int current_entry = m_entry[0].size();
             if(current_entry%1000==0)
                 std::cout << current_entry << "th\n";
-#ifdef DEBUG
-            std::cout << std::endl;
-#endif
-
         } else {
-
-#ifdef DEBUG
-            for(int k = 0; k < nTree; ++k) {
-                std::cout << k << "->" << entry[k] << "\t";
-            }
-            std::cout << std::endl;
-#endif
             ++entry[nTree-1];
             for(int k = 0; k < nTree-1; ++k) {
                 if(entry[k] < entry[nTree-1]) {
@@ -207,19 +184,22 @@ void RawdataManager::CheckTimeStamp() {
             }
         }
 
-
     } // while
 
-    delete[] timestamp;
+    //        std::cout << "# of surviving events    "
+//              << man->GetEntries() << " (" << std::setprecision(3)
+//              << 100. * man->GetEntries() / tin[0]->GetEntries()
+//              << "%)\n\n";
+
+//    delete[] timestamp;
     delete[] entry;
     delete[] tdif_delta;
 
     m_isSynchronized = 1;
-
-    std::cout << "----------------------------------------- fin\n\n";
+    std::cout << "...fin\n";
 }
 
-void RawdataManager::GetEntry(int spill) {
+void TreeManager::GetEntry(int spill) {
     if(!m_isSynchronized) {
         std::cout << "Use CheckTimeStamp() function at first\n";
         return;
@@ -228,13 +208,13 @@ void RawdataManager::GetEntry(int spill) {
         std::cout << "Total # of events " << m_entry[0].size() << "\n";
         return;
     }
-    for(int k = 0; k < m_tree.size(); ++k) {
-        m_tree[k]->GetEntry(m_entry[k][spill]);
+    for(int k = 0; k < m_tin.size(); ++k) {
+        m_tin[k]->GetEntry(m_entry[k][spill]);
 
     }
 }
 
-int RawdataManager::GetEntries() {
+int TreeManager::GetEntries() {
     if(!m_isSynchronized) {
         std::cout << "Use CheckTimeStamp() function at first\n";
         return 0;
@@ -242,7 +222,7 @@ int RawdataManager::GetEntries() {
     return m_entry[0].size();
 }
 
-int RawdataManager::Max(int N, const int* data) {
+int TreeManager::Max(int N, const int* data) {
     int max = -1000000;
     for(int i = 0; i < N; ++i) {
         if(max < data[i]) max = data[i];

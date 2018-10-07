@@ -92,22 +92,31 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/mari/work/cosmiTrigger/conv/conv.cpp">
+		<Unit filename="/Users/mari/work/cosmiTrigger/conv/conv2.cpp">
 			<Option target="conv"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/cosmiTrigger/conv/src/BothendReadoutDetector.cpp">
+		<Unit filename="/Users/mari/work/cosmiTrigger/conv/src/BothReadDetector.cpp">
+			<Option target="conv"/>
+		</Unit>
+		<Unit filename="/Users/mari/work/cosmiTrigger/conv/src/CosmicMeasSystem.cpp">
 			<Option target="conv"/>
 		</Unit>
 		<Unit filename="/Users/mari/work/cosmiTrigger/conv/src/CosmicRayCounter.cpp">
 			<Option target="conv"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/cosmiTrigger/conv/src/CosmicTriggerSystem.cpp">
-			<Option target="conv"/>
-		</Unit>
 		<Unit filename="/Users/mari/work/cosmiTrigger/conv/src/CsI.cpp">
 			<Option target="conv"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/cosmiTrigger/conv/src/RawdataManager.cpp">
+		<Unit filename="/Users/mari/work/cosmiTrigger/conv/src/CsIManager.cpp">
+			<Option target="conv"/>
+		</Unit>
+		<Unit filename="/Users/mari/work/cosmiTrigger/conv/src/TreeManager.cpp">
+			<Option target="conv"/>
+		</Unit>
+		<Unit filename="/Users/mari/work/cosmiTrigger/conv/src/TriggerManager.cpp">
+			<Option target="conv"/>
+		</Unit>
+		<Unit filename="/Users/mari/work/cosmiTrigger/conv/src/Visualization.cpp">
 			<Option target="conv"/>
 		</Unit>
 		<Unit filename="/Users/mari/work/cosmiTrigger/conv/CMakeLists.txt">

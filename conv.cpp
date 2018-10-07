@@ -202,8 +202,7 @@ int main(int argc, char** argv) {
         CsI* CsI;
         for(int locID = 0; locID < nCsI; ++locID){
             CsI = trg_sys->GetCSI(locID);
-            int use = CsI->GetIsUsed();
-            if(use) {
+            if(CsI->IsUsed()) {
                 for(int side = 0; side < 2; side++) {
                     int crate = CsI->GetCrate(side) - 3;
                     int slot = CsI->GetSlot(side);
@@ -225,7 +224,7 @@ int main(int argc, char** argv) {
                 for(int side = 0; side < 2; ++side) {
                     for(int smpl = 0; smpl < 64; ++smpl) {
                         data[layer][ch][side][smpl] = counter->GetData(side)[smpl];
-                        isOnlineHit[layer][ch][side][smpl] = counter->GetIsOnlineHit(side)[smpl];
+                        isOnlineHit[layer][ch][side][smpl] = counter->IsOnlineHit(side)[smpl];
                     }
                     ped[layer][ch][side] = counter->GetPed(side);
                     peak[layer][ch][side] = counter->GetPeak(side);
@@ -237,7 +236,7 @@ int main(int argc, char** argv) {
                 TD[layer][ch] = counter->GetTD();
                 MT[layer][ch] = counter->GetMT();
                 recX[layer][ch] = counter->GetHitPos(0);
-                isHit[layer][ch] = counter->GetIsHit();
+                isHit[layer][ch] = counter->IsHit();
             } // ch loop
 
             nHit[layer] = trg_sys->GetNhit(layer);
@@ -262,13 +261,13 @@ int main(int argc, char** argv) {
         TOF = trg_sys->GetTOF();
 
         for(int smpl = 0; smpl < 64; ++smpl) {
-            isOnlineTriggered[smpl] = trg_sys->GetIsOnlineTriggered()[smpl];
+            isOnlineTriggered[smpl] = trg_sys->IsOnlineTriggered()[smpl];
         }
 
         // CsI
         for (int locID = 0; locID < nCsI; locID++) {
             CsI = trg_sys->GetCSI(locID);
-            isUsed_CsI[locID] = CsI->GetIsUsed();
+            isUsed_CsI[locID] = CsI->IsUsed();
             if (isUsed_CsI[locID]) {
                 for (int side = 0; side < 2; side++) {
                     for (int smpl = 0; smpl < 64; smpl++) {
