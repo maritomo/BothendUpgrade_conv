@@ -546,6 +546,24 @@ THashTable.h
 iterator
 -
 
+/Users/mari/local/root/pro/include/TMath.h
+Rtypes.h
+/Users/mari/local/root/pro/include/Rtypes.h
+TMathBase.h
+/Users/mari/local/root/pro/include/TMathBase.h
+TError.h
+/Users/mari/local/root/pro/include/TError.h
+algorithm
+-
+limits
+-
+cmath
+-
+float.h
+-
+math.h
+-
+
 /Users/mari/local/root/pro/include/TMathBase.h
 Rtypes.h
 /Users/mari/local/root/pro/include/Rtypes.h
@@ -942,6 +960,8 @@ TreeManager.h
 iostream
 -
 fstream
+-
+TMath.h
 -
 TriggerManager.h
 /Users/mari/work/cosmiTrigger/conv/src/TriggerManager.h

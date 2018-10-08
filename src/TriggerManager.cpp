@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <TMath.h>
 #include "TriggerManager.h"
 
 TriggerManager::TriggerManager() {
@@ -29,7 +30,7 @@ bool TriggerManager::Init() {
     std::cout << "\nInitializing TriggerManager...\n";
 
     if(!Init_map()) return false;
-    if(!Init_channelDelay()) return false;
+    if(!Init_DAQconfig()) return false;
     if(!Init_calibConst()) return false;
     if(!Init_hitCondition()) return false;
     Branch();
@@ -61,7 +62,7 @@ bool TriggerManager::Init_map() {
     return true;
 }
 
-bool TriggerManager::Init_channelDelay() {
+bool TriggerManager::Init_DAQconfig(){
     std::string filename = "./data/channel_delay.txt";
     std::ifstream ifs(filename.c_str());
     if(!ifs) {
@@ -74,7 +75,7 @@ bool TriggerManager::Init_channelDelay() {
         int layer = slot;
         int ch = adcch / 2;
         int side = adcch % 2;
-        m_crc[layer][ch]->SetADCconfig(side, 3, slot, ch);
+        m_crc[layer][ch]->SetADCconfig(side, 3, slot, adcch);
         m_crc[layer][ch]->SetDelay(side, delay);
     }
     ifs.close();
@@ -146,34 +147,113 @@ bool TriggerManager::Init_hitCondition() {
 }
 
 void TriggerManager::Branch() {
-    m_tout->Branch("trig.data", m_BRtrig.data, "trig.data[2][6][2][64]/S");
-    m_tout->Branch("trig.ped", m_BRtrig.ped, "trig.ped[2][6][2]/F");
-    m_tout->Branch("trig.peak", m_BRtrig.peak, "trig.peak[2][6][2]/F");
-    m_tout->Branch("trig.integ", m_BRtrig.integ, "trig.integ[2][6][2]/F");
-    m_tout->Branch("trig.pt", m_BRtrig.pt, "trig.pt[2][6][2]/F");
-    m_tout->Branch("trig.cft", m_BRtrig.cft, "trig.cft[2][6][2]/F");
+    m_tout->Branch("trig.data", m_BRout.data, "trig.data[2][6][2][64]/S");
+    m_tout->Branch("trig.ped", m_BRout.ped, "trig.ped[2][6][2]/F");
+    m_tout->Branch("trig.peak", m_BRout.peak, "trig.peak[2][6][2]/F");
+    m_tout->Branch("trig.integ", m_BRout.integ, "trig.integ[2][6][2]/F");
+    m_tout->Branch("trig.pt", m_BRout.pt, "trig.pt[2][6][2]/F");
+    m_tout->Branch("trig.cft", m_BRout.cft, "trig.cft[2][6][2]/F");
 
-    m_tout->Branch("trig.TD", m_BRtrig.TD, "trig.TD[2][6]/F");
-    m_tout->Branch("trig.MT", m_BRtrig.MT, "trig.MT[2][6]/F");
+    m_tout->Branch("trig.TD", m_BRout.TD, "trig.TD[2][6]/F");
+    m_tout->Branch("trig.MT", m_BRout.MT, "trig.MT[2][6]/F");
 
-    m_tout->Branch("trig.isHit", m_BRtrig.isHit, "trig.isHit[2][6]/S");
-    m_tout->Branch("trig.hitpos", m_BRtrig.hitpos, "trig.hitpos[2][6]/F");
+    m_tout->Branch("trig.isHit", m_BRout.isHit, "trig.isHit[2][6]/S");
+    m_tout->Branch("trig.posHit", m_BRout.posHit, "trig.posHit[2][6]/F");
+    m_tout->Branch("trig.nHit", m_BRout.nHit, "trig.nHit[2]/S");
+    m_tout->Branch("trig.TOF", &m_BRout.TOF, "TOF/F");
 
-    m_tout->Branch("trig.nHit", m_BRtrig.nHit, "trig.nHit[2]/S");
-    m_tout->Branch("trig.hitpos", m_BRtrig.hitpos, "trig.hitpos[2][3]/F");
-    m_tout->Branch("trig.TOF", &m_BRtrig.TOF, "TOF/F");
+    m_tout->Branch("track", m_BRout.track, "track[3][2]/F");
+    m_tout->Branch("trackID", &m_BRout.trackID, "trackID/S");
 
-    m_tout->Branch("track", m_BRtrig.track, "track[3][2]/F");
-    m_tout->Branch("trackID", &m_BRtrig.trackID, "trackID/S");
-
-    m_tout->Branch("isOnlineHit", m_BRtrig.isOnlineHit, "isOnlineHit[2][6][2][64]/S");
-    m_tout->Branch("nOnlineHit", m_BRtrig.nOnlineHit, "nOnlineHit[2][64]/S");
-    m_tout->Branch("isOnlineTriggered", m_BRtrig.isOnlineTriggered, "isOnlineTriggered[64]/S");
+    m_tout->Branch("isOnlineHit", m_BRout.isOnlineHit, "isOnlineHit[2][6][2][64]/S");
+    m_tout->Branch("nOnlineHit", m_BRout.nOnlineHit, "nOnlineHit[2][64]/S");
+    m_tout->Branch("isOnlineTriggered", m_BRout.isOnlineTriggered, "isOnlineTriggered[64]/S");
 }
 
 // Process
 void TriggerManager::Process() {
+    Tracking();
+    OnlineHitDecision();
+    Fill();
 }
+
+void TriggerManager::Tracking() {
+    // Hit decision
+    m_BRout.nHit[0] = 0;
+    m_BRout.nHit[1] = 0;
+    for(int layer = 0; layer < nLayer; ++layer) {
+        for(int ch = 0; ch < nCRC; ++ch) {
+            m_crc[layer][ch]->Process();
+            if(m_crc[layer][ch]->IsHit()) {
+                ++m_BRout.nHit[layer];
+                m_BRout.chHit[layer] = ch;
+            }
+        }
+    }
+
+    // Tracking
+    if(m_BRout.nHit[0]!=1 || m_BRout.nHit[1]!=1) {
+        m_BRout.trackID = 0;
+        return;
+    }
+
+    double posHit[nLayer][3];
+    for(int layer = 0; layer < nLayer; ++layer) {
+        for(int axis = 0; axis < 3; ++axis) {
+            posHit[layer][axis] = m_crc[layer][m_BRout.chHit[layer]]->GetHitPosition(axis);
+        }
+    }
+
+    m_BRout.trackID = m_BRout.chHit[1] * nCRC + m_BRout.chHit[0] + 1;
+    m_BRout.TOF = sqrt(
+            (posHit[1][0] - posHit[0][0])*(posHit[1][0] - posHit[0][0]) +
+            (posHit[1][1] - posHit[0][1])*(posHit[1][1] - posHit[0][1]) +
+            (posHit[1][2] - posHit[0][2])*(posHit[1][2] - posHit[0][2])
+    )/TMath::C();
+
+    int axis_h; // index of horizontal axis
+    int axis_v; // index of vertical axis
+    for(int plane = 0; plane < 3; ++plane) {
+        GetVisAxis(plane, axis_h, axis_v);
+        m_BRout.track[plane][1] = (posHit[1][axis_v] - posHit[0][axis_v]) / (posHit[1][axis_h] - posHit[0][axis_h]);
+        m_BRout.track[plane][0] = posHit[1][axis_v] - m_BRout.track[plane][1] * posHit[1][axis_h];
+    }
+
+}
+
+void TriggerManager::OnlineHitDecision() {
+    for(int smpl = 0; smpl < 64; ++smpl) {
+        m_BRout.isOnlineTriggered[smpl] = 0;
+
+        for(int layer = 0; layer < nLayer; ++layer) {
+            m_BRout.nOnlineHit[layer][smpl] = 0;
+
+            for(int ch = 0; ch < nCRC; ++ch) {
+                for(int side = 0; side < 2; ++side) {
+                    if(m_crc[layer][ch]->IsOnlineHit(side)[smpl]) {
+                        ++m_BRout.nOnlineHit[layer][smpl];
+                    }
+                }
+            }
+        }
+        if(m_BRout.nOnlineHit[0][smpl] && m_BRout.nOnlineHit[1][smpl]) {
+            m_BRout.isOnlineTriggered[smpl] = 1;
+        }
+    }
+}
+
+void TriggerManager::Fill(){
+    for(int layer=0; layer<nLayer; ++layer) {
+        for(int ch=0; ch<nCRC; ++ch) {
+            for(int side=0; side<2; ++side) {
+                for(int smpl=0; smpl<64; ++smpl) {
+                    m_BRout.data[layer][ch][side][smpl] = m_crc[layer][ch]->GetData(side)[smpl];
+                }
+            }
+        }
+    }
+}
+
 
 // Getter
 bool TriggerManager::GetLocationID(int scintiID, int& layerID, int& chID) {
@@ -202,6 +282,7 @@ void TriggerManager::Visualize() {
     for(int plane=0; plane < 3; ++plane) {
         m_lTrack[plane] = new TLine();
         m_lTrack[plane]->SetLineColor(kRed);
+        m_lTrack[plane]->SetLineWidth(2);
     }
     m_isVis = 1;
 }
@@ -221,7 +302,7 @@ void TriggerManager::Display(int plane) {
     m_canv->Modified();
 
     // Track
-    if(m_BRtrig.trackID==0) return;
+    if(m_BRout.trackID==0) return;
 
     SetTrackLine(plane);
     m_lTrack[plane]->Draw("same");
@@ -237,7 +318,7 @@ void TriggerManager::SetTrackLine(int plane) {
 
     double h[2], v[2];
     for(int i = 0; i < 2; ++i) {
-        h[i] = (m_world[axis_v][i] - m_BRtrig.track[plane][0]) / m_BRtrig.track[plane][1];
+        h[i] = (m_world[axis_v][i] - m_BRout.track[plane][0]) / m_BRout.track[plane][1];
 
         if(h[i] < m_world[axis_h][0]) {
             h[i] = m_world[axis_h][0];
@@ -246,7 +327,7 @@ void TriggerManager::SetTrackLine(int plane) {
             h[i] = m_world[axis_h][1];
         }
 
-        v[i] = m_BRtrig.track[plane][1] * h[i] + m_BRtrig.track[plane][0];
+        v[i] = m_BRout.track[plane][1] * h[i] + m_BRout.track[plane][0];
     }
 
     m_lTrack[plane]->SetX1(h[0]);

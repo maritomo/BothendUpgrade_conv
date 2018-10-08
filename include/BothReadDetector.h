@@ -16,23 +16,20 @@ class BothReadDetector : public TreeManager, public Visualization {
 
     void SetADCconfig(int side, int crate, int slot, int ch);
     void SetDelay(int side, int delay) { m_delay[side] = delay; }
-    virtual void SetData(int side);
 
     void GetADCconfig(int side, int& crate, int& slot, int& ch);
-    double GetPos(int axis) { return m_pos[axis]; }
-    const int* GetData(int side) { return m_data[side]; }
-    double GetPed(int side) { return m_ped[side]; }
-    double GetPeak(int side) { return m_peak[side]; }
-    double GetInteg(int side) { return m_integ[side]; }
-    double GetPT(int side) { return m_pt[side]; }
-    double GetCFT(int side) { return m_cft[side]; }
-    double GetErrFlag(int side) { return m_errflag[side]; }
-
-    double GetTD() { return m_TD; }
-    double GetMT() { return m_MT; }
-
-    int IsHit() { return m_isHit; }
-    double GetHitPos(int axis) { return m_hitpos[axis]; }
+    short* GetData(int side) { if(!m_isUsed) return nullptr; return m_data[side]; }
+    double GetPos(int axis) { if(!m_isUsed) return 0; return m_pos[axis]; }
+    double GetPed(int side) { if(!m_isUsed) return 0; return m_ped[side]; }
+    double GetPeak(int side) { if(!m_isUsed) return 0; return m_peak[side]; }
+    double GetInteg(int side) { if(!m_isUsed) return 0; return m_integ[side]; }
+    double GetPT(int side) { if(!m_isUsed) return 0; return m_pt[side]; }
+    double GetCFT(int side) { if(!m_isUsed) return 0; return m_cft[side]; }
+    double GetErrFlag(int side) { if(!m_isUsed) return 0; return m_errflag[side]; }
+    double GetTD() { if(!m_isUsed) return 0; return m_TD; }
+    double GetMT() { if(!m_isUsed) return 0; return m_MT; }
+    int IsHit() { if(!m_isUsed) return 0; return m_isHit; }
+    double GetHitPosition(int axis) { if(!m_isUsed) return 0; return m_hitpos[axis]; }
 
     void GetCFTime(int side);
     short GetMax(int nSmpl, const short* data);
@@ -44,16 +41,15 @@ class BothReadDetector : public TreeManager, public Visualization {
   protected:
     double m_pos[3];   // location (x, y, z)
     double m_size[3];  // size (x, y, z)
-    int m_delay[2];   // Channel delay
 
     // FADC configuration
+    int m_isUsed;
     int m_crate[2];
     int m_slot[2];
     int m_ch[2];
-    int m_isUsed;
+    int m_delay[2];   // Channel delay
 
-    short* m_pdata[2];
-    int m_data[2][64];
+    short* m_data[2];
     double m_ped[2];
     double m_peak[2];
     double m_integ[2];

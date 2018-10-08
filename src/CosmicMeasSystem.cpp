@@ -37,7 +37,7 @@ bool CosmicMeasSystem::Init() {
 }
 
 void CosmicMeasSystem::Branch() {
-    m_tout->Branch("timestamp", m_BRsys.timestamp, "timestamp[3]/i");
+    m_tout->Branch("timestamp", m_BRout.timestamp, "timestamp[3]/i");
 }
 
 void CosmicMeasSystem::Process() {

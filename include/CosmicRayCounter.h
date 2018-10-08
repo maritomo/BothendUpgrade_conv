@@ -10,9 +10,7 @@ class CosmicRayCounter : public BothReadDetector {
   public:
     CosmicRayCounter(int layer, int ch, int scintiID, int dir, const double* pos);
 
-
     void Process();
-    void Reconstruct();
     void HitDecision();
 
     void SetCalibConst(const double* TD_x);

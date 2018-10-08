@@ -51,48 +51,43 @@ void CosmicRayCounter::SetCoinRange(int side, double* coin_range) {
  */
 
 void CosmicRayCounter::Process() {
-    Reconstruct();
     HitDecision();
     for(int side = 0; side < 2; ++side) {
         OnlineHitDecision(side);
     }
 }
 
-void CosmicRayCounter::Reconstruct() {
-    m_TD = m_pt[0] - m_pt[1];
-    m_MT = (m_pt[0] + m_pt[1]) / 2;
-    m_hitpos[0] = (m_TD - m_ccX[0]) / m_ccX[1];
-    m_hitpos[1] = m_pos[1];
-    m_hitpos[2] = m_pos[2];
-}
-
 void CosmicRayCounter::HitDecision() {
-
-    double f_far = 0; // arbitrary factor for peak threshold in far side
-
-    for(int k = 0; k < 2; ++k) {
-        int k1 = k % 2;        // index of one side
-        int k2 = (k + 1) % 2;  // index of another side
-
-        // hit condition (near side)
-        if(m_peak[k1] > m_peak_thr[k1] &&
-           m_pt[k1] > m_coin_range[k1][0] &&
-           m_pt[k1] < m_coin_range[k1][1]) {
-
-            // hit condition (far side)
-            /*
-            if(m_peak[k2] > f_far * m_peak_thr[k2] &&
-               m_pt[k2] > m_coin_range[k2][0] &&
-               m_pt[k2] < m_coin_range[k2][1]) {
-            */
-            if(1) {
-                m_isHit = 1;
-                return;
-            }
-        }
+    // Reconstruction & Hit decision
+    for(int side=0; side<2; ++side) {
+        GetCFTime(side);
     }
 
     m_isHit = 0;
+    for(int axis=0; axis<3; ++axis) {
+        m_hitpos[axis] = 0;
+    }
+
+    for(int side = 0; side < 2; ++side) {
+        if(m_peak[side] > m_peak_thr[side] &&
+           m_pt[side] > m_coin_range[side][0] &&
+           m_pt[side] < m_coin_range[side][1])
+        {
+            m_isHit = 1;
+            m_hitpos[0] = (m_TD - m_ccX[0]) / m_ccX[1];
+            m_hitpos[1] = m_pos[1];
+            m_hitpos[2] = m_pos[2];
+            break;
+        }
+    }
+
+    for(int side = 0; side < 2; ++side) {
+        m_pt[side] -= m_delay[side];
+        m_cft[side] -= m_delay[side];
+    }
+
+    m_TD = m_pt[0] - m_pt[1];
+    m_MT = (m_pt[0] + m_pt[1]) / 2;
 }
 
 // Imitation of the online trigger

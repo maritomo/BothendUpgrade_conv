@@ -114,6 +114,7 @@ void TreeManager::CheckTimeStamp() {
             }
         }
 
+
         if(recover_flag) {
             for(int k = 0; k < nTree; ++k) {
                 entry[k] = maxEntry;
@@ -127,7 +128,6 @@ void TreeManager::CheckTimeStamp() {
 
             continue;
         }
-
 
         // (nTree-1)th tree is used as reference
         int find_flag = 1;
@@ -199,18 +199,17 @@ void TreeManager::CheckTimeStamp() {
     std::cout << "...fin\n";
 }
 
-void TreeManager::GetEntry(int spill) {
+void TreeManager::GetEntry(int entry) {
     if(!m_isSynchronized) {
         std::cout << "Use CheckTimeStamp() function at first\n";
         return;
     }
-    if(spill >= m_entry[0].size()) {
+    if(entry >= m_entry[0].size()) {
         std::cout << "Total # of events " << m_entry[0].size() << "\n";
         return;
     }
     for(int k = 0; k < m_tin.size(); ++k) {
-        m_tin[k]->GetEntry(m_entry[k][spill]);
-
+        m_tin[k]->GetEntry(m_entry[k][entry]);
     }
 }
 

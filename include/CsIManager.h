@@ -39,16 +39,14 @@ class CsIManager : public TreeManager, public Visualization {
     bool Init();
     bool Init_map();
     bool Init_ADCconfig();
-    bool Init_channelDelay();
 //    bool Init_calibConst();
 //    bool Init_hitCondition();
     void Branch();
 
-    void SetData();
     void Process();
     void HitDecision();
-    void SetHitPos(double* track);
-//    void Tracking();
+//    void SetHitPos(double* track);
+    void Fill();
 
     // Visualization
     void Visualize();
@@ -56,9 +54,10 @@ class CsIManager : public TreeManager, public Visualization {
 
 
   private:
-    int m_isInit;
     CsI* m_csi[nCSI];
-    CsIBranchContainer m_BRcsi;
+    CsIBranchContainer m_BRout;
+
+    int m_isInit;
 };
 
 #endif //CONV_CSIMANAGER_H

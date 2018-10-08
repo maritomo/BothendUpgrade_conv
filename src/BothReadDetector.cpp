@@ -16,15 +16,15 @@ BothReadDetector::~BothReadDetector() {
 }
 
 void BothReadDetector::SetADCconfig(int side, int crate, int slot, int ch) {
-    int flag = 0;
 
+    int flag = 0;
     if(side!=0 && side!=1) flag = 1;
     if(crate<3 || crate > 5) flag = 1;
     if(slot<0 || slot > 15) flag = 1;
     if(ch<0 || ch>15) flag = 1;
 
     if(flag) {
-        std::cout << "Error: FADC configuration is outside the range\n";
+        std::cout << "Error: ADC configuration is out of the range\n";
         m_isUsed = 0;
         return;
     }
@@ -32,7 +32,8 @@ void BothReadDetector::SetADCconfig(int side, int crate, int slot, int ch) {
     m_crate[side] = crate;
     m_slot[side] = slot;
     m_ch[side] = ch;
-    m_pdata[side] = m_BRin[crate-3].Data[16][16];
+
+    m_data[side] = m_BRin[crate-3].Data[slot][ch];
     m_isUsed = 1;
 }
 
@@ -40,15 +41,6 @@ void BothReadDetector::GetADCconfig(int side, int& crate, int& slot, int& ch) {
     crate = m_crate[side];
     slot = m_slot[side];
     ch = m_ch[side];
-}
-
-void BothReadDetector::SetData(int side) {
-    for(int smpl = 0; smpl < 64; ++smpl)
-        m_data[side][smpl] =m_BRin[m_crate[side]].Data[m_slot[side]][m_ch[side]][smpl];
-    GetCFTime(side);
-
-    m_pt[side] += 15 - m_delay[side];
-    m_cft[side] += 15 - m_delay[side];
 }
 
 void BothReadDetector::GetCFTime(int side) {
@@ -67,15 +59,16 @@ void BothReadDetector::GetCFTime(int side) {
     for(int i = 0; i < 64; ++i) time[i] = i;
 
     for(int i = 0; i < n; ++i) {
-        if(i < nPed)
-
+        if(i < nPed) {
             m_ped[side] += (float) m_data[side][i] / nPed;
+        }
         if(m_peak[side] < m_data[side][i]) {
             m_peak[side] = m_data[side][i];
             ipeak = i;
         }
-        if(i < n - 1)
+        if(i < n - 1) {
             m_integ[side] += m_data[side][i] * (time[i + 1] - time[i]);
+        }
     }
 
     m_integ[side] -= m_ped[side] * (time[n - 1] - time[0]);
@@ -85,6 +78,7 @@ void BothReadDetector::GetCFTime(int side) {
     float yf = m_data[side][ipeak + 1];
 
     m_pt[side] = ipeak - (yf - yb) / 2 / (yf + yb - 2 * y);
+
     m_peak[side] = y - (yf - yb) * (yf - yb) / 8 / (yf + yb - 2 * y);
     m_peak[side] -= m_ped[side];
 
@@ -94,10 +88,11 @@ void BothReadDetector::GetCFTime(int side) {
     }
 
     float threshold = m_peak[side] / 2 + m_ped[side];
-
     for(int i = ipeak; i > 0; --i) {
         if(m_data[side][i] > threshold && m_data[side][i - 1] < threshold) {
-            m_cft[side] = time[i - 1] + (float) (time[i] - time[i - 1]) / (m_data[side][i] - m_data[side][i - 1]) * (threshold - m_data[side][i]);
+            m_cft[side] = time[i - 1] + (float) (time[i] - time[i - 1]) /
+                                        (m_data[side][i] - m_data[side][i - 1]) *
+                                        (threshold - m_data[side][i]);
             m_errflag[side] = 0;
             return;
         }

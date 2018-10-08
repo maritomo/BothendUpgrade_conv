@@ -294,7 +294,7 @@ void CosmicTriggerSystem::Tracking() {
 
     for(int layer = 0; layer < nLayer; ++layer) {
         for(int axis = 0; axis < 3; ++axis) {
-            m_hitpos[layer][axis] = m_crc[layer][m_hitCh[layer]]->GetHitPos(axis);
+            m_hitpos[layer][axis] = m_crc[layer][m_hitCh[layer]]->GetHitPosition(axis);
         }
     }
 
@@ -361,10 +361,7 @@ bool CosmicTriggerSystem::GetLocationID(int scintiID, int& layerID, int& chID) {
 }
 
 
-/*
- * Imitation of the online trigger
- */
-
+// Imitation of the online trigger
 void CosmicTriggerSystem::OnlineHitDecision() {
     for(int smpl = 0; smpl < 64; ++smpl) {
         m_isOnlineTriggered[smpl] = 0;

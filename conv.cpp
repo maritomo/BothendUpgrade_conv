@@ -235,14 +235,14 @@ int main(int argc, char** argv) {
 
                 TD[layer][ch] = counter->GetTD();
                 MT[layer][ch] = counter->GetMT();
-                recX[layer][ch] = counter->GetHitPos(0);
+                recX[layer][ch] = counter->GetHitPosition(0);
                 isHit[layer][ch] = counter->IsHit();
             } // ch loop
 
             nHit[layer] = trg_sys->GetNhit(layer);
 
             for(int axis = 0; axis < 3; ++axis) {
-                hitpos[layer][axis] = counter->GetHitPos(axis);
+                hitpos[layer][axis] = counter->GetHitPosition(axis);
             }
 
             for(int smpl = 0; smpl < 64; ++smpl) {
@@ -281,7 +281,7 @@ int main(int argc, char** argv) {
                     cft_CsI[locID][side] = CsI->GetCFT(side);
                 }
                 for(int axis = 0; axis < 3; ++axis) {
-                    hitpos_CsI[locID][axis] = CsI ->GetHitPos(axis);
+                    hitpos_CsI[locID][axis] = CsI ->GetHitPosition(axis);
                 }
             }
 

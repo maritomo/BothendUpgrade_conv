@@ -33,7 +33,7 @@ class CosmicMeasSystem : public TreeManager, public Visualization {
     int m_isInit;
     TriggerManager* m_trigMan;
     CsIManager* m_csiMan;
-    SystemBranchContainer m_BRsys;
+    SystemBranchContainer m_BRout;
 };
 
 

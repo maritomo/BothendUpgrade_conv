@@ -29,7 +29,6 @@ bool CsIManager::Init() {
 
     if(!Init_map()) return false;
     if(!Init_ADCconfig()) return false;
-    if(!Init_channelDelay()) return false;
     Branch();
 
     std::cout << "...fin\n";
@@ -59,6 +58,7 @@ bool CsIManager::Init_map() {
 
 bool CsIManager::Init_ADCconfig() {
 
+    // ADC channels
     for(int side = 0; side < 2; side++) {
         std::string filename;
         if(side == 0)
@@ -78,10 +78,7 @@ bool CsIManager::Init_ADCconfig() {
         }
     }
 
-    return true;
-}
-
-bool CsIManager::Init_channelDelay() {
+    // Digital delays
     for(int id=0; id < nCSI; ++id) {
         for(int side=0; side < 2; ++side) {
             int delay = 15;
@@ -89,6 +86,7 @@ bool CsIManager::Init_channelDelay() {
                 m_csi[id]->SetDelay(side, delay);
         }
     }
+
     return true;
 }
 
@@ -96,40 +94,42 @@ bool CsIManager::Init_channelDelay() {
 //    bool Init_hitCondition();
 
 void CsIManager::Branch() {
-    m_tout->Branch("csi.isUsed", m_BRcsi.isUsed, "csi.isUsed[2716]/S");
+    m_tout->Branch("csi.isUsed", m_BRout.isUsed, "csi.isUsed[2716]/S");
 
-    m_tout->Branch("csi.data", m_BRcsi.data, "csi.data[2716][2][64]/S");
-    m_tout->Branch("csi.ped", m_BRcsi.ped, "csi.ped[2716][2]/F");
-    m_tout->Branch("csi.peak", m_BRcsi.peak, "csi.peak[2716][2]/F");
-    m_tout->Branch("csi.integ", m_BRcsi.integ, "csi.integ[2716][2]/F");
-    m_tout->Branch("csi.pt", m_BRcsi.pt, "csi.pt[2716][2]/F");
-    m_tout->Branch("csi.cft", m_BRcsi.cft, "csi.cft[2716][2]/F");
+    m_tout->Branch("csi.data", m_BRout.data, "csi.data[2716][2][64]/S");
+    m_tout->Branch("csi.ped", m_BRout.ped, "csi.ped[2716][2]/F");
+    m_tout->Branch("csi.peak", m_BRout.peak, "csi.peak[2716][2]/F");
+    m_tout->Branch("csi.integ", m_BRout.integ, "csi.integ[2716][2]/F");
+    m_tout->Branch("csi.pt", m_BRout.pt, "csi.pt[2716][2]/F");
+    m_tout->Branch("csi.cft", m_BRout.cft, "csi.cft[2716][2]/F");
 
-    m_tout->Branch("csi.TD", m_BRcsi.TD, "csi.TD[2716]/F");
-    m_tout->Branch("csi.MT", m_BRcsi.MT, "csi.MT[2716]/F");
+    m_tout->Branch("csi.TD", m_BRout.TD, "csi.TD[2716]/F");
+    m_tout->Branch("csi.MT", m_BRout.MT, "csi.MT[2716]/F");
 
     int nline = 4; // what's this ?
-    m_tout->Branch("csi.isHit", m_BRcsi.isHit, "csi.isHit[2716]/S");
-    m_tout->Branch("csi.nHit", m_BRcsi.nHit, Form("csi.nHit[%d]/S", nline));
-    m_tout->Branch("csi.hitpos", m_BRcsi.hitpos, "csi.hitpos[2716][3]/F");
+    m_tout->Branch("csi.isHit", m_BRout.isHit, "csi.isHit[2716]/S");
+    m_tout->Branch("csi.nHit", m_BRout.nHit, Form("csi.nHit[%d]/S", nline));
+    m_tout->Branch("csi.hitpos", m_BRout.hitpos, "csi.hitpos[2716][3]/F");
 }
 
 void CsIManager::Process() {
-    SetData();
     HitDecision();
-}
-
-void CsIManager::SetData() {
-    for(int id=0; id < nCSI; ++id) {
-        for(int side=0; side < 2; ++side) {
-            m_csi[id]->SetData(side);
-        }
-    }
+    Fill();
 }
 
 void CsIManager::HitDecision() {
     for(int id = 0; id < nCSI; ++id){
         m_csi[id]->HitDecision();
+    }
+}
+
+void CsIManager::Fill(){
+    for(int id=0; id<nCSI; ++id) {
+        for(int side=0; side<2; ++side) {
+            for(int smpl=0; smpl<64; ++smpl) {
+//                m_BRout.data[id][side][smpl] = m_csi[id]->GetData(side)[smpl];
+            }
+        }
     }
 }
 

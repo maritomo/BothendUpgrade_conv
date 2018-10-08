@@ -34,8 +34,9 @@ struct TriggerBranchContainer {
     Float_t TD[2][6];
 
     Short_t isHit[2][6];
+    Float_t posHit[2][6];
     Short_t nHit[2];
-    Float_t hitpos[2][6];
+    Short_t chHit[2];
 
     Short_t trackID;
     Float_t track[3][2];
@@ -58,7 +59,7 @@ class TriggerManager : public TreeManager, public Visualization {
     // Initialize
     bool Init();
     bool Init_map();
-    bool Init_channelDelay();
+    bool Init_DAQconfig();
     bool Init_calibConst();
     bool Init_hitCondition();
 
@@ -66,15 +67,13 @@ class TriggerManager : public TreeManager, public Visualization {
 
     // Process
     void Process();
-    void SetData();
     void HitDecision();
     void Tracking();
+    void OnlineHitDecision();
+    void Fill();
 
     // Getter
     bool GetLocationID(int scintiID, int& layerID, int& chID);
-
-    // Imitation of the online trigger logic
-    void OnlineHitDecision();
 
     // Visualization
     void Visualize();
@@ -83,10 +82,10 @@ class TriggerManager : public TreeManager, public Visualization {
 
   private:
     CosmicRayCounter* m_crc[nLayer][nCRC];
+    TriggerBranchContainer m_BRout;
 
     int m_isInit;
     double m_commonThreshold;
-    TriggerBranchContainer m_BRtrig;
 
     // Visualization
     TLine* m_lTrack[3];

@@ -82,7 +82,7 @@ int main(int argc, char** argv) {
 
     for(int entry = 0; entry < sys->GetEntries(); ++entry) {
         sys->GetEntry(entry);
-
+        sys->Process();
         tout->Fill();
         if(entry % 1000==0) std::cout << entry << "th\n";
 
