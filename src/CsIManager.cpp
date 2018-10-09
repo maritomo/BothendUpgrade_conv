@@ -61,10 +61,8 @@ bool CsIManager::Init_ADCconfig() {
     // ADC channels
     for(int side = 0; side < 2; side++) {
         std::string filename;
-        if(side == 0)
-            filename = "./data/use_csi_mppc.txt";
-        if(side == 1)
-            filename = "./data/use_csi.txt";
+        if(side == 0) filename = "./data/use_csi_mppc.txt";
+        if(side == 1) filename = "./data/use_csi.txt";
 
         std::ifstream ifs(filename.c_str());
         if (!ifs) {
@@ -78,7 +76,7 @@ bool CsIManager::Init_ADCconfig() {
         }
     }
 
-    // Digital delays
+    // Delays
     for(int id=0; id < nCSI; ++id) {
         for(int side=0; side < 2; ++side) {
             int delay = 15;
@@ -113,14 +111,10 @@ void CsIManager::Branch() {
 }
 
 void CsIManager::Process() {
-    HitDecision();
-    Fill();
-}
-
-void CsIManager::HitDecision() {
     for(int id = 0; id < nCSI; ++id){
-        m_csi[id]->HitDecision();
+        m_csi[id]->Process();
     }
+    Fill();
 }
 
 void CsIManager::Fill(){
@@ -145,9 +139,20 @@ void CsIManager::Display(int plane) {
         std::cout << "Visualization not ready\n";
         return;
     }
-    for(int i=0; i<nCSI; ++i) {
-        m_csi[i]->Display(plane);
+
+    std::vector<CsI*> usedCSI;
+    for(int id=0; id<nCSI; ++id) {
+        if(m_csi[id]->IsUsed()) {
+            usedCSI.push_back(m_csi[id]);
+            continue;
+        }
+        m_csi[id]->Display(plane);
     }
+
+    for(auto itr=usedCSI.begin(); itr!=usedCSI.end(); ++itr) {
+        (*itr)->Display(plane);
+    }
+
     m_canv->Update();
     m_canv->Modified();
 }

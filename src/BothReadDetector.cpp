@@ -15,6 +15,14 @@ BothReadDetector::~BothReadDetector() {
     }
 }
 
+void BothReadDetector::Reconstruct() {
+    for(int side=0; side<2; ++side) {
+        GetCFTime(side);
+    }
+    m_TD = m_cft[0] - m_cft[1];
+    m_MT = (m_cft[0] + m_cft[1]) / 2;
+}
+
 void BothReadDetector::SetADCconfig(int side, int crate, int slot, int ch) {
 
     int flag = 0;
@@ -78,6 +86,7 @@ void BothReadDetector::GetCFTime(int side) {
     float yf = m_data[side][ipeak + 1];
 
     m_pt[side] = ipeak - (yf - yb) / 2 / (yf + yb - 2 * y);
+    m_pt[side] -= m_delay[side];
 
     m_peak[side] = y - (yf - yb) * (yf - yb) / 8 / (yf + yb - 2 * y);
     m_peak[side] -= m_ped[side];
@@ -93,6 +102,7 @@ void BothReadDetector::GetCFTime(int side) {
             m_cft[side] = time[i - 1] + (float) (time[i] - time[i - 1]) /
                                         (m_data[side][i] - m_data[side][i - 1]) *
                                         (threshold - m_data[side][i]);
+            m_cft[side] -= m_delay[side];
             m_errflag[side] = 0;
             return;
         }
@@ -117,18 +127,20 @@ void BothReadDetector::Visualize() {
         return;
     }
 
+    if(!m_isUsed) m_color = kGray;
+
     int axis_h; // index of horizontal axis
     int axis_v; // index of vertical axis
     for(int plane=0; plane < 3; ++plane) {
         GetVisAxis(plane, axis_h, axis_v);
         m_box_det[plane] = new TBox(m_pos[axis_h] - 0.5 * m_size[axis_h], m_pos[axis_v] - 0.5 * m_size[axis_v],
                                     m_pos[axis_h] + 0.5 * m_size[axis_h], m_pos[axis_v] + 0.5 * m_size[axis_v]);
-        m_box_det[plane]->SetLineColor(m_col);
+        m_box_det[plane]->SetLineColor(m_color);
         m_box_det[plane]->SetFillStyle(0);
 
         m_box_hit[plane] = new TBox(m_pos[axis_h] - 0.5 * m_size[axis_h], m_pos[axis_v] - 0.5 * m_size[axis_v],
                                     m_pos[axis_h] + 0.5 * m_size[axis_h], m_pos[axis_v] + 0.5 * m_size[axis_v]);
-        m_box_hit[plane]->SetFillColor(m_col);
+        m_box_hit[plane]->SetFillColor(m_color);
     }
 
     m_isVis = 1;

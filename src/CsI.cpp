@@ -35,15 +35,31 @@ CsI::CsI(int locationID, int crystalID, int lineID, double posx, double posy, in
     m_ch[side] = -1;
   }
 
-  m_col = kBlack;
+  m_color = kBlack;
   m_isVis = 0;
 }
 
 CsI::~CsI() {}
 
+void CsI::Process() {
+  HitDecision();
+}
+
 void CsI::HitDecision() {
-   // some conditions
-    m_isHit = 1;
+  m_isHit = 0;
+  for(int axis=0; axis<3; ++axis) {
+    m_hitpos[axis] = 0;
+  }
+
+  for(int side = 0; side < 2; ++side) {
+    if(m_peak[side] > 50) {
+      m_isHit = 1;
+//      m_hitpos[0] = ????;
+      m_hitpos[1] = m_pos[1];
+      m_hitpos[2] = m_pos[2];
+      break;
+    }
+  }
 }
 
 void CsI::SetHitPos(double* track) {

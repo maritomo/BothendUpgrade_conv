@@ -14,6 +14,9 @@ class BothReadDetector : public TreeManager, public Visualization {
   public:
     virtual ~BothReadDetector();
 
+    virtual void Process() = 0;
+    virtual void Reconstruct();
+
     void SetADCconfig(int side, int crate, int slot, int ch);
     void SetDelay(int side, int delay) { m_delay[side] = delay; }
 
@@ -31,7 +34,7 @@ class BothReadDetector : public TreeManager, public Visualization {
     int IsHit() { if(!m_isUsed) return 0; return m_isHit; }
     double GetHitPosition(int axis) { if(!m_isUsed) return 0; return m_hitpos[axis]; }
 
-    void GetCFTime(int side);
+    void GetCFTime(int side); // delays are subtracted in this function
     short GetMax(int nSmpl, const short* data);
 
     // Visualization
@@ -65,7 +68,7 @@ class BothReadDetector : public TreeManager, public Visualization {
     double m_posres[3]; // position resolution (x, y, z)
 
     // Visualization
-    int m_col;          // detector color
+    int m_color;          // detector color
     TBox* m_box_det[3]; // detector, (xy, yz, zx) plane
     TBox* m_box_hit[3]; // hit point (xy, yz, zx) plane
 

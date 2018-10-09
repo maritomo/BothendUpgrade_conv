@@ -8,8 +8,10 @@
 
 #include "CosmicRayCounter.h"
 
-CosmicRayCounter::CosmicRayCounter(int layer, int ch, int scintiID, int dir, const double* pos) :
-        m_layer(layer), m_ch(ch), m_scintiID(scintiID), m_dir(dir) {
+//CosmicRayCounter::CosmicRayCounter(int layer, int ch, int scintiID, int dir, const double* pos) :
+//        m_layer(layer), m_ch(ch), m_scintiID(scintiID), m_dir(dir) {
+CosmicRayCounter::CosmicRayCounter(int scintiID, int dir, const double* pos) :
+        m_scintiID(scintiID), m_dir(dir) {
 
     for(int k = 0; k < 3; ++k) {
         m_pos[k] = pos[k];
@@ -25,7 +27,7 @@ CosmicRayCounter::CosmicRayCounter(int layer, int ch, int scintiID, int dir, con
 
     m_isHit = 0;
 
-    m_col = kBlue;
+    m_color = kBlue;
     m_isVis = 0;
 }
 
@@ -51,6 +53,7 @@ void CosmicRayCounter::SetCoinRange(int side, double* coin_range) {
  */
 
 void CosmicRayCounter::Process() {
+    Reconstruct();
     HitDecision();
     for(int side = 0; side < 2; ++side) {
         OnlineHitDecision(side);
@@ -58,11 +61,6 @@ void CosmicRayCounter::Process() {
 }
 
 void CosmicRayCounter::HitDecision() {
-    // Reconstruction & Hit decision
-    for(int side=0; side<2; ++side) {
-        GetCFTime(side);
-    }
-
     m_isHit = 0;
     for(int axis=0; axis<3; ++axis) {
         m_hitpos[axis] = 0;
@@ -70,8 +68,8 @@ void CosmicRayCounter::HitDecision() {
 
     for(int side = 0; side < 2; ++side) {
         if(m_peak[side] > m_peak_thr[side] &&
-           m_pt[side] > m_coin_range[side][0] &&
-           m_pt[side] < m_coin_range[side][1])
+           m_pt[side]+m_delay[side] > m_coin_range[side][0] &&
+           m_pt[side]+m_delay[side] < m_coin_range[side][1])
         {
             m_isHit = 1;
             m_hitpos[0] = (m_TD - m_ccX[0]) / m_ccX[1];
@@ -80,14 +78,6 @@ void CosmicRayCounter::HitDecision() {
             break;
         }
     }
-
-    for(int side = 0; side < 2; ++side) {
-        m_pt[side] -= m_delay[side];
-        m_cft[side] -= m_delay[side];
-    }
-
-    m_TD = m_pt[0] - m_pt[1];
-    m_MT = (m_pt[0] + m_pt[1]) / 2;
 }
 
 // Imitation of the online trigger

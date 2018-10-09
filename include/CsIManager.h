@@ -44,7 +44,6 @@ class CsIManager : public TreeManager, public Visualization {
     void Branch();
 
     void Process();
-    void HitDecision();
 //    void SetHitPos(double* track);
     void Fill();
 

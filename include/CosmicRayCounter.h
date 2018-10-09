@@ -8,7 +8,8 @@
 #include "BothReadDetector.h"
 class CosmicRayCounter : public BothReadDetector {
   public:
-    CosmicRayCounter(int layer, int ch, int scintiID, int dir, const double* pos);
+//    CosmicRayCounter(int layer, int ch, int scintiID, int dir, const double* pos);
+    CosmicRayCounter(int scintiID, int dir, const double* pos);
 
     void Process();
     void HitDecision();
@@ -24,8 +25,8 @@ class CosmicRayCounter : public BothReadDetector {
     const int* IsOnlineHit(int side) { return m_isOnlineHit[side]; }
 
   private:
-    int m_layer;      // 0: bottom, 1: top
-    int m_ch;         // 0 ~ 5
+//    int m_layer;      // 0: bottom, 1: top
+//    int m_ch;         // 0 ~ 5
     int m_scintiID;   // scintillator ID
     int m_dir;        //    Directions of the counters along x-axis (+1: parallel, -1: unti-parallel) used in the pre-test at Tsukuba campus[2].
                       //    They are still used to calibrate Tdif to x-position,

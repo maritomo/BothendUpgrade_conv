@@ -12,6 +12,7 @@ public:
   CsI(int locationID, int crystalID, int lineID, double posx, double posy, int size);
   ~CsI();
 
+  void Process();
   void HitDecision();
   void SetHitPos(double* track); // trackID -> z hit position
 
