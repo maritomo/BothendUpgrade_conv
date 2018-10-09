@@ -34,10 +34,12 @@ int main(int argc, char** argv) {
     ss1 << argv[1];
     int runID;
     ss1 >> runID;
+    std::cout << "Run" << runID << "\n";
 
     std::string comment = "No comments";
     if(argc==3) {
         comment = argv[2];
+        std::cout << comment << "\n";
     }
 
     /*

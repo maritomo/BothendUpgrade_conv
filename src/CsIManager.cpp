@@ -61,8 +61,8 @@ bool CsIManager::Init_ADCconfig() {
     // ADC channels
     for(int side = 0; side < 2; side++) {
         std::string filename;
-        if(side == 0) filename = "./data/use_csi_mppc.txt";
-        if(side == 1) filename = "./data/use_csi.txt";
+        if(side==0) filename = "./data/use_csi_mppc.txt";
+        if(side==1) filename = "./data/use_csi.txt";
 
         std::ifstream ifs(filename.c_str());
         if (!ifs) {
@@ -70,9 +70,9 @@ bool CsIManager::Init_ADCconfig() {
             return false;
         }
 
-        int locID, crate, slot, ch;
-        while (ifs >> locID >> crate >> slot >> ch) {
-            m_csi[locID]->SetADCconfig(side, crate, slot, ch);
+        int locID, crate, mod, ch;
+        while (ifs >> locID >> crate >> mod >> ch) {
+            m_csi[locID]->SetADCconfig(side, crate, mod, ch);
         }
     }
 

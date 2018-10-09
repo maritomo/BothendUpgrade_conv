@@ -4,15 +4,15 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/mari/work/cosmiTrigger/conv/conv2.cpp" "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/conv2.cpp.o"
-  "/Users/mari/work/cosmiTrigger/conv/src/BothReadDetector.cpp" "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/BothReadDetector.cpp.o"
-  "/Users/mari/work/cosmiTrigger/conv/src/CosmicMeasSystem.cpp" "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CosmicMeasSystem.cpp.o"
-  "/Users/mari/work/cosmiTrigger/conv/src/CosmicRayCounter.cpp" "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o"
-  "/Users/mari/work/cosmiTrigger/conv/src/CsI.cpp" "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CsI.cpp.o"
-  "/Users/mari/work/cosmiTrigger/conv/src/CsIManager.cpp" "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CsIManager.cpp.o"
-  "/Users/mari/work/cosmiTrigger/conv/src/TreeManager.cpp" "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/TreeManager.cpp.o"
-  "/Users/mari/work/cosmiTrigger/conv/src/TriggerManager.cpp" "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/TriggerManager.cpp.o"
-  "/Users/mari/work/cosmiTrigger/conv/src/Visualization.cpp" "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/Visualization.cpp.o"
+  "/Users/mari/work/MPPCinstall/cosmiTrigger/conv/conv2.cpp" "/Users/mari/work/MPPCinstall/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/conv2.cpp.o"
+  "/Users/mari/work/MPPCinstall/cosmiTrigger/conv/src/BothReadDetector.cpp" "/Users/mari/work/MPPCinstall/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/BothReadDetector.cpp.o"
+  "/Users/mari/work/MPPCinstall/cosmiTrigger/conv/src/CosmicMeasSystem.cpp" "/Users/mari/work/MPPCinstall/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CosmicMeasSystem.cpp.o"
+  "/Users/mari/work/MPPCinstall/cosmiTrigger/conv/src/CosmicRayCounter.cpp" "/Users/mari/work/MPPCinstall/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o"
+  "/Users/mari/work/MPPCinstall/cosmiTrigger/conv/src/CsI.cpp" "/Users/mari/work/MPPCinstall/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CsI.cpp.o"
+  "/Users/mari/work/MPPCinstall/cosmiTrigger/conv/src/CsIManager.cpp" "/Users/mari/work/MPPCinstall/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CsIManager.cpp.o"
+  "/Users/mari/work/MPPCinstall/cosmiTrigger/conv/src/TreeManager.cpp" "/Users/mari/work/MPPCinstall/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/TreeManager.cpp.o"
+  "/Users/mari/work/MPPCinstall/cosmiTrigger/conv/src/TriggerManager.cpp" "/Users/mari/work/MPPCinstall/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/TriggerManager.cpp.o"
+  "/Users/mari/work/MPPCinstall/cosmiTrigger/conv/src/Visualization.cpp" "/Users/mari/work/MPPCinstall/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/Visualization.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 

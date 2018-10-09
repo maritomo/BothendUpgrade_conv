@@ -51,6 +51,8 @@ void CsI::HitDecision() {
     m_hitpos[axis] = 0;
   }
 
+  if(!m_isUsed) return;
+
   for(int side = 0; side < 2; ++side) {
     if(m_peak[side] > 50) {
       m_isHit = 1;
