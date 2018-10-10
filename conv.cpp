@@ -1,6 +1,6 @@
-//#define REDUCED_DATA
+#define REDUCED_DATA
 //#define DEBUG
-//#define VISUALIZE
+//  #define VISUALIZE
 
 #include "RawdataManager.h"
 #include "CosmicTriggerSystem.h"
