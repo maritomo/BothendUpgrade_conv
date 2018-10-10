@@ -42,9 +42,10 @@ void RawdataManager::CheckTimeStamp() {
 
     // The first event in a run must be the delta triggers
     // and timestamp difference between crates can be references
-    m_tree[nTree - 1]->GetEntry(0);
+    int startpoint = 30;
+    m_tree[nTree - 1]->GetEntry(startpoint);
     for(int k = 0; k < nTree; ++k) {
-        m_tree[k]->GetEntry(0);
+        m_tree[k]->GetEntry(startpoint);
         m_timestamp_delta[k] = timestamp[k];
         if(k < nTree - 1) {
             tdif_delta[k] = timestamp[nTree - 1] - timestamp[k];
@@ -53,7 +54,7 @@ void RawdataManager::CheckTimeStamp() {
 
     // Initialize entry#
     for(int k = 0; k < nTree; ++k) {
-        entry[k] = 1;
+        entry[k] = startpoint + 1;
     }
 
 
@@ -142,17 +143,17 @@ void RawdataManager::CheckTimeStamp() {
         }
 
         // if un-synchronized
-        // Sometimes the first spill is unsynchronized -> skip
-        int badFirstSpillFlag = 1;
-        for(int k=0; k<nTree; ++k) {
-            badFirstSpillFlag *= entry[k];
-        }
-        if(badFirstSpillFlag==1) {
-            for(int k=0; k<nTree; ++k) {
-                entry[k] = 30;
-            }
-            continue;
-        }
+//        // Sometimes the first spill is unsynchronized -> skip
+//        int badFirstSpillFlag = 1;
+//        for(int k=0; k<nTree; ++k) {
+//            badFirstSpillFlag *= entry[k];
+//        }
+//        if(badFirstSpillFlag==1) {
+//            for(int k=0; k<nTree; ++k) {
+//                entry[k] = 30;
+//            }
+//            continue;
+//        }
 
         int find_flag = 1;
         m_tree[nTree - 1]->GetEntry(entry[nTree - 1]);

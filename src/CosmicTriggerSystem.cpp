@@ -129,7 +129,8 @@ bool CosmicTriggerSystem::Init_useCsI() {
     for(int runID = m_runID; runID>-1; --runID) {
         std::stringstream ss;
         ss << "./data/ADCchMap/run" << runID << "_pmt.txt";
-        std::ifstream ifs(ss.str());
+        std::string filename = ss.str();
+        std::ifstream ifs(filename.c_str());
         if(ifs) {
             fname_runID = runID;
             break;
@@ -139,16 +140,19 @@ bool CosmicTriggerSystem::Init_useCsI() {
     for(int side = 0; side < 2; side++) {
         std::stringstream ss;
          if(side == 0){
-             ss << "./data/ADCchMap/run" << fname_runID << "_pmt.txt";
+             ss << "./data/ADCchMap/run" << fname_runID << "_mppc.txt";
          }
         if(side == 1){
             ss << "./data/ADCchMap/run" << fname_runID << "_pmt.txt";
         }
+
         std::string filename = ss.str();
         std::ifstream ifs(filename.c_str());
         if (!ifs) {
-            std::cout << " not found\n";
+            std::cout << filename << " not found\n";
             return false;
+        } else {
+            std::cout << filename << "\n";
         }
 
         int locID, crate, slot, ch;
