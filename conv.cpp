@@ -1,4 +1,4 @@
-#define REDUCED_DATA
+//#define REDUCED_DATA
 //#define DEBUG
 //#define VISUALIZE
 
@@ -13,7 +13,16 @@
 #include "TFile.h"
 #include "TTree.h"
 #include "TText.h"
+#include <TSystem.h>
 
+bool GetFileState(TString filename) {
+    FileStat_t info;
+    if (gSystem->GetPathInfo(filename.Data(), info)) {
+        std::cout << "Error: " << filename << " not found\n";
+        return false;
+    }
+    return true;
+}
 
 int main(int argc, char** argv) {
 
@@ -30,6 +39,7 @@ int main(int argc, char** argv) {
     ss1 << argv[1];
     int runID;
     ss1 >> runID;
+    std::cout << "Run" << runID << "\n";
 
     std::string comment = "No comments";
     if(argc==3) {
@@ -59,6 +69,7 @@ int main(int argc, char** argv) {
     filename = Form("./rootfile/run%d.root", runID);
 #endif
 
+    if(!GetFileState(filename)) return 1;
     TFile* fin = new TFile(filename);
 
     const int nCrate = 3;
@@ -92,41 +103,9 @@ int main(int argc, char** argv) {
      */
 
     TFile* fout = new TFile(Form("./convfile/run%d_conv.root", runID), "recreate");
+    if(!GetFileState(filename)) return 1;
+
     TTree* tout = new TTree("tree", Form("run%d", runID));
-
-    // CsI branches
-    const int nCsI = trg_sys->GetNCsI();
-    const int nline = 4;
-
-    Short_t data_CsI[nCsI][2][64];
-    Float_t ped_CsI[nCsI][2];
-    Float_t peak_CsI[nCsI][2];
-    Float_t integ_CsI[nCsI][2];
-    Float_t pt_CsI[nCsI][2];
-    Float_t cft_CsI[nCsI][2];
-
-    Float_t TD_CsI[nCsI][2];
-    Float_t MT_CsI[nCsI][2];
-
-    Short_t isHit_CsI[nCsI];
-    Short_t isUsed_CsI[nCsI];
-    Short_t nHit_CsI[nline];
-    Float_t hitpos_CsI[nCsI][3];
-
-    tout->Branch("csi.data", data_CsI, Form("csi.data[%d][2][64]/S", nCsI));
-    tout->Branch("csi.ped", ped_CsI, Form("csi.ped[%d][2]/F", nCsI));
-    tout->Branch("csi.peak", peak_CsI, Form("csi.peakI[%d][2]/F", nCsI));
-    tout->Branch("csi.integ", integ_CsI, Form("csi.integ[%d][2]/F", nCsI));
-    tout->Branch("csi.pt", pt_CsI, Form("csi.pt[%d][2]/F", nCsI));
-    tout->Branch("csi.cft", cft_CsI, Form("csi.cft[%d][2]/F", nCsI));
-
-    tout->Branch("csi.TD", TD_CsI, Form("csi.TD[%d]/F", nCsI));
-    tout->Branch("csi.MT", MT_CsI, Form("csi.MT[%d]/F", nCsI));
-    tout->Branch("csi.isHit", isHit_CsI, Form("csi.isHit[%d]/S", nCsI));
-    tout->Branch("csi.isUsed",isUsed_CsI, Form("csi.isUsed[%d]/S", nCsI));
-
-    tout->Branch("csi.nHit", nHit_CsI, Form("csi.nHit[%d]/S", nline));
-    tout->Branch("csi.hitpos", hitpos_CsI, Form("csi.hitpos[%d][3]/F", nCsI));
 
     // Trigger branches
     const int nLayer = trg_sys->GetNLayer();
@@ -178,6 +157,38 @@ int main(int argc, char** argv) {
     tout->Branch("nOnlineHit", nOnlineHit, "nOnlineHit[2][64]/S");
     tout->Branch("isOnlineTriggered", isOnlineTriggered, "isOnlineTriggered[64]/S");
 
+    // CsI branches
+    const int nCsI = trg_sys->GetNCsI();
+    const int nline = 4;
+
+    Short_t isUsed_CsI[nCsI];
+
+    Short_t data_CsI[nCsI][2][64];
+    Float_t ped_CsI[nCsI][2];
+    Float_t peak_CsI[nCsI][2];
+    Float_t integ_CsI[nCsI][2];
+    Float_t pt_CsI[nCsI][2];
+    Float_t cft_CsI[nCsI][2];
+
+    Float_t TD_CsI[nCsI];
+
+    Short_t isHit_CsI[nCsI];
+    Float_t hitpos_CsI[nCsI][3];
+
+    tout->Branch("csi.isUsed",isUsed_CsI, Form("csi.isUsed[%d]/S", nCsI));
+
+    tout->Branch("csi.data", data_CsI, Form("csi.data[%d][2][64]/S", nCsI));
+    tout->Branch("csi.ped", ped_CsI, Form("csi.ped[%d][2]/F", nCsI));
+    tout->Branch("csi.peak", peak_CsI, Form("csi.peak[%d][2]/F", nCsI));
+    tout->Branch("csi.integ", integ_CsI, Form("csi.integ[%d][2]/F", nCsI));
+    tout->Branch("csi.pt", pt_CsI, Form("csi.pt[%d][2]/F", nCsI));
+    tout->Branch("csi.cft", cft_CsI, Form("csi.cft[%d][2]/F", nCsI));
+
+    tout->Branch("csi.TD", TD_CsI, Form("csi.TD[%d]/F", nCsI));
+
+    tout->Branch("csi.isHit", isHit_CsI, Form("csi.isHit[%d]/S", nCsI));
+    tout->Branch("csi.hitpos", hitpos_CsI, Form("csi.hitpos[%d][3]/F", nCsI));
+
     // Timestamp branch
     tout->Branch("timestamp", Timestamp, Form("timestamp[%d]/i", nCrate));
 
@@ -191,23 +202,24 @@ int main(int argc, char** argv) {
     for(int entry = 0; entry < man->GetEntries(); ++entry) {
         man->GetEntry(entry);
 
-        // Set trigger counter data
+        // Set data
+        // Trigger
         for(int slot = 0; slot < 16; ++slot) {
             for(int ch = 0; ch < 16; ++ch) {
                 trg_sys->SetData(0, slot, ch, Data[0][slot][ch]);
             }
         }
 
-        // Set CsI data
-        CsI* CsI;
+        // CsI
         for(int locID = 0; locID < nCsI; ++locID){
-            CsI = trg_sys->GetCSI(locID);
+            CsI* CsI = trg_sys->GetCSI(locID);
             int use = CsI->GetIsUsed();
             if(use) {
                 for(int side = 0; side < 2; side++) {
                     int crate = CsI->GetCrate(side) - 3;
                     int slot = CsI->GetSlot(side);
                     int ch = CsI->Getch(side);
+//                    std::cout << side << "|" << crate << " " << slot << " " << ch << "\n";
                     trg_sys->SetData_CsI(locID, side, Data[crate][slot][ch]);
                 }
             }
@@ -217,9 +229,8 @@ int main(int argc, char** argv) {
 
         // Fill data
         // Trigger
-        CosmicRayCounter* counter;
-
         for(int layer = 0; layer < nLayer; ++layer) {
+            CosmicRayCounter* counter;
             for(int ch = 0; ch < nCRC; ++ch) {
                 counter = trg_sys->GetCRC(layer, ch);
                 for(int side = 0; side < 2; ++side) {
@@ -233,7 +244,6 @@ int main(int argc, char** argv) {
                     pt[layer][ch][side] = counter->GetPT(side);
                     cft[layer][ch][side] = counter->GetCFT(side);
                 }
-
                 TD[layer][ch] = counter->GetTD();
                 MT[layer][ch] = counter->GetMT();
                 recX[layer][ch] = counter->GetHitPos(0);
@@ -266,27 +276,30 @@ int main(int argc, char** argv) {
         }
 
         // CsI
-        for (int locID = 0; locID < nCsI; locID++) {
-            CsI = trg_sys->GetCSI(locID);
-            isUsed_CsI[locID] = CsI->GetIsUsed();
-            if (isUsed_CsI[locID]) {
+        for (int id = 0; id < nCsI; id++) {
+            CsI* csi = trg_sys->GetCSI(id);
+            isUsed_CsI[id] = csi->GetIsUsed();
+            if (isUsed_CsI[id]) {
                 for (int side = 0; side < 2; side++) {
                     for (int smpl = 0; smpl < 64; smpl++) {
-                        data_CsI[locID][side][smpl] = CsI->GetData(side)[smpl];
-
+                        data_CsI[id][side][smpl] = csi->GetData(side)[smpl];
                     }
-                    ped_CsI[locID][side] = CsI->GetPed(side);
-                    peak_CsI[locID][side] = CsI->GetPeak(side);
-                    integ_CsI[locID][side] = CsI->GetInteg(side);
-                    pt_CsI[locID][side] = CsI->GetPT(side);
-                    cft_CsI[locID][side] = CsI->GetCFT(side);
+                    ped_CsI[id][side] = csi->GetPed(side);
+                    peak_CsI[id][side] = csi->GetPeak(side);
+                    integ_CsI[id][side] = csi->GetInteg(side);
+                    pt_CsI[id][side] = csi->GetPT(side);
+                    cft_CsI[id][side] = csi->GetCFT(side);
                 }
+                TD_CsI[id] = cft_CsI[id][0] - cft_CsI[id][1];
+
+                isHit_CsI[id] = csi->GetIsHit();
                 for(int axis = 0; axis < 3; ++axis) {
-                    hitpos_CsI[locID][axis] = CsI ->GetHitPos(axis);
+                    hitpos_CsI[id][axis] = csi->GetHitPos(axis);
                 }
             }
-
         }
+
+
         tout->Fill();
 
         if(entry % 1000==0) std::cout << entry << "th\n";

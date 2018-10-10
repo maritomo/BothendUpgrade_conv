@@ -52,8 +52,9 @@ void RawdataManager::CheckTimeStamp() {
     }
 
     // Initialize entry#
-    for(int k = 0; k < nTree; ++k)
+    for(int k = 0; k < nTree; ++k) {
         entry[k] = 1;
+    }
 
 
     /* Scan all entries */
@@ -140,7 +141,19 @@ void RawdataManager::CheckTimeStamp() {
             continue;
         }
 
-        // (nTree-1)th tree is used as reference
+        // if un-synchronized
+        // Sometimes the first spill is unsynchronized -> skip
+        int badFirstSpillFlag = 1;
+        for(int k=0; k<nTree; ++k) {
+            badFirstSpillFlag *= entry[k];
+        }
+        if(badFirstSpillFlag==1) {
+            for(int k=0; k<nTree; ++k) {
+                entry[k] = 30;
+            }
+            continue;
+        }
+
         int find_flag = 1;
         m_tree[nTree - 1]->GetEntry(entry[nTree - 1]);
 

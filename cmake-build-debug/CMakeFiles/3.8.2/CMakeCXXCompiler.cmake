@@ -66,5 +66,5 @@ endif()
 
 
 set(CMAKE_CXX_IMPLICIT_LINK_LIBRARIES "c++")
-set(CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES "/Users/mari/work/cpplib/lib;/Applications/PicoScope6.app/Contents/Resources/lib;/Users/mari/work/cosmiTrigger/conv;/usr/lib;/usr/local/lib")
+set(CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES "/Users/mari/work/cpplib/lib;/Applications/PicoScope6.app/Contents/Resources/lib;/Users/mari/work/MPPC/install/cosmi/conv;/usr/lib;/usr/local/lib")
 set(CMAKE_CXX_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES "/Library/Frameworks;/System/Library/Frameworks")

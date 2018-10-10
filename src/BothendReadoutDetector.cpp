@@ -17,11 +17,10 @@ BothendReadoutDetector::~BothendReadoutDetector() {
 }
 
 void BothendReadoutDetector::SetData(int side, const short* data) {
-    for(int smpl = 0; smpl < 64; ++smpl)
+    for(int smpl = 0; smpl < 64; ++smpl) {
         m_data[side][smpl] = data[smpl];
-
+    }
     GetCFTime(side);
-
     m_pt[side] += 15 - m_delay[side];
     m_cft[side] += 15 - m_delay[side];
 }
@@ -64,19 +63,22 @@ void BothendReadoutDetector::GetCFTime(int side) {
     m_peak[side] -= m_ped[side];
 
     if(ipeak==0 || ipeak==n - 1) {
-        m_cft[side] = 404;
+        m_cft[side] = 0;
         return;
     }
 
     float threshold = m_peak[side] / 2 + m_ped[side];
 
     for(int i = ipeak; i > 0; --i) {
-        if(m_data[side][i] > threshold && m_data[side][i - 1] < threshold) {
+        if(m_data[side][i] > threshold && m_data[side][i - 1] <= threshold) {
             m_cft[side] = time[i - 1] + (float) (time[i] - time[i - 1]) / (m_data[side][i] - m_data[side][i - 1]) * (threshold - m_data[side][i]);
             m_errflag[side] = 0;
             return;
         }
     }
+
+    m_cft[side] = 0;
+    m_errflag[side] = 1;
 }
 
 short BothendReadoutDetector::GetMax(int nSmpl, const short* data) {

@@ -4,12 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/mari/work/cosmiTrigger/conv/conv.cpp" "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/conv.cpp.o"
-  "/Users/mari/work/cosmiTrigger/conv/src/BothendReadoutDetector.cpp" "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/BothendReadoutDetector.cpp.o"
-  "/Users/mari/work/cosmiTrigger/conv/src/CosmicRayCounter.cpp" "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o"
-  "/Users/mari/work/cosmiTrigger/conv/src/CosmicTriggerSystem.cpp" "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o"
-  "/Users/mari/work/cosmiTrigger/conv/src/CsI.cpp" "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CsI.cpp.o"
-  "/Users/mari/work/cosmiTrigger/conv/src/RawdataManager.cpp" "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir/src/RawdataManager.cpp.o"
+  "/Users/mari/work/MPPC/install/cosmi/conv/conv.cpp" "/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/conv.cpp.o"
+  "/Users/mari/work/MPPC/install/cosmi/conv/src/BothendReadoutDetector.cpp" "/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/src/BothendReadoutDetector.cpp.o"
+  "/Users/mari/work/MPPC/install/cosmi/conv/src/CosmicRayCounter.cpp" "/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o"
+  "/Users/mari/work/MPPC/install/cosmi/conv/src/CosmicTriggerSystem.cpp" "/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CosmicTriggerSystem.cpp.o"
+  "/Users/mari/work/MPPC/install/cosmi/conv/src/CsI.cpp" "/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CsI.cpp.o"
+  "/Users/mari/work/MPPC/install/cosmi/conv/src/RawdataManager.cpp" "/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/src/RawdataManager.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 

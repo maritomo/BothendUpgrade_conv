@@ -131,7 +131,7 @@ bool CosmicTriggerSystem::Init_useCsI() {
             filename = "./data/use_csi_mppc.txt";
         }
         if(side == 1){
-            filename = "./data/use_csi.txt";
+            filename = "./data/use_csi_pmt.txt";
         }
 
         std::ifstream ifs(filename.c_str());
@@ -280,6 +280,7 @@ void CosmicTriggerSystem::HitDecision() {
             }
         }
     }
+
     for(int locID = 0; locID < m_nCsI; ++locID){
         m_csi[locID]->Process();
     }
@@ -305,17 +306,13 @@ void CosmicTriggerSystem::Tracking() {
                  (m_hitpos[1][1] - m_hitpos[0][1]) * (m_hitpos[1][1] - m_hitpos[0][1]) +
                  (m_hitpos[1][2] - m_hitpos[0][2]) * (m_hitpos[1][2] - m_hitpos[0][2])) / TMath::C();
 
-    int axis_h; // index of horizontal axis
-    int axis_v; // index of vertical axis
-    double* track;
+    int axis_h, axis_v;
     for(int plane = 0; plane < 3; ++plane) {
         GetVisAxis(plane, axis_h, axis_v);
         m_track[plane][1] = (m_hitpos[1][axis_v] - m_hitpos[0][axis_v]) / (m_hitpos[1][axis_h] - m_hitpos[0][axis_h]);
         m_track[plane][0] = m_hitpos[1][axis_v] - m_track[plane][1] * m_hitpos[1][axis_h];
-        //track = m_track[1];
-//        std::cout << *track << std::endl;
-//        std::cout << track << std::endl;
     }
+
     for(int id = 0; id < m_nCsI; id++) {
             m_csi[id]->SetHitPos(m_track[1]);
     }
@@ -335,16 +332,10 @@ void CosmicTriggerSystem::SetData(int crate, int slot, int ch, const short* data
     int side = ch % 2;
 
     m_crc[layer][channel]->SetData(side, data);
-
-
-
-
 }
 
 void CosmicTriggerSystem::SetData_CsI(int locID, int side, const short* data) {
-
-    m_csi[locID] ->SetData(side, data);
-
+    m_csi[locID]->SetData(side, data);
 }
 
 

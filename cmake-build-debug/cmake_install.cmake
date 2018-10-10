@@ -1,4 +1,4 @@
-# Install script for directory: /Users/mari/work/cosmiTrigger/conv
+# Install script for directory: /Users/mari/work/MPPC/install/cosmi/conv
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -35,5 +35,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/mari/work/cosmiTrigger/conv/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
