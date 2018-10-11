@@ -6,29 +6,45 @@
 
 #include "TreeManager.h"
 
+int TreeManager::m_runID;
 std::vector<TTree*> TreeManager::m_tin;
-InputBranchContainer* TreeManager::m_BRin;
+TTree* TreeManager::m_tout;
+std::vector<InputBranchContainer> TreeManager::m_BRin;
 std::vector<std::vector<int>> TreeManager::m_entry;
-std::vector<int> TreeManager::m_timestamp_delta;
+std::vector<int> TreeManager::m_tDeltaTrigger;
 
-TTree* TreeManager::m_tout = nullptr;
 
-int TreeManager::m_isSynchronized = 0;
+bool TreeManager::m_isInit = 0;
 
-void TreeManager::SetInputTrees(int num, TTree** tree) {
-    m_BRin = new InputBranchContainer[num];
+void TreeManager::SetRunID(int runID) {
+    m_runID = runID;
+}
 
-    for(int i=0; i < num; ++i) {
-        m_tin.push_back(tree[i]);
-        m_tin[i]->SetBranchAddress("Data", m_BRin[i].Data);
-        m_tin[i]->SetBranchAddress("Timestamp", &m_BRin[i].Timestamp);
+void TreeManager::SetInputTrees(int N, TTree** tree) {
+    m_tin.resize(N);
+    m_BRin.resize(N);
+    for(int k=0; k<N; ++k) {
+        m_tin[k] = tree[k];
+        m_tin[k]->SetBranchAddress("Data", m_BRin[k].Data);
+        m_tin[k]->SetBranchAddress("Timestamp", &m_BRin[k].Timestamp);
     }
+}
 
-    if(!m_isSynchronized) CheckTimeStamp();
+void TreeManager::AddInputTree(TTree* tree) {
+    m_tin.push_back(tree);
+    if(m_BRin.size()==0) m_BRin.resize(16);
+
+    int index = m_tin.size()-1;
+    m_tin[index]->SetBranchAddress("Data", m_BRin[index].Data);
+    m_tin[index]->SetBranchAddress("Timestamp", &m_BRin[index].Timestamp);
+}
+
+void TreeManager::SetOutputTree(TTree* tout) {
+    m_tout = tout;
 }
 
 void TreeManager::CheckTimeStamp() {
-    std::cout << "\nChecking timestamps...\n";
+    std::cout << "Checking timestamps --------------------------------------\n";
 
     const int nTree = m_tin.size();
     if(nTree < 2) {
@@ -36,29 +52,28 @@ void TreeManager::CheckTimeStamp() {
         return;
     }
 
-//    UInt_t* timestamp = new UInt_t[nTree];
-
     m_entry.resize(nTree);
-    m_timestamp_delta.resize(nTree);
+    m_tDeltaTrigger.resize(nTree);
 
     int* entry = new int[nTree];
     int* tdif_delta = new int[nTree-1];
 
     // The first event in a run must be the delta triggers
     // and timestamp difference between crates can be references
-    m_tin[nTree-1]->GetEntry(0);
+    int first_entry = 30;
+    m_tin[nTree-1]->GetEntry(first_entry);
     for(int k = 0; k < nTree; ++k) {
-        m_tin[k]->GetEntry(0);
-        m_timestamp_delta[k] = m_BRin[k].Timestamp;
-//        m_timestamp_delta[k] = timestamp[k];
+        m_tin[k]->GetEntry(first_entry);
+        m_tDeltaTrigger[k] = m_BRin[k].Timestamp;
         if(k < nTree-1) {
-//            tdif_delta[k] = timestamp[nTree-1] - timestamp[k];
             tdif_delta[k] = m_BRin[nTree-1].Timestamp - m_BRin[k].Timestamp;
         }
     }
 
-    // Initialize entry#
-    for(int k = 0; k < nTree; ++k) entry[k] = 1;
+    for(int k = 0; k < nTree; ++k) {
+        entry[k] = first_entry + 1;
+    }
+
 
     /* Scan all events */
     while(1) {
@@ -78,7 +93,7 @@ void TreeManager::CheckTimeStamp() {
         // delta trigger events
         for(int k = 0; k < nTree; ++k) {
             m_tin[k]->GetEntry(entry[k]);
-            if(m_BRin[k].Timestamp==m_timestamp_delta[k]) {
+            if(m_BRin[k].Timestamp==m_tDeltaTrigger[k]) {
                 ++entry[k];
                 continue_flag = 1;
             }
@@ -107,7 +122,6 @@ void TreeManager::CheckTimeStamp() {
                 break;
             }
             m_tin[k]->GetEntry(maxEntry);
-//            if(timestamp[k]+tdif_delta[k]!=timestamp[nTree-1]) {
             if(m_BRin[k].Timestamp+tdif_delta[k]!=m_BRin[nTree-1].Timestamp) {
                 recover_flag = 0;
                 break;
@@ -151,13 +165,11 @@ void TreeManager::CheckTimeStamp() {
                 m_tin[k]->GetEntry(nextentry);
 
                 // skip delta trigger events
-//                if(timestamp[k]==m_timestamp_delta[k]) {
-                if(m_BRin[k].Timestamp==m_timestamp_delta[k]) {
+                if(m_BRin[k].Timestamp==m_tDeltaTrigger[k]) {
                     continue;
                 }
 
                 // if found
-//                if(timestamp[k] + tdif_delta[k]==timestamp[nTree-1]) {
                 if(m_BRin[k].Timestamp + tdif_delta[k]==m_BRin[nTree-1].Timestamp) {
                     entry[k] = nextentry;
                     break;
@@ -186,21 +198,18 @@ void TreeManager::CheckTimeStamp() {
 
     } // while
 
-    //        std::cout << "# of surviving events    "
-//              << man->GetEntries() << " (" << std::setprecision(3)
-//              << 100. * man->GetEntries() / tin[0]->GetEntries()
-//              << "%)\n\n";
+    std::cout << "# of surviving events     " << m_entry[0].size() << " ("
+              << (double)m_entry[0].size()/m_tin[0]->GetEntries()*100 << "%)\n";
 
-//    delete[] timestamp;
     delete[] entry;
     delete[] tdif_delta;
 
-    m_isSynchronized = 1;
-    std::cout << "...fin\n";
+    std::cout << "----------------------------------------------------------\n";
+    m_isInit = 1;
 }
 
 void TreeManager::GetEntry(int entry) {
-    if(!m_isSynchronized) {
+    if(!m_isInit) {
         std::cout << "Use CheckTimeStamp() function at first\n";
         return;
     }
@@ -214,11 +223,15 @@ void TreeManager::GetEntry(int entry) {
 }
 
 int TreeManager::GetEntries() {
-    if(!m_isSynchronized) {
+    if(!m_isInit) {
         std::cout << "Use CheckTimeStamp() function at first\n";
         return 0;
     }
     return m_entry[0].size();
+}
+
+void TreeManager::Fill() {
+    m_tout->Fill();
 }
 
 int TreeManager::Max(int N, const int* data) {

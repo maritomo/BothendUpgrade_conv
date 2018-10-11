@@ -7,9 +7,10 @@
 
 #include "TLine.h"
 
+#include "TriggerCounter.h"
+#include "Visualizer.h"
 #include "TreeManager.h"
-#include "Visualization.h"
-#include "CosmicRayCounter.h"
+#include "CosmicRay.h"
 
 /*
  * --> z
@@ -33,83 +34,71 @@ struct TriggerBranchContainer {
     Float_t MT[12];
     Float_t TD[12];
 
-    Short_t isHit[12];
-    Float_t posHit[12];
-// Short_t data[2][6][2][64];
-//    Float_t ped[2][6][2];
-//    Float_t peak[2][6][2];
-//    Float_t integ[2][6][2];
-//    Float_t pt[2][6][2];
-//    Float_t cft[2][6][2];
-//
-//    Float_t MT[2][6];
-//    Float_t TD[2][6];
-//
-//    Short_t isHit[2][6];
-//    Float_t posHit[2][6];
+    Bool_t isHit[12];
+    Float_t hitpos[12][3];
     Short_t nHit[2];
     Short_t hitID[2];
 
-    Short_t trackID;
-    Float_t track[3][2];
     Float_t TOF;
 
-//    Short_t isOnlineHit[2][6][2][64];
-    Short_t isOnlineHit[12][2][64];
-    Short_t nOnlineHit[2][64];
-    Short_t isOnlineTriggered[64];
+    Bool_t isHit_online[12][2][64];
+    Short_t nHit_online[2][64];
+    Bool_t isTriggered_online[64];
 };
 
-class TriggerManager : public TreeManager, public Visualization {
+class TriggerManager : public Visualizer, public TreeManager {
   public:
     TriggerManager();
     ~TriggerManager();
+    void Branch();
+    void Fill();
 
-//    static const int nLayer = 2;  // # of layer (top, bottom)
-//    static const int nCRC = 6;  // # of cosmic ray counter in 1 layer
     static const int nCRC = 12;  // # of cosmic ray counters
     static const int nTrack = 36;
 
-    // Initialize
+    // Initialization
     bool Init();
     bool Init_map();
     bool Init_DAQconfig();
     bool Init_calibConst();
     bool Init_hitCondition();
 
-    void Branch();
-
     // Process
     void Process();
     void HitDecision();
     void Tracking();
     void OnlineHitDecision();
-    void Fill();
 
-//    bool GetLocationID(int scintiID, int& layerID, int& chID);
     int GetID(int scintiID);
-    int GetID(int slot, int ch) { return 6 * slot + ch / 2; }
-    int GetSide(int slot, int ch) { return ch % 2; }
+    int GetID(int mod, int ch) { return 6 * mod + ch / 2; }
+    int GetSide(int mod, int ch) { return ch % 2; }
     int GetLayer(int id) { return id/6; }
 
-    double Distance(CosmicRayCounter* crc1, CosmicRayCounter* crc2);
+    double Distance(TriggerCounter* crc1, TriggerCounter* crc2);
 
     // Visualization
     void Visualize();
     void Display(int plane);
-    void SetTrackLine(int plane);
 
   private:
-//    CosmicRayCounter* m_crc[nLayer][nCRC];
-    CosmicRayCounter* m_crc[nCRC];
-    CosmicRayCounter* m_crcHit[2]; // Hit counters (top, bottom)
+    TriggerCounter* m_trig[nCRC];
+    TriggerCounter* m_trigHit[2]; // Fired counters (top, bottom)
     TriggerBranchContainer m_BRout;
+    CosmicRay* m_cosmi;
 
-    int m_isInit;
+    bool m_isInit;
     double m_commonThreshold;
 
-    // Visualization
-    TLine* m_lTrack[3];
+    bool m_isHit[12];
+    double m_hitpos[12][3];
+    int m_nHit[2];
+    int m_hitID[2];
+
+    double m_TOF;
+
+    bool m_isHit_online[12][2][64];
+    bool m_isTriggered_online[64];
+    double m_nHit_online[2][64];
 };
 
 #endif //CONV_TRIGGERMANAGER_H

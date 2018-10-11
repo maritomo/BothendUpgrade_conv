@@ -8,33 +8,36 @@
 #include "TBox.h"
 
 #include "TreeManager.h"
-#include "Visualization.h"
+#include "Visualizer.h"
 
-class BothReadDetector : public TreeManager, public Visualization {
+class BothReadDetector : public TreeManager, public Visualizer {
   public:
     virtual ~BothReadDetector();
 
     virtual void Process() = 0;
     virtual void Reconstruct();
 
-    void SetADCconfig(int side, int crate, int slot, int ch);
+    void SetADCconfig(int side, int crate, int mod, int ch);
     void SetDelay(int side, int delay) { m_delay[side] = delay; }
+    void SetHitpos(double* hitpos) { for(int axis=0; axis<3; ++axis) {m_hitpos[axis] = hitpos[axis];} }
 
-    void GetADCconfig(int side, int& crate, int& slot, int& ch);
-    short* GetData(int side) { if(!m_isUsed) return nullptr; return m_data[side]; }
-    double GetPos(int axis) { if(!m_isUsed) return 0; return m_pos[axis]; }
-    double GetPed(int side) { if(!m_isUsed) return 0; return m_ped[side]; }
-    double GetPeak(int side) { if(!m_isUsed) return 0; return m_peak[side]; }
-    double GetInteg(int side) { if(!m_isUsed) return 0; return m_integ[side]; }
-    double GetPT(int side) { if(!m_isUsed) return 0; return m_pt[side]; }
-    double GetCFT(int side) { if(!m_isUsed) return 0; return m_cft[side]; }
-    double GetErrFlag(int side) { if(!m_isUsed) return 0; return m_errflag[side]; }
-    double GetTD() { if(!m_isUsed) return 0; return m_TD; }
-    double GetMT() { if(!m_isUsed) return 0; return m_MT; }
-    int IsHit() { if(!m_isUsed) return 0; return m_isHit; }
-    double GetHitPosition(int axis) { if(!m_isUsed) return 0; return m_hitpos[axis]; }
+    double* GetPosition() { return m_pos; }
+    void GetADCconfig(int side, int& crate, int& mod, int& ch);
 
-    void GetCFTime(int side); // delays are subtracted in this function
+    bool IsUsed(int side) { return m_isUsed[side]; }
+    short* GetData(int side) { return m_data[side]; }
+    double GetPedestal(int side) { return m_ped[side]; }
+    double GetPeak(int side) { return m_peak[side]; }
+    double GetIntegration(int side) { return m_integ[side]; }
+    double GetPeakTime(int side) { return m_pt[side]; }
+    double GetCFTime(int side) { return m_cft[side]; }
+    double GetErrorFlag(int side) { return m_errflag[side]; }
+    double GetTimeDiff() { return m_TD; }
+    double GetMeanTime() { return m_MT; }
+    bool IsHit() { return m_isHit; }
+    double GetHitPosition(int axis) { return m_hitpos[axis]; }
+
+    void GetCFTimeime(int side); // delays are subtracted in this function
     short GetMax(int nSmpl, const short* data);
 
     // Visualization
@@ -46,9 +49,9 @@ class BothReadDetector : public TreeManager, public Visualization {
     double m_size[3];  // size (x, y, z)
 
     // FADC configuration
-    int m_isUsed;
+    bool m_isUsed[2];
     int m_crate[2];
-    int m_slot[2];
+    int m_mod[2];
     int m_ch[2];
     int m_delay[2];   // Channel delay
 
@@ -63,7 +66,7 @@ class BothReadDetector : public TreeManager, public Visualization {
     double m_TD;  // timing difference
     double m_MT;  // mean time
 
-    int m_isHit;
+    bool m_isHit;
     double m_hitpos[3]; // hit position (x, y, z)
     double m_posres[3]; // position resolution (x, y, z)
 

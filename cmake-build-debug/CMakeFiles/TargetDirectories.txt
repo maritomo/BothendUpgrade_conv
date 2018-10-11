@@ -1,3 +1,3 @@
-/Users/mari/work/MPPCinstall/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/mari/work/MPPCinstall/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/mari/work/MPPCinstall/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/conv.dir
+/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir

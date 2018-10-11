@@ -48,10 +48,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/mari/work/MPPCinstall/cosmiTrigger/conv
+CMAKE_SOURCE_DIR = /Users/mari/work/MPPC/install/cosmi/conv
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/mari/work/MPPCinstall/cosmiTrigger/conv/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mari/work/MPPCinstall/cosmiTrigger/conv/cmake-build-debug/CMakeFiles /Users/mari/work/MPPCinstall/cosmiTrigger/conv/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles /Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mari/work/MPPCinstall/cosmiTrigger/conv/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,32 +123,32 @@ conv/fast:
 	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/build
 .PHONY : conv/fast
 
-conv2.o: conv2.cpp.o
+conv.o: conv.cpp.o
 
-.PHONY : conv2.o
+.PHONY : conv.o
 
 # target to build an object file
-conv2.cpp.o:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/conv2.cpp.o
-.PHONY : conv2.cpp.o
+conv.cpp.o:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/conv.cpp.o
+.PHONY : conv.cpp.o
 
-conv2.i: conv2.cpp.i
+conv.i: conv.cpp.i
 
-.PHONY : conv2.i
+.PHONY : conv.i
 
 # target to preprocess a source file
-conv2.cpp.i:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/conv2.cpp.i
-.PHONY : conv2.cpp.i
+conv.cpp.i:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/conv.cpp.i
+.PHONY : conv.cpp.i
 
-conv2.s: conv2.cpp.s
+conv.s: conv.cpp.s
 
-.PHONY : conv2.s
+.PHONY : conv.s
 
 # target to generate assembly for a file
-conv2.cpp.s:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/conv2.cpp.s
-.PHONY : conv2.cpp.s
+conv.cpp.s:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/conv.cpp.s
+.PHONY : conv.cpp.s
 
 src/BothReadDetector.o: src/BothReadDetector.cpp.o
 
@@ -177,59 +177,59 @@ src/BothReadDetector.cpp.s:
 	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/BothReadDetector.cpp.s
 .PHONY : src/BothReadDetector.cpp.s
 
-src/CosmicMeasSystem.o: src/CosmicMeasSystem.cpp.o
+src/Converter.o: src/Converter.cpp.o
 
-.PHONY : src/CosmicMeasSystem.o
-
-# target to build an object file
-src/CosmicMeasSystem.cpp.o:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CosmicMeasSystem.cpp.o
-.PHONY : src/CosmicMeasSystem.cpp.o
-
-src/CosmicMeasSystem.i: src/CosmicMeasSystem.cpp.i
-
-.PHONY : src/CosmicMeasSystem.i
-
-# target to preprocess a source file
-src/CosmicMeasSystem.cpp.i:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CosmicMeasSystem.cpp.i
-.PHONY : src/CosmicMeasSystem.cpp.i
-
-src/CosmicMeasSystem.s: src/CosmicMeasSystem.cpp.s
-
-.PHONY : src/CosmicMeasSystem.s
-
-# target to generate assembly for a file
-src/CosmicMeasSystem.cpp.s:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CosmicMeasSystem.cpp.s
-.PHONY : src/CosmicMeasSystem.cpp.s
-
-src/CosmicRayCounter.o: src/CosmicRayCounter.cpp.o
-
-.PHONY : src/CosmicRayCounter.o
+.PHONY : src/Converter.o
 
 # target to build an object file
-src/CosmicRayCounter.cpp.o:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.o
-.PHONY : src/CosmicRayCounter.cpp.o
+src/Converter.cpp.o:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/Converter.cpp.o
+.PHONY : src/Converter.cpp.o
 
-src/CosmicRayCounter.i: src/CosmicRayCounter.cpp.i
+src/Converter.i: src/Converter.cpp.i
 
-.PHONY : src/CosmicRayCounter.i
+.PHONY : src/Converter.i
 
 # target to preprocess a source file
-src/CosmicRayCounter.cpp.i:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.i
-.PHONY : src/CosmicRayCounter.cpp.i
+src/Converter.cpp.i:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/Converter.cpp.i
+.PHONY : src/Converter.cpp.i
 
-src/CosmicRayCounter.s: src/CosmicRayCounter.cpp.s
+src/Converter.s: src/Converter.cpp.s
 
-.PHONY : src/CosmicRayCounter.s
+.PHONY : src/Converter.s
 
 # target to generate assembly for a file
-src/CosmicRayCounter.cpp.s:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CosmicRayCounter.cpp.s
-.PHONY : src/CosmicRayCounter.cpp.s
+src/Converter.cpp.s:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/Converter.cpp.s
+.PHONY : src/Converter.cpp.s
+
+src/CosmicRay.o: src/CosmicRay.cpp.o
+
+.PHONY : src/CosmicRay.o
+
+# target to build an object file
+src/CosmicRay.cpp.o:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CosmicRay.cpp.o
+.PHONY : src/CosmicRay.cpp.o
+
+src/CosmicRay.i: src/CosmicRay.cpp.i
+
+.PHONY : src/CosmicRay.i
+
+# target to preprocess a source file
+src/CosmicRay.cpp.i:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CosmicRay.cpp.i
+.PHONY : src/CosmicRay.cpp.i
+
+src/CosmicRay.s: src/CosmicRay.cpp.s
+
+.PHONY : src/CosmicRay.s
+
+# target to generate assembly for a file
+src/CosmicRay.cpp.s:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CosmicRay.cpp.s
+.PHONY : src/CosmicRay.cpp.s
 
 src/CsI.o: src/CsI.cpp.o
 
@@ -312,6 +312,33 @@ src/TreeManager.cpp.s:
 	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/TreeManager.cpp.s
 .PHONY : src/TreeManager.cpp.s
 
+src/TriggerCounter.o: src/TriggerCounter.cpp.o
+
+.PHONY : src/TriggerCounter.o
+
+# target to build an object file
+src/TriggerCounter.cpp.o:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/TriggerCounter.cpp.o
+.PHONY : src/TriggerCounter.cpp.o
+
+src/TriggerCounter.i: src/TriggerCounter.cpp.i
+
+.PHONY : src/TriggerCounter.i
+
+# target to preprocess a source file
+src/TriggerCounter.cpp.i:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/TriggerCounter.cpp.i
+.PHONY : src/TriggerCounter.cpp.i
+
+src/TriggerCounter.s: src/TriggerCounter.cpp.s
+
+.PHONY : src/TriggerCounter.s
+
+# target to generate assembly for a file
+src/TriggerCounter.cpp.s:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/TriggerCounter.cpp.s
+.PHONY : src/TriggerCounter.cpp.s
+
 src/TriggerManager.o: src/TriggerManager.cpp.o
 
 .PHONY : src/TriggerManager.o
@@ -339,32 +366,32 @@ src/TriggerManager.cpp.s:
 	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/TriggerManager.cpp.s
 .PHONY : src/TriggerManager.cpp.s
 
-src/Visualization.o: src/Visualization.cpp.o
+src/Visualizer.o: src/Visualizer.cpp.o
 
-.PHONY : src/Visualization.o
+.PHONY : src/Visualizer.o
 
 # target to build an object file
-src/Visualization.cpp.o:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/Visualization.cpp.o
-.PHONY : src/Visualization.cpp.o
+src/Visualizer.cpp.o:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/Visualizer.cpp.o
+.PHONY : src/Visualizer.cpp.o
 
-src/Visualization.i: src/Visualization.cpp.i
+src/Visualizer.i: src/Visualizer.cpp.i
 
-.PHONY : src/Visualization.i
+.PHONY : src/Visualizer.i
 
 # target to preprocess a source file
-src/Visualization.cpp.i:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/Visualization.cpp.i
-.PHONY : src/Visualization.cpp.i
+src/Visualizer.cpp.i:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/Visualizer.cpp.i
+.PHONY : src/Visualizer.cpp.i
 
-src/Visualization.s: src/Visualization.cpp.s
+src/Visualizer.s: src/Visualizer.cpp.s
 
-.PHONY : src/Visualization.s
+.PHONY : src/Visualizer.s
 
 # target to generate assembly for a file
-src/Visualization.cpp.s:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/Visualization.cpp.s
-.PHONY : src/Visualization.cpp.s
+src/Visualizer.cpp.s:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/Visualizer.cpp.s
+.PHONY : src/Visualizer.cpp.s
 
 # Help Target
 help:
@@ -375,18 +402,18 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... conv"
-	@echo "... conv2.o"
-	@echo "... conv2.i"
-	@echo "... conv2.s"
+	@echo "... conv.o"
+	@echo "... conv.i"
+	@echo "... conv.s"
 	@echo "... src/BothReadDetector.o"
 	@echo "... src/BothReadDetector.i"
 	@echo "... src/BothReadDetector.s"
-	@echo "... src/CosmicMeasSystem.o"
-	@echo "... src/CosmicMeasSystem.i"
-	@echo "... src/CosmicMeasSystem.s"
-	@echo "... src/CosmicRayCounter.o"
-	@echo "... src/CosmicRayCounter.i"
-	@echo "... src/CosmicRayCounter.s"
+	@echo "... src/Converter.o"
+	@echo "... src/Converter.i"
+	@echo "... src/Converter.s"
+	@echo "... src/CosmicRay.o"
+	@echo "... src/CosmicRay.i"
+	@echo "... src/CosmicRay.s"
 	@echo "... src/CsI.o"
 	@echo "... src/CsI.i"
 	@echo "... src/CsI.s"
@@ -396,12 +423,15 @@ help:
 	@echo "... src/TreeManager.o"
 	@echo "... src/TreeManager.i"
 	@echo "... src/TreeManager.s"
+	@echo "... src/TriggerCounter.o"
+	@echo "... src/TriggerCounter.i"
+	@echo "... src/TriggerCounter.s"
 	@echo "... src/TriggerManager.o"
 	@echo "... src/TriggerManager.i"
 	@echo "... src/TriggerManager.s"
-	@echo "... src/Visualization.o"
-	@echo "... src/Visualization.i"
-	@echo "... src/Visualization.s"
+	@echo "... src/Visualizer.o"
+	@echo "... src/Visualizer.i"
+	@echo "... src/Visualizer.s"
 .PHONY : help
 
 

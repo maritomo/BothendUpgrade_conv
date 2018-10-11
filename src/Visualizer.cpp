@@ -4,13 +4,12 @@
 
 #include <iostream>
 
-#include "Visualization.h"
+#include "Visualizer.h"
 
-double Visualization::m_world[3][2] = {{-1100,1100}, {-1500,1500}, {-300,300}};
-TCanvas* Visualization::m_canv = nullptr;
-TH1* Visualization::m_frame[3] = {nullptr, nullptr, nullptr};
+double Visualizer::m_world[3][2] = {{-1100,1100}, {-1500,1500}, {-300,300}};
+TCanvas* Visualizer::m_canv = nullptr;
 
-void Visualization::Print(const char* filename) {
+void Visualizer::Print(const char* filename) {
     if(!m_isVis) {
         std::cout << "Visualization not ready\n";
         return;
@@ -18,7 +17,7 @@ void Visualization::Print(const char* filename) {
     m_canv->Print(filename);
 }
 
-void Visualization::GetVisAxis(int plane, int& axis_h, int& axis_v){
+void Visualizer::GetVisAxis(int plane, int& axis_h, int& axis_v){
     if(plane==0) {          // xy plane->(x, y)
         axis_h = 0;
         axis_v = 1;

@@ -6,5 +6,5 @@ CXX_FLAGS = -g   -std=gnu++11
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/mari/work/MPPCinstall/cosmiTrigger/conv/include -I/Users/mari/local/root/pro/include 
+CXX_INCLUDES = -I/Users/mari/work/MPPC/install/cosmi/conv/include -I/Users/mari/local/root/pro/include 
 

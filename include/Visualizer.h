@@ -8,10 +8,10 @@
 #include "TCanvas.h"
 #include "TH1.h"
 
-class Visualization {
+class Visualizer {
   public:
-    Visualization() {}
-    virtual ~Visualization() {}
+    Visualizer() {}
+    virtual ~Visualizer() {}
 
     virtual void Visualize() = 0;
     virtual void Display(int plane) = 0;
@@ -20,10 +20,9 @@ class Visualization {
     void GetVisAxis(int plane, int& axis_h, int& axis_v);
 
   protected:
-    int m_isVis;
+    bool m_isVis;
     static double m_world[3][2]; // (x, y, z), (min, max)
     static TCanvas* m_canv;
-    static TH1* m_frame[3]; // (xy, zy, xz)
 };
 
 

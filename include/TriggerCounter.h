@@ -2,14 +2,13 @@
 // Created by Tomoo MARI on 2018/09/19.
 //
 
-#ifndef CONV_COSMICRAYCOUNTER_H
-#define CONV_COSMICRAYCOUNTER_H
+#ifndef CONV_TRIGGERCOUNTER_H
+#define CONV_TRIGGERCOUNTER_H
 
 #include "BothReadDetector.h"
-class CosmicRayCounter : public BothReadDetector {
+class TriggerCounter : public BothReadDetector {
   public:
-//    CosmicRayCounter(int layer, int ch, int scintiID, int dir, const double* pos);
-    CosmicRayCounter(int scintiID, int dir, const double* pos);
+    TriggerCounter(int scintiID, int dir, const double* pos);
 
     void Process();
     void HitDecision();
@@ -22,11 +21,9 @@ class CosmicRayCounter : public BothReadDetector {
 
     // Imitation of the online trigger
     void OnlineHitDecision(int side);
-    const int* IsOnlineHit(int side) { return m_isOnlineHit[side]; }
+    const bool* IsOnlineHit(int side) { return m_isHit_online[side]; }
 
   private:
-//    int m_layer;      // 0: bottom, 1: top
-//    int m_ch;         // 0 ~ 5
     int m_scintiID;   // scintillator ID
     int m_dir;        //    Directions of the counters along x-axis (+1: parallel, -1: unti-parallel) used in the pre-test at Tsukuba campus[2].
                       //    They are still used to calibrate Tdif to x-position,
@@ -37,8 +34,8 @@ class CosmicRayCounter : public BothReadDetector {
     double m_peak_thr[2];       // threshold of pulse height, (even, odd) ch
     double m_coin_range[2][2];  // coincidence window, (even, odd) ch, (min, max)
 
-    int m_isOnlineHit[2][64];
+    bool m_isHit_online[2][64];
 };
 
 
-#endif //CONV_COSMICRAYCOUNTER_H
+#endif //CONV_TRIGGERCOUNTER_H

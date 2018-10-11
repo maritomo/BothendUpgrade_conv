@@ -17,41 +17,40 @@ BothReadDetector::~BothReadDetector() {
 
 void BothReadDetector::Reconstruct() {
     for(int side=0; side<2; ++side) {
-        GetCFTime(side);
+        GetCFTimeime(side);
     }
     m_TD = m_cft[0] - m_cft[1];
     m_MT = (m_cft[0] + m_cft[1]) / 2;
 }
 
-void BothReadDetector::SetADCconfig(int side, int crate, int slot, int ch) {
-
+void BothReadDetector::SetADCconfig(int side, int crate, int mod, int ch) {
     int flag = 0;
-    if(side!=0 && side!=1) flag = 1;
-    if(crate<3 || crate > 5) flag = 1;
-    if(slot<0 || slot > 15) flag = 1;
+    if(side<0 || side>1) flag = 1;
+    if(crate<3 || crate>5) flag = 1;
+    if(mod<0 || mod>15) flag = 1;
     if(ch<0 || ch>15) flag = 1;
 
     if(flag) {
         std::cout << "Error: ADC configuration is out of the range\n";
-        m_isUsed = 0;
+        m_isUsed[side] = 0;
         return;
     }
 
     m_crate[side] = crate;
-    m_slot[side] = slot;
+    m_mod[side] = mod;
     m_ch[side] = ch;
 
-    m_data[side] = m_BRin[crate-3].Data[slot][ch];
-    m_isUsed = 1;
+    m_data[side] = m_BRin[crate-3].Data[mod][ch];
+    m_isUsed[side] = 1;
 }
 
-void BothReadDetector::GetADCconfig(int side, int& crate, int& slot, int& ch) {
+void BothReadDetector::GetADCconfig(int side, int& crate, int& mod, int& ch) {
     crate = m_crate[side];
-    slot = m_slot[side];
+    mod = m_mod[side];
     ch = m_ch[side];
 }
 
-void BothReadDetector::GetCFTime(int side) {
+void BothReadDetector::GetCFTimeime(int side) {
 
     m_ped[side] = 0;
     m_peak[side] = 0;
@@ -127,7 +126,7 @@ void BothReadDetector::Visualize() {
         return;
     }
 
-    if(!m_isUsed) m_color = kGray;
+    if(!m_isUsed[0] && !m_isUsed[1]) m_color = kGray;
 
     int axis_h; // index of horizontal axis
     int axis_v; // index of vertical axis

@@ -6,11 +6,11 @@
 #include <sstream>
 #include <cmath>
 
-#include "CosmicRayCounter.h"
+#include "TriggerCounter.h"
 
-//CosmicRayCounter::CosmicRayCounter(int layer, int ch, int scintiID, int dir, const double* pos) :
+//TriggerCounter::TriggerCounter(int layer, int ch, int scintiID, int dir, const double* pos) :
 //        m_layer(layer), m_ch(ch), m_scintiID(scintiID), m_dir(dir) {
-CosmicRayCounter::CosmicRayCounter(int scintiID, int dir, const double* pos) :
+TriggerCounter::TriggerCounter(int scintiID, int dir, const double* pos) :
         m_scintiID(scintiID), m_dir(dir) {
 
     for(int k = 0; k < 3; ++k) {
@@ -35,13 +35,13 @@ CosmicRayCounter::CosmicRayCounter(int scintiID, int dir, const double* pos) :
  * Setter
  */
 
-void CosmicRayCounter::SetCalibConst(const double* TD_to_x) {
+void TriggerCounter::SetCalibConst(const double* TD_to_x) {
     for(int i = 0; i < 2; ++i) {
         m_ccX[i] = TD_to_x[i] * m_dir;
     }
 }
 
-void CosmicRayCounter::SetCoinRange(int side, double* coin_range) {
+void TriggerCounter::SetCoinRange(int side, double* coin_range) {
     for(int i = 0; i < 2; ++i) {
         m_coin_range[side][i] = coin_range[i];
     }
@@ -52,7 +52,7 @@ void CosmicRayCounter::SetCoinRange(int side, double* coin_range) {
  * Process
  */
 
-void CosmicRayCounter::Process() {
+void TriggerCounter::Process() {
     Reconstruct();
     HitDecision();
     for(int side = 0; side < 2; ++side) {
@@ -60,7 +60,7 @@ void CosmicRayCounter::Process() {
     }
 }
 
-void CosmicRayCounter::HitDecision() {
+void TriggerCounter::HitDecision() {
     m_isHit = 0;
     for(int axis=0; axis<3; ++axis) {
         m_hitpos[axis] = 0;
@@ -81,7 +81,7 @@ void CosmicRayCounter::HitDecision() {
 }
 
 // Imitation of the online trigger
-void CosmicRayCounter::OnlineHitDecision(int side) {
+void TriggerCounter::OnlineHitDecision(int side) {
 
     // local time window
     int window_l[2] = {-2, 2};
@@ -95,7 +95,7 @@ void CosmicRayCounter::OnlineHitDecision(int side) {
     short data_l[nSmpl_l];
 
     for(int smpl = 0; smpl < 64; ++smpl) {
-        m_isOnlineHit[side][smpl] = 0;
+        m_isHit_online[side][smpl] = 0;
 
         if(smpl < 0 - window_g[0] || smpl >= 64 - window_g[1])
             continue;
@@ -110,7 +110,7 @@ void CosmicRayCounter::OnlineHitDecision(int side) {
         short max_g = GetMax(nSmpl_g, data_g);
 
         if(max_l == max_g && max_l-m_ped[side] > m_peak_thr[side]) {
-            m_isOnlineHit[side][smpl] = 1;
+            m_isHit_online[side][smpl] = 1;
         }
     }
 

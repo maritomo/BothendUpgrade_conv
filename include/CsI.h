@@ -14,14 +14,6 @@ public:
 
   void Process();
   void HitDecision();
-  void SetHitPos(double* track); // trackID -> z hit position
-
-  int IsUsed() { return m_isUsed; }
-  int GetLocationID(){ return m_locationID; }
-
-  int GetCrate(int side){ return m_crate[side]; }
-  int GetSlot(int side){ return m_slot[side]; }
-  int Getch(int side){ return m_ch[side]; }
 
 private:
   static const int nCSI = 2716;
