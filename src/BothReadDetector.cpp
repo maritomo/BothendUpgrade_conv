@@ -17,21 +17,20 @@ BothReadDetector::~BothReadDetector() {
 
 void BothReadDetector::Reconstruct() {
     for(int side=0; side<2; ++side) {
-        GetCFTimeime(side);
+        CalculateCFTime(side);
     }
     m_TD = m_cft[0] - m_cft[1];
     m_MT = (m_cft[0] + m_cft[1]) / 2;
 }
 
-void BothReadDetector::SetADCconfig(int side, int crate, int mod, int ch) {
-    int flag = 0;
-    if(side<0 || side>1) flag = 1;
-    if(crate<3 || crate>5) flag = 1;
-    if(mod<0 || mod>15) flag = 1;
-    if(ch<0 || ch>15) flag = 1;
-
-    if(flag) {
-        std::cout << "Error: ADC configuration is out of the range\n";
+void BothReadDetector::SetData(int side, int crate, int mod, int ch) {
+    if((side<0 || side>1) || (crate<3 || crate>5)||
+       (mod<0 || mod>15)|| (ch<0 || ch>15))
+    {
+        m_data[side] = new short[64];
+        for(int smpl=0; smpl<64; ++smpl) {
+            m_data[side][smpl] = 0;
+        }
         m_isUsed[side] = 0;
         return;
     }
@@ -50,12 +49,10 @@ void BothReadDetector::GetADCconfig(int side, int& crate, int& mod, int& ch) {
     ch = m_ch[side];
 }
 
-void BothReadDetector::GetCFTimeime(int side) {
-
+void BothReadDetector::CalculateCFTime(int side){
     m_ped[side] = 0;
     m_peak[side] = 0;
     m_integ[side] = 0;
-    m_errflag[side] = 1;
 
     int nPed = 10;
     int ipeak = 0;
@@ -86,12 +83,14 @@ void BothReadDetector::GetCFTimeime(int side) {
 
     m_pt[side] = ipeak - (yf - yb) / 2 / (yf + yb - 2 * y);
     m_pt[side] -= m_delay[side];
+    m_pt[side] *= 8;
 
     m_peak[side] = y - (yf - yb) * (yf - yb) / 8 / (yf + yb - 2 * y);
     m_peak[side] -= m_ped[side];
 
     if(ipeak==0 || ipeak==n - 1) {
-        m_cft[side] = 404;
+        m_cft[side] = 0;
+        m_eflag[side] = 1;
         return;
     }
 
@@ -102,10 +101,13 @@ void BothReadDetector::GetCFTimeime(int side) {
                                         (m_data[side][i] - m_data[side][i - 1]) *
                                         (threshold - m_data[side][i]);
             m_cft[side] -= m_delay[side];
-            m_errflag[side] = 0;
+            m_cft[side] *= 8;
+            m_eflag[side] = 0;
             return;
         }
     }
+
+    m_eflag[side] = 2;
 }
 
 short BothReadDetector::GetMax(int nSmpl, const short* data) {

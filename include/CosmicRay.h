@@ -11,9 +11,7 @@
 #include "TreeManager.h"
 
 struct CosmicRayBranchContainer {
-    Short_t trackID;
     Float_t track[3][2];
-    Float_t hitTime[2];
 };
 
 class CosmicRay : public Visualizer, public TreeManager {
@@ -23,16 +21,13 @@ class CosmicRay : public Visualizer, public TreeManager {
     void Branch();
     void Fill();
 
-    void SetTrackID(int trackID) { m_trackID = trackID; }
+    void SetIsTracked(bool isTracked) { m_isTracked = isTracked; }
     void SetTrack(int plane, double* track) { for(int k=0; k<2; ++k) m_track[plane][k] = track[k]; }
-    void SetHitTime(int layer, double hitTime) { m_hitTime[layer] = hitTime; }
     double* GetTrack(int plane) { return m_track[plane]; }
-    double* GetHitTime(int layer) { return m_hitTime; }
-
-    void Visualize();
-    void Display(int plane);
 
     // Visualization
+    void Visualize();
+    void Display(int plane);
 
 private:
     CosmicRay();
@@ -41,9 +36,8 @@ private:
     static bool m_isInit;
 
     CosmicRayBranchContainer m_BRout;
-    int m_trackID;
+    bool m_isTracked;
     double m_track[3][2];
-    double m_hitTime[2];
 
     // Visualization
     TLine* m_trackLine[3];

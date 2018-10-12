@@ -1,6 +1,6 @@
 #define REDUCED_DATA
-//#define DEBUG
-//#define VISUALIZE
+#define DEBUG
+#define VISUALIZE
 
 #include "Converter.h"
 
@@ -8,7 +8,6 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
-#include <TRint.h>
 
 #include "TFile.h"
 #include "TTree.h"
@@ -37,51 +36,35 @@ int main(int argc, char** argv) {
         std::cout << comment << "\n";
     }
 
-
-
     /*
      * Set trees into TreeManager
      */
 
-    TString filename = Form("./rootfile/run%d.root", runID);
-
-#ifdef REDUCED_DATA
-    filename=Form("./rootfile/run%d.root_reduced", runID);
-#endif
-
     TreeManager::SetRunID(runID);
 
-    // Input trees
+    // Input files
+    TString filename = Form("./rootfile/run%d.root", runID);
+#ifdef REDUCED_DATA
+    filename = Form("./rootfile/run%d.root_reduced", runID);
+#endif
     if(!GetFileState(filename)) {
         std::cout << filename << " not found\n";
         return 1;
     }
-
     TFile* fin = new TFile(filename);
-    const int nCrate=3;
-    TTree* tin[nCrate];
-    TString treename[nCrate] = {"Crate3", "Crate4", "Crate5"};
 
-    for(int k=0; k<nCrate; ++k) {
-        tin[k] = (TTree*) fin->Get(treename[k]);
-    }
-//    TreeManager::SetInputTrees(nCrate, tin);
-    for(int k=0; k<nCrate; ++k) {
+    // Output file
+    TFile* fout = new TFile(Form("./convfile/run%d_conv.root", runID), "recreate");
+
+
+    /*
+     * Set trees into converter
+     */
+
+    TString treename[] = {"Crate3", "Crate4", "Crate5"};
+    for(int k=0; k<sizeof(treename)/sizeof(TString); ++k) {
         TreeManager::AddInputTree((TTree*) fin->Get(treename[k]));
     }
-
-    // Output tree
-    TFile* fout = new TFile(Form("./convfile/run%d_conv.root", runID), "recreate");
-    TTree* tout = new TTree("tree", Form("run%d", runID));
-    TreeManager::SetOutputTree(tout);
-    TreeManager::CheckTimeStamp();
-
-
-#ifdef VISUALIZE
-    conv->Visualize();
-//    TApplication app("app", &argc, argv);
-#endif
-
 
     /*
      * Conversion
@@ -89,7 +72,15 @@ int main(int argc, char** argv) {
 
     Converter* conv = new Converter();
 
+#ifdef VISUALIZE
+    conv->Visualize();
+//    TApplication app("app", &argc, argv);
+#endif
+
     std::cout << "\n######################## Scanning entries ########################\n";
+
+    TreeManager::CheckTimeStamp();
+
     for(int entry=0; entry<conv->GetEntries(); ++entry) {
         TreeManager::GetEntry(entry);
         conv->Convert();
@@ -103,10 +94,10 @@ int main(int argc, char** argv) {
         conv->Display(1); // zy plane
 //        gSystem->ProcessEvents();
 //        gSystem->Sleep(1000);
-        conv->Print(Form("./test_%d.pdf", entry));
+        conv->Print(Form("./pict/test_%d.pdf", entry));
 #endif
 #ifdef DEBUG
-        if(entry==0) break;
+        if(entry==100) break;
 #endif
 
     }
@@ -117,25 +108,23 @@ int main(int argc, char** argv) {
      * Write
      */
 
-//    TString note_threshold = Form("%.1f (common)", trg_sys->GetCommonThreshold());
-//    TText note2(0, 0, note_threshold);
-//    note2.SetName("Peak threshold");
-
     TText note1(0, 0, comment.c_str());
     note1.SetName("Comments");
 
     fout->cd();
-    tout->Write();
+    TreeManager::GetEventTree()->Write();
+    TreeManager::GetStatusTree()->Write();
     note1.Write();
-//    note2.Write();
 
     fout->Close();
 
-
 #ifdef DEBUG
-    std::cout << "###############################\n";
-    std::cout << "######     DEBUG mode    ######\n";
-    std::cout << "###############################\n";
+    std::cout << "\n";
+    std::cout << "*-*-*-*-*-*-*-* DEBUG *-*-*-*-*-*-*-*\n";
+#endif
+#ifdef REDUCED_DATA
+    std::cout << "\n";
+    std::cout << "*-*-*-*-*-*-*-* REDUCED_DATA *-*-*-*-*-*-*-*\n";
 #endif
 
     return 0;

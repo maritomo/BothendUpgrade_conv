@@ -68,8 +68,8 @@ void TriggerCounter::HitDecision() {
 
     for(int side = 0; side < 2; ++side) {
         if(m_peak[side] > m_peak_thr[side] &&
-           m_pt[side]+m_delay[side] > m_coin_range[side][0] &&
-           m_pt[side]+m_delay[side] < m_coin_range[side][1])
+           m_pt[side]/8 + m_delay[side] > m_coin_range[side][0] &&
+           m_pt[side]/8 + m_delay[side] < m_coin_range[side][1])
         {
             m_isHit = 1;
             m_hitpos[0] = (m_TD - m_ccX[0]) / m_ccX[1];

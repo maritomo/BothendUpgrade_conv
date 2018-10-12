@@ -30,6 +30,7 @@ struct TriggerBranchContainer {
     Float_t integ[12][2];
     Float_t pt[12][2];
     Float_t cft[12][2];
+    Bool_t eflag[12][2];
 
     Float_t MT[12];
     Float_t TD[12];
@@ -39,7 +40,9 @@ struct TriggerBranchContainer {
     Short_t nHit[2];
     Short_t hitID[2];
 
+    Short_t trackID;
     Float_t TOF;
+    Float_t range;
 
     Bool_t isHit_online[12][2][64];
     Short_t nHit_online[2][64];
@@ -94,7 +97,9 @@ class TriggerManager : public Visualizer, public TreeManager {
     int m_nHit[2];
     int m_hitID[2];
 
+    int m_trackID;
     double m_TOF;
+    double m_range;
 
     bool m_isHit_online[12][2][64];
     bool m_isTriggered_online[64];

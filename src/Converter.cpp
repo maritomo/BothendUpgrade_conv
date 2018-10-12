@@ -8,12 +8,8 @@
 
 Converter::Converter() {
     m_cosmi = CosmicRay::GetInstance();
-    m_trigMan = new TriggerManager();
     m_csiMan = new CsIManager();
-
-    for(int k=0; k<m_tin.size(); ++k) {
-        m_tin[k]->SetBranchAddress("Timestamp", &m_BRout.timestamp[k]);
-    }
+    m_trigMan = new TriggerManager();
     Branch();
 
     m_isVis = 0;
@@ -27,7 +23,7 @@ Converter::~Converter() {
 }
 
 void Converter::Branch() {
-    m_tout->Branch("timestamp", m_BRout.timestamp, "timestamp[3]/i");
+    m_eventTree->Branch("timestamp", m_BRout.timestamp, "timestamp[3]/i");
 }
 
 void Converter::Fill(){
@@ -37,8 +33,9 @@ void Converter::Fill(){
 }
 
 void Converter::Convert(){
-    m_trigMan->Process();
     m_csiMan->Process();
+    m_trigMan->Process();
+
     m_csiMan->RecHitPosition();
 
     m_trigMan->Fill();
@@ -54,6 +51,7 @@ void Converter::Visualize(){
     }
     m_trigMan->Visualize();
     m_csiMan->Visualize();
+    m_cosmi->Visualize();
     m_isVis = 1;
 }
 
@@ -77,4 +75,5 @@ void Converter::Display(int plane) {
                                      title[plane]);
     m_trigMan->Display(plane);
     m_csiMan->Display(plane);
+    m_cosmi->Display(plane);
 }

@@ -11,10 +11,9 @@ CsIManager::CsIManager() {
     Branch();
 
     if(!Init()) {
-        std::cout << "CsIManager initialization failed\n";
+        std::cout << "Error: CsIManager initialization failed\n";
         m_isInit = 0;
     } else {
-        std::cout << "CsIManager initialized\n";
         m_isInit = 1;
     }
     m_isVis = 0;
@@ -27,44 +26,47 @@ CsIManager::~CsIManager() {
 }
 
 void CsIManager::Branch() {
-    m_tout->Branch("csi.isUsed", m_BRout.isUsed, "csi.isUsed[2716][2]/O");
+    m_eventTree->Branch("csi.isUsed", m_BRout.isUsed, "csi.isUsed[2716][2]/O");
 
-    m_tout->Branch("csi.data", m_BRout.data, "csi.data[2716][2][64]/S");
-    m_tout->Branch("csi.ped", m_BRout.ped, "csi.ped[2716][2]/F");
-    m_tout->Branch("csi.peak", m_BRout.peak, "csi.peak[2716][2]/F");
-    m_tout->Branch("csi.integ", m_BRout.integ, "csi.integ[2716][2]/F");
-    m_tout->Branch("csi.pt", m_BRout.pt, "csi.pt[2716][2]/F");
-    m_tout->Branch("csi.cft", m_BRout.cft, "csi.cft[2716][2]/F");
+    m_eventTree->Branch("csi.data", m_BRout.data, "csi.data[2716][2][64]/S");
+    m_eventTree->Branch("csi.ped", m_BRout.ped, "csi.ped[2716][2]/F");
+    m_eventTree->Branch("csi.peak", m_BRout.peak, "csi.peak[2716][2]/F");
+    m_eventTree->Branch("csi.integ", m_BRout.integ, "csi.integ[2716][2]/F");
+    m_eventTree->Branch("csi.pt", m_BRout.pt, "csi.pt[2716][2]/F");
+    m_eventTree->Branch("csi.cft", m_BRout.cft, "csi.cft[2716][2]/F");
+    m_eventTree->Branch("csi.eflag", m_BRout.eflag, "csi.eflag[2716][2]/O");
 
-    m_tout->Branch("csi.TD", m_BRout.TD, "csi.TD[2716]/F");
-    m_tout->Branch("csi.MT", m_BRout.MT, "csi.MT[2716]/F");
+    m_eventTree->Branch("csi.TD", m_BRout.TD, "csi.TD[2716]/F");
+    m_eventTree->Branch("csi.MT", m_BRout.MT, "csi.MT[2716]/F");
 
-    m_tout->Branch("csi.isHit", m_BRout.isHit, "csi.isHit[2716]/O");
-    m_tout->Branch("csi.hitpos", m_BRout.hitpos, "csi.hitpos[2716][3]/F");
+    m_eventTree->Branch("csi.isHit", m_BRout.isHit, "csi.isHit[2716]/O");
+    m_eventTree->Branch("csi.hitpos", m_BRout.hitpos, "csi.hitpos[2716][3]/F");
 }
 
 void CsIManager::Fill(){
     for(int id=0; id<nCSI; ++id) {
         for(int side=0; side<2; ++side) {
             m_BRout.isUsed[id][side] = m_csi[id]->IsUsed(side);
-            if(!m_csi[id]->IsUsed(side)) {
-                continue;
-            }
+//            if(!m_csi[id]->IsUsed(side)) {
+//                continue;
+//            }
 
             for(int smpl=0; smpl<64; ++smpl) {
-                m_BRout.data[id][side][smpl] = (Short_t) m_csi[id]->GetData(side)[smpl];
+                m_BRout.data[id][side][smpl] = m_csi[id]->GetData(side)[smpl];
             }
             m_BRout.ped[id][side] = (Float_t) m_csi[id]->GetPedestal(side);
             m_BRout.peak[id][side] = (Float_t) m_csi[id]->GetPeak(side);
             m_BRout.integ[id][side] = (Float_t) m_csi[id]->GetIntegration(side);
             m_BRout.pt[id][side] = (Float_t) m_csi[id]->GetPeakTime(side);
             m_BRout.cft[id][side] = (Float_t) m_csi[id]->GetCFTime(side);
+            m_BRout.eflag[id][side] = m_csi[id]->GetErrorFlag(side);
         }
+
         if(m_csi[id]->IsUsed(0) && m_csi[id]->IsUsed(1)) {
-            m_BRout.TD[id] = m_csi[id]->GetTimeDiff();
-            m_BRout.MT[id] = m_csi[id]->GetMeanTime();
-            m_BRout.isHit[id] = m_csi[id]->IsHit();
+            m_BRout.TD[id] = (Float_t) m_csi[id]->GetTimeDiff();
+            m_BRout.MT[id] = (Float_t) m_csi[id]->GetMeanTime();
         }
+        m_BRout.isHit[id] = m_csi[id]->IsHit();
     }
 }
 
@@ -102,7 +104,6 @@ bool CsIManager::Init_map() {
 
 bool CsIManager::Init_DAQconfig() {
     // ADC channels
-    // find configuration files
     int fname_runID;
     for(int runID = m_runID; runID>-1; --runID) {
         std::stringstream ss;
@@ -137,13 +138,21 @@ bool CsIManager::Init_DAQconfig() {
             std::cout << filename << "\n";
         }
 
+        // if used
         int id, crate, mod, ch;
         while (ifs >> id >> crate >> mod >> ch) {
-            m_csi[id]->SetADCconfig(side, crate, mod, ch);
+            m_csi[id]->SetData(side, crate, mod, ch);
+        }
+        // if not used
+        for(int id=0; id<nCSI; ++id) {
+            for(int side=0; side<2; ++side) {
+                if(m_csi[id]->IsUsed(side)) continue;
+                m_csi[id]->SetData(side, -1, -1, -1); // all data array elements are set to zero
+            }
         }
     }
 
-    // Delays
+    // Digital delays
     for(int id=0; id < nCSI; ++id) {
         for(int side=0; side < 2; ++side) {
             int delay = 15;

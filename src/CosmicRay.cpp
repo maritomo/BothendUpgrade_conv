@@ -22,14 +22,11 @@ void CosmicRay::Delete(){
 
 CosmicRay::CosmicRay() {
     Branch();
-    m_BRout.trackID = 0;
+    m_isTracked = 0;
     for(int plane=0; plane<3; ++plane) {
         for(int par=0; par<2; ++par) {
             m_track[plane][par] = 0;
         }
-    }
-    for(int layer=0; layer<2; ++layer) {
-        m_hitTime[layer] = 0;
     }
     m_isInit = 1;
 }
@@ -39,23 +36,16 @@ CosmicRay::~CosmicRay() {
 }
 
 void CosmicRay::Branch() {
-    m_tout->Branch("cosmi.trackID", &m_BRout.trackID, "cosmi.trackID/S");
-    m_tout->Branch("cosmi.track", m_BRout.track, "cosmi.track[3][2]/F");
-    m_tout->Branch("cosmi.hitTime", m_BRout.hitTime, "cosmi.hitTime[2]/F");
+    m_eventTree->Branch("cosmi.track", m_BRout.track, "cosmi.track[3][2]/F");
 }
 
 void CosmicRay::Fill() {
-    m_BRout.trackID = (Short_t) m_trackID;
     for(int plane=0; plane<3; ++plane) {
         for(int par=0; par<2; ++par) {
             m_BRout.track[plane][par] = (Float_t) m_track[plane][par];
         }
     }
-    for(int layer=0; layer<2; ++layer) {
-        m_BRout.hitTime[layer] = (Float_t) m_hitTime[layer];
-    }
 }
-
 
 // Visualization
 void CosmicRay::Visualize() {
@@ -68,8 +58,7 @@ void CosmicRay::Visualize() {
 }
 
 void CosmicRay::Display(int plane) {
-    if(!m_trackID) {
-        std::cout << "No track\n";
+    if(!m_isTracked) {
         return;
     }
 

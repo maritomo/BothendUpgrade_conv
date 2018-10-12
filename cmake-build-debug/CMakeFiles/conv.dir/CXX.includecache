@@ -638,12 +638,6 @@ TVirtualQConnection.h
 TQClass.h
 /Users/mari/local/root/pro/include/TQClass.h
 
-/Users/mari/local/root/pro/include/TRint.h
-TApplication.h
-/Users/mari/local/root/pro/include/TApplication.h
-TString.h
-/Users/mari/local/root/pro/include/TString.h
-
 /Users/mari/local/root/pro/include/TSchemaHelper.h
 RtypesCore.h
 /Users/mari/local/root/pro/include/RtypesCore.h
@@ -892,8 +886,6 @@ fstream
 sstream
 -
 iomanip
--
-TRint.h
 -
 TFile.h
 /Users/mari/work/MPPC/install/cosmi/conv/TFile.h

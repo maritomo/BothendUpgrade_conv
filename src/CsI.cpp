@@ -23,7 +23,7 @@ CsI::CsI(int locationID, int crystalID, int lineID, double posx, double posy, in
 
   m_posres[0] = m_size[0];
   m_posres[1] = m_size[1];
-  m_posres[2] = m_size[2]/4;
+  m_posres[2] = m_size[2] * 0.1;
 
   for(int side=0; side < 2; ++side) {
     m_isUsed[side] = 0;
@@ -40,6 +40,7 @@ CsI::CsI(int locationID, int crystalID, int lineID, double posx, double posy, in
 CsI::~CsI() {}
 
 void CsI::Process() {
+  Reconstruct();
   HitDecision();
 }
 
@@ -49,15 +50,10 @@ void CsI::HitDecision() {
     m_hitpos[axis] = 0;
   }
 
-  if(!m_isUsed[0] && !m_isUsed[1]) return;
-
-  for(int side = 0; side < 2; ++side) {
-    if(m_peak[side] > 50) {
-      m_isHit = 1;
-//      m_hitpos[0] = ????;
-      m_hitpos[1] = m_pos[1];
-      m_hitpos[2] = m_pos[2];
-      break;
-    }
+  if(m_peak[1] > 100) {
+    m_isHit = 1;
+    m_hitpos[0] = m_pos[0];
+    m_hitpos[1] = m_pos[1];
   }
+
 }

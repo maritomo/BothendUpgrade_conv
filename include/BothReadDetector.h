@@ -17,7 +17,7 @@ class BothReadDetector : public TreeManager, public Visualizer {
     virtual void Process() = 0;
     virtual void Reconstruct();
 
-    void SetADCconfig(int side, int crate, int mod, int ch);
+    void SetData(int side, int crate, int mod, int ch);
     void SetDelay(int side, int delay) { m_delay[side] = delay; }
     void SetHitpos(double* hitpos) { for(int axis=0; axis<3; ++axis) {m_hitpos[axis] = hitpos[axis];} }
 
@@ -31,13 +31,15 @@ class BothReadDetector : public TreeManager, public Visualizer {
     double GetIntegration(int side) { return m_integ[side]; }
     double GetPeakTime(int side) { return m_pt[side]; }
     double GetCFTime(int side) { return m_cft[side]; }
-    double GetErrorFlag(int side) { return m_errflag[side]; }
+    bool GetErrorFlag(int side) { return m_eflag[side]; }
+
     double GetTimeDiff() { return m_TD; }
     double GetMeanTime() { return m_MT; }
+
     bool IsHit() { return m_isHit; }
     double GetHitPosition(int axis) { return m_hitpos[axis]; }
 
-    void GetCFTimeime(int side); // delays are subtracted in this function
+    void CalculateCFTime(int side); // delays are subtracted in this function
     short GetMax(int nSmpl, const short* data);
 
     // Visualization
@@ -61,7 +63,7 @@ class BothReadDetector : public TreeManager, public Visualizer {
     double m_integ[2];
     double m_pt[2];
     double m_cft[2];
-    int m_errflag[2];
+    bool m_eflag[2];
 
     double m_TD;  // timing difference
     double m_MT;  // mean time

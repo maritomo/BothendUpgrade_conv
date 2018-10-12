@@ -6,21 +6,28 @@
 
 #include "TreeManager.h"
 
-int TreeManager::m_runID;
 std::vector<TTree*> TreeManager::m_tin;
-TTree* TreeManager::m_tout;
+TTree* TreeManager::m_eventTree;
+TTree* TreeManager::m_statusTree;
+
+int TreeManager::m_runID = 0;
 std::vector<InputBranchContainer> TreeManager::m_BRin;
 std::vector<std::vector<int>> TreeManager::m_entry;
 std::vector<int> TreeManager::m_tDeltaTrigger;
-
-
 bool TreeManager::m_isInit = 0;
+
 
 void TreeManager::SetRunID(int runID) {
     m_runID = runID;
 }
 
 void TreeManager::SetInputTrees(int N, TTree** tree) {
+    if(!m_isInit) {
+        m_eventTree = new TTree("eventTree", Form("run%d", m_runID));
+        m_statusTree = new TTree("statusTree", Form("run%d", m_runID));
+        m_isInit = 1;
+    }
+
     m_tin.resize(N);
     m_BRin.resize(N);
     for(int k=0; k<N; ++k) {
@@ -31,6 +38,12 @@ void TreeManager::SetInputTrees(int N, TTree** tree) {
 }
 
 void TreeManager::AddInputTree(TTree* tree) {
+    if(!m_isInit) {
+        m_eventTree = new TTree("eventTree", Form("run%d", m_runID));
+        m_statusTree = new TTree("statusTree", Form("run%d", m_runID));
+        m_isInit = 1;
+    }
+
     m_tin.push_back(tree);
     if(m_BRin.size()==0) m_BRin.resize(16);
 
@@ -39,8 +52,24 @@ void TreeManager::AddInputTree(TTree* tree) {
     m_tin[index]->SetBranchAddress("Timestamp", &m_BRin[index].Timestamp);
 }
 
-void TreeManager::SetOutputTree(TTree* tout) {
-    m_tout = tout;
+//void TreeManager::SetOutputTree(TTree* tout) {
+//    m_eventTree = tout;
+//}
+
+TTree* TreeManager::GetEventTree() {
+    if(!m_isInit) {
+        std::cout << "TreeManager::AddInputTree or TreeManager::SetInputTrees() were not called\n";
+        return nullptr;
+    }
+    return m_eventTree;
+}
+
+TTree* TreeManager::GetStatusTree() {
+    if(!m_isInit) {
+        std::cout << "TreeManager::AddInputTree or TreeManager::SetInputTrees() were not called\n";
+        return nullptr;
+    }
+    return m_statusTree;
 }
 
 void TreeManager::CheckTimeStamp() {
@@ -78,7 +107,7 @@ void TreeManager::CheckTimeStamp() {
     /* Scan all events */
     while(1) {
         // end
-        int end_flag = 0;
+        bool end_flag = 0;
         for(int k = 0; k < nTree; ++k) {
             if(entry[k] >= m_tin[k]->GetEntries()) {
                 end_flag = 1;
@@ -88,7 +117,7 @@ void TreeManager::CheckTimeStamp() {
         if(end_flag) break;
 
         // skip some events
-        int continue_flag = 0;
+        bool continue_flag = 0;
 
         // delta trigger events
         for(int k = 0; k < nTree; ++k) {
@@ -231,7 +260,8 @@ int TreeManager::GetEntries() {
 }
 
 void TreeManager::Fill() {
-    m_tout->Fill();
+    m_eventTree->Fill();
+    m_statusTree->Fill();
 }
 
 int TreeManager::Max(int N, const int* data) {
