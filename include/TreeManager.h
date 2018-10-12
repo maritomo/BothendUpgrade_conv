@@ -40,7 +40,7 @@ class TreeManager {
     static TTree* m_eventTree;
     static TTree* m_statusTree;
 
-    static std::vector<std::vector<int>> m_entry; // event# of synchronized events
+    static std::vector<std::vector<int> > m_entry; // event# of synchronized events
     static std::vector<int> m_tDeltaTrigger;
 
   private:

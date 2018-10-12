@@ -1,0 +1,74 @@
+Sender: LSF System <lsfadmin@cb146>
+Subject: Job 98975360: <./conv 1210> in cluster <centralcluster> Done
+
+Job <./conv 1210> was submitted from host <cw11> by user <tomoo> in cluster <centralcluster> at Wed Oct 10 11:40:33 2018
+Job was executed on host(s) <cb146>, in queue <s>, as user <tomoo> in cluster <centralcluster> at Wed Oct 10 11:40:34 2018
+</home/had/tomoo> was used as the home directory.
+</home/had/tomoo/conv/source/current> was used as the working directory.
+Started at Wed Oct 10 11:40:34 2018
+Terminated at Wed Oct 10 11:44:07 2018
+Results reported at Wed Oct 10 11:44:07 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+./conv 1210
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   206.78 sec.
+    Max Memory :                                 1182 MB
+    Average Memory :                             1108.93 MB
+    Total Requested Memory :                     4000.00 MB
+    Delta Memory :                               2818.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                4
+    Run time :                                   212 sec.
+    Turnaround time :                            214 sec.
+
+The output (if any) follows:
+
+Run1210
+Initializing cosmic trigger system ----------
+Trigger counter map             [OK]
+CsI map                         [OK]
+Channel delays                  [OK]
+(scinti. 3 not found)
+(scinti. 4 not found)
+(scinti. 5 not found)
+(scinti. 14 not found)
+Calibration constants           [OK]
+Hit condition parameters        [OK]
+./data/ADCchMap/run1204_mppc.txt
+./data/ADCchMap/run1204_pmt.txt
+----------- Cosmic trigger system initialized
+
+Checking timestamps -------------------------
+1000th
+2000th
+3000th
+4000th
+5000th
+6000th
+7000th
+8000th
+----------------------------------------- fin
+
+# of surviving events    8870 (64.4%)
+
+Scan entries --------------------------------
+0th
+1000th
+2000th
+3000th
+4000th
+5000th
+6000th
+7000th
+8000th
+------------------------------------------fin

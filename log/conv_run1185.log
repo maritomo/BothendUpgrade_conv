@@ -1,0 +1,36 @@
+Sender: LSF System <lsfadmin@cb049>
+Subject: Job 98974089: <./conv 1185> in cluster <centralcluster> Exited
+
+Job <./conv 1185> was submitted from host <cw11> by user <tomoo> in cluster <centralcluster> at Wed Oct 10 11:15:07 2018
+Job was executed on host(s) <cb049>, in queue <s>, as user <tomoo> in cluster <centralcluster> at Wed Oct 10 11:15:09 2018
+</home/had/tomoo> was used as the home directory.
+</home/had/tomoo/conv/source/current> was used as the working directory.
+Started at Wed Oct 10 11:15:09 2018
+Terminated at Wed Oct 10 11:17:36 2018
+Results reported at Wed Oct 10 11:17:36 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+./conv 1185
+------------------------------------------------------------
+
+TERM_OWNER: job killed by owner.
+Exited with exit code 130.
+
+Resource usage summary:
+
+    CPU time :                                   139.99 sec.
+    Max Memory :                                 583 MB
+    Average Memory :                             546.75 MB
+    Total Requested Memory :                     4000.00 MB
+    Delta Memory :                               3417.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                4
+    Run time :                                   148 sec.
+    Turnaround time :                            149 sec.
+
+The output (if any) follows:
+

@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
+
 #include "CsIManager.h"
 
 CsIManager::CsIManager() {
@@ -206,7 +208,7 @@ void CsIManager::Display(int plane) {
         m_csi[id]->Display(plane);
     }
 
-    for(auto itr=usedCSI.begin(); itr!=usedCSI.end(); ++itr) {
+    for(std::vector<CsI*>::iterator itr=usedCSI.begin(); itr!=usedCSI.end(); ++itr) {
         (*itr)->Display(plane);
     }
 

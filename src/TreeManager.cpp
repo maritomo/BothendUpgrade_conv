@@ -12,7 +12,7 @@ TTree* TreeManager::m_statusTree;
 
 int TreeManager::m_runID = 0;
 std::vector<InputBranchContainer> TreeManager::m_BRin;
-std::vector<std::vector<int>> TreeManager::m_entry;
+std::vector<std::vector<int> > TreeManager::m_entry;
 std::vector<int> TreeManager::m_tDeltaTrigger;
 bool TreeManager::m_isInit = 0;
 
