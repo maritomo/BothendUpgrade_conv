@@ -876,9 +876,11 @@ unistd.h
 sys/types.h
 -
 
-/Users/mari/work/MPPC/install/cosmi/conv/conv.cpp
+/Users/mari/work/MPPC/upgrade/cosmi/conv/conv.cpp
+TreeManager.h
+/Users/mari/work/MPPC/upgrade/cosmi/conv/TreeManager.h
 Converter.h
-/Users/mari/work/MPPC/install/cosmi/conv/Converter.h
+/Users/mari/work/MPPC/upgrade/cosmi/conv/Converter.h
 iostream
 -
 fstream
@@ -888,17 +890,17 @@ sstream
 iomanip
 -
 TFile.h
-/Users/mari/work/MPPC/install/cosmi/conv/TFile.h
+/Users/mari/work/MPPC/upgrade/cosmi/conv/TFile.h
 TTree.h
-/Users/mari/work/MPPC/install/cosmi/conv/TTree.h
+/Users/mari/work/MPPC/upgrade/cosmi/conv/TTree.h
 TText.h
-/Users/mari/work/MPPC/install/cosmi/conv/TText.h
+/Users/mari/work/MPPC/upgrade/cosmi/conv/TText.h
 TApplication.h
-/Users/mari/work/MPPC/install/cosmi/conv/TApplication.h
+/Users/mari/work/MPPC/upgrade/cosmi/conv/TApplication.h
 TSystem.h
-/Users/mari/work/MPPC/install/cosmi/conv/TSystem.h
+/Users/mari/work/MPPC/upgrade/cosmi/conv/TSystem.h
 
-/Users/mari/work/MPPC/install/cosmi/conv/src/BothReadDetector.cpp
+/Users/mari/work/MPPC/upgrade/cosmi/conv/src/BothReadDetector.cpp
 TString.h
 -
 iostream
@@ -906,43 +908,45 @@ iostream
 cmath
 -
 BothReadDetector.h
-/Users/mari/work/MPPC/install/cosmi/conv/src/BothReadDetector.h
+/Users/mari/work/MPPC/upgrade/cosmi/conv/src/BothReadDetector.h
 
-/Users/mari/work/MPPC/install/cosmi/conv/src/Converter.cpp
+/Users/mari/work/MPPC/upgrade/cosmi/conv/src/Converter.cpp
 iostream
 -
 Converter.h
-/Users/mari/work/MPPC/install/cosmi/conv/src/Converter.h
+/Users/mari/work/MPPC/upgrade/cosmi/conv/src/Converter.h
 
-/Users/mari/work/MPPC/install/cosmi/conv/src/CosmicRay.cpp
+/Users/mari/work/MPPC/upgrade/cosmi/conv/src/CosmicRay.cpp
 iostream
 -
 CosmicRay.h
-/Users/mari/work/MPPC/install/cosmi/conv/src/CosmicRay.h
+/Users/mari/work/MPPC/upgrade/cosmi/conv/src/CosmicRay.h
 
-/Users/mari/work/MPPC/install/cosmi/conv/src/CsI.cpp
+/Users/mari/work/MPPC/upgrade/cosmi/conv/src/CsI.cpp
 fstream
 -
 iostream
 -
 CsI.h
-/Users/mari/work/MPPC/install/cosmi/conv/src/CsI.h
+/Users/mari/work/MPPC/upgrade/cosmi/conv/src/CsI.h
 
-/Users/mari/work/MPPC/install/cosmi/conv/src/CsIManager.cpp
+/Users/mari/work/MPPC/upgrade/cosmi/conv/src/CsIManager.cpp
 iostream
 -
 fstream
 -
+sstream
+-
 CsIManager.h
-/Users/mari/work/MPPC/install/cosmi/conv/src/CsIManager.h
+/Users/mari/work/MPPC/upgrade/cosmi/conv/src/CsIManager.h
 
-/Users/mari/work/MPPC/install/cosmi/conv/src/TreeManager.cpp
+/Users/mari/work/MPPC/upgrade/cosmi/conv/src/TreeManager.cpp
 iostream
 -
 TreeManager.h
-/Users/mari/work/MPPC/install/cosmi/conv/src/TreeManager.h
+/Users/mari/work/MPPC/upgrade/cosmi/conv/src/TreeManager.h
 
-/Users/mari/work/MPPC/install/cosmi/conv/src/TriggerCounter.cpp
+/Users/mari/work/MPPC/upgrade/cosmi/conv/src/TriggerCounter.cpp
 iostream
 -
 sstream
@@ -950,9 +954,9 @@ sstream
 cmath
 -
 TriggerCounter.h
-/Users/mari/work/MPPC/install/cosmi/conv/src/TriggerCounter.h
+/Users/mari/work/MPPC/upgrade/cosmi/conv/src/TriggerCounter.h
 
-/Users/mari/work/MPPC/install/cosmi/conv/src/TriggerManager.cpp
+/Users/mari/work/MPPC/upgrade/cosmi/conv/src/TriggerManager.cpp
 iostream
 -
 fstream
@@ -960,11 +964,11 @@ fstream
 TMath.h
 -
 TriggerManager.h
-/Users/mari/work/MPPC/install/cosmi/conv/src/TriggerManager.h
+/Users/mari/work/MPPC/upgrade/cosmi/conv/src/TriggerManager.h
 
-/Users/mari/work/MPPC/install/cosmi/conv/src/Visualizer.cpp
+/Users/mari/work/MPPC/upgrade/cosmi/conv/src/Visualizer.cpp
 iostream
 -
 Visualizer.h
-/Users/mari/work/MPPC/install/cosmi/conv/src/Visualizer.h
+/Users/mari/work/MPPC/upgrade/cosmi/conv/src/Visualizer.h
 

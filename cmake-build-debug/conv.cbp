@@ -8,43 +8,43 @@
 		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\local\;CMake Files\..\..\..\..\..\local\root\;CMake Files\..\..\..\..\..\local\root\pro\;CMake Files\..\..\..\..\..\local\root\pro\cmake\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug"/>
+				<Option working_dir="/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug"/>
+				<Option working_dir="/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug"/>
+				<Option working_dir="/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="conv">
-				<Option output="/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/conv" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug"/>
+				<Option output="/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/conv" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/mari/work/MPPC/install/cosmi/conv/include"/>
+					<Add directory="/Users/mari/work/MPPC/upgrade/cosmi/conv/include"/>
 					<Add directory="/Users/mari/local/root/pro/include"/>
 					<Add directory="."/>
 					<Add directory="/Users/mari/work/cpplib/include"/>
@@ -58,20 +58,20 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 conv"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 conv"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="conv/fast">
-				<Option output="/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/conv" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug"/>
+				<Option output="/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/conv" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/mari/work/MPPC/install/cosmi/conv/include"/>
+					<Add directory="/Users/mari/work/MPPC/upgrade/cosmi/conv/include"/>
 					<Add directory="/Users/mari/local/root/pro/include"/>
 					<Add directory="."/>
 					<Add directory="/Users/mari/work/cpplib/include"/>
@@ -85,56 +85,56 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 conv/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 conv/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/mari/work/MPPC/install/cosmi/conv/conv.cpp">
+		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/conv.cpp">
 			<Option target="conv"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/MPPC/install/cosmi/conv/src/BothReadDetector.cpp">
+		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/BothReadDetector.cpp">
 			<Option target="conv"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/MPPC/install/cosmi/conv/src/Converter.cpp">
+		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/Converter.cpp">
 			<Option target="conv"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/MPPC/install/cosmi/conv/src/CosmicRay.cpp">
+		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/CosmicRay.cpp">
 			<Option target="conv"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/MPPC/install/cosmi/conv/src/CsI.cpp">
+		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/CsI.cpp">
 			<Option target="conv"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/MPPC/install/cosmi/conv/src/CsIManager.cpp">
+		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/CsIManager.cpp">
 			<Option target="conv"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/MPPC/install/cosmi/conv/src/TreeManager.cpp">
+		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/TreeManager.cpp">
 			<Option target="conv"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/MPPC/install/cosmi/conv/src/TriggerCounter.cpp">
+		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/TriggerCounter.cpp">
 			<Option target="conv"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/MPPC/install/cosmi/conv/src/TriggerManager.cpp">
+		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/TriggerManager.cpp">
 			<Option target="conv"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/MPPC/install/cosmi/conv/src/Visualizer.cpp">
+		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/Visualizer.cpp">
 			<Option target="conv"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/MPPC/install/cosmi/conv/CMakeLists.txt">
+		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/MPPC/install/cosmi/conv/../../../../../local/root/pro/cmake/ROOTConfig-version.cmake">
+		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/../../../../../local/root/pro/cmake/ROOTConfig-version.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\..\local\root\pro\cmake\"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/MPPC/install/cosmi/conv/../../../../../local/root/pro/cmake/ROOTConfig.cmake">
+		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/../../../../../local/root/pro/cmake/ROOTConfig.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\..\local\root\pro\cmake\"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/MPPC/install/cosmi/conv/../../../../../local/root/pro/cmake/ROOTConfig-targets.cmake">
+		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/../../../../../local/root/pro/cmake/ROOTConfig-targets.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\..\local\root\pro\cmake\"/>
 		</Unit>
-		<Unit filename="/Users/mari/work/MPPC/install/cosmi/conv/../../../../../local/root/pro/cmake/ROOTConfig-targets-release.cmake">
+		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/../../../../../local/root/pro/cmake/ROOTConfig-targets-release.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\..\local\root\pro\cmake\"/>
 		</Unit>
 	</Project>

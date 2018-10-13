@@ -77,7 +77,7 @@ void TreeManager::CheckTimeStamp() {
 
     const int nTree = m_tin.size();
     if(nTree < 2) {
-        std::cout << "Error: # of trees should be >= 2\n";
+        std::cout << "[Error] # of trees should be >= 2\n";
         return;
     }
 

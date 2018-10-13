@@ -106,7 +106,7 @@ CMakeFiles/conv.dir/conv.cpp.o
  /Users/mari/local/root/pro/include/libcpp_string_view.h
  /Users/mari/local/root/pro/include/snprintf.h
  /Users/mari/local/root/pro/include/strlcpy.h
- /Users/mari/work/MPPC/install/cosmi/conv/conv.cpp
+ /Users/mari/work/MPPC/upgrade/cosmi/conv/conv.cpp
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o
  ../include/BothReadDetector.h
  ../include/TreeManager.h
@@ -190,7 +190,7 @@ CMakeFiles/conv.dir/src/BothReadDetector.cpp.o
  /Users/mari/local/root/pro/include/libcpp_string_view.h
  /Users/mari/local/root/pro/include/snprintf.h
  /Users/mari/local/root/pro/include/strlcpy.h
- /Users/mari/work/MPPC/install/cosmi/conv/src/BothReadDetector.cpp
+ /Users/mari/work/MPPC/upgrade/cosmi/conv/src/BothReadDetector.cpp
 CMakeFiles/conv.dir/src/Converter.cpp.o
  ../include/BothReadDetector.h
  ../include/Converter.h
@@ -281,7 +281,7 @@ CMakeFiles/conv.dir/src/Converter.cpp.o
  /Users/mari/local/root/pro/include/libcpp_string_view.h
  /Users/mari/local/root/pro/include/snprintf.h
  /Users/mari/local/root/pro/include/strlcpy.h
- /Users/mari/work/MPPC/install/cosmi/conv/src/Converter.cpp
+ /Users/mari/work/MPPC/upgrade/cosmi/conv/src/Converter.cpp
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o
  ../include/CosmicRay.h
  ../include/TreeManager.h
@@ -365,7 +365,7 @@ CMakeFiles/conv.dir/src/CosmicRay.cpp.o
  /Users/mari/local/root/pro/include/libcpp_string_view.h
  /Users/mari/local/root/pro/include/snprintf.h
  /Users/mari/local/root/pro/include/strlcpy.h
- /Users/mari/work/MPPC/install/cosmi/conv/src/CosmicRay.cpp
+ /Users/mari/work/MPPC/upgrade/cosmi/conv/src/CosmicRay.cpp
 CMakeFiles/conv.dir/src/CsI.cpp.o
  ../include/BothReadDetector.h
  ../include/CsI.h
@@ -450,7 +450,7 @@ CMakeFiles/conv.dir/src/CsI.cpp.o
  /Users/mari/local/root/pro/include/libcpp_string_view.h
  /Users/mari/local/root/pro/include/snprintf.h
  /Users/mari/local/root/pro/include/strlcpy.h
- /Users/mari/work/MPPC/install/cosmi/conv/src/CsI.cpp
+ /Users/mari/work/MPPC/upgrade/cosmi/conv/src/CsI.cpp
 CMakeFiles/conv.dir/src/CsIManager.cpp.o
  ../include/BothReadDetector.h
  ../include/CosmicRay.h
@@ -538,7 +538,7 @@ CMakeFiles/conv.dir/src/CsIManager.cpp.o
  /Users/mari/local/root/pro/include/libcpp_string_view.h
  /Users/mari/local/root/pro/include/snprintf.h
  /Users/mari/local/root/pro/include/strlcpy.h
- /Users/mari/work/MPPC/install/cosmi/conv/src/CsIManager.cpp
+ /Users/mari/work/MPPC/upgrade/cosmi/conv/src/CsIManager.cpp
 CMakeFiles/conv.dir/src/TreeManager.cpp.o
  ../include/TreeManager.h
  /Users/mari/local/root/pro/include/DllImport.h
@@ -591,7 +591,7 @@ CMakeFiles/conv.dir/src/TreeManager.cpp.o
  /Users/mari/local/root/pro/include/libcpp_string_view.h
  /Users/mari/local/root/pro/include/snprintf.h
  /Users/mari/local/root/pro/include/strlcpy.h
- /Users/mari/work/MPPC/install/cosmi/conv/src/TreeManager.cpp
+ /Users/mari/work/MPPC/upgrade/cosmi/conv/src/TreeManager.cpp
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o
  ../include/BothReadDetector.h
  ../include/TreeManager.h
@@ -676,7 +676,7 @@ CMakeFiles/conv.dir/src/TriggerCounter.cpp.o
  /Users/mari/local/root/pro/include/libcpp_string_view.h
  /Users/mari/local/root/pro/include/snprintf.h
  /Users/mari/local/root/pro/include/strlcpy.h
- /Users/mari/work/MPPC/install/cosmi/conv/src/TriggerCounter.cpp
+ /Users/mari/work/MPPC/upgrade/cosmi/conv/src/TriggerCounter.cpp
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o
  ../include/BothReadDetector.h
  ../include/CosmicRay.h
@@ -765,7 +765,7 @@ CMakeFiles/conv.dir/src/TriggerManager.cpp.o
  /Users/mari/local/root/pro/include/libcpp_string_view.h
  /Users/mari/local/root/pro/include/snprintf.h
  /Users/mari/local/root/pro/include/strlcpy.h
- /Users/mari/work/MPPC/install/cosmi/conv/src/TriggerManager.cpp
+ /Users/mari/work/MPPC/upgrade/cosmi/conv/src/TriggerManager.cpp
 CMakeFiles/conv.dir/src/Visualizer.cpp.o
  ../include/Visualizer.h
  /Users/mari/local/root/pro/include/Buttons.h
@@ -835,4 +835,4 @@ CMakeFiles/conv.dir/src/Visualizer.cpp.o
  /Users/mari/local/root/pro/include/libcpp_string_view.h
  /Users/mari/local/root/pro/include/snprintf.h
  /Users/mari/local/root/pro/include/strlcpy.h
- /Users/mari/work/MPPC/install/cosmi/conv/src/Visualizer.cpp
+ /Users/mari/work/MPPC/upgrade/cosmi/conv/src/Visualizer.cpp

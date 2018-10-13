@@ -43,10 +43,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/mari/work/MPPC/install/cosmi/conv
+CMAKE_SOURCE_DIR = /Users/mari/work/MPPC/upgrade/cosmi/conv
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/conv.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/conv.dir/flags.make
 
 CMakeFiles/conv.dir/conv.cpp.o: CMakeFiles/conv.dir/flags.make
 CMakeFiles/conv.dir/conv.cpp.o: ../conv.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/conv.dir/conv.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/conv.cpp.o -c /Users/mari/work/MPPC/install/cosmi/conv/conv.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/conv.dir/conv.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/conv.cpp.o -c /Users/mari/work/MPPC/upgrade/cosmi/conv/conv.cpp
 
 CMakeFiles/conv.dir/conv.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/conv.dir/conv.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/install/cosmi/conv/conv.cpp > CMakeFiles/conv.dir/conv.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/upgrade/cosmi/conv/conv.cpp > CMakeFiles/conv.dir/conv.cpp.i
 
 CMakeFiles/conv.dir/conv.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/conv.dir/conv.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/install/cosmi/conv/conv.cpp -o CMakeFiles/conv.dir/conv.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/upgrade/cosmi/conv/conv.cpp -o CMakeFiles/conv.dir/conv.cpp.s
 
 CMakeFiles/conv.dir/conv.cpp.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/conv.dir/conv.cpp.o.provides.build: CMakeFiles/conv.dir/conv.cpp.o
 
 CMakeFiles/conv.dir/src/TreeManager.cpp.o: CMakeFiles/conv.dir/flags.make
 CMakeFiles/conv.dir/src/TreeManager.cpp.o: ../src/TreeManager.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/conv.dir/src/TreeManager.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/TreeManager.cpp.o -c /Users/mari/work/MPPC/install/cosmi/conv/src/TreeManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/conv.dir/src/TreeManager.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/TreeManager.cpp.o -c /Users/mari/work/MPPC/upgrade/cosmi/conv/src/TreeManager.cpp
 
 CMakeFiles/conv.dir/src/TreeManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/conv.dir/src/TreeManager.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/install/cosmi/conv/src/TreeManager.cpp > CMakeFiles/conv.dir/src/TreeManager.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/upgrade/cosmi/conv/src/TreeManager.cpp > CMakeFiles/conv.dir/src/TreeManager.cpp.i
 
 CMakeFiles/conv.dir/src/TreeManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/conv.dir/src/TreeManager.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/install/cosmi/conv/src/TreeManager.cpp -o CMakeFiles/conv.dir/src/TreeManager.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/upgrade/cosmi/conv/src/TreeManager.cpp -o CMakeFiles/conv.dir/src/TreeManager.cpp.s
 
 CMakeFiles/conv.dir/src/TreeManager.cpp.o.requires:
 
@@ -107,16 +107,16 @@ CMakeFiles/conv.dir/src/TreeManager.cpp.o.provides.build: CMakeFiles/conv.dir/sr
 
 CMakeFiles/conv.dir/src/Visualizer.cpp.o: CMakeFiles/conv.dir/flags.make
 CMakeFiles/conv.dir/src/Visualizer.cpp.o: ../src/Visualizer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/conv.dir/src/Visualizer.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/Visualizer.cpp.o -c /Users/mari/work/MPPC/install/cosmi/conv/src/Visualizer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/conv.dir/src/Visualizer.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/Visualizer.cpp.o -c /Users/mari/work/MPPC/upgrade/cosmi/conv/src/Visualizer.cpp
 
 CMakeFiles/conv.dir/src/Visualizer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/conv.dir/src/Visualizer.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/install/cosmi/conv/src/Visualizer.cpp > CMakeFiles/conv.dir/src/Visualizer.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/upgrade/cosmi/conv/src/Visualizer.cpp > CMakeFiles/conv.dir/src/Visualizer.cpp.i
 
 CMakeFiles/conv.dir/src/Visualizer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/conv.dir/src/Visualizer.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/install/cosmi/conv/src/Visualizer.cpp -o CMakeFiles/conv.dir/src/Visualizer.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/upgrade/cosmi/conv/src/Visualizer.cpp -o CMakeFiles/conv.dir/src/Visualizer.cpp.s
 
 CMakeFiles/conv.dir/src/Visualizer.cpp.o.requires:
 
@@ -131,16 +131,16 @@ CMakeFiles/conv.dir/src/Visualizer.cpp.o.provides.build: CMakeFiles/conv.dir/src
 
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: CMakeFiles/conv.dir/flags.make
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: ../src/BothReadDetector.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/conv.dir/src/BothReadDetector.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/BothReadDetector.cpp.o -c /Users/mari/work/MPPC/install/cosmi/conv/src/BothReadDetector.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/conv.dir/src/BothReadDetector.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/BothReadDetector.cpp.o -c /Users/mari/work/MPPC/upgrade/cosmi/conv/src/BothReadDetector.cpp
 
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/conv.dir/src/BothReadDetector.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/install/cosmi/conv/src/BothReadDetector.cpp > CMakeFiles/conv.dir/src/BothReadDetector.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/upgrade/cosmi/conv/src/BothReadDetector.cpp > CMakeFiles/conv.dir/src/BothReadDetector.cpp.i
 
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/conv.dir/src/BothReadDetector.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/install/cosmi/conv/src/BothReadDetector.cpp -o CMakeFiles/conv.dir/src/BothReadDetector.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/upgrade/cosmi/conv/src/BothReadDetector.cpp -o CMakeFiles/conv.dir/src/BothReadDetector.cpp.s
 
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o.requires:
 
@@ -155,16 +155,16 @@ CMakeFiles/conv.dir/src/BothReadDetector.cpp.o.provides.build: CMakeFiles/conv.d
 
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: CMakeFiles/conv.dir/flags.make
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: ../src/CosmicRay.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/conv.dir/src/CosmicRay.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/CosmicRay.cpp.o -c /Users/mari/work/MPPC/install/cosmi/conv/src/CosmicRay.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/conv.dir/src/CosmicRay.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/CosmicRay.cpp.o -c /Users/mari/work/MPPC/upgrade/cosmi/conv/src/CosmicRay.cpp
 
 CMakeFiles/conv.dir/src/CosmicRay.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/conv.dir/src/CosmicRay.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/install/cosmi/conv/src/CosmicRay.cpp > CMakeFiles/conv.dir/src/CosmicRay.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/upgrade/cosmi/conv/src/CosmicRay.cpp > CMakeFiles/conv.dir/src/CosmicRay.cpp.i
 
 CMakeFiles/conv.dir/src/CosmicRay.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/conv.dir/src/CosmicRay.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/install/cosmi/conv/src/CosmicRay.cpp -o CMakeFiles/conv.dir/src/CosmicRay.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/upgrade/cosmi/conv/src/CosmicRay.cpp -o CMakeFiles/conv.dir/src/CosmicRay.cpp.s
 
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o.requires:
 
@@ -179,16 +179,16 @@ CMakeFiles/conv.dir/src/CosmicRay.cpp.o.provides.build: CMakeFiles/conv.dir/src/
 
 CMakeFiles/conv.dir/src/Converter.cpp.o: CMakeFiles/conv.dir/flags.make
 CMakeFiles/conv.dir/src/Converter.cpp.o: ../src/Converter.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/conv.dir/src/Converter.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/Converter.cpp.o -c /Users/mari/work/MPPC/install/cosmi/conv/src/Converter.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/conv.dir/src/Converter.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/Converter.cpp.o -c /Users/mari/work/MPPC/upgrade/cosmi/conv/src/Converter.cpp
 
 CMakeFiles/conv.dir/src/Converter.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/conv.dir/src/Converter.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/install/cosmi/conv/src/Converter.cpp > CMakeFiles/conv.dir/src/Converter.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/upgrade/cosmi/conv/src/Converter.cpp > CMakeFiles/conv.dir/src/Converter.cpp.i
 
 CMakeFiles/conv.dir/src/Converter.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/conv.dir/src/Converter.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/install/cosmi/conv/src/Converter.cpp -o CMakeFiles/conv.dir/src/Converter.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/upgrade/cosmi/conv/src/Converter.cpp -o CMakeFiles/conv.dir/src/Converter.cpp.s
 
 CMakeFiles/conv.dir/src/Converter.cpp.o.requires:
 
@@ -203,16 +203,16 @@ CMakeFiles/conv.dir/src/Converter.cpp.o.provides.build: CMakeFiles/conv.dir/src/
 
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: CMakeFiles/conv.dir/flags.make
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: ../src/TriggerManager.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/conv.dir/src/TriggerManager.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/TriggerManager.cpp.o -c /Users/mari/work/MPPC/install/cosmi/conv/src/TriggerManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/conv.dir/src/TriggerManager.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/TriggerManager.cpp.o -c /Users/mari/work/MPPC/upgrade/cosmi/conv/src/TriggerManager.cpp
 
 CMakeFiles/conv.dir/src/TriggerManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/conv.dir/src/TriggerManager.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/install/cosmi/conv/src/TriggerManager.cpp > CMakeFiles/conv.dir/src/TriggerManager.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/upgrade/cosmi/conv/src/TriggerManager.cpp > CMakeFiles/conv.dir/src/TriggerManager.cpp.i
 
 CMakeFiles/conv.dir/src/TriggerManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/conv.dir/src/TriggerManager.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/install/cosmi/conv/src/TriggerManager.cpp -o CMakeFiles/conv.dir/src/TriggerManager.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/upgrade/cosmi/conv/src/TriggerManager.cpp -o CMakeFiles/conv.dir/src/TriggerManager.cpp.s
 
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o.requires:
 
@@ -227,16 +227,16 @@ CMakeFiles/conv.dir/src/TriggerManager.cpp.o.provides.build: CMakeFiles/conv.dir
 
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: CMakeFiles/conv.dir/flags.make
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: ../src/TriggerCounter.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/conv.dir/src/TriggerCounter.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/TriggerCounter.cpp.o -c /Users/mari/work/MPPC/install/cosmi/conv/src/TriggerCounter.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/conv.dir/src/TriggerCounter.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/TriggerCounter.cpp.o -c /Users/mari/work/MPPC/upgrade/cosmi/conv/src/TriggerCounter.cpp
 
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/conv.dir/src/TriggerCounter.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/install/cosmi/conv/src/TriggerCounter.cpp > CMakeFiles/conv.dir/src/TriggerCounter.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/upgrade/cosmi/conv/src/TriggerCounter.cpp > CMakeFiles/conv.dir/src/TriggerCounter.cpp.i
 
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/conv.dir/src/TriggerCounter.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/install/cosmi/conv/src/TriggerCounter.cpp -o CMakeFiles/conv.dir/src/TriggerCounter.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/upgrade/cosmi/conv/src/TriggerCounter.cpp -o CMakeFiles/conv.dir/src/TriggerCounter.cpp.s
 
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o.requires:
 
@@ -251,16 +251,16 @@ CMakeFiles/conv.dir/src/TriggerCounter.cpp.o.provides.build: CMakeFiles/conv.dir
 
 CMakeFiles/conv.dir/src/CsIManager.cpp.o: CMakeFiles/conv.dir/flags.make
 CMakeFiles/conv.dir/src/CsIManager.cpp.o: ../src/CsIManager.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/conv.dir/src/CsIManager.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/CsIManager.cpp.o -c /Users/mari/work/MPPC/install/cosmi/conv/src/CsIManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/conv.dir/src/CsIManager.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/CsIManager.cpp.o -c /Users/mari/work/MPPC/upgrade/cosmi/conv/src/CsIManager.cpp
 
 CMakeFiles/conv.dir/src/CsIManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/conv.dir/src/CsIManager.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/install/cosmi/conv/src/CsIManager.cpp > CMakeFiles/conv.dir/src/CsIManager.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/upgrade/cosmi/conv/src/CsIManager.cpp > CMakeFiles/conv.dir/src/CsIManager.cpp.i
 
 CMakeFiles/conv.dir/src/CsIManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/conv.dir/src/CsIManager.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/install/cosmi/conv/src/CsIManager.cpp -o CMakeFiles/conv.dir/src/CsIManager.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/upgrade/cosmi/conv/src/CsIManager.cpp -o CMakeFiles/conv.dir/src/CsIManager.cpp.s
 
 CMakeFiles/conv.dir/src/CsIManager.cpp.o.requires:
 
@@ -275,16 +275,16 @@ CMakeFiles/conv.dir/src/CsIManager.cpp.o.provides.build: CMakeFiles/conv.dir/src
 
 CMakeFiles/conv.dir/src/CsI.cpp.o: CMakeFiles/conv.dir/flags.make
 CMakeFiles/conv.dir/src/CsI.cpp.o: ../src/CsI.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/conv.dir/src/CsI.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/CsI.cpp.o -c /Users/mari/work/MPPC/install/cosmi/conv/src/CsI.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/conv.dir/src/CsI.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/conv.dir/src/CsI.cpp.o -c /Users/mari/work/MPPC/upgrade/cosmi/conv/src/CsI.cpp
 
 CMakeFiles/conv.dir/src/CsI.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/conv.dir/src/CsI.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/install/cosmi/conv/src/CsI.cpp > CMakeFiles/conv.dir/src/CsI.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mari/work/MPPC/upgrade/cosmi/conv/src/CsI.cpp > CMakeFiles/conv.dir/src/CsI.cpp.i
 
 CMakeFiles/conv.dir/src/CsI.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/conv.dir/src/CsI.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/install/cosmi/conv/src/CsI.cpp -o CMakeFiles/conv.dir/src/CsI.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mari/work/MPPC/upgrade/cosmi/conv/src/CsI.cpp -o CMakeFiles/conv.dir/src/CsI.cpp.s
 
 CMakeFiles/conv.dir/src/CsI.cpp.o.requires:
 
@@ -342,7 +342,7 @@ conv: /Users/mari/local/root/pro/lib/libMathCore.so
 conv: /Users/mari/local/root/pro/lib/libThread.so
 conv: /Users/mari/local/root/pro/lib/libMultiProc.so
 conv: CMakeFiles/conv.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable conv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable conv"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/conv.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -368,6 +368,6 @@ CMakeFiles/conv.dir/clean:
 .PHONY : CMakeFiles/conv.dir/clean
 
 CMakeFiles/conv.dir/depend:
-	cd /Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/mari/work/MPPC/install/cosmi/conv /Users/mari/work/MPPC/install/cosmi/conv /Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug /Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug /Users/mari/work/MPPC/install/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/mari/work/MPPC/upgrade/cosmi/conv /Users/mari/work/MPPC/upgrade/cosmi/conv /Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug /Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug /Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/conv.dir/depend
 

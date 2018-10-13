@@ -12,7 +12,7 @@ TriggerManager::TriggerManager() {
     Branch();
 
     if(!Init()) {
-        std::cout << "Error: TriggerManager initialization failed\n";
+        std::cout << "[Error] TriggerManager initialization failed\n";
         m_isInit = 0;
     } else {
         m_isInit = 1;

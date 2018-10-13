@@ -1,7 +1,8 @@
-//#define REDUCED_DATA
+#define REDUCED_DATA
 //#define DEBUG
 //#define VISUALIZE
 
+#include "TreeManager.h"
 #include "Converter.h"
 
 #include <iostream>
@@ -48,7 +49,7 @@ int main(int argc, char** argv) {
     filename = Form("./rootfile/run%d.root_reduced", runID);
 #endif
     if(!GetFileState(filename)) {
-        std::cout << filename << " not found\n";
+        std::cout << "[Error] " << filename << " not found\n";
         return 1;
     }
     TFile* fin = new TFile(filename);
@@ -134,7 +135,6 @@ int main(int argc, char** argv) {
 bool GetFileState(TString filename) {
     FileStat_t info;
     if(gSystem->GetPathInfo(filename.Data(), info)) {
-        std::cout << "Error: " << filename << " not found\n";
         return false;
     }
     return true;

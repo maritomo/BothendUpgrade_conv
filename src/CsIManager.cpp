@@ -13,7 +13,7 @@ CsIManager::CsIManager() {
     Branch();
 
     if(!Init()) {
-        std::cout << "Error: CsIManager initialization failed\n";
+        std::cout << "[Error] CsIManager initialization failed\n";
         m_isInit = 0;
     } else {
         m_isInit = 1;
@@ -117,7 +117,7 @@ bool CsIManager::Init_DAQconfig() {
             break;
         }
         if(!runID) {
-            std::cout << "Error: ADC channel map not found\n";
+            std::cout << "[Error] ADC channel map not found\n";
             return false;
         }
     }

@@ -11,7 +11,6 @@ Converter::Converter() {
     m_csiMan = new CsIManager();
     m_trigMan = new TriggerManager();
     Branch();
-
     m_isVis = 0;
 }
 
@@ -23,7 +22,7 @@ Converter::~Converter() {
 }
 
 void Converter::Branch() {
-    m_eventTree->Branch("timestamp", m_BRout.timestamp, "timestamp[3]/i");
+    m_statusTree->Branch("timestamp", m_BRout.timestamp, "timestamp[3]/i");
 }
 
 void Converter::Fill(){
@@ -35,7 +34,6 @@ void Converter::Fill(){
 void Converter::Convert(){
     m_csiMan->Process();
     m_trigMan->Process();
-
     m_csiMan->RecHitPosition();
 
     m_trigMan->Fill();
