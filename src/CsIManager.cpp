@@ -45,6 +45,7 @@ void CsIManager::Branch() {
     m_eventTree->Branch("csi.MT", m_BRout.MT, "csi.MT[2716]/F");
 
     m_eventTree->Branch("csi.isHit", m_BRout.isHit, "csi.isHit[2716]/O");
+    m_eventTree->Branch("csi.nHit", &m_BRout.nHit, "csi.nHit/S");
     m_eventTree->Branch("csi.hitpos", m_BRout.hitpos, "csi.hitpos[2716][3]/F");
     m_eventTree->Branch("csi.track_xy", m_BRout.track_xy, "csi.track_xy[2]/F");
 }
@@ -74,6 +75,7 @@ void CsIManager::Fill(){
         }
 
         m_BRout.isHit[id] = m_csi[id]->IsHit();
+        m_BRout.nHit = m_nHit;
         for(int axis = 0; axis<3; ++axis) {
             m_BRout.hitpos[id][axis] = (Float_t) m_csi[id]->GetHitPosition()[axis];
         }
@@ -184,21 +186,27 @@ void CsIManager::Process() {
     for(int id = 0; id < nCSI; ++id){
         m_csi[id]->Process();
     }
+    Tracking();
 }
 
 void CsIManager::Tracking() {
     TGraph* gCsI = new TGraph();
-    int nHit = 0;
+    m_nHit = 0;
     for(int id = 0; id<nCSI; ++id) {
         if(m_csi[id]->IsHit()) {
-            gCsI->SetPoint(nHit, m_csi[id]->GetPosition()[0], m_csi[id]->GetPosition()[1]);
-            ++nHit;
+            gCsI->SetPoint(m_nHit, m_csi[id]->GetPosition()[0], m_csi[id]->GetPosition()[1]);
+            ++m_nHit;
         }
     }
-    if(nHit>1) {
-        gCsI->Fit("pol1");
+
+    for(int par = 0; par<2; ++par) {
+        m_track_xy[par] = 0;
+    }
+
+    if(m_nHit>1) {
+        gCsI->Fit("pol1", "Q");
         for(int par = 0; par<2; ++par) {
-            m_track_xy[par]= gCsI->GetFunction("pol1")->GetParameter(par);
+            m_track_xy[par] = gCsI->GetFunction("pol1")->GetParameter(par);
         }
     }
 }

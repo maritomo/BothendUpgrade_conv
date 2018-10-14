@@ -95,10 +95,10 @@ int main(int argc, char** argv) {
         conv->Display(1); // zy plane
 //        gSystem->ProcessEvents();
 //        gSystem->Sleep(1000);
-        conv->Print(Form("./pict/test_%d.pdf", entry));
+        conv->Print(Form("./pict/run%d_%d.pdf", runID, entry));
 #endif
 #ifdef DEBUG
-        if(entry==100) break;
+        if(entry==0) break;
 #endif
 
     }
