@@ -464,6 +464,8 @@ CMakeFiles/conv.dir/src/CsIManager.cpp.o
  /Users/mari/local/root/pro/include/Fit/FitExecutionPolicy.h
  /Users/mari/local/root/pro/include/Foption.h
  /Users/mari/local/root/pro/include/GuiTypes.h
+ /Users/mari/local/root/pro/include/Math/ParamFunctor.h
+ /Users/mari/local/root/pro/include/Math/Types.h
  /Users/mari/local/root/pro/include/RConfig.h
  /Users/mari/local/root/pro/include/RConfigure.h
  /Users/mari/local/root/pro/include/ROOT/TIOFeatures.hxx
@@ -488,6 +490,7 @@ CMakeFiles/conv.dir/src/CsIManager.cpp.o
  /Users/mari/local/root/pro/include/TAttText.h
  /Users/mari/local/root/pro/include/TAxis.h
  /Users/mari/local/root/pro/include/TBasket.h
+ /Users/mari/local/root/pro/include/TBits.h
  /Users/mari/local/root/pro/include/TBox.h
  /Users/mari/local/root/pro/include/TBranch.h
  /Users/mari/local/root/pro/include/TBuffer.h
@@ -500,8 +503,12 @@ CMakeFiles/conv.dir/src/CsIManager.cpp.o
  /Users/mari/local/root/pro/include/TDictionary.h
  /Users/mari/local/root/pro/include/TDirectory.h
  /Users/mari/local/root/pro/include/TError.h
+ /Users/mari/local/root/pro/include/TF1.h
+ /Users/mari/local/root/pro/include/TF1AbsComposition.h
  /Users/mari/local/root/pro/include/TFitResultPtr.h
+ /Users/mari/local/root/pro/include/TFormula.h
  /Users/mari/local/root/pro/include/TGenericClassInfo.h
+ /Users/mari/local/root/pro/include/TGraph.h
  /Users/mari/local/root/pro/include/TH1.h
  /Users/mari/local/root/pro/include/TInterpreter.h
  /Users/mari/local/root/pro/include/TIsAProxy.h
@@ -509,7 +516,9 @@ CMakeFiles/conv.dir/src/CsIManager.cpp.o
  /Users/mari/local/root/pro/include/TKey.h
  /Users/mari/local/root/pro/include/TLine.h
  /Users/mari/local/root/pro/include/TList.h
+ /Users/mari/local/root/pro/include/TMath.h
  /Users/mari/local/root/pro/include/TMathBase.h
+ /Users/mari/local/root/pro/include/TMethodCall.h
  /Users/mari/local/root/pro/include/TNamed.h
  /Users/mari/local/root/pro/include/TObjArray.h
  /Users/mari/local/root/pro/include/TObjString.h
@@ -518,6 +527,7 @@ CMakeFiles/conv.dir/src/CsIManager.cpp.o
  /Users/mari/local/root/pro/include/TPoint.h
  /Users/mari/local/root/pro/include/TQClass.h
  /Users/mari/local/root/pro/include/TQObject.h
+ /Users/mari/local/root/pro/include/TROOT.h
  /Users/mari/local/root/pro/include/TSchemaHelper.h
  /Users/mari/local/root/pro/include/TSeqCollection.h
  /Users/mari/local/root/pro/include/TStorage.h

@@ -6,6 +6,9 @@
 #include <fstream>
 #include <sstream>
 
+#include "TGraph.h"
+#include "TF1.h"
+
 #include "CsIManager.h"
 
 CsIManager::CsIManager() {
@@ -43,6 +46,7 @@ void CsIManager::Branch() {
 
     m_eventTree->Branch("csi.isHit", m_BRout.isHit, "csi.isHit[2716]/O");
     m_eventTree->Branch("csi.hitpos", m_BRout.hitpos, "csi.hitpos[2716][3]/F");
+    m_eventTree->Branch("csi.track_xy", m_BRout.track_xy, "csi.track_xy[2]/F");
 }
 
 void CsIManager::Fill(){
@@ -68,7 +72,14 @@ void CsIManager::Fill(){
             m_BRout.TD[id] = (Float_t) m_csi[id]->GetTimeDiff();
             m_BRout.MT[id] = (Float_t) m_csi[id]->GetMeanTime();
         }
+
         m_BRout.isHit[id] = m_csi[id]->IsHit();
+        for(int axis = 0; axis<3; ++axis) {
+            m_BRout.hitpos[id][axis] = (Float_t) m_csi[id]->GetHitPosition()[axis];
+        }
+        for(int par = 0; par<2; ++par) {
+            m_BRout.track_xy[par] = m_track_xy[par];
+        }
     }
 }
 
@@ -167,14 +178,32 @@ bool CsIManager::Init_DAQconfig() {
 }
 
 //    bool Init_calibConst();
-//    bool Init_hitCondition();
 
+// Processes
 void CsIManager::Process() {
     for(int id = 0; id < nCSI; ++id){
         m_csi[id]->Process();
     }
 }
 
+void CsIManager::Tracking() {
+    TGraph* gCsI = new TGraph();
+    int nHit = 0;
+    for(int id = 0; id<nCSI; ++id) {
+        if(m_csi[id]->IsHit()) {
+            gCsI->SetPoint(nHit, m_csi[id]->GetPosition()[0], m_csi[id]->GetPosition()[1]);
+            ++nHit;
+        }
+    }
+    if(nHit>1) {
+        gCsI->Fit("pol1");
+        for(int par = 0; par<2; ++par) {
+            m_track_xy[par]= gCsI->GetFunction("pol1")->GetParameter(par);
+        }
+    }
+}
+
+// REc hit z position using external track
 void CsIManager::RecHitPosition() {
     for(int id=0; id<nCSI; ++id) {
         double hitpos[3];
@@ -186,6 +215,7 @@ void CsIManager::RecHitPosition() {
 }
 
 
+// Visualization
 void CsIManager::Visualize() {
     for(int i=0; i<nCSI; ++i) {
         m_csi[i]->Visualize();

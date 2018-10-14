@@ -70,7 +70,7 @@ void TriggerManager::Fill(){
 
         m_BRout.isHit[id] = m_trig[id]->IsHit();
         for(int axis=0; axis<3; ++axis) {
-            m_BRout.hitpos[id][axis] = (Float_t) m_trig[id]->GetHitPosition(axis);
+            m_BRout.hitpos[id][axis] = (Float_t) m_trig[id]->GetHitPosition()[axis];
         }
         for(int layer=0; layer<2; ++layer) {
             m_BRout.nHit[layer] = (Short_t) m_nHit[layer];
@@ -257,10 +257,10 @@ void TriggerManager::Tracking() {
         int axis_h, axis_v; // horizontal, vertical
         GetVisAxis(plane, axis_h, axis_v);
         double track[2];
-        track[1] = (Float_t) ((m_trigHit[1]->GetHitPosition(axis_v)-m_trigHit[0]->GetHitPosition(axis_v))
-                              / (m_trigHit[1]->GetHitPosition(axis_h)-m_trigHit[0]->GetHitPosition(axis_h)));
-        track[0] = (Float_t) (m_trigHit[1]->GetHitPosition(axis_v)
-                              - track[1] * (m_trigHit[1]->GetHitPosition(axis_h)));
+        track[1] = (Float_t) ((m_trigHit[1]->GetHitPosition()[axis_v]-m_trigHit[0]->GetHitPosition()[axis_v])
+                              / (m_trigHit[1]->GetHitPosition()[axis_h]-m_trigHit[0]->GetHitPosition()[axis_h]));
+        track[0] = (Float_t) (m_trigHit[1]->GetHitPosition()[axis_v]
+                              - track[1] * (m_trigHit[1]->GetHitPosition()[axis_h]));
         m_cosmi->SetTrack(plane, track);
     }
 
@@ -300,9 +300,9 @@ int TriggerManager::GetID(int scintiID) {
 
 double TriggerManager::Distance(TriggerCounter* crc1, TriggerCounter* crc2) {
     return sqrt(
-            pow((crc1->GetHitPosition(0)-crc2->GetHitPosition(0)), 2) +
-            pow((crc1->GetHitPosition(1)-crc2->GetHitPosition(1)), 2) +
-            pow((crc1->GetHitPosition(2)-crc2->GetHitPosition(2)), 2)
+            pow((crc1->GetHitPosition()[0]-crc2->GetHitPosition()[0]), 2) +
+            pow((crc1->GetHitPosition()[1]-crc2->GetHitPosition()[1]), 2) +
+            pow((crc1->GetHitPosition()[2]-crc2->GetHitPosition()[2]), 2)
     );
 }
 

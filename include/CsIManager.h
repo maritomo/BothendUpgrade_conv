@@ -26,6 +26,8 @@ struct CsIBranchContainer {
 
     Bool_t isHit[2716];
     Float_t hitpos[2716][3];
+
+    Float_t track_xy[2];
 };
 
 
@@ -44,21 +46,22 @@ class CsIManager : public TreeManager, public Visualizer {
     bool Init_map();
     bool Init_DAQconfig();
 //    bool Init_calibConst();
-//    bool Init_hitCondition();
 
     void Process();
     void RecHitPosition();
+    void Tracking();
 
     // Visualization
     void Visualize();
     void Display(int plane);
 
   private:
+    bool m_isInit;
     CsI* m_csi[nCSI];
     CsIBranchContainer m_BRout;
     CosmicRay* m_cosmi;
 
-    bool m_isInit;
+    double m_track_xy[2];
 };
 
 #endif //CONV_CSIMANAGER_H

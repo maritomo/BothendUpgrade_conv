@@ -21,11 +21,11 @@ class BothReadDetector : public TreeManager, public Visualizer {
     void SetDelay(int side, int delay) { m_delay[side] = delay; }
     void SetHitpos(double* hitpos) { for(int axis=0; axis<3; ++axis) {m_hitpos[axis] = hitpos[axis];} }
 
-    double* GetPosition() { return m_pos; }
+    const double* GetPosition() { return m_pos; }
     void GetADCconfig(int side, int& crate, int& mod, int& ch);
 
     bool IsUsed(int side) { return m_isUsed[side]; }
-    short* GetData(int side) { return m_data[side]; }
+    const short* GetData(int side) { return m_data[side]; }
     double GetPedestal(int side) { return m_ped[side]; }
     double GetPeak(int side) { return m_peak[side]; }
     double GetIntegration(int side) { return m_integ[side]; }
@@ -37,7 +37,7 @@ class BothReadDetector : public TreeManager, public Visualizer {
     double GetMeanTime() { return m_MT; }
 
     bool IsHit() { return m_isHit; }
-    double GetHitPosition(int axis) { return m_hitpos[axis]; }
+    const double* GetHitPosition() { return m_hitpos; }
 
     void CalculateCFTime(int side); // delays are subtracted in this function
     short GetMax(int nSmpl, const short* data);
