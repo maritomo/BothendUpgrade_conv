@@ -24,8 +24,8 @@ void BothReadDetector::Reconstruct() {
 }
 
 void BothReadDetector::SetData(int side, int crate, int mod, int ch) {
-    if((side<0 || side>1) || (crate<3 || crate>5)||
-       (mod<0 || mod>15)|| (ch<0 || ch>15))
+    if( (side<0||side>1) || (crate<3||crate>5) ||
+        (mod<0||mod>15) || (ch<0||ch>15) )
     {
         m_data[side] = new short[64];
         for(int smpl=0; smpl<64; ++smpl) {

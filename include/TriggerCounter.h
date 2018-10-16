@@ -16,8 +16,10 @@ class TriggerCounter : public BothReadDetector {
     void SetCalibConst(const double* TD_x);
     void SetPeakThreshold(int side, double peak_thr) { m_peak_thr[side] = peak_thr; }
     void SetCoinRange(int side, double* coin_range);
+    void SetRecX(double recX) { m_recX = recX; }
 
     int GetScintiID() { return m_scintiID; }
+    double GetRecX() { return m_recX; }
 
     // Imitation of the online trigger
     void OnlineHitDecision(int side);
@@ -29,6 +31,7 @@ class TriggerCounter : public BothReadDetector {
                       //    They are still used to calibrate Tdif to x-position,
                       //    because the calibration constants are same as that in the pre-test at Tsukuba.
 
+    double m_recX;  // hit x position reconstructed with CsI track
     double m_ccX[2];     // calibration constant for TD->x, (constant, slope)
 
     double m_peak_thr[2];       // threshold of pulse height, (even, odd) ch

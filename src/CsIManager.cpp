@@ -47,7 +47,6 @@ void CsIManager::Branch() {
     m_eventTree->Branch("csi.isHit", m_BRout.isHit, "csi.isHit[2716]/O");
     m_eventTree->Branch("csi.nHit", &m_BRout.nHit, "csi.nHit/S");
     m_eventTree->Branch("csi.hitpos", m_BRout.hitpos, "csi.hitpos[2716][3]/F");
-    m_eventTree->Branch("csi.track_xy", m_BRout.track_xy, "csi.track_xy[2]/F");
 }
 
 void CsIManager::Fill(){
@@ -77,10 +76,7 @@ void CsIManager::Fill(){
         m_BRout.isHit[id] = m_csi[id]->IsHit();
         m_BRout.nHit = m_nHit;
         for(int axis = 0; axis<3; ++axis) {
-            m_BRout.hitpos[id][axis] = (Float_t) m_csi[id]->GetHitPosition()[axis];
-        }
-        for(int par = 0; par<2; ++par) {
-            m_BRout.track_xy[par] = m_track_xy[par];
+            m_BRout.hitpos[id][axis] = (Float_t) m_csi[id]->GetHitPos()[axis];
         }
     }
 }
@@ -135,6 +131,7 @@ bool CsIManager::Init_DAQconfig() {
         }
     }
 
+    std::cout << "ADC configuration\n";
     for(int side = 0; side < 2; side++) {
         std::stringstream ss;
         if(side == 0){
@@ -153,17 +150,14 @@ bool CsIManager::Init_DAQconfig() {
             std::cout << filename << "\n";
         }
 
-        // if used
         int id, crate, mod, ch;
         while (ifs >> id >> crate >> mod >> ch) {
             m_csi[id]->SetData(side, crate, mod, ch);
         }
-        // if not used
+
         for(int id=0; id<nCSI; ++id) {
-            for(int side=0; side<2; ++side) {
-                if(m_csi[id]->IsUsed(side)) continue;
-                m_csi[id]->SetData(side, -1, -1, -1); // all data array elements are set to zero
-            }
+            if(m_csi[id]->IsUsed(side)) continue;
+            m_csi[id]->SetData(side, -1, -1, -1); // All elements in data arrays are set to 0
         }
     }
 
@@ -192,33 +186,42 @@ void CsIManager::Process() {
 void CsIManager::Tracking() {
     TGraph* gCsI = new TGraph();
     m_nHit = 0;
+    bool isVerticalTrack = true;
+
     for(int id = 0; id<nCSI; ++id) {
         if(m_csi[id]->IsHit()) {
-            gCsI->SetPoint(m_nHit, m_csi[id]->GetPosition()[0], m_csi[id]->GetPosition()[1]);
+            gCsI->SetPoint(m_nHit, m_csi[id]->GetPos()[0], m_csi[id]->GetPos()[1]);
+            if(m_nHit>0) {
+                if(gCsI->GetX()[m_nHit] - gCsI->GetX()[m_nHit] != 0) {
+                    isVerticalTrack = false;
+                }
+            }
             ++m_nHit;
         }
     }
 
-    for(int par = 0; par<2; ++par) {
-        m_track_xy[par] = 0;
-    }
-
     if(m_nHit>1) {
-        gCsI->Fit("pol1", "Q");
-        for(int par = 0; par<2; ++par) {
-            m_track_xy[par] = gCsI->GetFunction("pol1")->GetParameter(par);
+        if(!isVerticalTrack) {
+            gCsI->Fit("pol1", "Q");
+            for(int par = 0; par<2; ++par) {
+                m_track[par] = gCsI->GetFunction("pol1")->GetParameter(par);
+            }
+        } else {
+            m_track[0] = gCsI->GetX()[0];
+            m_track[1] = 1e10;
         }
+        m_cosmi->SetIsTracked_CsI(1);
+    } else {
+        m_track[0] = 0;
+        m_track[1] = 0;
     }
+    m_cosmi->SetCsITrack(m_track);
 }
 
-// REc hit z position using external track
-void CsIManager::RecHitPosition() {
+// Calculate hit z position using track reconstructed by trigger counters
+void CsIManager::RecHitZpos() {
     for(int id=0; id<nCSI; ++id) {
-        double hitpos[3];
-        hitpos[0] = m_csi[id]->GetPosition()[0];
-        hitpos[1] = m_csi[id]->GetPosition()[1];
-        hitpos[2] = (m_csi[id]->GetPosition()[1]-m_cosmi->GetTrack(1)[0])/m_cosmi->GetTrack(1)[1];
-        m_csi[id]->SetHitpos(hitpos);
+        m_csi[id]->SetHitpos(2, (m_csi[id]->GetPos()[1]-m_cosmi->GetTrack(1)[0])/m_cosmi->GetTrack(1)[1]);
     }
 }
 

@@ -27,8 +27,6 @@ struct CsIBranchContainer {
     Bool_t isHit[2716];
     Short_t nHit;
     Float_t hitpos[2716][3];
-
-    Float_t track_xy[2];
 };
 
 
@@ -49,8 +47,11 @@ class CsIManager : public TreeManager, public Visualizer {
 //    bool Init_calibConst();
 
     void Process();
-    void RecHitPosition();
     void Tracking();
+
+    void RecHitZpos();
+
+    const double* GetTrack() { return m_track; }
 
     // Visualization
     void Visualize();
@@ -63,7 +64,7 @@ class CsIManager : public TreeManager, public Visualizer {
     CosmicRay* m_cosmi;
 
     int m_nHit;
-    double m_track_xy[2];
+    double m_track[2];
 };
 
 #endif //CONV_CSIMANAGER_H

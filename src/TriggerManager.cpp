@@ -46,6 +46,8 @@ void TriggerManager::Branch() {
     m_eventTree->Branch("trig.TOF", &m_BRout.TOF, "trig.TOF/F");
     m_eventTree->Branch("trig.range", &m_BRout.range, "trig.range/F");
 
+    m_eventTree->Branch("trig.recX", m_BRout.recX, "trig.recX[12]/F");
+
 //    m_eventTree->Branch("trig.isHit_online", m_BRout.isHit_online, "trig.isHit_online[12][2][64]/O");
 //    m_eventTree->Branch("trig.isTriggered_online", m_BRout.isTriggered_online, "trig.isTriggered_online[64]/O");
 //    m_eventTree->Branch("trig.nHit_online", m_BRout.nHit_online, "trig.nHit_online[2][64]/S");
@@ -70,7 +72,7 @@ void TriggerManager::Fill(){
 
         m_BRout.isHit[id] = m_trig[id]->IsHit();
         for(int axis=0; axis<3; ++axis) {
-            m_BRout.hitpos[id][axis] = (Float_t) m_trig[id]->GetHitPosition()[axis];
+            m_BRout.hitpos[id][axis] = (Float_t) m_trig[id]->GetHitPos()[axis];
         }
         for(int layer=0; layer<2; ++layer) {
             m_BRout.nHit[layer] = (Short_t) m_nHit[layer];
@@ -80,6 +82,8 @@ void TriggerManager::Fill(){
         m_BRout.trackID = (Short_t) m_trackID;
         m_BRout.TOF = (Float_t) m_TOF;
         m_BRout.range = (Float_t) m_range;
+
+        m_BRout.recX[id] = (Float_t) m_trig[id]->GetRecX();
 
         for(int smpl=0; smpl<64; ++smpl) {
             m_BRout.isTriggered_online[smpl] = m_isTriggered_online[smpl];
@@ -257,10 +261,10 @@ void TriggerManager::Tracking() {
         int axis_h, axis_v; // horizontal, vertical
         GetVisAxis(plane, axis_h, axis_v);
         double track[2];
-        track[1] = (Float_t) ((m_trigHit[1]->GetHitPosition()[axis_v]-m_trigHit[0]->GetHitPosition()[axis_v])
-                              / (m_trigHit[1]->GetHitPosition()[axis_h]-m_trigHit[0]->GetHitPosition()[axis_h]));
-        track[0] = (Float_t) (m_trigHit[1]->GetHitPosition()[axis_v]
-                              - track[1] * (m_trigHit[1]->GetHitPosition()[axis_h]));
+        track[1] = (Float_t) ((m_trigHit[1]->GetHitPos()[axis_v]-m_trigHit[0]->GetHitPos()[axis_v])
+                              / (m_trigHit[1]->GetHitPos()[axis_h]-m_trigHit[0]->GetHitPos()[axis_h]));
+        track[0] = (Float_t) (m_trigHit[1]->GetHitPos()[axis_v]
+                              - track[1] * (m_trigHit[1]->GetHitPos()[axis_h]));
         m_cosmi->SetTrack(plane, track);
     }
 
@@ -287,6 +291,24 @@ void TriggerManager::OnlineHitDecision() {
     }
 }
 
+void TriggerManager::RecHitXpos() {
+    if(m_trackID==0) return;
+    if(!m_cosmi->IsTracked_CsI()) return;
+    if(m_cosmi->GetCsITrack()[1]==0) return;
+
+    for(int id=0; id<nCRC; ++id) {
+        if(m_trig[id]->IsHit()) {
+            if(m_cosmi->GetCsITrack()[1]==1e10) {
+                m_trig[id]->SetRecX(m_cosmi->GetCsITrack()[0]);
+            } else {
+                m_trig[id]->SetRecX((m_trig[id]->GetPos()[1] - m_cosmi->GetCsITrack()[0])/m_cosmi->GetCsITrack()[1]);
+            }
+        } else {
+            m_trig[id]->SetRecX(0);
+        }
+    }
+}
+
 // Getter
 int TriggerManager::GetID(int scintiID) {
     for(int id=0; id<nCRC; ++id) {
@@ -300,9 +322,9 @@ int TriggerManager::GetID(int scintiID) {
 
 double TriggerManager::Distance(TriggerCounter* crc1, TriggerCounter* crc2) {
     return sqrt(
-            pow((crc1->GetHitPosition()[0]-crc2->GetHitPosition()[0]), 2) +
-            pow((crc1->GetHitPosition()[1]-crc2->GetHitPosition()[1]), 2) +
-            pow((crc1->GetHitPosition()[2]-crc2->GetHitPosition()[2]), 2)
+            pow((crc1->GetHitPos()[0]-crc2->GetHitPos()[0]), 2) +
+            pow((crc1->GetHitPos()[1]-crc2->GetHitPos()[1]), 2) +
+            pow((crc1->GetHitPos()[2]-crc2->GetHitPos()[2]), 2)
     );
 }
 

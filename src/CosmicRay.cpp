@@ -37,6 +37,7 @@ CosmicRay::~CosmicRay() {
 
 void CosmicRay::Branch() {
     m_eventTree->Branch("cosmi.track", m_BRout.track, "cosmi.track[3][2]/F");
+    m_eventTree->Branch("cosmi.csiTrack", m_BRout.csiTrack, "cosmi.csiTrack[2]/F");
 }
 
 void CosmicRay::Fill() {
@@ -44,6 +45,9 @@ void CosmicRay::Fill() {
         for(int par=0; par<2; ++par) {
             m_BRout.track[plane][par] = (Float_t) m_track[plane][par];
         }
+    }
+    for(int par=0; par<2; ++par) {
+        m_BRout.csiTrack[par] = (Float_t) m_csiTrack[par];
     }
 }
 

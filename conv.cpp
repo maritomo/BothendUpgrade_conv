@@ -41,8 +41,6 @@ int main(int argc, char** argv) {
      * Set trees into TreeManager
      */
 
-    TreeManager::SetRunID(runID);
-
     // Input files
     TString filename = Form("./rootfile/run%d.root", runID);
 #ifdef REDUCED_DATA
@@ -59,9 +57,10 @@ int main(int argc, char** argv) {
 
 
     /*
-     * Set trees into converter
+     * Set trees into TreeManager
      */
 
+    TreeManager::SetRunID(runID);
     TString treename[] = {"Crate3", "Crate4", "Crate5"};
     for(int k=0; k<sizeof(treename)/sizeof(TString); ++k) {
         TreeManager::AddInputTree((TTree*) fin->Get(treename[k]));
@@ -98,7 +97,7 @@ int main(int argc, char** argv) {
         conv->Print(Form("./pict/run%d_%d.pdf", runID, entry));
 #endif
 #ifdef DEBUG
-        if(entry==0) break;
+        break;
 #endif
 
     }
