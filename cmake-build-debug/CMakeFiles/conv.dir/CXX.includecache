@@ -991,8 +991,6 @@ sys/types.h
 -
 
 /Users/mari/work/MPPC/upgrade/cosmi/conv/conv.cpp
-TreeManager.h
-/Users/mari/work/MPPC/upgrade/cosmi/conv/TreeManager.h
 Converter.h
 /Users/mari/work/MPPC/upgrade/cosmi/conv/Converter.h
 iostream

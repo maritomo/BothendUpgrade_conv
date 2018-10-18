@@ -50,11 +50,9 @@ void BothReadDetector::GetADCconfig(int side, int& crate, int& mod, int& ch) {
 }
 
 void BothReadDetector::CalculateCFTime(int side){
-    m_ped[side] = 0;
     m_peak[side] = 0;
     m_integ[side] = 0;
 
-    int nPed = 10;
     int ipeak = 0;
 
     int n = 64;
@@ -62,20 +60,16 @@ void BothReadDetector::CalculateCFTime(int side){
     int time[64];
     for(int i = 0; i < 64; ++i) time[i] = i;
 
-    for(int i = 0; i < n; ++i) {
-        if(i < nPed) {
-            m_ped[side] += (float) m_data[side][i] / nPed;
-        }
+    CalculatePedestal(side);
+
+    // Skip first bin
+    for(int i = 1; i < n; ++i) {
         if(m_peak[side] < m_data[side][i]) {
             m_peak[side] = m_data[side][i];
             ipeak = i;
         }
-        if(i < n - 1) {
-            m_integ[side] += m_data[side][i] * (time[i + 1] - time[i]);
-        }
+        m_integ[side] += m_data[side][i]-m_ped[side];
     }
-
-    m_integ[side] -= m_ped[side] * (time[n - 1] - time[0]);
 
     float yb = m_data[side][ipeak - 1];
     float y = m_data[side][ipeak];
@@ -108,6 +102,15 @@ void BothReadDetector::CalculateCFTime(int side){
     }
 
     m_eflag[side] = 2;
+}
+
+void BothReadDetector::CalculatePedestal(int side) {
+    m_ped[side] = 0;
+    int nPed = 10;
+    // Skip first bin
+    for(int smpl = 1; smpl < 1+nPed; ++smpl) {
+        m_ped[side] += m_data[side][smpl] / nPed;
+    }
 }
 
 short BothReadDetector::GetMax(int nSmpl, const short* data) {

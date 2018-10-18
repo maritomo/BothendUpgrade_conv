@@ -1,5 +1,5 @@
 {
-  std::string filename = "../run1204_mppc.txt";
+  std::string filename = "run1204_mppc.txt";
   std::ifstream ifs(filename.c_str());
 
   filename += "_modified";

@@ -41,6 +41,7 @@ class BothReadDetector : public TreeManager, public Visualizer {
     const double* GetHitPos() { return m_hitpos; }
 
     void CalculateCFTime(int side); // delays are subtracted in this function
+    void CalculatePedestal(int side);
     short GetMax(int nSmpl, const short* data);
 
     // Visualization
