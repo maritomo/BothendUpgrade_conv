@@ -36,7 +36,6 @@ void Converter::Convert(){
     m_trigMan->Process();
 
     m_csiMan->RecHitZpos();
-    m_trigMan->RecHitXpos();
 
     m_trigMan->Fill();
     m_csiMan->Fill();

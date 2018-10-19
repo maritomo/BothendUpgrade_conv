@@ -177,45 +177,9 @@ bool CsIManager::Init_DAQconfig() {
 
 // Processes
 void CsIManager::Process() {
-    for(int id = 0; id < nCSI; ++id){
+    for(int id = 0; id < nCSI; ++id) {
         m_csi[id]->Process();
     }
-    Tracking();
-}
-
-void CsIManager::Tracking() {
-    TGraph* gCsI = new TGraph();
-    m_nHit = 0;
-    bool isVerticalTrack = true;
-
-    for(int id = 0; id<nCSI; ++id) {
-        if(m_csi[id]->IsHit()) {
-            gCsI->SetPoint(m_nHit, m_csi[id]->GetPos()[0], m_csi[id]->GetPos()[1]);
-            if(m_nHit>0) {
-                if(gCsI->GetX()[m_nHit] - gCsI->GetX()[m_nHit] != 0) {
-                    isVerticalTrack = false;
-                }
-            }
-            ++m_nHit;
-        }
-    }
-
-    if(m_nHit>1) {
-        if(!isVerticalTrack) {
-            gCsI->Fit("pol1", "Q");
-            for(int par = 0; par<2; ++par) {
-                m_track[par] = gCsI->GetFunction("pol1")->GetParameter(par);
-            }
-        } else {
-            m_track[0] = gCsI->GetX()[0];
-            m_track[1] = 1e10;
-        }
-        m_cosmi->SetIsTracked_CsI(1);
-    } else {
-        m_track[0] = 0;
-        m_track[1] = 0;
-    }
-    m_cosmi->SetCsITrack(m_track);
 }
 
 // Calculate hit z position using track reconstructed by trigger counters

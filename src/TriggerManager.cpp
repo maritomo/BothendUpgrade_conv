@@ -291,24 +291,6 @@ void TriggerManager::OnlineHitDecision() {
     }
 }
 
-void TriggerManager::RecHitXpos() {
-    if(m_trackID==0) return;
-    if(!m_cosmi->IsTracked_CsI()) return;
-    if(m_cosmi->GetCsITrack()[1]==0) return;
-
-    for(int id=0; id<nCRC; ++id) {
-        if(m_trig[id]->IsHit()) {
-            if(m_cosmi->GetCsITrack()[1]==1e10) {
-                m_trig[id]->SetRecX(m_cosmi->GetCsITrack()[0]);
-            } else {
-                m_trig[id]->SetRecX((m_trig[id]->GetPos()[1] - m_cosmi->GetCsITrack()[0])/m_cosmi->GetCsITrack()[1]);
-            }
-        } else {
-            m_trig[id]->SetRecX(0);
-        }
-    }
-}
-
 // Getter
 int TriggerManager::GetID(int scintiID) {
     for(int id=0; id<nCRC; ++id) {

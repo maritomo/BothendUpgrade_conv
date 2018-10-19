@@ -74,8 +74,6 @@ class TriggerManager : public Visualizer, public TreeManager {
     void Tracking();
     void OnlineHitDecision();
 
-    void RecHitXpos();
-
     int GetID(int scintiID);
     int GetID(int mod, int ch) { return 6 * mod + ch / 2; }
     int GetSide(int mod, int ch) { return ch % 2; }

@@ -47,7 +47,6 @@ class CsIManager : public TreeManager, public Visualizer {
 //    bool Init_calibConst();
 
     void Process();
-    void Tracking();
 
     void RecHitZpos();
 
