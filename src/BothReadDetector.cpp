@@ -52,9 +52,7 @@ void BothReadDetector::GetADCconfig(int side, int& crate, int& mod, int& ch) {
 void BothReadDetector::CalculateCFTime(int side){
     m_peak[side] = 0;
     m_integ[side] = 0;
-
     int ipeak = 0;
-
     int n = 64;
 
     int time[64];
@@ -109,7 +107,7 @@ void BothReadDetector::CalculatePedestal(int side) {
     int nPed = 10;
     // Skip first bin
     for(int smpl = 1; smpl < 1+nPed; ++smpl) {
-        m_ped[side] += m_data[side][smpl] / nPed;
+        m_ped[side] += (double)m_data[side][smpl] / nPed;
     }
 }
 
