@@ -1,2 +1,0 @@
-unlink rootfile
-unlink convfile

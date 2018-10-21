@@ -36,7 +36,7 @@ void CsIManager::Branch() {
     m_eventTree->Branch("csi.data", m_BRout.data, "csi.data[2716][2][64]/S");
     m_eventTree->Branch("csi.ped", m_BRout.ped, "csi.ped[2716][2]/F");
     m_eventTree->Branch("csi.peak", m_BRout.peak, "csi.peak[2716][2]/F");
-    m_eventTree->Branch("csi.integ", m_BRout.integ, "csi.integ[2716][2]/F");
+    m_eventTree->Branch("csi.sumADC", m_BRout.sumADC, "csi.sumADC[2716][2]/F");
     m_eventTree->Branch("csi.pt", m_BRout.pt, "csi.pt[2716][2]/F");
     m_eventTree->Branch("csi.cft", m_BRout.cft, "csi.cft[2716][2]/F");
     m_eventTree->Branch("csi.eflag", m_BRout.eflag, "csi.eflag[2716][2]/O");
@@ -62,7 +62,7 @@ void CsIManager::Fill(){
             }
             m_BRout.ped[id][side] = (Float_t) m_csi[id]->GetPedestal(side);
             m_BRout.peak[id][side] = (Float_t) m_csi[id]->GetPeak(side);
-            m_BRout.integ[id][side] = (Float_t) m_csi[id]->GetIntegration(side);
+            m_BRout.sumADC[id][side] = (Float_t) m_csi[id]->GetIntegratedADC(side);
             m_BRout.pt[id][side] = (Float_t) m_csi[id]->GetPeakTime(side);
             m_BRout.cft[id][side] = (Float_t) m_csi[id]->GetCFTime(side);
             m_BRout.eflag[id][side] = m_csi[id]->GetErrorFlag(side);

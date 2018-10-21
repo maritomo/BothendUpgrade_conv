@@ -16,7 +16,7 @@ struct CsIBranchContainer {
     Short_t data[2716][2][64];
     Float_t ped[2716][2];
     Float_t peak[2716][2];
-    Float_t integ[2716][2];
+    Float_t sumADC[2716][2];
     Float_t pt[2716][2];
     Float_t cft[2716][2];
     Bool_t eflag[2716][2];

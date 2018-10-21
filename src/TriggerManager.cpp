@@ -29,7 +29,7 @@ void TriggerManager::Branch() {
     m_eventTree->Branch("trig.data", m_BRout.data, "trig.data[12][2][64]/S");
     m_eventTree->Branch("trig.ped", m_BRout.ped, "trig.ped[12][2]/F");
     m_eventTree->Branch("trig.peak", m_BRout.peak, "trig.peak[12][2]/F");
-    m_eventTree->Branch("trig.integ", m_BRout.integ, "trig.integ[12][2]/F");
+    m_eventTree->Branch("trig.sumADC", m_BRout.sumADC, "trig.sumADC[12][2]/F");
     m_eventTree->Branch("trig.pt", m_BRout.pt, "trig.pt[12][2]/F");
     m_eventTree->Branch("trig.cft", m_BRout.cft, "trig.cft[12][2]/F");
     m_eventTree->Branch("trig.eflag", m_BRout.eflag, "trig.eflag[12][2]/F");
@@ -61,7 +61,7 @@ void TriggerManager::Fill(){
             }
             m_BRout.ped[id][side] = (Float_t) m_trig[id]->GetPedestal(side);
             m_BRout.peak[id][side] = (Float_t) m_trig[id]->GetPeak(side);
-            m_BRout.integ[id][side] = (Float_t) m_trig[id]->GetIntegration(side);
+            m_BRout.sumADC[id][side] = (Float_t) m_trig[id]->GetIntegratedADC(side);
             m_BRout.pt[id][side] = (Float_t) m_trig[id]->GetPeakTime(side);
             m_BRout.cft[id][side] = (Float_t) m_trig[id]->GetCFTime(side);
             m_BRout.eflag[id][side] = m_trig[id]->GetErrorFlag(side);

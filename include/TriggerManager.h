@@ -27,7 +27,7 @@ struct TriggerBranchContainer {
     Short_t data[12][2][64];
     Float_t ped[12][2];
     Float_t peak[12][2];
-    Float_t integ[12][2];
+    Float_t sumADC[12][2];
     Float_t pt[12][2];
     Float_t cft[12][2];
     Bool_t eflag[12][2];

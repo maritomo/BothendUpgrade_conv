@@ -29,7 +29,7 @@ class BothReadDetector : public TreeManager, public Visualizer {
     const short* GetData(int side) { return m_data[side]; }
     double GetPedestal(int side) { return m_ped[side]; }
     double GetPeak(int side) { return m_peak[side]; }
-    double GetIntegration(int side) { return m_integ[side]; }
+    double GetIntegratedADC(int side) { return m_sumADC[side]; }
     double GetPeakTime(int side) { return m_pt[side]; }
     double GetCFTime(int side) { return m_cft[side]; }
     bool GetErrorFlag(int side) { return m_eflag[side]; }
@@ -62,7 +62,7 @@ class BothReadDetector : public TreeManager, public Visualizer {
     short* m_data[2];
     double m_ped[2];
     double m_peak[2];
-    double m_integ[2];
+    double m_sumADC[2];
     double m_pt[2];
     double m_cft[2];
     bool m_eflag[2];

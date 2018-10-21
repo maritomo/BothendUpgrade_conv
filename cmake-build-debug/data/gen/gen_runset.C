@@ -2,7 +2,7 @@ void gen_runset() {
 
   std::ofstream ofs("../runset.txt");
   
-  int runID[][2] = { {1183, 1187}, {1204, 1215}, {1230, 1256} };
+  int runID[][2] = { {1183, 1187}, {1204, 1215}, {1230, 1256}, {1261, 1261}};
   
   for(int i=0; i<sizeof(runID)/sizeof(int)/2; ++i) {
     int id = runID[i][0];

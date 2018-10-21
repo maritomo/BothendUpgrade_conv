@@ -51,7 +51,7 @@ void BothReadDetector::GetADCconfig(int side, int& crate, int& mod, int& ch) {
 
 void BothReadDetector::CalculateCFTime(int side){
     m_peak[side] = 0;
-    m_integ[side] = 0;
+    m_sumADC[side] = 0;
     int ipeak = 0;
     int n = 64;
 
@@ -66,7 +66,7 @@ void BothReadDetector::CalculateCFTime(int side){
             m_peak[side] = m_data[side][i];
             ipeak = i;
         }
-        m_integ[side] += m_data[side][i]-m_ped[side];
+        m_sumADC[side] += m_data[side][i]-m_ped[side];
     }
 
     float yb = m_data[side][ipeak - 1];
