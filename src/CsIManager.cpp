@@ -118,7 +118,7 @@ bool CsIManager::Init_DAQconfig() {
     // ADC channels
     int fname_runID = GetFirstRunID(m_runID);
     if(!fname_runID) {
-        std::cout << "[Error] ADC configuration files not found\n";
+        std::cout << "[Error] run" << m_runID << " is not registered with data/runset.txt\n";
         return false;
     }
 
@@ -168,18 +168,19 @@ bool CsIManager::Init_calibration() {
     // ADC channels
     int fname_runID = GetFirstRunID(m_runID);
     if(!fname_runID) {
-        std::cout << "[Error] ADC configuration files not found\n";
+        std::cout << "[Error] run" << m_runID << " is not registered with data/runset.txt\n";
         return false;
     }
 
     TString filename = Form("data/CsIEdep/cali_csiEdep_run%d.txt", fname_runID);
     std::ifstream ifs(filename.Data());
     if(!ifs) {
-        std::cout << filename << " not found\n";
-        std::cout << "Energy deposit of all set to 0\n";
+        std::cout << "[Warning] " << filename << " not found. CsI energy deposit set to 0\n";
+        for(int id = 0; id<nCSI; ++id) {
+            m_csi[id]->SetEdepCalibConst(0);
+        }
         return true;
     }
-
     int id;
     double cc;
     while(ifs >> id >> cc) {
