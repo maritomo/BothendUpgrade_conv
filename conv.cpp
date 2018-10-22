@@ -1,6 +1,6 @@
-#define REDUCED_DATA
-#define DEBUG
-#define VISUALIZE
+//#define REDUCED_DATA
+//#define DEBUG
+//#define VISUALIZE
 
 #include "Converter.h"
 
@@ -97,7 +97,7 @@ int main(int argc, char** argv) {
         conv->Print(Form("./pict/run%d_%d.pdf", runID, entry));
 #endif
 #ifdef DEBUG
-        break;
+        if(entry>1000) break;
 #endif
 
     }
@@ -119,12 +119,10 @@ int main(int argc, char** argv) {
     fout->Close();
 
 #ifdef DEBUG
-    std::cout << "\n";
-    std::cout << "*-*-*-*-*-*-*-* DEBUG *-*-*-*-*-*-*-*\n";
+    std::cout << "\n*-*-*-*-*-*-*-* DEBUG *-*-*-*-*-*-*-*\n";
 #endif
 #ifdef REDUCED_DATA
-    std::cout << "\n";
-    std::cout << "*-*-*-*-*-*-*-* REDUCED_DATA *-*-*-*-*-*-*-*\n";
+    std::cout << "\n*-*-*-*-*-*-*-* REDUCED_DATA *-*-*-*-*-*-*-*\n";
 #endif
 
     return 0;
