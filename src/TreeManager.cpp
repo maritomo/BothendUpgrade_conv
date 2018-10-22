@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <fstream>
 
 #include "TreeManager.h"
 
@@ -21,6 +22,21 @@ void TreeManager::SetRunID(int runID) {
     m_runID = runID;
 }
 
+void TreeManager::AddInputTree(TTree* tree) {
+    if(!m_isInit) {
+        m_eventTree = new TTree("eventTree", Form("run%d", m_runID));
+        m_statusTree = new TTree("statusTree", Form("run%d", m_runID));
+        m_isInit = 1;
+    }
+
+    m_tin.push_back(tree);
+    if(m_BRin.size()==0) m_BRin.resize(16);
+
+    int index = m_tin.size()-1;
+    m_tin[index]->SetBranchAddress("Data", m_BRin[index].Data);
+    m_tin[index]->SetBranchAddress("Timestamp", &m_BRin[index].Timestamp);
+}
+
 void TreeManager::SetInputTrees(int N, TTree** tree) {
     if(!m_isInit) {
         m_eventTree = new TTree("eventTree", Form("run%d", m_runID));
@@ -37,24 +53,36 @@ void TreeManager::SetInputTrees(int N, TTree** tree) {
     }
 }
 
-void TreeManager::AddInputTree(TTree* tree) {
-    if(!m_isInit) {
-        m_eventTree = new TTree("eventTree", Form("run%d", m_runID));
-        m_statusTree = new TTree("statusTree", Form("run%d", m_runID));
-        m_isInit = 1;
+int TreeManager::GetFirstRunID(int runID) {
+    std::string filename = "data/runset.txt";
+    std::ifstream ifs(filename.c_str());
+    if(!ifs) {
+        std::cout << "[Error] " << filename << " not found\n";
+        return 0;
     }
 
-    m_tin.push_back(tree);
-    if(m_BRin.size()==0) m_BRin.resize(16);
+    std::string line;
+    while(std::getline(ifs, line)) {
+        std::stringstream ss;
+        ss << line;
 
-    int index = m_tin.size()-1;
-    m_tin[index]->SetBranchAddress("Data", m_BRin[index].Data);
-    m_tin[index]->SetBranchAddress("Timestamp", &m_BRin[index].Timestamp);
+        std::vector<int> runset;
+        bool endflag = false;
+        std::string buf;
+
+        while(std::getline(ss, buf, ' ')) {
+            runset.push_back(atoi(buf.c_str()));
+            if( runID == *(--runset.end()) ) endflag = true;
+        }
+        if(endflag) {
+            sort(runset.begin(), runset.end());
+            return runset[0];
+        }
+    }
+
+    std::cout << "[Error] First runID not found\n";
+    return 0;
 }
-
-//void TreeManager::SetOutputTree(TTree* tout) {
-//    m_eventTree = tout;
-//}
 
 TTree* TreeManager::GetEventTree() {
     if(!m_isInit) {

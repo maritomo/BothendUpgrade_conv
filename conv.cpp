@@ -1,4 +1,4 @@
-//#define REDUCED_DATA
+#define REDUCED_DATA
 //#define DEBUG
 //#define VISUALIZE
 

@@ -1059,6 +1059,8 @@ CsIManager.h
 /Users/mari/work/MPPC/upgrade/cosmi/conv/src/TreeManager.cpp
 iostream
 -
+fstream
+-
 TreeManager.h
 /Users/mari/work/MPPC/upgrade/cosmi/conv/src/TreeManager.h
 

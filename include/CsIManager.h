@@ -27,6 +27,8 @@ struct CsIBranchContainer {
     Bool_t isHit[2716];
     Short_t nHit;
     Float_t hitpos[2716][3];
+
+    Float_t Edep[2716];
 };
 
 
@@ -44,7 +46,7 @@ class CsIManager : public TreeManager, public Visualizer {
     bool Init();
     bool Init_map();
     bool Init_DAQconfig();
-//    bool Init_calibConst();
+    bool Init_calibration();
 
     void Process();
 

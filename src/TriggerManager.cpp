@@ -112,7 +112,7 @@ bool TriggerManager::Init() {
 
     if(!Init_map()) return false;
     if(!Init_DAQconfig()) return false;
-    if(!Init_calibConst()) return false;
+    if(!Init_calibration()) return false;
     if(!Init_hitCondition()) return false;
 
     std::cout << "----------------------------------------------------------------------\n";
@@ -136,7 +136,7 @@ bool TriggerManager::Init_map() {
     }
     ifs.close();
 
-    std::cout << "Trigger counter map             [OK]\n";
+    std::cout << "* Location map                  [OK]\n";
     return true;
 }
 
@@ -157,11 +157,11 @@ bool TriggerManager::Init_DAQconfig(){
     }
     ifs.close();
 
-    std::cout << "Channel delays                  [OK]\n";
+    std::cout << "* Channel delays                [OK]\n";
     return true;
 }
 
-bool TriggerManager::Init_calibConst() {
+bool TriggerManager::Init_calibration() {
     std::string filename = "./data/TDtoX.txt";
     std::ifstream ifs(filename.c_str());
     if(!ifs) {
@@ -181,7 +181,7 @@ bool TriggerManager::Init_calibConst() {
     }
     ifs.close();
 
-    std::cout << "Calibration constants           [OK]\n";
+    std::cout << "* Calibration constants         [OK]\n";
     return true;
 }
 
@@ -212,7 +212,7 @@ bool TriggerManager::Init_hitCondition() {
     }
     ifs2.close();
 
-    std::cout << "Hit condition parameters        [OK]\n";
+    std::cout << "* Hit condition parameters      [OK]\n";
     return true;
 }
 
@@ -298,7 +298,6 @@ int TriggerManager::GetID(int scintiID) {
             return id;
         }
     }
-    std::cout << "(scinti. " << scintiID << " not found)\n";
     return -1;
 }
 

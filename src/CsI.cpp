@@ -41,7 +41,12 @@ CsI::~CsI() {}
 
 void CsI::Process() {
     Reconstruct();
+    Calibration();
     HitDecision();
+}
+
+void CsI::Calibration() {
+    m_Edep = m_sumADC[1] * m_ccEne;
 }
 
 void CsI::HitDecision() {
