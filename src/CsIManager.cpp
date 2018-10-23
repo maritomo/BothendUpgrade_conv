@@ -138,7 +138,7 @@ bool CsIManager::Init_DAQconfig() {
             std::cout << "\t[Error] " << filename << " not found\n";
             return false;
         } else {
-            std::cout << "\t"  << filename << "\n";
+            std::cout << "\t-> "  << filename << "\n";
         }
 
         int id, crate, mod, ch;
@@ -180,7 +180,7 @@ bool CsIManager::Init_calibration() {
     }
 
     std::cout << "* CsI energy calibration        [OK]\n";
-    std::cout << "\t" << filename << "\n";
+    std::cout << "\t-> " << filename << "\n";
 
     int id;
     double cc;

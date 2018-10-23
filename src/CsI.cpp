@@ -77,7 +77,6 @@ void CsI::HitDecision() {
 void CsI::SetEdepCalibConst(double cEne) {
     // if negative
     if(cEne <= 0) {
-        std::cout << "[Error] CsI energy calibration constant should be positive\n";
         m_isCalibrated = false;
         return;
     }

@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 #include "TreeManager.h"
 
@@ -67,20 +68,16 @@ int TreeManager::GetFirstRunID(int runID) {
         ss << line;
 
         std::vector<int> runset;
-        bool endflag = false;
         std::string buf;
-
         while(std::getline(ss, buf, ' ')) {
             runset.push_back(atoi(buf.c_str()));
-            if( runID == *(--runset.end()) ) endflag = true;
-        }
-        if(endflag) {
-            sort(runset.begin(), runset.end());
-            return runset[0];
+            if(runID == atoi(buf.c_str())) {
+                return runset[0];
+            }
         }
     }
 
-    std::cout << "[Error] First runID not found\n";
+    std::cout << "[Error] run" << runID << " not found\n";
     return 0;
 }
 
