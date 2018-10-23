@@ -176,11 +176,12 @@ bool CsIManager::Init_calibration() {
     std::ifstream ifs(filename.Data());
     if(!ifs) {
         std::cout << "[Warning] " << filename << " not found. CsI energy deposit set to 0\n";
-        for(int id = 0; id<nCSI; ++id) {
-            m_csi[id]->SetEdepCalibConst(0);
-        }
         return true;
     }
+
+    std::cout << "* CsI energy calibration        [OK]\n";
+    std::cout << "\t" << filename << "\n";
+
     int id;
     double cc;
     while(ifs >> id >> cc) {

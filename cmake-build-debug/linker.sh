@@ -1,7 +1,6 @@
-unlink rootfile
-unlink convfile
-
 if [ $1 = "0" ]; then
+    unlink rootfile
+    unlink convfile
     echo "unlink rootfile"
     echo "unlink convfile"
 else

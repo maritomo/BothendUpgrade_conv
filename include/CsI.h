@@ -16,6 +16,10 @@ class CsI : public BothReadDetector {
     void Calibration();
     void HitDecision();
 
+    bool IsCalibrated() { return m_isCalibrated; }
+    void SetEdepCalibConst(double cEne);
+    double GetEnergyDeposit() { return m_Edep; }
+
   private:
     static const int nCSI = 2716;
     static const int nCSI_S = 2240;
@@ -25,7 +29,9 @@ class CsI : public BothReadDetector {
     int m_crystalID;
     int m_lineID;
 
-    double m_cEne; // Integrated ADC->deposited energy
+    bool m_isCalibrated;
+    double m_cEne; // calibration constant
+    double m_Edep;
 };
 
 

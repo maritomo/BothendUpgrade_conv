@@ -21,7 +21,6 @@ class BothReadDetector : public TreeManager, public Visualizer {
     void SetDelay(int side, int delay) { m_delay[side] = delay; }
     void SetHitpos(double* hitpos) { for(int axis=0; axis<3; ++axis) {m_hitpos[axis] = hitpos[axis];} }
     void SetHitpos(int axis, double hitpos) { m_hitpos[axis] = hitpos; }
-    void SetEdepCalibConst(double ccEne) { m_ccEne = ccEne; }
 
     const double* GetPos() { return m_pos; }
     void GetADCconfig(int side, int& crate, int& mod, int& ch);
@@ -40,8 +39,6 @@ class BothReadDetector : public TreeManager, public Visualizer {
 
     bool IsHit() { return m_isHit; }
     const double* GetHitPos() { return m_hitpos; }
-
-    double GetEnergyDeposit() { return m_Edep; }
 
     void CalculateCFTime(int side); // delays are subtracted in this function
     void CalculatePedestal(int side);
@@ -76,9 +73,6 @@ class BothReadDetector : public TreeManager, public Visualizer {
     bool m_isHit;
     double m_hitpos[3]; // hit position (x, y, z)
     double m_posres[3]; // position resolution (x, y, z)
-
-    double m_ccEne; // calibration constant
-    double m_Edep;
 
     // Visualization
     int m_color;          // detector color

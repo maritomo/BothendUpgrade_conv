@@ -31,7 +31,8 @@ CsI::CsI(int locationID, int crystalID, int lineID, double posx, double posy, in
         m_mod[side] = -1;
         m_ch[side] = -1;
     }
-    m_isHit = 0;
+    m_isHit = false;
+    m_isCalibrated = false;
 
     m_color = kBlack;
     m_isVis = 0;
@@ -46,7 +47,7 @@ void CsI::Process() {
 }
 
 void CsI::Calibration() {
-    m_Edep = m_sumADC[1] * m_ccEne;
+    m_Edep = m_sumADC[1] * m_cEne;
 }
 
 void CsI::HitDecision() {
@@ -54,10 +55,32 @@ void CsI::HitDecision() {
     for(int axis = 0; axis<3; ++axis) {
         m_hitpos[axis] = 0;
     }
-    if(m_peak[1]>100) {
-        m_hitpos[0] = m_pos[0];
-        m_hitpos[1] = m_pos[1];
-        m_isHit = 1;
-    }
 
+    double mip = 30;
+    if(m_size[0]==25) mip *= 0.5;
+
+    if(m_isCalibrated) {
+        if(m_Edep>0.5*mip) {
+            m_hitpos[0] = m_pos[0];
+            m_hitpos[1] = m_pos[1];
+            m_isHit = 1;
+        }
+    } else {
+        if(m_peak[1]>100) {
+            m_hitpos[0] = m_pos[0];
+            m_hitpos[1] = m_pos[1];
+            m_isHit = 1;
+        }
+    }
+}
+
+void CsI::SetEdepCalibConst(double cEne) {
+    // if negative
+    if(cEne <= 0) {
+        std::cout << "[Error] CsI energy calibration constant should be positive\n";
+        m_isCalibrated = false;
+        return;
+    }
+    m_cEne = cEne;
+    m_isCalibrated = true;
 }
