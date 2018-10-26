@@ -8,23 +8,30 @@
 #include "BothReadDetector.h"
 
 class CsI : public BothReadDetector {
-public:
-  CsI(int locationID, int crystalID, int lineID, double posx, double posy, int size);
-  ~CsI();
+  public:
+    CsI(int locationID, int crystalID, int lineID, double posx, double posy, int size);
+    ~CsI();
 
-  void Process();
-  void HitDecision();
+    void Process();
+    void Calibration();
+    void HitDecision();
 
-private:
-  static const int nCSI = 2716;
-  static const int nCSI_S = 2240;
-  static const int nCSI_L = 476;
+    bool IsCalibrated() { return m_isCalibrated; }
+    void SetEdepCalibConst(double cEne);
+    double GetEnergyDeposit() { return m_Edep; }
 
-  int m_locationID;
-  int m_crystalID;
-  int m_lineID;
+  private:
+    static const int nCSI = 2716;
+    static const int nCSI_S = 2240;
+    static const int nCSI_L = 476;
 
-  double m_cEne; // Integrated ADC->deposited energy
+    int m_locationID;
+    int m_crystalID;
+    int m_lineID;
+
+    bool m_isCalibrated;
+    double m_cEne; // calibration constant
+    double m_Edep;
 };
 
 

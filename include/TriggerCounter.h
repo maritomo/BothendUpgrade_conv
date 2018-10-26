@@ -32,7 +32,7 @@ class TriggerCounter : public BothReadDetector {
                       //    because the calibration constants are same as that in the pre-test at Tsukuba.
 
     double m_recX;  // hit x position reconstructed with CsI track
-    double m_ccX[2];     // calibration constant for TD->x, (constant, slope)
+    double m_cHitX[2];     // calibration constant for TD->x, (constant, slope)
 
     double m_peak_thr[2];       // threshold of pulse height, (even, odd) ch
     double m_coin_range[2][2];  // coincidence window, (even, odd) ch, (min, max)

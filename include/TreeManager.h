@@ -16,13 +16,11 @@ struct InputBranchContainer {
 
 class TreeManager {
   public:
-
-    static std::vector<InputBranchContainer> m_BRin;
-
     virtual ~TreeManager() {}
     static void SetRunID(int runID);
     static void AddInputTree(TTree* tree);
     static void SetInputTrees(int N, TTree** tree);
+    static int GetFirstRunID(int runID);
 
     static TTree* GetEventTree();
     static TTree* GetStatusTree();
@@ -39,6 +37,7 @@ class TreeManager {
     static std::vector<TTree*> m_tin;
     static TTree* m_eventTree;
     static TTree* m_statusTree;
+    static std::vector<InputBranchContainer> m_BRin;
 
     static std::vector<std::vector<int> > m_entry; // event# of synchronized events
     static std::vector<int> m_tDeltaTrigger;

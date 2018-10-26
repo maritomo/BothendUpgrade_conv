@@ -112,7 +112,7 @@ bool TriggerManager::Init() {
 
     if(!Init_map()) return false;
     if(!Init_DAQconfig()) return false;
-    if(!Init_calibConst()) return false;
+    if(!Init_calibration()) return false;
     if(!Init_hitCondition()) return false;
 
     std::cout << "----------------------------------------------------------------------\n";
@@ -136,7 +136,7 @@ bool TriggerManager::Init_map() {
     }
     ifs.close();
 
-    std::cout << "Trigger counter map             [OK]\n";
+    std::cout << "* Location map                  [OK]\n";
     return true;
 }
 
@@ -157,31 +157,26 @@ bool TriggerManager::Init_DAQconfig(){
     }
     ifs.close();
 
-    std::cout << "Channel delays                  [OK]\n";
+    std::cout << "* Channel delays                [OK]\n";
     return true;
 }
 
-bool TriggerManager::Init_calibConst() {
-    std::string filename = "./data/TDtoX.txt";
+bool TriggerManager::Init_calibration() {
+    std::string filename = "./data/cali_trigHitX.txt";
     std::ifstream ifs(filename.c_str());
     if(!ifs) {
         std::cout << filename << " not found\n";
         return false;
     }
 
-    for(int i = 0; i < 16; ++i) {
-        int scintiID;
-        double cc[2];
-        ifs >> scintiID >> cc[0] >> cc[1];
-
-        int id = GetID(scintiID);
-        if(id >= 0) {
-            m_trig[GetID(scintiID)]->SetCalibConst(cc);
-        }
+    int id;
+    double cc[2];
+    while(ifs >> id >> cc[0] >> cc[1]) {
+        m_trig[id]->SetCalibConst(cc);
     }
     ifs.close();
 
-    std::cout << "Calibration constants           [OK]\n";
+    std::cout << "* Calibration constants         [OK]\n";
     return true;
 }
 
@@ -212,7 +207,7 @@ bool TriggerManager::Init_hitCondition() {
     }
     ifs2.close();
 
-    std::cout << "Hit condition parameters        [OK]\n";
+    std::cout << "* Hit condition parameters      [OK]\n";
     return true;
 }
 
@@ -298,7 +293,6 @@ int TriggerManager::GetID(int scintiID) {
             return id;
         }
     }
-    std::cout << "(scinti. " << scintiID << " not found)\n";
     return -1;
 }
 

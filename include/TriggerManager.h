@@ -65,7 +65,7 @@ class TriggerManager : public Visualizer, public TreeManager {
     bool Init();
     bool Init_map();
     bool Init_DAQconfig();
-    bool Init_calibConst();
+    bool Init_calibration();
     bool Init_hitCondition();
 
     // Process

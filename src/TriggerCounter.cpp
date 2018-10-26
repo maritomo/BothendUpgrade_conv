@@ -37,7 +37,7 @@ TriggerCounter::TriggerCounter(int scintiID, int dir, const double* pos) :
 
 void TriggerCounter::SetCalibConst(const double* TD_to_x) {
     for(int i = 0; i < 2; ++i) {
-        m_ccX[i] = TD_to_x[i] * m_dir;
+        m_cHitX[i] = TD_to_x[i] * m_dir;
     }
 }
 
@@ -72,7 +72,7 @@ void TriggerCounter::HitDecision() {
            m_pt[side]/8 + m_delay[side] < m_coin_range[side][1])
         {
             m_isHit = 1;
-            m_hitpos[0] = (m_TD - m_ccX[0]) / m_ccX[1];
+            m_hitpos[0] = m_cHitX[1] * m_TD + m_cHitX[0];
             m_hitpos[1] = m_pos[1];
             m_hitpos[2] = m_pos[2];
             break;

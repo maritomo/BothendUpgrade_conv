@@ -1,5 +1,5 @@
-//#define REDUCED_DATA
-//#define DEBUG
+#define REDUCED_DATA
+#define DEBUG
 //#define VISUALIZE
 
 #include "Converter.h"
@@ -97,7 +97,7 @@ int main(int argc, char** argv) {
         conv->Print(Form("./pict/run%d_%d.pdf", runID, entry));
 #endif
 #ifdef DEBUG
-        if(entry>1000) break;
+        break;
 #endif
 
     }

@@ -47,16 +47,14 @@ void CsIManager::Branch() {
     m_eventTree->Branch("csi.isHit", m_BRout.isHit, "csi.isHit[2716]/O");
     m_eventTree->Branch("csi.nHit", &m_BRout.nHit, "csi.nHit/S");
     m_eventTree->Branch("csi.hitpos", m_BRout.hitpos, "csi.hitpos[2716][3]/F");
+
+    m_eventTree->Branch("csi.Edep", m_BRout.Edep, "csi.Edep[2716]/F");
 }
 
 void CsIManager::Fill(){
     for(int id=0; id<nCSI; ++id) {
         for(int side=0; side<2; ++side) {
             m_BRout.isUsed[id][side] = m_csi[id]->IsUsed(side);
-//            if(!m_csi[id]->IsUsed(side)) {
-//                continue;
-//            }
-
             for(int smpl=0; smpl<64; ++smpl) {
                 m_BRout.data[id][side][smpl] = m_csi[id]->GetData(side)[smpl];
             }
@@ -78,6 +76,8 @@ void CsIManager::Fill(){
         for(int axis = 0; axis<3; ++axis) {
             m_BRout.hitpos[id][axis] = (Float_t) m_csi[id]->GetHitPos()[axis];
         }
+
+        m_BRout.Edep[id] = (Float_t) m_csi[id]->GetEnergyDeposit();
     }
 }
 
@@ -88,6 +88,7 @@ bool CsIManager::Init() {
 
     if(!Init_map()) return false;
     if(!Init_DAQconfig()) return false;
+    if(!Init_calibration()) return false;
 
     std::cout << "-----------------------------------------------------------------\n";
     m_isInit = 1;
@@ -109,45 +110,35 @@ bool CsIManager::Init_map() {
     }
     ifs.close();
 
-    std::cout << " map                         [OK]\n";
+    std::cout << "* Location map                  [OK]\n";
     return true;
 }
 
 bool CsIManager::Init_DAQconfig() {
     // ADC channels
-    int fname_runID;
-    for(int runID = m_runID; runID>-1; --runID) {
-        std::stringstream ss;
-        ss << "./data/ADCchMap/run" << runID << "_pmt.txt";
-        std::string filename = ss.str();
-        std::ifstream ifs(filename.c_str());
-        if(ifs) {
-            fname_runID = runID;
-            break;
-        }
-        if(!runID) {
-            std::cout << "[Error] ADC channel map not found\n";
-            return false;
-        }
+    int fname_runID = GetFirstRunID(m_runID);
+    if(!fname_runID) {
+        std::cout << "[Error] run" << m_runID << " is not registered with data/runset.txt\n";
+        return false;
     }
 
-    std::cout << "ADC configuration\n";
+    std::cout << "* ADC channel map               [OK]\n";
     for(int side = 0; side < 2; side++) {
         std::stringstream ss;
         if(side == 0){
-            ss << "./data/ADCchMap/run" << fname_runID << "_mppc.txt";
+            ss << "data/ADCchMap/run" << fname_runID << "_mppc.txt";
         }
         if(side == 1){
-            ss << "./data/ADCchMap/run" << fname_runID << "_pmt.txt";
+            ss << "data/ADCchMap/run" << fname_runID << "_pmt.txt";
         }
 
         std::string filename = ss.str();
         std::ifstream ifs(filename.c_str());
         if (!ifs) {
-            std::cout << filename << " not found\n";
+            std::cout << "\t[Error] " << filename << " not found\n";
             return false;
         } else {
-            std::cout << filename << "\n";
+            std::cout << "\t-> "  << filename << "\n";
         }
 
         int id, crate, mod, ch;
@@ -173,12 +164,41 @@ bool CsIManager::Init_DAQconfig() {
     return true;
 }
 
-//    bool Init_calibConst();
+bool CsIManager::Init_calibration() {
+    // ADC channels
+    int fname_runID = GetFirstRunID(m_runID);
+    if(!fname_runID) {
+        std::cout << "[Error] run" << m_runID << " is not registered with data/runset.txt\n";
+        return false;
+    }
+
+    TString filename = Form("data/CsIEdep/cali_csiEdep_run%d.txt", fname_runID);
+    std::ifstream ifs(filename.Data());
+    if(!ifs) {
+        std::cout << "[Warning] " << filename << " not found. CsI energy deposit set to 0\n";
+        return true;
+    }
+
+    std::cout << "* CsI energy calibration        [OK]\n";
+    std::cout << "\t-> " << filename << "\n";
+
+    int id;
+    double cc;
+    while(ifs >> id >> cc) {
+        m_csi[id]->SetEdepCalibConst(cc);
+    }
+
+    return true;
+}
 
 // Processes
 void CsIManager::Process() {
+    m_nHit = 0;
     for(int id = 0; id < nCSI; ++id) {
         m_csi[id]->Process();
+	if(m_csi[id]->IsHit()) {
+	  ++m_nHit;
+	}
     }
 }
 
