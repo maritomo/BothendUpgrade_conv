@@ -18,7 +18,10 @@ class CsI : public BothReadDetector {
 
     bool IsCalibrated() { return m_isCalibrated; }
     void SetEdepCalibConst(double cEne);
+    void SetZhitTable(const double* z);
+
     double GetEnergyDeposit() { return m_Edep; }
+    const double* GetHitzTable() { return m_zhit; }
 
   private:
     static const int nCSI = 2716;
@@ -32,6 +35,7 @@ class CsI : public BothReadDetector {
     bool m_isCalibrated;
     double m_cEne; // calibration constant
     double m_Edep;
+    double m_zhit[36];
 };
 
 

@@ -19,7 +19,6 @@ struct CsIBranchContainer {
     Float_t sumADC[2716][2];
     Float_t pt[2716][2];
     Float_t cft[2716][2];
-    Bool_t eflag[2716][2];
 
     Float_t TD[2716];
     Float_t MT[2716];
@@ -49,8 +48,8 @@ class CsIManager : public TreeManager, public Visualizer {
     bool Init_calibration();
 
     void Process();
-
-    void RecHitZpos();
+    void HitDecision();
+    void RecZhit();
 
     const double* GetTrack() { return m_track; }
 

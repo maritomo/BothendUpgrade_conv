@@ -3,6 +3,8 @@
 //
 
 #include <iostream>
+#include <TGraphErrors.h>
+#include <TF1.h>
 #include "CosmicRay.h"
 
 CosmicRay* CosmicRay::m_cosmi;
@@ -44,6 +46,47 @@ void CosmicRay::Fill() {
         for(int par=0; par<2; ++par) {
             m_BRout.track[plane][par] = (Float_t) m_track[plane][par];
         }
+    }
+}
+
+void CosmicRay::AddHitPosition(const double* pos, const double* dpos) {
+    for(int axis=0; axis<3; ++axis) {
+        m_hitpos[axis].push_back(pos[axis]);
+        m_dhitpos[axis].push_back(dpos[axis]);
+    }
+}
+
+void CosmicRay::Tracking() {
+    for(int plane=0; plane<3; ++plane) {
+        for(int par = 0; par<2; ++par) {
+            m_track[plane][par] = 0;
+        }
+        m_chi2[plane] = 0;
+        m_ndf[plane] = 0;
+    }
+
+    // plane {xy, zy, xz}
+    for(int plane=0; plane<3; ++plane) {
+        int axis_h, axis_v;
+        GetVisAxis(plane, axis_h, axis_v);
+        if(m_hitpos[axis_h].size()<2) continue;
+        if(m_hitpos[axis_v].size()<2) continue;
+
+        std::vector<double> zero;
+        int N = (int)m_hitpos->size();
+        for(int i = 0; i<N; ++i) zero.push_back(0);
+        TGraphErrors g(N, &m_hitpos[axis_h][0], &m_hitpos[axis_v][0], &zero[0], &m_dhitpos[axis_v][0]);
+        TF1 ffit("ffit", "pol1");
+        g.Fit("ffit", "Q");
+        m_track[plane][0] = ffit.GetParameter(0);
+        m_track[plane][1] = ffit.GetParameter(1);
+        m_chi2[plane] = ffit.GetChisquare();
+        m_ndf[plane] = ffit.GetNDF();
+    }
+
+    for(int axis=0; axis<3; ++axis) {
+        m_hitpos[axis].clear();
+        m_dhitpos[axis].clear();
     }
 }
 

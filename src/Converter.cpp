@@ -32,10 +32,8 @@ void Converter::Fill(){
 }
 
 void Converter::Convert(){
-    m_csiMan->Process();
     m_trigMan->Process();
-
-    m_csiMan->RecHitZpos();
+    m_csiMan->Process();
 
     m_trigMan->Fill();
     m_csiMan->Fill();

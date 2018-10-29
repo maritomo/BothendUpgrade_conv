@@ -61,16 +61,17 @@ void CsI::HitDecision() {
 
     if(m_isCalibrated) {
         if(m_Edep>0.5*mip) {
-            m_hitpos[0] = m_pos[0];
-            m_hitpos[1] = m_pos[1];
-            m_isHit = 1;
+            m_isHit = true;
         }
     } else {
         if(m_peak[1]>100) {
-            m_hitpos[0] = m_pos[0];
-            m_hitpos[1] = m_pos[1];
-            m_isHit = 1;
+            m_isHit = true;
         }
+    }
+
+    if(m_isHit) {
+        m_hitpos[0] = m_pos[0];
+        m_hitpos[1] = m_pos[1];
     }
 }
 
@@ -82,4 +83,10 @@ void CsI::SetEdepCalibConst(double cEne) {
     }
     m_cEne = cEne;
     m_isCalibrated = true;
+}
+
+void CsI::SetZhitTable(const double* z) {
+    for(int i=0; i<36; ++i) {
+        m_zhit[i] = z[i];
+    }
 }
