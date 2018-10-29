@@ -49,7 +49,7 @@ void CosmicRay::Fill() {
     }
 }
 
-void CosmicRay::AddHitPosition(const double* pos, const double* dpos) {
+void CosmicRay::AddHitPoint(const double* pos, const double* dpos) {
     for(int axis=0; axis<3; ++axis) {
         m_hitpos[axis].push_back(pos[axis]);
         m_dhitpos[axis].push_back(dpos[axis]);

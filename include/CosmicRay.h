@@ -12,6 +12,8 @@
 
 struct CosmicRayBranchContainer {
     Float_t track[3][2];
+    Float_t chi2[3];
+    Short_t ndf[3];
 };
 
 class CosmicRay : public Visualizer, public TreeManager {
@@ -21,7 +23,7 @@ class CosmicRay : public Visualizer, public TreeManager {
     void Branch();
     void Fill();
 
-    void AddHitPosition(const double* pos, const double* dpos);
+    void AddHitPoint(const double* pos, const double* dpos);
     void Tracking();
 
     void SetIsTracked(bool isTracked) { m_isTracked = isTracked; }
