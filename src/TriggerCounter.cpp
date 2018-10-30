@@ -21,9 +21,9 @@ TriggerCounter::TriggerCounter(int scintiID, int dir, const double* pos) :
     m_size[1] = 100;
     m_size[2] = 50;
 
-    m_posres[0] = m_size[0] / 20;
-    m_posres[1] = m_size[1];
-    m_posres[2] = m_size[2];
+    m_posres[0] = m_size[0] * 0.02; // resolution ~ 2% (4cm)
+    m_posres[1] = m_size[1] * 0.5;
+    m_posres[2] = m_size[2] * 0.5;
 
     m_isHit = 0;
 

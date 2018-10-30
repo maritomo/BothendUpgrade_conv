@@ -23,14 +23,13 @@ class CosmicRay : public Visualizer, public TreeManager {
     void Branch();
     void Fill();
 
+    void SetTrackID(int trackID);
     void AddHitPoint(const double* pos, const double* dpos);
+    void AddHitPoint(int axis, double pos, double dpos);
     void Tracking();
 
-    void SetIsTracked(bool isTracked) { m_isTracked = isTracked; }
-    void SetTrack(int plane, double* track) { for(int k=0; k<2; ++k) m_track[plane][k] = track[k]; }
-    void SetTrackID(int trackID) { m_trackID = trackID; }
 
-    bool IsTracked() { return m_isTracked; }
+    bool IsSingleTracked() { return m_isSingleTrack; }
     const double* GetTrack(int plane) { return m_track[plane]; }
     int GetTrackID() { return m_trackID; }
 
@@ -46,7 +45,7 @@ private:
 
     CosmicRayBranchContainer m_BRout;
 
-    bool m_isTracked;
+    bool m_isSingleTrack;
     std::vector<double> m_hitpos[3], m_dhitpos[3];
     double m_track[3][2];
     double m_chi2[3];

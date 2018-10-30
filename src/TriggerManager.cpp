@@ -239,38 +239,26 @@ void TriggerManager::Tracking() {
             int layer = GetLayer(id);
             ++m_nHit[layer];
             m_hitID[layer] = (Short_t) id;
-            m_trigHit[layer] = m_trig[id];
         }
     }
 
-    // Tracking
-    // if no track
+    // TrackID
     if(m_nHit[0]!=1 || m_nHit[1]!=1) {
-        m_cosmi->SetIsTracked(0);
-        m_trackID = 0;
-        double zero[2] = {};
-        for(int plane=0; plane<3; ++plane) {
-            m_cosmi->SetTrack(plane, zero);
-        }
-        return;
+        m_trackID = 0; // No track
+    } else {
+        int N = nTrig / 2; // = 6, # of trigger counters in each layer
+        int i_top = m_hitID[1] - N; // 0-5, from upstream
+        int i_btm = m_hitID[0];     // 0-5
+        m_trackID = (Short_t) (i_top * N + i_btm + 1);
     }
 
-    m_cosmi->SetIsTracked(1);
-    m_trackID = (Short_t) ( (m_hitID[1]-nTrig/2)*nTrig/2 + m_hitID[0] + 1 );
-
-    // if tracked
+    // Add hit points into cosmic ray
     m_cosmi->SetTrackID(m_trackID);
-    for(int plane = 0; plane < 3; ++plane) {
-        int axis_h, axis_v; // horizontal, vertical
-        GetVisAxis(plane, axis_h, axis_v);
-        double track[2];
-        track[1] = (Float_t) ((m_trigHit[1]->GetHitPos()[axis_v]-m_trigHit[0]->GetHitPos()[axis_v])
-                              / (m_trigHit[1]->GetHitPos()[axis_h]-m_trigHit[0]->GetHitPos()[axis_h]));
-        track[0] = (Float_t) (m_trigHit[1]->GetHitPos()[axis_v]
-                              - track[1] * (m_trigHit[1]->GetHitPos()[axis_h]));
-        m_cosmi->SetTrack(plane, track);
+    for(int id=0; id<nTrig; ++id) {
+        if(m_trig[id]->IsHit()) {
+            m_cosmi->AddHitPoint(m_trig[id]->GetHitPos(), m_trig[id]->GetPosres());
+        }
     }
-
 }
 
 void TriggerManager::OnlineHitDecision() {

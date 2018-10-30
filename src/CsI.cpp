@@ -21,8 +21,8 @@ CsI::CsI(int locationID, int crystalID, int lineID, double posx, double posy, in
     m_size[1] = size;
     m_size[2] = 500;
 
-    m_posres[0] = m_size[0];
-    m_posres[1] = m_size[1];
+    m_posres[0] = m_size[0] * 0.5;
+    m_posres[1] = m_size[1] * 0.5;
     m_posres[2] = m_size[2] * 0.1;
 
     for(int side = 0; side<2; ++side) {

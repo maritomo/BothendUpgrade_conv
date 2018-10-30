@@ -34,6 +34,7 @@ void Converter::Fill(){
 void Converter::Convert(){
     m_trigMan->Process();
     m_csiMan->Process();
+    m_cosmi->Tracking();
 
     m_trigMan->Fill();
     m_csiMan->Fill();

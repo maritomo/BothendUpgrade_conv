@@ -82,7 +82,6 @@ class TriggerManager : public Visualizer, public TreeManager {
 
   private:
     TriggerCounter* m_trig[nTrig];
-    TriggerCounter* m_trigHit[2]; // Fired counters (top, bottom)
     TriggerBranchContainer m_BRout;
     CosmicRay* m_cosmi;
 
@@ -90,8 +89,6 @@ class TriggerManager : public Visualizer, public TreeManager {
     double m_commonThreshold;
     double m_MT0[nTrig]; // timing-zero of mean time
     
-    bool m_isHit[nTrig];
-    double m_hitpos[nTrig][3];
     int m_nHit[2];
     int m_hitID[2];
     int m_trackID;
