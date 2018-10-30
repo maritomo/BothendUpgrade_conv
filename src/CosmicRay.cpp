@@ -75,9 +75,11 @@ void CosmicRay::Tracking() {
         std::vector<double> zero;
         int N = (int)m_hitpos->size();
         for(int i = 0; i<N; ++i) zero.push_back(0);
+
         TGraphErrors g(N, &m_hitpos[axis_h][0], &m_hitpos[axis_v][0], &zero[0], &m_dhitpos[axis_v][0]);
         TF1 ffit("ffit", "pol1");
         g.Fit("ffit", "Q");
+
         m_track[plane][0] = ffit.GetParameter(0);
         m_track[plane][1] = ffit.GetParameter(1);
         m_chi2[plane] = ffit.GetChisquare();
