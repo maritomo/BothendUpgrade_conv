@@ -220,6 +220,10 @@ void CsIManager::HitDecision() {
         m_csi[id]->Process();
         if(m_csi[id]->IsHit()) {
             ++m_nHit;
+            for(int axis=0; axis<3; ++axis) {
+                if(axis==3) continue; // Hit z position of CsI cannot be used for tracking
+                m_cosmi->AddHitPoint(axis, m_csi[id]->GetHitPos()[axis], m_csi[id]->GetPosres()[axis]);
+            }
         }
     }
 }

@@ -23,6 +23,7 @@ class BothReadDetector : public TreeManager, public Visualizer {
     void SetHitpos(int axis, double hitpos) { m_hitpos[axis] = hitpos; }
 
     const double* GetPos() { return m_pos; }
+    const double* GetPosres() { return m_posres; }
     void GetADCconfig(int side, int& crate, int& mod, int& ch);
 
     bool IsUsed(int side) { return m_isUsed[side]; }

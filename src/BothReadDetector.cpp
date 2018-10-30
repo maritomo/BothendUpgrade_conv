@@ -160,9 +160,9 @@ void BothReadDetector::Display(int plane) {
     int axis_v; // index of vertical axis
     GetVisAxis(plane, axis_h, axis_v);
 
-    m_box_hit[plane]->SetX1(m_hitpos[axis_h] - 0.5 * m_posres[axis_h]);
-    m_box_hit[plane]->SetX2(m_hitpos[axis_h] + 0.5 * m_posres[axis_h]);
-    m_box_hit[plane]->SetY1(m_hitpos[axis_v] - 0.5 * m_posres[axis_v]);
-    m_box_hit[plane]->SetY2(m_hitpos[axis_v] + 0.5 * m_posres[axis_v]);
+    m_box_hit[plane]->SetX1(m_hitpos[axis_h] - m_posres[axis_h]);
+    m_box_hit[plane]->SetX2(m_hitpos[axis_h] + m_posres[axis_h]);
+    m_box_hit[plane]->SetY1(m_hitpos[axis_v] - m_posres[axis_v]);
+    m_box_hit[plane]->SetY2(m_hitpos[axis_v] + m_posres[axis_v]);
     m_box_hit[plane]->Draw("same");
 }
