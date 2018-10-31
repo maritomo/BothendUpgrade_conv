@@ -28,6 +28,7 @@ struct CsIBranchContainer {
     Float_t hitpos[2716][3];
 
     Float_t Edep[2716];
+    Float_t range[2716];
 };
 
 
@@ -50,6 +51,7 @@ class CsIManager : public TreeManager, public Visualizer {
     void Process();
     void HitDecision();
     void RecZhit();
+    void RecRange();
 
     const double* GetTrack() { return m_track; }
 

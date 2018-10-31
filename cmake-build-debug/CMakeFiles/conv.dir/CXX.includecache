@@ -13,6 +13,8 @@ TreeManager.h
 ../include/TreeManager.h
 Visualizer.h
 ../include/Visualizer.h
+CosmicRay.h
+../include/CosmicRay.h
 
 ../include/Converter.h
 TCanvas.h

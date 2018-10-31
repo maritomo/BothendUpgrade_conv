@@ -62,7 +62,7 @@ void TriggerCounter::Process() {
 }
 
 void TriggerCounter::HitDecision() {
-    m_isHit = 0;
+    m_isHit = false;
     for(int axis=0; axis<3; ++axis) {
         m_hitpos[axis] = 0;
     }
@@ -72,7 +72,7 @@ void TriggerCounter::HitDecision() {
            m_pt[side]/8 + m_delay[side] > m_coin_range[side][0] &&
            m_pt[side]/8 + m_delay[side] < m_coin_range[side][1])
         {
-            m_isHit = 1;
+            m_isHit = true;
             m_hitpos[0] = m_cHitX[1] * m_TD + m_cHitX[0];
             m_hitpos[1] = m_pos[1];
             m_hitpos[2] = m_pos[2];

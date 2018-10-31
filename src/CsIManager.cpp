@@ -48,6 +48,7 @@ void CsIManager::Branch() {
     m_eventTree->Branch("csi.hitpos", m_BRout.hitpos, "csi.hitpos[2716][3]/F");
 
     m_eventTree->Branch("csi.Edep", m_BRout.Edep, "csi.Edep[2716]/F");
+    m_eventTree->Branch("csi.range", m_BRout.range, "csi.range[2716]/F");
 }
 
 void CsIManager::Fill(){
@@ -76,6 +77,7 @@ void CsIManager::Fill(){
         }
 
         m_BRout.Edep[id] = (Float_t) m_csi[id]->GetEnergyDeposit();
+        m_BRout.range[id] = (Float_t) m_csi[id]->GetRange();
     }
 }
 
@@ -220,10 +222,7 @@ void CsIManager::HitDecision() {
         m_csi[id]->Process();
         if(m_csi[id]->IsHit()) {
             ++m_nHit;
-            for(int axis=0; axis<3; ++axis) {
-                if(axis==3) continue; // Hit z position of CsI cannot be used for tracking
-                m_cosmi->AddHitPoint(axis, m_csi[id]->GetHitPos()[axis], m_csi[id]->GetPosres()[axis]);
-            }
+            m_cosmi->AddHitPoint(m_csi[id]->GetHitPos(), m_csi[id]->GetPosres());
         }
     }
 }
@@ -234,6 +233,14 @@ void CsIManager::RecZhit() {
             // m_csi[id]->SetHitpos(2, (m_csi[id]->GetPos()[1]-m_cosmi->GetTrack(1)[0])/m_cosmi->GetTrack(1)[1]);
             int i_track = m_cosmi->GetTrackID() - 1;
             m_csi[id]->SetHitpos(2, m_csi[id]->GetHitzTable()[i_track]);
+        }
+    }
+}
+
+void CsIManager::RecRange() {
+    for(int id = 0; id < nCSI; ++id) {
+        if(m_csi[id]->IsUsed(1)) {
+            m_csi[id]->RecRange();
         }
     }
 }
@@ -254,7 +261,7 @@ void CsIManager::Display(int plane) {
 
     std::vector<CsI*> usedCSI;
     for(int id=0; id<nCSI; ++id) {
-        if(m_csi[id]->IsUsed(0)||m_csi[id]->IsUsed(1)) {
+        if(m_csi[id]->IsUsed(0) || m_csi[id]->IsUsed(1)) {
             usedCSI.push_back(m_csi[id]);
             continue;
         }

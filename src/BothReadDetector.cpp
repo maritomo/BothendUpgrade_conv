@@ -9,14 +9,14 @@
 #include "BothReadDetector.h"
 
 BothReadDetector::~BothReadDetector() {
-    for(int plane = 0; plane < 3; ++plane) {
+    for(int plane = 0; plane<3; ++plane) {
         delete m_box_det[plane];
         delete m_box_hit[plane];
     }
 }
 
 void BothReadDetector::Reconstruct() {
-    for(int side=0; side<2; ++side) {
+    for(int side = 0; side<2; ++side) {
         CalculateCFTime(side);
     }
     m_TD = m_cft[0] - m_cft[1];
@@ -24,11 +24,10 @@ void BothReadDetector::Reconstruct() {
 }
 
 void BothReadDetector::SetData(int side, int crate, int mod, int ch) {
-    if( (side<0||side>1) || (crate<3||crate>5) ||
-        (mod<0||mod>15) || (ch<0||ch>15) )
-    {
+    if((side<0 || side>1) || (crate<3 || crate>5) ||
+       (mod<0 || mod>15) || (ch<0 || ch>15)) {
         m_data[side] = new short[64];
-        for(int smpl=0; smpl<64; ++smpl) {
+        for(int smpl = 0; smpl<64; ++smpl) {
             m_data[side][smpl] = 0;
         }
         m_isUsed[side] = 0;
@@ -39,7 +38,7 @@ void BothReadDetector::SetData(int side, int crate, int mod, int ch) {
     m_mod[side] = mod;
     m_ch[side] = ch;
 
-    m_data[side] = m_BRin[crate-3].Data[mod][ch];
+    m_data[side] = m_BRin[crate - 3].Data[mod][ch];
     m_isUsed[side] = 1;
 }
 
@@ -49,24 +48,24 @@ void BothReadDetector::GetADCconfig(int side, int& crate, int& mod, int& ch) {
     ch = m_ch[side];
 }
 
-void BothReadDetector::CalculateCFTime(int side){
+void BothReadDetector::CalculateCFTime(int side) {
     m_peak[side] = 0;
     m_sumADC[side] = 0;
     int ipeak = 0;
     int n = 64;
 
     int time[64];
-    for(int i = 0; i < 64; ++i) time[i] = i;
+    for(int i = 0; i<64; ++i) time[i] = i;
 
-    CalculatePedestal(side);
+    Pedestal(side);
 
     // Skip first bin
-    for(int i = 1; i < n; ++i) {
-        if(m_peak[side] < m_data[side][i]) {
+    for(int i = 1; i<n; ++i) {
+        if(m_peak[side]<m_data[side][i]) {
             m_peak[side] = m_data[side][i];
             ipeak = i;
         }
-        m_sumADC[side] += m_data[side][i]-m_ped[side];
+        m_sumADC[side] += m_data[side][i] - m_ped[side];
     }
 
     float yb = m_data[side][ipeak - 1];
@@ -87,8 +86,8 @@ void BothReadDetector::CalculateCFTime(int side){
     }
 
     float threshold = m_peak[side] / 2 + m_ped[side];
-    for(int i = ipeak; i > 0; --i) {
-        if(m_data[side][i] > threshold && m_data[side][i - 1] < threshold) {
+    for(int i = ipeak; i>0; --i) {
+        if(m_data[side][i]>threshold && m_data[side][i - 1]<threshold) {
             m_cft[side] = time[i - 1] + (float) (time[i] - time[i - 1]) /
                                         (m_data[side][i] - m_data[side][i - 1]) *
                                         (threshold - m_data[side][i]);
@@ -102,22 +101,66 @@ void BothReadDetector::CalculateCFTime(int side){
     m_eflag[side] = 2;
 }
 
-void BothReadDetector::CalculatePedestal(int side) {
+void BothReadDetector::Pedestal(int side) {
     m_ped[side] = 0;
     int nPed = 10;
     // Skip first bin
-    for(int smpl = 1; smpl < 1+nPed; ++smpl) {
-        m_ped[side] += (double)m_data[side][smpl] / nPed;
+    for(int smpl = 1; smpl<1 + nPed; ++smpl) {
+        m_ped[side] += (double) m_data[side][smpl] / nPed;
     }
 }
 
 short BothReadDetector::GetMax(int nSmpl, const short* data) {
     short max = -1 * (pow(2, 15) - 1);
-    for(int i = 0; i < nSmpl; ++i) {
-        if(max < data[i]) max = data[i];
+    for(int i = 0; i<nSmpl; ++i) {
+        if(max<data[i]) max = data[i];
     }
     return max;
 }
+
+void BothReadDetector::RecRange() {
+
+    if(!m_cosmi->IsSingleTrack()) {
+        m_range = 0;
+        return;
+    }
+
+    double bound_x[2] = {m_pos[0] - 0.5 * m_size[0], m_pos[0] + 0.5 * m_size[0]};
+    double bound_y[2] = {m_pos[1] - 0.5 * m_size[1], m_pos[1] + 0.5 * m_size[1]};
+    double bound_z[2] = {m_pos[2] - 0.5 * m_size[2], m_pos[2] + 0.5 * m_size[2]};
+    std::vector<double> x, y, z;
+
+    // search hit points from x-y view
+    for(int side = 0; side<2; ++side) {
+        double coord_y = m_cosmi->GetVerticalCoordinate(0, bound_x[side]);
+        if(coord_y>bound_y[0] && coord_y<bound_y[1]) {
+            x.push_back(bound_x[side]);
+            y.push_back(bound_y[side]);
+        }
+
+        double coord_x = m_cosmi->GetHorizontalCoordinate(0, bound_y[side]);
+        if(coord_x>bound_x[0] && coord_x<bound_x[1]) {
+            x.push_back(bound_x[side]);
+            y.push_back(bound_y[side]);
+        }
+    }
+
+    if((int) x.size()!=2) return;
+
+    // search hit points from z-y view
+    for(int i = 0; i<2; ++i) {
+        double coord_z = m_cosmi->GetHorizontalCoordinate(1, y[i]);
+        if(coord_z<bound_z[0] || coord_z>bound_z[1]) return;
+        z.push_back(coord_z);
+    }
+
+    m_range = sqrt(
+            (x[0] - x[1]) * (x[0] - x[1]) +
+            (y[0] - y[1]) * (y[0] - y[1]) +
+            (z[0] - z[1]) * (z[0] - z[1])
+    );
+}
+
 
 /*
  * Visuallization
@@ -133,7 +176,7 @@ void BothReadDetector::Visualize() {
 
     int axis_h; // index of horizontal axis
     int axis_v; // index of vertical axis
-    for(int plane=0; plane < 3; ++plane) {
+    for(int plane = 0; plane<3; ++plane) {
         GetVisAxis(plane, axis_h, axis_v);
         m_box_det[plane] = new TBox(m_pos[axis_h] - 0.5 * m_size[axis_h], m_pos[axis_v] - 0.5 * m_size[axis_v],
                                     m_pos[axis_h] + 0.5 * m_size[axis_h], m_pos[axis_v] + 0.5 * m_size[axis_v]);

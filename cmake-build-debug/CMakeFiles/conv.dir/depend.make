@@ -108,6 +108,7 @@ CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/strlcpy.h
 CMakeFiles/conv.dir/conv.cpp.o: ../conv.cpp
 
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: ../include/BothReadDetector.h
+CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: ../include/CosmicRay.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: ../include/TreeManager.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: ../include/Visualizer.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/Buttons.h
@@ -159,6 +160,7 @@ CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/inclu
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TIsAProxy.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TIterator.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TKey.h
+CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TLine.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TList.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TMathBase.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TNamed.h
@@ -378,6 +380,7 @@ CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/strl
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: ../src/CosmicRay.cpp
 
 CMakeFiles/conv.dir/src/CsI.cpp.o: ../include/BothReadDetector.h
+CMakeFiles/conv.dir/src/CsI.cpp.o: ../include/CosmicRay.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: ../include/CsI.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: ../include/TreeManager.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: ../include/Visualizer.h
@@ -430,6 +433,7 @@ CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TInterpret
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TIsAProxy.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TIterator.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TKey.h
+CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TLine.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TList.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TMathBase.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TNamed.h
@@ -614,6 +618,7 @@ CMakeFiles/conv.dir/src/TreeManager.cpp.o: /Users/mari/local/root/pro/include/st
 CMakeFiles/conv.dir/src/TreeManager.cpp.o: ../src/TreeManager.cpp
 
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: ../include/BothReadDetector.h
+CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: ../include/CosmicRay.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: ../include/TreeManager.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: ../include/TriggerCounter.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: ../include/Visualizer.h
@@ -666,6 +671,7 @@ CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TIsAProxy.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TIterator.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TKey.h
+CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TLine.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TList.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TMathBase.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TNamed.h

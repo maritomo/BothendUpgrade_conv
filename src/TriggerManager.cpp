@@ -259,6 +259,7 @@ void TriggerManager::Tracking() {
             m_cosmi->AddHitPoint(m_trig[id]->GetHitPos(), m_trig[id]->GetPosres());
         }
     }
+
 }
 
 void TriggerManager::OnlineHitDecision() {

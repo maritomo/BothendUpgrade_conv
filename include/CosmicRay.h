@@ -27,11 +27,14 @@ class CosmicRay : public Visualizer, public TreeManager {
     void AddHitPoint(const double* pos, const double* dpos);
     void AddHitPoint(int axis, double pos, double dpos);
     void Tracking();
+    void Clear();
 
-
-    bool IsSingleTracked() { return m_isSingleTrack; }
+    bool IsSingleTrack() { return m_isSingleTrack; }
     const double* GetTrack(int plane) { return m_track[plane]; }
     int GetTrackID() { return m_trackID; }
+
+    double GetVerticalCoordinate(int plane, double coord_h) { return m_track[plane][1]*coord_h + m_track[plane][0]; }
+    double GetHorizontalCoordinate(int plane, double coord_v) { return (coord_v-m_track[plane][0])/m_track[plane][1]; }
 
     // Visualization
     void Visualize();
@@ -47,6 +50,7 @@ private:
 
     bool m_isSingleTrack;
     std::vector<double> m_hitpos[3], m_dhitpos[3];
+
     double m_track[3][2];
     double m_chi2[3];
     int m_ndf[3];

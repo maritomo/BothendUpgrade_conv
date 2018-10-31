@@ -9,6 +9,7 @@
 
 #include "TreeManager.h"
 #include "Visualizer.h"
+#include "CosmicRay.h"
 
 class BothReadDetector : public TreeManager, public Visualizer {
   public:
@@ -42,14 +43,19 @@ class BothReadDetector : public TreeManager, public Visualizer {
     const double* GetHitPos() { return m_hitpos; }
 
     void CalculateCFTime(int side); // delays are subtracted in this function
-    void CalculatePedestal(int side);
+    void Pedestal(int side);
     short GetMax(int nSmpl, const short* data);
+
+    void RecRange();
+    double GetRange() { return m_range; }
 
     // Visualization
     void Visualize();
     void Display(int plane);
 
   protected:
+    CosmicRay* m_cosmi;
+
     double m_pos[3];   // location (x, y, z)
     double m_size[3];  // size (x, y, z)
 
@@ -74,6 +80,8 @@ class BothReadDetector : public TreeManager, public Visualizer {
     bool m_isHit;
     double m_hitpos[3]; // hit position (x, y, z)
     double m_posres[3]; // position resolution (x, y, z)
+
+    double m_range;
 
     // Visualization
     int m_color;          // detector color

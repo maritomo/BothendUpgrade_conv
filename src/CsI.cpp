@@ -34,6 +34,8 @@ CsI::CsI(int locationID, int crystalID, int lineID, double posx, double posy, in
     m_isHit = false;
     m_isCalibrated = false;
 
+    m_cosmi = CosmicRay::GetInstance();
+
     m_color = kBlack;
     m_isVis = 0;
 }
@@ -51,7 +53,7 @@ void CsI::Calibration() {
 }
 
 void CsI::HitDecision() {
-    m_isHit = 0;
+    m_isHit = false;
     for(int axis = 0; axis<3; ++axis) {
         m_hitpos[axis] = 0;
     }

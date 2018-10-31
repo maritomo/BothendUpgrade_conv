@@ -109,6 +109,7 @@ CMakeFiles/conv.dir/conv.cpp.o
  /Users/mari/work/MPPC/upgrade/cosmi/conv/conv.cpp
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o
  ../include/BothReadDetector.h
+ ../include/CosmicRay.h
  ../include/TreeManager.h
  ../include/Visualizer.h
  /Users/mari/local/root/pro/include/Buttons.h
@@ -160,6 +161,7 @@ CMakeFiles/conv.dir/src/BothReadDetector.cpp.o
  /Users/mari/local/root/pro/include/TIsAProxy.h
  /Users/mari/local/root/pro/include/TIterator.h
  /Users/mari/local/root/pro/include/TKey.h
+ /Users/mari/local/root/pro/include/TLine.h
  /Users/mari/local/root/pro/include/TList.h
  /Users/mari/local/root/pro/include/TMathBase.h
  /Users/mari/local/root/pro/include/TNamed.h
@@ -379,6 +381,7 @@ CMakeFiles/conv.dir/src/CosmicRay.cpp.o
  /Users/mari/work/MPPC/upgrade/cosmi/conv/src/CosmicRay.cpp
 CMakeFiles/conv.dir/src/CsI.cpp.o
  ../include/BothReadDetector.h
+ ../include/CosmicRay.h
  ../include/CsI.h
  ../include/TreeManager.h
  ../include/Visualizer.h
@@ -431,6 +434,7 @@ CMakeFiles/conv.dir/src/CsI.cpp.o
  /Users/mari/local/root/pro/include/TIsAProxy.h
  /Users/mari/local/root/pro/include/TIterator.h
  /Users/mari/local/root/pro/include/TKey.h
+ /Users/mari/local/root/pro/include/TLine.h
  /Users/mari/local/root/pro/include/TList.h
  /Users/mari/local/root/pro/include/TMathBase.h
  /Users/mari/local/root/pro/include/TNamed.h
@@ -615,6 +619,7 @@ CMakeFiles/conv.dir/src/TreeManager.cpp.o
  /Users/mari/work/MPPC/upgrade/cosmi/conv/src/TreeManager.cpp
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o
  ../include/BothReadDetector.h
+ ../include/CosmicRay.h
  ../include/TreeManager.h
  ../include/TriggerCounter.h
  ../include/Visualizer.h
@@ -667,6 +672,7 @@ CMakeFiles/conv.dir/src/TriggerCounter.cpp.o
  /Users/mari/local/root/pro/include/TIsAProxy.h
  /Users/mari/local/root/pro/include/TIterator.h
  /Users/mari/local/root/pro/include/TKey.h
+ /Users/mari/local/root/pro/include/TLine.h
  /Users/mari/local/root/pro/include/TList.h
  /Users/mari/local/root/pro/include/TMathBase.h
  /Users/mari/local/root/pro/include/TNamed.h

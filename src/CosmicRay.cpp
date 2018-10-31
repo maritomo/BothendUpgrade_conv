@@ -24,13 +24,13 @@ void CosmicRay::Delete(){
 
 CosmicRay::CosmicRay() {
     Branch();
-    m_isSingleTrack = 0;
     for(int plane=0; plane<3; ++plane) {
         for(int par=0; par<2; ++par) {
             m_track[plane][par] = 0;
         }
     }
-    m_isInit = 1;
+    m_isSingleTrack = false;
+    m_isInit = true;
 }
 
 CosmicRay::~CosmicRay() {
@@ -75,6 +75,9 @@ void CosmicRay::AddHitPoint(int axis, double pos, double dpos) {
 }
 
 void CosmicRay::Tracking() {
+    static int entry = -1;
+    entry++;
+
     // Initiallization
     for(int plane=0; plane<3; ++plane) {
         for(int par = 0; par<2; ++par) {
@@ -84,20 +87,42 @@ void CosmicRay::Tracking() {
         m_ndf[plane] = 0;
     }
 
-    if(!m_isSingleTrack) return;
+    if(!m_isSingleTrack) {
+        Clear();
+        return;
+    }
 
     // Tracking
     for(int plane=0; plane<3; ++plane) {
+        std::vector<double> h, v, dh, dv;
+
         int axis_h, axis_v;
         GetVisAxis(plane, axis_h, axis_v);
-        if(m_hitpos[axis_h].size()<2) continue;
-        if(m_hitpos[axis_v].size()<2) continue;
 
-        int N = (int)m_hitpos->size();
-        std::vector<double> zero;
-        for(int i = 0; i<N; ++i) zero.push_back(0);
+        std::vector<double>::iterator itr_h = m_hitpos[axis_h].begin();
+        std::vector<double>::iterator itr_v = m_hitpos[axis_v].begin();
+        std::vector<double>::iterator itr_dh = m_dhitpos[axis_h].begin();
+        std::vector<double>::iterator itr_dv = m_dhitpos[axis_v].begin();
 
-        TGraphErrors g(N, &m_hitpos[axis_h][0], &m_hitpos[axis_v][0], &zero[0], &m_dhitpos[axis_v][0]);
+        for(; itr_h!=m_hitpos[axis_h].end(); ++itr_h, ++itr_v, ++itr_dh, ++itr_dv) {
+            // Remove points outside the world
+            if(*itr_h<m_world[axis_h][0] || *itr_h>m_world[axis_h][1] ||
+               *itr_v<m_world[axis_v][0] || *itr_v>m_world[axis_v][1]) continue;
+            // Remove CsI hit points in z-y plane
+            if(plane==1 && *itr_v>-1000 && *itr_v<1000) continue;
+            // Remove CsI hit points in x-z plane
+            if(plane==2  && *itr_h>-1000 && *itr_h<1000) continue;
+
+            h.push_back(*itr_h);
+            v.push_back(*itr_v);
+            dh.push_back(0);
+            dv.push_back(*itr_dv);
+        }
+
+
+        if(h.size()<2) break;
+
+        TGraphErrors g((int)h.size(), &h[0], &v[0], &dh[0], &dv[0]);
         TF1 ffit("ffit", "pol1");
         g.Fit("ffit", "Q");
 
@@ -107,7 +132,10 @@ void CosmicRay::Tracking() {
         m_ndf[plane] = ffit.GetNDF();
     }
 
-    // Clear
+    Clear();
+}
+
+void CosmicRay::Clear() {
     for(int axis=0; axis<3; ++axis) {
         m_hitpos[axis].clear();
         m_dhitpos[axis].clear();
