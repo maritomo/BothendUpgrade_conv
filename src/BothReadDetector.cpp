@@ -135,12 +135,11 @@ void BothReadDetector::RecRange() {
         double coord_y = m_cosmi->GetVerticalCoordinate(0, bound_x[side]);
         if(coord_y>bound_y[0] && coord_y<bound_y[1]) {
             x.push_back(bound_x[side]);
-            y.push_back(bound_y[side]);
+            y.push_back(coord_y);
         }
-
         double coord_x = m_cosmi->GetHorizontalCoordinate(0, bound_y[side]);
         if(coord_x>bound_x[0] && coord_x<bound_x[1]) {
-            x.push_back(bound_x[side]);
+            x.push_back(coord_x);
             y.push_back(bound_y[side]);
         }
     }

@@ -62,7 +62,7 @@ void CsI::HitDecision() {
     if(m_size[0]==25) mip *= 0.5;
 
     if(m_isCalibrated) {
-        if(m_Edep>0.5*mip) {
+        if(m_Edep>0.25*mip) {
             m_isHit = true;
         }
     } else {
