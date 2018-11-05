@@ -160,6 +160,32 @@ bool CsIManager::Init_DAQconfig() {
         }
     }
 
+    // Dead channels
+    for(int side = 0; side < 2; side++) {
+        std::stringstream ss;
+        if(side==0) {
+            ss << "data/deadCSI/run" << fname_runID << "_mppc.txt";
+        }
+        if(side==1) {
+            ss << "data/deadCSI/run" << fname_runID << "_pmt.txt";
+        }
+
+        std::string filename = ss.str();
+        std::ifstream ifs(filename.c_str());
+        if(!ifs) {
+            if(side==0) std::cout << "\tNo dead channels in MPPC side\n";
+            else std::cout << "\tNo dead channels in PMT side\n";
+            continue;
+        } else {
+            std::cout << "\t" << filename << "\n";
+        }
+
+        int csiID;
+        while(ifs >> csiID) {
+            m_csi[csiID]->SetData(side, -1, -1, -1);
+        }
+    }
+
     std::cout << "* ADC channel map               [OK]\n";
     return true;
 }
