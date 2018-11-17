@@ -39,8 +39,7 @@ void CsIManager::Branch() {
     m_eventTree->Branch("csi.sumADC", m_BRout.sumADC, "csi.sumADC[2716][2]/F");
     m_eventTree->Branch("csi.pt", m_BRout.pt, "csi.pt[2716][2]/F");
     m_eventTree->Branch("csi.cft", m_BRout.cft, "csi.cft[2716][2]/F");
-    m_eventTree->Branch("csi.eflag", m_BRout.eflag, "csi.eflag[2716][2]/O");
-
+    m_eventTree->Branch("csi.isDataComplemented", m_BRout.isDataComplemented, "csi.isDataComplemented[2716][2]/O");
     m_eventTree->Branch("csi.TD", m_BRout.TD, "csi.TD[2716]/F");
     m_eventTree->Branch("csi.MT", m_BRout.MT, "csi.MT[2716]/F");
 
@@ -49,6 +48,7 @@ void CsIManager::Branch() {
     m_eventTree->Branch("csi.hitpos", m_BRout.hitpos, "csi.hitpos[2716][3]/F");
 
     m_eventTree->Branch("csi.Edep", m_BRout.Edep, "csi.Edep[2716]/F");
+    m_eventTree->Branch("csi.range", m_BRout.range, "csi.range[2716]/F");
 }
 
 void CsIManager::Fill(){
@@ -63,7 +63,7 @@ void CsIManager::Fill(){
             m_BRout.sumADC[id][side] = (Float_t) m_csi[id]->GetIntegratedADC(side);
             m_BRout.pt[id][side] = (Float_t) m_csi[id]->GetPeakTime(side);
             m_BRout.cft[id][side] = (Float_t) m_csi[id]->GetCFTime(side);
-            m_BRout.eflag[id][side] = m_csi[id]->GetErrorFlag(side);
+            m_BRout.isDataComplemented[id][side] = m_csi[id]->IsDataComplemented(side);
         }
 
         if(m_csi[id]->IsUsed(0) && m_csi[id]->IsUsed(1)) {
@@ -78,6 +78,7 @@ void CsIManager::Fill(){
         }
 
         m_BRout.Edep[id] = (Float_t) m_csi[id]->GetEnergyDeposit();
+        m_BRout.range[id] = (Float_t) m_csi[id]->GetRange();
     }
 }
 
@@ -122,7 +123,6 @@ bool CsIManager::Init_DAQconfig() {
         return false;
     }
 
-    std::cout << "* ADC channel map               [OK]\n";
     for(int side = 0; side < 2; side++) {
         std::stringstream ss;
         if(side == 0){
@@ -138,7 +138,7 @@ bool CsIManager::Init_DAQconfig() {
             std::cout << "\t[Error] " << filename << " not found\n";
             return false;
         } else {
-            std::cout << "\t-> "  << filename << "\n";
+            std::cout << "\t"  << filename << "\n";
         }
 
         int id, crate, mod, ch;
@@ -155,60 +155,120 @@ bool CsIManager::Init_DAQconfig() {
     // Digital delays
     for(int id=0; id < nCSI; ++id) {
         for(int side=0; side < 2; ++side) {
-            int delay = 15;
-            if(m_csi[id]->IsUsed(side))
-                m_csi[id]->SetDelay(side, delay);
+            if(m_csi[id]->IsUsed(side)) m_csi[id]->SetDelay(side, 0);
         }
     }
 
+    // Dead channels
+    for(int side = 0; side < 2; side++) {
+        std::stringstream ss;
+        if(side==0) {
+            ss << "data/deadCSI/run" << fname_runID << "_mppc.txt";
+        }
+        if(side==1) {
+            ss << "data/deadCSI/run" << fname_runID << "_pmt.txt";
+        }
+
+        std::string filename = ss.str();
+        std::ifstream ifs(filename.c_str());
+        if(!ifs) {
+            if(side==0) std::cout << "\tNo dead channels in MPPC side\n";
+            else std::cout << "\tNo dead channels in PMT side\n";
+            continue;
+        } else {
+            std::cout << "\t" << filename << "\n";
+        }
+
+        int csiID;
+        while(ifs >> csiID) {
+            m_csi[csiID]->SetDeadChannel(side);
+        }
+    }
+
+    std::cout << "* ADC channel map               [OK]\n";
     return true;
 }
 
 bool CsIManager::Init_calibration() {
-    // ADC channels
+    // Deposit energy
     int fname_runID = GetFirstRunID(m_runID);
     if(!fname_runID) {
-        std::cout << "[Error] run" << m_runID << " is not registered with data/runset.txt\n";
+        std::cout << "[Error] run" << m_runID << " does not exist in data/runset.txt\n";
         return false;
     }
-
     TString filename = Form("data/CsIEdep/cali_csiEdep_run%d.txt", fname_runID);
     std::ifstream ifs(filename.Data());
     if(!ifs) {
-        std::cout << "[Warning] " << filename << " not found. CsI energy deposit set to 0\n";
-        return true;
+        std::cout << "[Warning] " << filename << " not found\n";
+        for(int id = 0; id<nCSI; ++id) {
+            m_csi[id]->SetEdepCalibConst(0);
+        }
+    } else {
+        std::cout << "\t" << filename << "\n";
+        int id;
+        double cc;
+        while(ifs >> id >> cc) {
+            m_csi[id]->SetEdepCalibConst(cc);
+        }
     }
+    ifs.close();
+    ifs.clear();
 
-    std::cout << "* CsI energy calibration        [OK]\n";
-    std::cout << "\t-> " << filename << "\n";
+    // Hit z position
+    filename = Form("data/csi_zhit.txt");
+    ifs.open(filename.Data());
+    if(!ifs) {
+        std::cout << "[Error] " << filename << " not found\n";
+        return false;
+    }
 
     int id;
-    double cc;
-    while(ifs >> id >> cc) {
-        m_csi[id]->SetEdepCalibConst(cc);
+    while(ifs >> id) {
+        double z[36];
+        for(int i = 0; i<36; ++i) {
+            ifs >> z[i];
+        }
+        m_csi[id]->SetZhitTable(z);
     }
 
+    std::cout << "* Calibration of CsI            [OK]\n";
     return true;
 }
 
 // Processes
 void CsIManager::Process() {
+    HitDecision();
+    RecZhit();
+}
+
+void CsIManager::HitDecision() {
     m_nHit = 0;
     for(int id = 0; id < nCSI; ++id) {
         m_csi[id]->Process();
-	if(m_csi[id]->IsHit()) {
-	  ++m_nHit;
-	}
+        if(m_csi[id]->IsHit()) {
+            ++m_nHit;
+            m_cosmi->AddHitPoint(m_csi[id]->GetHitPos(), m_csi[id]->GetPosres());
+        }
     }
 }
 
-// Calculate hit z position using track reconstructed by trigger counters
-void CsIManager::RecHitZpos() {
-    for(int id=0; id<nCSI; ++id) {
-        m_csi[id]->SetHitpos(2, (m_csi[id]->GetPos()[1]-m_cosmi->GetTrack(1)[0])/m_cosmi->GetTrack(1)[1]);
+void CsIManager::RecZhit() {
+    for(int id = 0; id < nCSI; ++id) {
+        if(m_csi[id]->IsHit()) {
+            // m_csi[id]->SetHitpos(2, (m_csi[id]->GetPos()[1]-m_cosmi->GetTrack(1)[0])/m_cosmi->GetTrack(1)[1]);
+            int i_track = m_cosmi->GetTrackID() - 1;
+            m_csi[id]->SetHitpos(2, m_csi[id]->GetHitzTable()[i_track]);
+        }
     }
 }
 
+void CsIManager::RecRange() {
+    for(int id = 0; id < nCSI; ++id) {
+        if(m_csi[id]->IsUsed(1)) {
+            m_csi[id]->RecRange();
+        }
+    }
+}
 
 // Visualization
 void CsIManager::Visualize() {
@@ -226,7 +286,7 @@ void CsIManager::Display(int plane) {
 
     std::vector<CsI*> usedCSI;
     for(int id=0; id<nCSI; ++id) {
-        if(m_csi[id]->IsUsed(0)||m_csi[id]->IsUsed(1)) {
+        if(m_csi[id]->IsUsed(0) || m_csi[id]->IsUsed(1)) {
             usedCSI.push_back(m_csi[id]);
             continue;
         }

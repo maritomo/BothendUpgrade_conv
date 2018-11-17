@@ -1,5 +1,5 @@
 #define REDUCED_DATA
-#define DEBUG
+//#define DEBUG
 //#define VISUALIZE
 
 #include "Converter.h"

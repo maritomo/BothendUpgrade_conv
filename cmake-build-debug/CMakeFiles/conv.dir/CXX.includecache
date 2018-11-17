@@ -7,12 +7,16 @@
 #IncludeRegexTransform: 
 
 ../include/BothReadDetector.h
+TF1.h
+../include/TF1.h
 TBox.h
 ../include/TBox.h
 TreeManager.h
 ../include/TreeManager.h
 Visualizer.h
 ../include/Visualizer.h
+CosmicRay.h
+../include/CosmicRay.h
 
 ../include/Converter.h
 TCanvas.h
@@ -534,6 +538,10 @@ TVectorDfwd.h
 TFitResultPtr.h
 /Users/mari/local/root/pro/include/TFitResultPtr.h
 
+/Users/mari/local/root/pro/include/TGraphErrors.h
+TGraph.h
+/Users/mari/local/root/pro/include/TGraph.h
+
 /Users/mari/local/root/pro/include/TH1.h
 TAxis.h
 /Users/mari/local/root/pro/include/TAxis.h
@@ -1019,6 +1027,8 @@ iostream
 -
 cmath
 -
+TGraph.h
+-
 BothReadDetector.h
 /Users/mari/work/MPPC/upgrade/cosmi/conv/src/BothReadDetector.h
 
@@ -1030,6 +1040,10 @@ Converter.h
 
 /Users/mari/work/MPPC/upgrade/cosmi/conv/src/CosmicRay.cpp
 iostream
+-
+TGraphErrors.h
+-
+TF1.h
 -
 CosmicRay.h
 /Users/mari/work/MPPC/upgrade/cosmi/conv/src/CosmicRay.h

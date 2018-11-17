@@ -34,12 +34,13 @@ class TreeManager {
 
   protected:
     static int m_runID;
+    static int m_entry;
     static std::vector<TTree*> m_tin;
     static TTree* m_eventTree;
     static TTree* m_statusTree;
     static std::vector<InputBranchContainer> m_BRin;
 
-    static std::vector<std::vector<int> > m_entry; // event# of synchronized events
+    static std::vector<std::vector<int> > m_entries; // event# of synchronized events
     static std::vector<int> m_tDeltaTrigger;
 
   private:

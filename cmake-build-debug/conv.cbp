@@ -46,9 +46,6 @@
 				<Compiler>
 					<Add directory="/Users/mari/work/MPPC/upgrade/cosmi/conv/include"/>
 					<Add directory="/Users/mari/local/root/pro/include"/>
-					<Add directory="."/>
-					<Add directory="/Users/mari/work/cpplib/include"/>
-					<Add directory="/Applications/PicoScope6.app/Contents/Resources/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/include"/>
@@ -73,9 +70,6 @@
 				<Compiler>
 					<Add directory="/Users/mari/work/MPPC/upgrade/cosmi/conv/include"/>
 					<Add directory="/Users/mari/local/root/pro/include"/>
-					<Add directory="."/>
-					<Add directory="/Users/mari/work/cpplib/include"/>
-					<Add directory="/Applications/PicoScope6.app/Contents/Resources/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/include"/>

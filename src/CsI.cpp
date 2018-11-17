@@ -9,6 +9,8 @@
 
 CsI::CsI(int locationID, int crystalID, int lineID, double posx, double posy, int size) {
 
+    m_cosmi = CosmicRay::GetInstance();
+
     m_locationID = locationID;
     m_lineID = lineID;
     m_crystalID = crystalID;
@@ -21,8 +23,8 @@ CsI::CsI(int locationID, int crystalID, int lineID, double posx, double posy, in
     m_size[1] = size;
     m_size[2] = 500;
 
-    m_posres[0] = m_size[0];
-    m_posres[1] = m_size[1];
+    m_posres[0] = m_size[0] * 0.5;
+    m_posres[1] = m_size[1] * 0.5;
     m_posres[2] = m_size[2] * 0.1;
 
     for(int side = 0; side<2; ++side) {
@@ -31,6 +33,10 @@ CsI::CsI(int locationID, int crystalID, int lineID, double posx, double posy, in
         m_mod[side] = -1;
         m_ch[side] = -1;
     }
+
+    m_completion_peakThreshold[0] = 50;
+    m_completion_peakThreshold[1] = 50;
+
     m_isHit = false;
     m_isCalibrated = false;
 
@@ -51,26 +57,32 @@ void CsI::Calibration() {
 }
 
 void CsI::HitDecision() {
-    m_isHit = 0;
+    m_isHit = false;
     for(int axis = 0; axis<3; ++axis) {
         m_hitpos[axis] = 0;
+    }
+
+    if(m_eflag[1]) {
+      m_isHit = false;
+      return;
     }
 
     double mip = 30;
     if(m_size[0]==25) mip *= 0.5;
 
     if(m_isCalibrated) {
-        if(m_Edep>0.5*mip) {
-            m_hitpos[0] = m_pos[0];
-            m_hitpos[1] = m_pos[1];
-            m_isHit = 1;
+        if(m_Edep>0.25*mip) {
+            m_isHit = true;
         }
     } else {
         if(m_peak[1]>100) {
-            m_hitpos[0] = m_pos[0];
-            m_hitpos[1] = m_pos[1];
-            m_isHit = 1;
+            m_isHit = true;
         }
+    }
+
+    if(m_isHit) {
+        m_hitpos[0] = m_pos[0];
+        m_hitpos[1] = m_pos[1];
     }
 }
 
@@ -82,4 +94,10 @@ void CsI::SetEdepCalibConst(double cEne) {
     }
     m_cEne = cEne;
     m_isCalibrated = true;
+}
+
+void CsI::SetZhitTable(const double* z) {
+    for(int i=0; i<36; ++i) {
+        m_zhit[i] = z[i];
+    }
 }

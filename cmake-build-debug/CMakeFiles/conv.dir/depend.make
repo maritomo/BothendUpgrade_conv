@@ -16,6 +16,8 @@ CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/ESTLType.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/Fit/FitExecutionPolicy.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/Foption.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/GuiTypes.h
+CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/Math/ParamFunctor.h
+CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/Math/Types.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/RConfig.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/RConfigure.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/ROOT/TIOFeatures.hxx
@@ -44,6 +46,7 @@ CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TAttPad.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TAttText.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TAxis.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TBasket.h
+CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TBits.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TBox.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TBranch.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TBuffer.h
@@ -57,8 +60,11 @@ CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TDictionary.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TDirectory.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TDirectoryFile.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TError.h
+CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TF1.h
+CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TF1AbsComposition.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TFile.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TFitResultPtr.h
+CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TFormula.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TGenericClassInfo.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TH1.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/THashTable.h
@@ -70,7 +76,9 @@ CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TKey.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TLine.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TList.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TMap.h
+CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TMath.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TMathBase.h
+CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TMethodCall.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TNamed.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TObjArray.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TObjString.h
@@ -79,6 +87,7 @@ CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TPad.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TPoint.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TQClass.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TQObject.h
+CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TROOT.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TSchemaHelper.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TSeqCollection.h
 CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/TStorage.h
@@ -108,6 +117,7 @@ CMakeFiles/conv.dir/conv.cpp.o: /Users/mari/local/root/pro/include/strlcpy.h
 CMakeFiles/conv.dir/conv.cpp.o: ../conv.cpp
 
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: ../include/BothReadDetector.h
+CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: ../include/CosmicRay.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: ../include/TreeManager.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: ../include/Visualizer.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/Buttons.h
@@ -116,6 +126,8 @@ CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/inclu
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/Fit/FitExecutionPolicy.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/Foption.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/GuiTypes.h
+CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/Math/ParamFunctor.h
+CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/Math/Types.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/RConfig.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/RConfigure.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/ROOT/TIOFeatures.hxx
@@ -140,6 +152,7 @@ CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/inclu
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TAttText.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TAxis.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TBasket.h
+CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TBits.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TBox.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TBranch.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TBuffer.h
@@ -152,15 +165,22 @@ CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/inclu
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TDictionary.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TDirectory.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TError.h
+CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TF1.h
+CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TF1AbsComposition.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TFitResultPtr.h
+CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TFormula.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TGenericClassInfo.h
+CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TGraph.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TH1.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TInterpreter.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TIsAProxy.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TIterator.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TKey.h
+CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TLine.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TList.h
+CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TMath.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TMathBase.h
+CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TMethodCall.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TNamed.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TObjArray.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TObjString.h
@@ -169,6 +189,7 @@ CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/inclu
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TPoint.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TQClass.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TQObject.h
+CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TROOT.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TSchemaHelper.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TSeqCollection.h
 CMakeFiles/conv.dir/src/BothReadDetector.cpp.o: /Users/mari/local/root/pro/include/TStorage.h
@@ -206,6 +227,8 @@ CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/ESTL
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/Fit/FitExecutionPolicy.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/Foption.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/GuiTypes.h
+CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/Math/ParamFunctor.h
+CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/Math/Types.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/RConfig.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/RConfigure.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/ROOT/TIOFeatures.hxx
@@ -230,6 +253,7 @@ CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TAtt
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TAttText.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TAxis.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TBasket.h
+CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TBits.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TBox.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TBranch.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TBuffer.h
@@ -242,7 +266,10 @@ CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TDat
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TDictionary.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TDirectory.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TError.h
+CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TF1.h
+CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TF1AbsComposition.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TFitResultPtr.h
+CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TFormula.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TGenericClassInfo.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TH1.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TInterpreter.h
@@ -251,7 +278,9 @@ CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TIte
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TKey.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TLine.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TList.h
+CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TMath.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TMathBase.h
+CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TMethodCall.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TNamed.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TObjArray.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TObjString.h
@@ -260,6 +289,7 @@ CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TPad
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TPoint.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TQClass.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TQObject.h
+CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TROOT.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TSchemaHelper.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TSeqCollection.h
 CMakeFiles/conv.dir/src/Converter.cpp.o: /Users/mari/local/root/pro/include/TStorage.h
@@ -291,6 +321,8 @@ CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/ESTL
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/Fit/FitExecutionPolicy.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/Foption.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/GuiTypes.h
+CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/Math/ParamFunctor.h
+CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/Math/Types.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/RConfig.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/RConfigure.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/ROOT/TIOFeatures.hxx
@@ -315,6 +347,7 @@ CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TAtt
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TAttText.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TAxis.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TBasket.h
+CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TBits.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TBranch.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TBuffer.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TCanvas.h
@@ -326,8 +359,13 @@ CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TDat
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TDictionary.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TDirectory.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TError.h
+CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TF1.h
+CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TF1AbsComposition.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TFitResultPtr.h
+CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TFormula.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TGenericClassInfo.h
+CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TGraph.h
+CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TGraphErrors.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TH1.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TInterpreter.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TIsAProxy.h
@@ -335,7 +373,9 @@ CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TIte
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TKey.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TLine.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TList.h
+CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TMath.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TMathBase.h
+CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TMethodCall.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TNamed.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TObjArray.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TObjString.h
@@ -344,6 +384,7 @@ CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TPad
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TPoint.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TQClass.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TQObject.h
+CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TROOT.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TSchemaHelper.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TSeqCollection.h
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/TStorage.h
@@ -367,6 +408,7 @@ CMakeFiles/conv.dir/src/CosmicRay.cpp.o: /Users/mari/local/root/pro/include/strl
 CMakeFiles/conv.dir/src/CosmicRay.cpp.o: ../src/CosmicRay.cpp
 
 CMakeFiles/conv.dir/src/CsI.cpp.o: ../include/BothReadDetector.h
+CMakeFiles/conv.dir/src/CsI.cpp.o: ../include/CosmicRay.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: ../include/CsI.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: ../include/TreeManager.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: ../include/Visualizer.h
@@ -376,6 +418,8 @@ CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/ESTLType.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/Fit/FitExecutionPolicy.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/Foption.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/GuiTypes.h
+CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/Math/ParamFunctor.h
+CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/Math/Types.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/RConfig.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/RConfigure.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/ROOT/TIOFeatures.hxx
@@ -400,6 +444,7 @@ CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TAttPad.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TAttText.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TAxis.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TBasket.h
+CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TBits.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TBox.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TBranch.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TBuffer.h
@@ -412,15 +457,21 @@ CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TDatime.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TDictionary.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TDirectory.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TError.h
+CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TF1.h
+CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TF1AbsComposition.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TFitResultPtr.h
+CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TFormula.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TGenericClassInfo.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TH1.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TInterpreter.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TIsAProxy.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TIterator.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TKey.h
+CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TLine.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TList.h
+CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TMath.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TMathBase.h
+CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TMethodCall.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TNamed.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TObjArray.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TObjString.h
@@ -429,6 +480,7 @@ CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TPad.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TPoint.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TQClass.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TQObject.h
+CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TROOT.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TSchemaHelper.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TSeqCollection.h
 CMakeFiles/conv.dir/src/CsI.cpp.o: /Users/mari/local/root/pro/include/TStorage.h
@@ -603,6 +655,7 @@ CMakeFiles/conv.dir/src/TreeManager.cpp.o: /Users/mari/local/root/pro/include/st
 CMakeFiles/conv.dir/src/TreeManager.cpp.o: ../src/TreeManager.cpp
 
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: ../include/BothReadDetector.h
+CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: ../include/CosmicRay.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: ../include/TreeManager.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: ../include/TriggerCounter.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: ../include/Visualizer.h
@@ -612,6 +665,8 @@ CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/Fit/FitExecutionPolicy.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/Foption.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/GuiTypes.h
+CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/Math/ParamFunctor.h
+CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/Math/Types.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/RConfig.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/RConfigure.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/ROOT/TIOFeatures.hxx
@@ -636,6 +691,7 @@ CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TAttText.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TAxis.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TBasket.h
+CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TBits.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TBox.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TBranch.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TBuffer.h
@@ -648,15 +704,21 @@ CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TDictionary.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TDirectory.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TError.h
+CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TF1.h
+CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TF1AbsComposition.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TFitResultPtr.h
+CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TFormula.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TGenericClassInfo.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TH1.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TInterpreter.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TIsAProxy.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TIterator.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TKey.h
+CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TLine.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TList.h
+CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TMath.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TMathBase.h
+CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TMethodCall.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TNamed.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TObjArray.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TObjString.h
@@ -665,6 +727,7 @@ CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TPoint.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TQClass.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TQObject.h
+CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TROOT.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TSchemaHelper.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TSeqCollection.h
 CMakeFiles/conv.dir/src/TriggerCounter.cpp.o: /Users/mari/local/root/pro/include/TStorage.h
@@ -699,6 +762,8 @@ CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/Fit/FitExecutionPolicy.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/Foption.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/GuiTypes.h
+CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/Math/ParamFunctor.h
+CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/Math/Types.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/RConfig.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/RConfigure.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/ROOT/TIOFeatures.hxx
@@ -723,6 +788,7 @@ CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TAttText.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TAxis.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TBasket.h
+CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TBits.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TBox.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TBranch.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TBuffer.h
@@ -735,7 +801,10 @@ CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TDictionary.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TDirectory.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TError.h
+CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TF1.h
+CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TF1AbsComposition.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TFitResultPtr.h
+CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TFormula.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TGenericClassInfo.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TH1.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TInterpreter.h
@@ -746,6 +815,7 @@ CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TList.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TMath.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TMathBase.h
+CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TMethodCall.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TNamed.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TObjArray.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TObjString.h
@@ -754,6 +824,7 @@ CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TPoint.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TQClass.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TQObject.h
+CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TROOT.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TSchemaHelper.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TSeqCollection.h
 CMakeFiles/conv.dir/src/TriggerManager.cpp.o: /Users/mari/local/root/pro/include/TStorage.h

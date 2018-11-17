@@ -13,8 +13,9 @@ TTree* TreeManager::m_eventTree;
 TTree* TreeManager::m_statusTree;
 
 int TreeManager::m_runID = 0;
+int TreeManager::m_entry;
 std::vector<InputBranchContainer> TreeManager::m_BRin;
-std::vector<std::vector<int> > TreeManager::m_entry;
+std::vector<std::vector<int> > TreeManager::m_entries;
 std::vector<int> TreeManager::m_tDeltaTrigger;
 bool TreeManager::m_isInit = 0;
 
@@ -106,7 +107,7 @@ void TreeManager::CheckTimeStamp() {
         return;
     }
 
-    m_entry.resize(nTree);
+    m_entries.resize(nTree);
     m_tDeltaTrigger.resize(nTree);
 
     int* entry = new int[nTree];
@@ -186,11 +187,11 @@ void TreeManager::CheckTimeStamp() {
         if(recover_flag) {
             for(int k = 0; k < nTree; ++k) {
                 entry[k] = maxEntry;
-                m_entry[k].push_back(entry[k]);
+                m_entries[k].push_back(entry[k]);
                 ++entry[k];
             }
 
-            int current_entry = m_entry[0].size();
+            int current_entry = m_entries[0].size();
             if(current_entry%1000==0)
                 std::cout << current_entry << "th\n";
 
@@ -235,10 +236,10 @@ void TreeManager::CheckTimeStamp() {
         // if found
         if(find_flag) {
             for(int k = 0; k < nTree; ++k) {
-                m_entry[k].push_back(entry[k]);
+                m_entries[k].push_back(entry[k]);
                 ++entry[k];
             }
-            int current_entry = m_entry[0].size();
+            int current_entry = m_entries[0].size();
             if(current_entry%1000==0)
                 std::cout << current_entry << "th\n";
         } else {
@@ -252,8 +253,8 @@ void TreeManager::CheckTimeStamp() {
 
     } // while
 
-    std::cout << "# of surviving events     " << m_entry[0].size() << " ("
-              << (double)m_entry[0].size()/m_tin[0]->GetEntries()*100 << "%)\n";
+    std::cout << "# of surviving events     " << m_entries[0].size() << " ("
+              << (double)m_entries[0].size()/m_tin[0]->GetEntries()*100 << "%)\n";
 
     delete[] entry;
     delete[] tdif_delta;
@@ -267,12 +268,13 @@ void TreeManager::GetEntry(int entry) {
         std::cout << "Use CheckTimeStamp() function at first\n";
         return;
     }
-    if(entry >= m_entry[0].size()) {
-        std::cout << "Total # of events " << m_entry[0].size() << "\n";
+    if(entry >= m_entries[0].size()) {
+        std::cout << "Total # of events " << m_entries[0].size() << "\n";
         return;
     }
+    m_entry = entry;
     for(int k = 0; k < m_tin.size(); ++k) {
-        m_tin[k]->GetEntry(m_entry[k][entry]);
+        m_tin[k]->GetEntry(m_entries[k][entry]);
     }
 }
 
@@ -281,7 +283,7 @@ int TreeManager::GetEntries() {
         std::cout << "Use CheckTimeStamp() function at first\n";
         return 0;
     }
-    return m_entry[0].size();
+    return m_entries[0].size();
 }
 
 void TreeManager::Fill() {

@@ -10,34 +10,34 @@
 
 //TriggerCounter::TriggerCounter(int layer, int ch, int scintiID, int dir, const double* pos) :
 //        m_layer(layer), m_ch(ch), m_scintiID(scintiID), m_dir(dir) {
-TriggerCounter::TriggerCounter(int scintiID, int dir, const double* pos) :
-        m_scintiID(scintiID), m_dir(dir) {
+TriggerCounter::TriggerCounter(int scintiID, int dir, const double* pos) : m_scintiID(scintiID), m_dir(dir) {
 
-    for(int k = 0; k < 3; ++k) {
-        m_pos[k] = pos[k];
-    }
+    for(int k = 0; k < 3; ++k) m_pos[k] = pos[k];
 
     m_size[0] = 2000;
     m_size[1] = 100;
     m_size[2] = 50;
 
-    m_posres[0] = m_size[0] / 20;
-    m_posres[1] = m_size[1];
-    m_posres[2] = m_size[2];
+    m_posres[0] = m_size[0] * 0.02; // resolution ~ 2% (4cm)
+    m_posres[1] = m_size[1] * 0.5;
+    m_posres[2] = m_size[2] * 0.5;
 
-    m_isHit = 0;
+    m_completion_peakThreshold[0] = 500;
+    m_completion_peakThreshold[1] = 500;
+
+    m_isHit = false;
 
     m_color = kBlue;
-    m_isVis = 0;
+    m_isVis = false;
 }
 
 /*
  * Setter
  */
 
-void TriggerCounter::SetCalibConst(const double* TD_to_x) {
+void TriggerCounter::SetHitXparams(const double* TD_to_x) {
     for(int i = 0; i < 2; ++i) {
-        m_cHitX[i] = TD_to_x[i] * m_dir;
+        m_cHitX[i] = TD_to_x[i];
     }
 }
 
@@ -54,6 +54,7 @@ void TriggerCounter::SetCoinRange(int side, double* coin_range) {
 
 void TriggerCounter::Process() {
     Reconstruct();
+    m_MT -= m_MT0;
     HitDecision();
     for(int side = 0; side < 2; ++side) {
         OnlineHitDecision(side);
@@ -61,7 +62,7 @@ void TriggerCounter::Process() {
 }
 
 void TriggerCounter::HitDecision() {
-    m_isHit = 0;
+    m_isHit = false;
     for(int axis=0; axis<3; ++axis) {
         m_hitpos[axis] = 0;
     }
@@ -71,7 +72,7 @@ void TriggerCounter::HitDecision() {
            m_pt[side]/8 + m_delay[side] > m_coin_range[side][0] &&
            m_pt[side]/8 + m_delay[side] < m_coin_range[side][1])
         {
-            m_isHit = 1;
+            m_isHit = true;
             m_hitpos[0] = m_cHitX[1] * m_TD + m_cHitX[0];
             m_hitpos[1] = m_pos[1];
             m_hitpos[2] = m_pos[2];
@@ -106,8 +107,8 @@ void TriggerCounter::OnlineHitDecision(int side) {
             if(k < nSmpl_l) data_l[k] = m_data[side][smpl + index];
         }
 
-        short max_l = GetMax(nSmpl_l, data_l);
-        short max_g = GetMax(nSmpl_g, data_g);
+        short max_l = Max(nSmpl_l, data_l);
+        short max_g = Max(nSmpl_g, data_g);
 
         if(max_l == max_g && max_l-m_ped[side] > m_peak_thr[side]) {
             m_isHit_online[side][smpl] = 1;

@@ -20,7 +20,7 @@ TriggerManager::TriggerManager() {
 }
 
 TriggerManager::~TriggerManager() {
-    for(int id=0; id<nCRC; ++id) {
+    for(int id=0; id<nTrig; ++id) {
         delete m_trig[id];
     }
 }
@@ -32,8 +32,7 @@ void TriggerManager::Branch() {
     m_eventTree->Branch("trig.sumADC", m_BRout.sumADC, "trig.sumADC[12][2]/F");
     m_eventTree->Branch("trig.pt", m_BRout.pt, "trig.pt[12][2]/F");
     m_eventTree->Branch("trig.cft", m_BRout.cft, "trig.cft[12][2]/F");
-    m_eventTree->Branch("trig.eflag", m_BRout.eflag, "trig.eflag[12][2]/F");
-
+    m_eventTree->Branch("trig.isDataComplemented", m_BRout.isDataComplemented, "trig.isDataComplemented[12][2]/O");
     m_eventTree->Branch("trig.MT", m_BRout.MT, "trig.MT[12]/F");
     m_eventTree->Branch("trig.TD", m_BRout.TD, "trig.TD[12]/F");
 
@@ -43,18 +42,15 @@ void TriggerManager::Branch() {
     m_eventTree->Branch("trig.hitID", m_BRout.hitID, "trig.hitID[2]/S");
 
     m_eventTree->Branch("trig.trackID", &m_BRout.trackID, "trig.trackID/S");
-    m_eventTree->Branch("trig.TOF", &m_BRout.TOF, "trig.TOF/F");
-    m_eventTree->Branch("trig.range", &m_BRout.range, "trig.range/F");
 
-    m_eventTree->Branch("trig.recX", m_BRout.recX, "trig.recX[12]/F");
-
+    // Online hit decision algorithm
 //    m_eventTree->Branch("trig.isHit_online", m_BRout.isHit_online, "trig.isHit_online[12][2][64]/O");
 //    m_eventTree->Branch("trig.isTriggered_online", m_BRout.isTriggered_online, "trig.isTriggered_online[64]/O");
 //    m_eventTree->Branch("trig.nHit_online", m_BRout.nHit_online, "trig.nHit_online[2][64]/S");
 }
 
 void TriggerManager::Fill(){
-    for(int id=0; id<nCRC; ++id) {
+    for(int id=0; id<nTrig; ++id) {
         for(int side=0; side<2; ++side) {
             for(int smpl=0; smpl<64; ++smpl) {
                 m_BRout.data[id][side][smpl] = m_trig[id]->GetData(side)[smpl];
@@ -64,7 +60,7 @@ void TriggerManager::Fill(){
             m_BRout.sumADC[id][side] = (Float_t) m_trig[id]->GetIntegratedADC(side);
             m_BRout.pt[id][side] = (Float_t) m_trig[id]->GetPeakTime(side);
             m_BRout.cft[id][side] = (Float_t) m_trig[id]->GetCFTime(side);
-            m_BRout.eflag[id][side] = m_trig[id]->GetErrorFlag(side);
+            m_BRout.isDataComplemented[id][side] = m_trig[id]->IsDataComplemented(side);
         }
 
         m_BRout.MT[id] = (Float_t) m_trig[id]->GetMeanTime();
@@ -80,16 +76,12 @@ void TriggerManager::Fill(){
         }
 
         m_BRout.trackID = (Short_t) m_trackID;
-        m_BRout.TOF = (Float_t) m_TOF;
-        m_BRout.range = (Float_t) m_range;
-
-        m_BRout.recX[id] = (Float_t) m_trig[id]->GetRecX();
 
         for(int smpl=0; smpl<64; ++smpl) {
             m_BRout.isTriggered_online[smpl] = m_isTriggered_online[smpl];
             for(int side=0; side<2; ++side) {
                 m_BRout.nHit_online[side][smpl] = (Short_t) m_nHit_online[side][smpl];
-                for(int id=0; id<nCRC; ++id) {
+                for(int id=0; id<nTrig; ++id) {
                     m_BRout.isHit_online[id][side][smpl] = m_isHit_online[id][side][smpl];
                 }
             }
@@ -102,7 +94,6 @@ void TriggerManager::Fill(){
         m_BRout.hitID[layer] = (Short_t) m_hitID[layer];
     }
 
-    m_BRout.TOF = (Float_t) m_TOF;
 }
 
 // Initialization
@@ -130,7 +121,7 @@ bool TriggerManager::Init_map() {
 
     int scintiID, dir;
     double pos[3];
-    for(int id=0; id<nCRC; ++id) {
+    for(int id=0; id<nTrig; ++id) {
         ifs >> scintiID >> dir >> pos[0] >> pos[1] >> pos[2];
         m_trig[id] = new TriggerCounter(scintiID, dir, pos);
     }
@@ -162,19 +153,38 @@ bool TriggerManager::Init_DAQconfig(){
 }
 
 bool TriggerManager::Init_calibration() {
+    // Hit x position
     std::string filename = "./data/cali_trigHitX.txt";
     std::ifstream ifs(filename.c_str());
+    double cc[2] = {};
     if(!ifs) {
-        std::cout << filename << " not found\n";
-        return false;
-    }
-
-    int id;
-    double cc[2];
-    while(ifs >> id >> cc[0] >> cc[1]) {
-        m_trig[id]->SetCalibConst(cc);
+        std::cout << "\t[Warning] " <<  filename << " not found\n";
+        for(int id=0; id<nTrig; ++id) {
+            m_trig[id]->SetHitXparams(cc);
+        }
+    } else {
+        int id;
+        while(ifs >> id >> cc[0] >> cc[1]) {
+            m_trig[id]->SetHitXparams(cc);
+        }
     }
     ifs.close();
+    ifs.clear();
+
+    // Timing-zero of mean time
+    filename = "data/trig_crossTiming.txt";
+    ifs.open(filename.c_str());
+    if(!ifs) {
+        std::cout << "\t[Warning] " << filename << " not found\n";
+        for(int id=0; id<nTrig; ++id) {
+            m_trig[id]->SetMeanTimeZero(0);
+        }
+    } else {
+        int id; double t0;
+        while(ifs >> id >> t0) {
+            m_trig[id]->SetMeanTimeZero(t0);
+        }
+    }
 
     std::cout << "* Calibration constants         [OK]\n";
     return true;
@@ -214,7 +224,7 @@ bool TriggerManager::Init_hitCondition() {
 
 // Process
 void TriggerManager::Process() {
-    for(int id=0; id<nCRC; ++id) {
+    for(int id=0; id<nTrig; ++id) {
         m_trig[id]->Process();
     }
     Tracking();
@@ -225,42 +235,30 @@ void TriggerManager::Tracking() {
     // Hit decision
     m_nHit[0] = 0;
     m_nHit[1] = 0;
-    for(int id=0; id<nCRC; ++id) {
+    for(int id=0; id<nTrig; ++id) {
         if(m_trig[id]->IsHit()) {
             int layer = GetLayer(id);
             ++m_nHit[layer];
             m_hitID[layer] = (Short_t) id;
-            m_trigHit[layer] = m_trig[id];
         }
     }
 
-    // Tracking
-    // if no track
+    // TrackID
     if(m_nHit[0]!=1 || m_nHit[1]!=1) {
-        m_cosmi->SetIsTracked(0);
-        m_trackID = 0;
-        double zero[2] = {};
-        for(int plane=0; plane<3; ++plane) {
-            m_cosmi->SetTrack(plane, zero);
-        }
-        return;
+        m_trackID = 0; // No track
+    } else {
+        int N = nTrig / 2; // = 6, # of trigger counters in each layer
+        int i_top = m_hitID[1] - N; // 0-5, from upstream
+        int i_btm = m_hitID[0];     // 0-5
+        m_trackID = (Short_t) (i_top * N + i_btm + 1);
     }
 
-    m_cosmi->SetIsTracked(1);
-    m_trackID = (Short_t) ( (m_hitID[1]-nCRC/2)*nCRC/2 + m_hitID[0] + 1 );
-    m_range = (Float_t) (Distance(m_trigHit[0], m_trigHit[1]) * 1e-3); // [m]
-    m_TOF = m_trigHit[1]->GetMeanTime() - m_trigHit[0]->GetMeanTime();
-
-    // if tracked
-    for(int plane = 0; plane < 3; ++plane) {
-        int axis_h, axis_v; // horizontal, vertical
-        GetVisAxis(plane, axis_h, axis_v);
-        double track[2];
-        track[1] = (Float_t) ((m_trigHit[1]->GetHitPos()[axis_v]-m_trigHit[0]->GetHitPos()[axis_v])
-                              / (m_trigHit[1]->GetHitPos()[axis_h]-m_trigHit[0]->GetHitPos()[axis_h]));
-        track[0] = (Float_t) (m_trigHit[1]->GetHitPos()[axis_v]
-                              - track[1] * (m_trigHit[1]->GetHitPos()[axis_h]));
-        m_cosmi->SetTrack(plane, track);
+    // Add hit points into cosmic ray
+    m_cosmi->SetTrackID(m_trackID);
+    for(int id=0; id<nTrig; ++id) {
+        if(m_trig[id]->IsHit()) {
+            m_cosmi->AddHitPoint(m_trig[id]->GetHitPos(), m_trig[id]->GetPosres());
+        }
     }
 
 }
@@ -271,7 +269,7 @@ void TriggerManager::OnlineHitDecision() {
 
         for(int layer = 0; layer < 2; ++layer) {
             m_nHit_online[layer][smpl] = 0;
-            for(int ch = 0; ch < nCRC; ++ch) {
+            for(int ch = 0; ch < nTrig; ++ch) {
                 int id = GetID(layer, ch);
                 for(int side = 0; side < 2; ++side) {
                     if(m_trig[id]->IsOnlineHit(side)[smpl]) {
@@ -288,7 +286,7 @@ void TriggerManager::OnlineHitDecision() {
 
 // Getter
 int TriggerManager::GetID(int scintiID) {
-    for(int id=0; id<nCRC; ++id) {
+    for(int id=0; id<nTrig; ++id) {
         if(m_trig[id]->GetScintiID()==scintiID) {
             return id;
         }
@@ -304,10 +302,9 @@ double TriggerManager::Distance(TriggerCounter* crc1, TriggerCounter* crc2) {
     );
 }
 
-
 // Visualization
 void TriggerManager::Visualize() {
-    for(int id=0; id<nCRC; ++id) {
+    for(int id=0; id<nTrig; ++id) {
         m_trig[id]->Visualize();
     }
     m_isVis = 1;
@@ -319,7 +316,7 @@ void TriggerManager::Display(int plane) {
         return;
     }
 
-    for(int id=0; id<nCRC; ++id) {
+    for(int id=0; id<nTrig; ++id) {
         m_trig[id]->Display(plane);
     }
     m_canv->Update();

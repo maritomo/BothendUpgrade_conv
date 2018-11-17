@@ -12,6 +12,8 @@
 
 struct CosmicRayBranchContainer {
     Float_t track[3][2];
+    Float_t chi2[3];
+    Short_t ndf[3];
 };
 
 class CosmicRay : public Visualizer, public TreeManager {
@@ -21,11 +23,18 @@ class CosmicRay : public Visualizer, public TreeManager {
     void Branch();
     void Fill();
 
-    void SetIsTracked(bool isTracked) { m_isTracked = isTracked; }
-    void SetTrack(int plane, double* track) { for(int k=0; k<2; ++k) m_track[plane][k] = track[k]; }
+    void SetTrackID(int trackID);
+    void AddHitPoint(const double* pos, const double* dpos);
+    void AddHitPoint(int axis, double pos, double dpos);
+    void Tracking();
+    void Clear();
 
-    bool IsTracked() { return m_isTracked; }
+    bool IsSingleTrack() { return m_isSingleTrack; }
     const double* GetTrack(int plane) { return m_track[plane]; }
+    int GetTrackID() { return m_trackID; }
+
+    double GetVerticalCoordinate(int plane, double coord_h) { return m_track[plane][1]*coord_h + m_track[plane][0]; }
+    double GetHorizontalCoordinate(int plane, double coord_v) { return (coord_v-m_track[plane][0])/m_track[plane][1]; }
 
     // Visualization
     void Visualize();
@@ -39,8 +48,14 @@ private:
 
     CosmicRayBranchContainer m_BRout;
 
-    bool m_isTracked;
+    bool m_isSingleTrack;
+    std::vector<double> m_hitpos[3], m_dhitpos[3];
+
     double m_track[3][2];
+    double m_chi2[3];
+    int m_ndf[3];
+
+    int m_trackID;
 
     // Visualization
     TLine* m_trackLine[3];
