@@ -177,6 +177,114 @@ src/BothReadDetector.cpp.s:
 	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/BothReadDetector.cpp.s
 .PHONY : src/BothReadDetector.cpp.s
 
+src/COSMIC.o: src/COSMIC.cpp.o
+
+.PHONY : src/COSMIC.o
+
+# target to build an object file
+src/COSMIC.cpp.o:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/COSMIC.cpp.o
+.PHONY : src/COSMIC.cpp.o
+
+src/COSMIC.i: src/COSMIC.cpp.i
+
+.PHONY : src/COSMIC.i
+
+# target to preprocess a source file
+src/COSMIC.cpp.i:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/COSMIC.cpp.i
+.PHONY : src/COSMIC.cpp.i
+
+src/COSMIC.s: src/COSMIC.cpp.s
+
+.PHONY : src/COSMIC.s
+
+# target to generate assembly for a file
+src/COSMIC.cpp.s:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/COSMIC.cpp.s
+.PHONY : src/COSMIC.cpp.s
+
+src/COSMICManager.o: src/COSMICManager.cpp.o
+
+.PHONY : src/COSMICManager.o
+
+# target to build an object file
+src/COSMICManager.cpp.o:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/COSMICManager.cpp.o
+.PHONY : src/COSMICManager.cpp.o
+
+src/COSMICManager.i: src/COSMICManager.cpp.i
+
+.PHONY : src/COSMICManager.i
+
+# target to preprocess a source file
+src/COSMICManager.cpp.i:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/COSMICManager.cpp.i
+.PHONY : src/COSMICManager.cpp.i
+
+src/COSMICManager.s: src/COSMICManager.cpp.s
+
+.PHONY : src/COSMICManager.s
+
+# target to generate assembly for a file
+src/COSMICManager.cpp.s:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/COSMICManager.cpp.s
+.PHONY : src/COSMICManager.cpp.s
+
+src/CSI.o: src/CSI.cpp.o
+
+.PHONY : src/CSI.o
+
+# target to build an object file
+src/CSI.cpp.o:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CSI.cpp.o
+.PHONY : src/CSI.cpp.o
+
+src/CSI.i: src/CSI.cpp.i
+
+.PHONY : src/CSI.i
+
+# target to preprocess a source file
+src/CSI.cpp.i:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CSI.cpp.i
+.PHONY : src/CSI.cpp.i
+
+src/CSI.s: src/CSI.cpp.s
+
+.PHONY : src/CSI.s
+
+# target to generate assembly for a file
+src/CSI.cpp.s:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CSI.cpp.s
+.PHONY : src/CSI.cpp.s
+
+src/CSIManager.o: src/CSIManager.cpp.o
+
+.PHONY : src/CSIManager.o
+
+# target to build an object file
+src/CSIManager.cpp.o:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CSIManager.cpp.o
+.PHONY : src/CSIManager.cpp.o
+
+src/CSIManager.i: src/CSIManager.cpp.i
+
+.PHONY : src/CSIManager.i
+
+# target to preprocess a source file
+src/CSIManager.cpp.i:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CSIManager.cpp.i
+.PHONY : src/CSIManager.cpp.i
+
+src/CSIManager.s: src/CSIManager.cpp.s
+
+.PHONY : src/CSIManager.s
+
+# target to generate assembly for a file
+src/CSIManager.cpp.s:
+	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CSIManager.cpp.s
+.PHONY : src/CSIManager.cpp.s
+
 src/Converter.o: src/Converter.cpp.o
 
 .PHONY : src/Converter.o
@@ -231,141 +339,6 @@ src/CosmicRay.cpp.s:
 	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CosmicRay.cpp.s
 .PHONY : src/CosmicRay.cpp.s
 
-src/CsI.o: src/CsI.cpp.o
-
-.PHONY : src/CsI.o
-
-# target to build an object file
-src/CsI.cpp.o:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CsI.cpp.o
-.PHONY : src/CsI.cpp.o
-
-src/CsI.i: src/CsI.cpp.i
-
-.PHONY : src/CsI.i
-
-# target to preprocess a source file
-src/CsI.cpp.i:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CsI.cpp.i
-.PHONY : src/CsI.cpp.i
-
-src/CsI.s: src/CsI.cpp.s
-
-.PHONY : src/CsI.s
-
-# target to generate assembly for a file
-src/CsI.cpp.s:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CsI.cpp.s
-.PHONY : src/CsI.cpp.s
-
-src/CsIManager.o: src/CsIManager.cpp.o
-
-.PHONY : src/CsIManager.o
-
-# target to build an object file
-src/CsIManager.cpp.o:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CsIManager.cpp.o
-.PHONY : src/CsIManager.cpp.o
-
-src/CsIManager.i: src/CsIManager.cpp.i
-
-.PHONY : src/CsIManager.i
-
-# target to preprocess a source file
-src/CsIManager.cpp.i:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CsIManager.cpp.i
-.PHONY : src/CsIManager.cpp.i
-
-src/CsIManager.s: src/CsIManager.cpp.s
-
-.PHONY : src/CsIManager.s
-
-# target to generate assembly for a file
-src/CsIManager.cpp.s:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/CsIManager.cpp.s
-.PHONY : src/CsIManager.cpp.s
-
-src/TreeManager.o: src/TreeManager.cpp.o
-
-.PHONY : src/TreeManager.o
-
-# target to build an object file
-src/TreeManager.cpp.o:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/TreeManager.cpp.o
-.PHONY : src/TreeManager.cpp.o
-
-src/TreeManager.i: src/TreeManager.cpp.i
-
-.PHONY : src/TreeManager.i
-
-# target to preprocess a source file
-src/TreeManager.cpp.i:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/TreeManager.cpp.i
-.PHONY : src/TreeManager.cpp.i
-
-src/TreeManager.s: src/TreeManager.cpp.s
-
-.PHONY : src/TreeManager.s
-
-# target to generate assembly for a file
-src/TreeManager.cpp.s:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/TreeManager.cpp.s
-.PHONY : src/TreeManager.cpp.s
-
-src/TriggerCounter.o: src/TriggerCounter.cpp.o
-
-.PHONY : src/TriggerCounter.o
-
-# target to build an object file
-src/TriggerCounter.cpp.o:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/TriggerCounter.cpp.o
-.PHONY : src/TriggerCounter.cpp.o
-
-src/TriggerCounter.i: src/TriggerCounter.cpp.i
-
-.PHONY : src/TriggerCounter.i
-
-# target to preprocess a source file
-src/TriggerCounter.cpp.i:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/TriggerCounter.cpp.i
-.PHONY : src/TriggerCounter.cpp.i
-
-src/TriggerCounter.s: src/TriggerCounter.cpp.s
-
-.PHONY : src/TriggerCounter.s
-
-# target to generate assembly for a file
-src/TriggerCounter.cpp.s:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/TriggerCounter.cpp.s
-.PHONY : src/TriggerCounter.cpp.s
-
-src/TriggerManager.o: src/TriggerManager.cpp.o
-
-.PHONY : src/TriggerManager.o
-
-# target to build an object file
-src/TriggerManager.cpp.o:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/TriggerManager.cpp.o
-.PHONY : src/TriggerManager.cpp.o
-
-src/TriggerManager.i: src/TriggerManager.cpp.i
-
-.PHONY : src/TriggerManager.i
-
-# target to preprocess a source file
-src/TriggerManager.cpp.i:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/TriggerManager.cpp.i
-.PHONY : src/TriggerManager.cpp.i
-
-src/TriggerManager.s: src/TriggerManager.cpp.s
-
-.PHONY : src/TriggerManager.s
-
-# target to generate assembly for a file
-src/TriggerManager.cpp.s:
-	$(MAKE) -f CMakeFiles/conv.dir/build.make CMakeFiles/conv.dir/src/TriggerManager.cpp.s
-.PHONY : src/TriggerManager.cpp.s
-
 src/Visualizer.o: src/Visualizer.cpp.o
 
 .PHONY : src/Visualizer.o
@@ -408,27 +381,24 @@ help:
 	@echo "... src/BothReadDetector.o"
 	@echo "... src/BothReadDetector.i"
 	@echo "... src/BothReadDetector.s"
+	@echo "... src/COSMIC.o"
+	@echo "... src/COSMIC.i"
+	@echo "... src/COSMIC.s"
+	@echo "... src/COSMICManager.o"
+	@echo "... src/COSMICManager.i"
+	@echo "... src/COSMICManager.s"
+	@echo "... src/CSI.o"
+	@echo "... src/CSI.i"
+	@echo "... src/CSI.s"
+	@echo "... src/CSIManager.o"
+	@echo "... src/CSIManager.i"
+	@echo "... src/CSIManager.s"
 	@echo "... src/Converter.o"
 	@echo "... src/Converter.i"
 	@echo "... src/Converter.s"
 	@echo "... src/CosmicRay.o"
 	@echo "... src/CosmicRay.i"
 	@echo "... src/CosmicRay.s"
-	@echo "... src/CsI.o"
-	@echo "... src/CsI.i"
-	@echo "... src/CsI.s"
-	@echo "... src/CsIManager.o"
-	@echo "... src/CsIManager.i"
-	@echo "... src/CsIManager.s"
-	@echo "... src/TreeManager.o"
-	@echo "... src/TreeManager.i"
-	@echo "... src/TreeManager.s"
-	@echo "... src/TriggerCounter.o"
-	@echo "... src/TriggerCounter.i"
-	@echo "... src/TriggerCounter.s"
-	@echo "... src/TriggerManager.o"
-	@echo "... src/TriggerManager.i"
-	@echo "... src/TriggerManager.s"
 	@echo "... src/Visualizer.o"
 	@echo "... src/Visualizer.i"
 	@echo "... src/Visualizer.s"

@@ -8,33 +8,35 @@
 #include "TCanvas.h"
 #include "TH1.h"
 #include "TTree.h"
+#include "TChain.h"
 
-#include "TreeManager.h"
-#include "TriggerManager.h"
-#include "CsIManager.h"
+#include "COSMICManager.h"
+#include "CSIManager.h"
 
-struct SystemBranchContainer {
-    UInt_t timestamp[3];
-};
 
-class Converter : public Visualizer, public TreeManager {
+class Converter : public Visualizer {
   public:
     Converter();
     ~Converter();
 
-    void Branch();
-    void Convert();
-    void Fill();
+    void SetInputTree(TChain* tin);
+    void SetOutputTree(TTree* tout);
+    void Convert(int entry);
+
+    CosmicRay* GetCosmicRay() { return m_cosmic_ray; }
+    COSMICManager* GetCOSMICManager() { return m_COSMIC_man; }
+    CSIManager* GetCSIManager() { return m_CSI_man; }
 
     // Visualization
     void Visualize();
     void Display(int plane);
 
   private:
-    TriggerManager* m_trigMan;
-    CsIManager* m_csiMan;
-    SystemBranchContainer m_BRout;
-    CosmicRay* m_cosmi;
+    TChain* m_tin;
+    TTree* m_tout;
+    CosmicRay* m_cosmic_ray;
+    COSMICManager* m_COSMIC_man;
+    CSIManager* m_CSI_man;
 };
 
 

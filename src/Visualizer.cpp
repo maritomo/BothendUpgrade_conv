@@ -6,8 +6,15 @@
 
 #include "Visualizer.h"
 
-double Visualizer::m_world[3][2] = {{-1100,1100}, {-1500,1500}, {-300,300}};
+double Visualizer::m_world[3][2] = {{-1100,1100}, {-2500,2500}, {-300,300}};
 TCanvas* Visualizer::m_canv = nullptr;
+
+void Visualizer::GenerateCanvas() {
+    if(m_canv == nullptr) {
+        m_canv =  m_canv = new TCanvas("m_canv", "Event Display", 1100, 1200);
+        m_canv->Divide(2, 1);
+    }
+}
 
 void Visualizer::Print(const char* filename) {
     if(!m_isVis) {

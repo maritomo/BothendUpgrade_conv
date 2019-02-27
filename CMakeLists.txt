@@ -13,9 +13,9 @@ include_directories(${ROOT_INCLUDE_DIRS})
 link_directories($ENV{ROOTSYS}/lib)
 
 set(SOURCE_FILES conv.cpp
-        src/TreeManager.cpp src/Visualizer.cpp src/BothReadDetector.cpp
-        src/CosmicRay.cpp src/Converter.cpp src/TriggerManager.cpp
-        src/TriggerCounter.cpp src/CsIManager.cpp src/CsI.cpp)
+        src/Visualizer.cpp src/BothReadDetector.cpp
+        src/CosmicRay.cpp src/Converter.cpp src/COSMICManager.cpp
+        src/COSMIC.cpp src/CSIManager.cpp src/CSI.cpp)
 add_executable(conv ${SOURCE_FILES})
 
 target_link_libraries(conv ${ROOT_LIBRARIES})

@@ -1,139 +1,117 @@
-#define REDUCED_DATA
-//#define DEBUG
 //#define VISUALIZE
+//#define DEBUG
 
-#include "Converter.h"
 
 #include <iostream>
-#include <fstream>
+#include <string>
 #include <sstream>
-#include <iomanip>
+
+#include <dirent.h>
 
 #include "TFile.h"
 #include "TTree.h"
-#include "TText.h"
-#include "TApplication.h"
-#include "TSystem.h"
+#include <TChain.h>
 
-bool GetFileState(TString filename);
+
+#include "Converter.h"
+
+
+bool GetFileNames(const char* directory, std::vector<std::string>& filenames) {
+    filenames.clear();
+    DIR* dir = opendir(directory);
+    if(dir == NULL) return false;
+    while(1) {
+        dirent* entry = readdir(dir);
+        if(entry == NULL) break;
+        std::string filename = entry->d_name;
+        if(filename.length() < 5) continue;
+        if(filename.substr(filename.length()-5, 5) != ".root") continue;
+        filename.insert(0, directory);
+        filenames.push_back(filename);
+    }
+    return true;
+}
+
 
 int main(int argc, char** argv) {
 
-    if(argc<2 || argc>4) {
-        std::cout << "./conv [runID]([comment])\n";
+    if(argc != 2) {
+        std::cerr << "./" << argv[0] << " [runID]\n";
         return 1;
     }
 
+    int runID;
     std::stringstream ss1;
     ss1 << argv[1];
-    int runID;
     ss1 >> runID;
-    std::cout << "Run\t" << runID << " \n";
+    std::cout << "run\t" << runID << "\n";
 
-    std::string comment="No comments";
-    if(argc == 3) {
-        comment=argv[2];
-        std::cout << comment << "\n";
-    }
 
-    /*
-     * Set trees into TreeManager
-     */
+    // Get input file names
+    auto tin = new TChain("eventTree");
+    std::string dir = Form("build_in/run%d/", runID);
+    std::vector<std::string> fin_names;
 
-    TreeManager::SetRunID(runID);
-
-    // Input files
-    TString filename = Form("./rootfile/run%d.root", runID);
-#ifdef REDUCED_DATA
-    filename = Form("./rootfile/run%d.root_reduced", runID);
-#endif
-    if(!GetFileState(filename)) {
-        std::cout << filename << " not found\n";
+    if(GetFileNames(dir.c_str(), fin_names) == false) {
+        std::cerr << "Error : Directory \"./build_in/run" << runID << "\" not found.\n";
         return 1;
     }
-    TFile* fin = new TFile(filename);
 
-    // Output file
-    TFile* fout = new TFile(Form("./convfile/run%d_conv.root", runID), "recreate");
-
-
-    /*
-     * Set trees into converter
-     */
-
-    TString treename[] = {"Crate3", "Crate4", "Crate5"};
-    for(int k=0; k<sizeof(treename)/sizeof(TString); ++k) {
-        TreeManager::AddInputTree((TTree*) fin->Get(treename[k]));
+    if(fin_names.size()==0) {
+        std::cerr << "Error : There is no file in \"build_in/run" << runID << "\".\n";
+        return 1;
     }
 
-    /*
-     * Conversion
-     */
 
+    // Generate convereter
     Converter* conv = new Converter();
+
+
+    // Input tree
+    for(auto fname : fin_names) {
+        std::cout << fname << "\n";
+        tin->Add(fname.c_str());
+    }
+    conv->SetInputTree(tin);
+
+
+    // Generate output tree
+    auto fout = new TFile(Form("conv_file/run%d_conv.root", runID), "RECREATE");
+    auto tout = new TTree("eventTree", Form("run%d", runID));
+    conv->SetOutputTree(tout);
+
 
 #ifdef VISUALIZE
     conv->Visualize();
-//    TApplication app("app", &argc, argv);
 #endif
 
-    std::cout << "\n######################## Scanning entries ########################\n";
+    std::cout << "\n######################## Conversion started ########################\n";
 
-    TreeManager::CheckTimeStamp();
 
-    for(int entry=0; entry<conv->GetEntries(); ++entry) {
-        TreeManager::GetEntry(entry);
-        conv->Convert();
-        TreeManager::Fill();
-        if(entry % 1000 == 0){
-            std::cout << entry << "th\n";
-        }
+    for(int entry = 0; entry < tin->GetEntries(); ++entry) {
+        conv->Convert(entry);
+        if(entry % 10 == 0) std::cout << entry << "th\n";
 
 #ifdef VISUALIZE
         conv->Display(0); // xy plane
         conv->Display(1); // zy plane
-//        gSystem->ProcessEvents();
-//        gSystem->Sleep(1000);
-        conv->Print(Form("./pict/run%d_%d.pdf", runID, entry));
+        conv->Print(Form("pict/run%d_%d.png", runID, entry));
 #endif
+
 #ifdef DEBUG
         break;
 #endif
 
     }
+
+
     std::cout << "############################## END ###############################\n";
 
 
-    /*
-     * Write
-     */
-
-    TText note1(0, 0, comment.c_str());
-    note1.SetName("Comments");
-
     fout->cd();
-    TreeManager::GetEventTree()->Write();
-    TreeManager::GetStatusTree()->Write();
-    note1.Write();
-
+    tout->Write();
     fout->Close();
 
-#ifdef DEBUG
-    std::cout << "\n*-*-*-*-*-*-*-* DEBUG *-*-*-*-*-*-*-*\n";
-#endif
-#ifdef REDUCED_DATA
-    std::cout << "\n*-*-*-*-*-*-*-* REDUCED_DATA *-*-*-*-*-*-*-*\n";
-#endif
 
     return 0;
-}
-
-
-bool GetFileState(TString filename) {
-    FileStat_t info;
-    if(gSystem->GetPathInfo(filename.Data(), info)) {
-        std::cout << "Error: " << filename << " not found\n";
-        return false;
-    }
-    return true;
 }

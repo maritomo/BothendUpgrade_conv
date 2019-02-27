@@ -92,25 +92,22 @@
 		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/BothReadDetector.cpp">
 			<Option target="conv"/>
 		</Unit>
+		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/COSMIC.cpp">
+			<Option target="conv"/>
+		</Unit>
+		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/COSMICManager.cpp">
+			<Option target="conv"/>
+		</Unit>
+		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/CSI.cpp">
+			<Option target="conv"/>
+		</Unit>
+		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/CSIManager.cpp">
+			<Option target="conv"/>
+		</Unit>
 		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/Converter.cpp">
 			<Option target="conv"/>
 		</Unit>
 		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/CosmicRay.cpp">
-			<Option target="conv"/>
-		</Unit>
-		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/CsI.cpp">
-			<Option target="conv"/>
-		</Unit>
-		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/CsIManager.cpp">
-			<Option target="conv"/>
-		</Unit>
-		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/TreeManager.cpp">
-			<Option target="conv"/>
-		</Unit>
-		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/TriggerCounter.cpp">
-			<Option target="conv"/>
-		</Unit>
-		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/TriggerManager.cpp">
 			<Option target="conv"/>
 		</Unit>
 		<Unit filename="/Users/mari/work/MPPC/upgrade/cosmi/conv/src/Visualizer.cpp">

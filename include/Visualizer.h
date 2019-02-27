@@ -16,8 +16,11 @@ class Visualizer {
     virtual void Visualize() = 0;
     virtual void Display(int plane) = 0;
 
+    void GenerateCanvas();
     void Print(const char* filename);
     void GetVisAxis(int plane, int& axis_h, int& axis_v);
+
+    TCanvas* GetCanvas() { return m_canv; }
 
   protected:
     bool m_isVis;

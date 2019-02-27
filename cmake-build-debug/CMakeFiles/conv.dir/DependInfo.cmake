@@ -6,13 +6,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/mari/work/MPPC/upgrade/cosmi/conv/conv.cpp" "/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/conv.cpp.o"
   "/Users/mari/work/MPPC/upgrade/cosmi/conv/src/BothReadDetector.cpp" "/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/src/BothReadDetector.cpp.o"
+  "/Users/mari/work/MPPC/upgrade/cosmi/conv/src/COSMIC.cpp" "/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/src/COSMIC.cpp.o"
+  "/Users/mari/work/MPPC/upgrade/cosmi/conv/src/COSMICManager.cpp" "/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/src/COSMICManager.cpp.o"
+  "/Users/mari/work/MPPC/upgrade/cosmi/conv/src/CSI.cpp" "/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CSI.cpp.o"
+  "/Users/mari/work/MPPC/upgrade/cosmi/conv/src/CSIManager.cpp" "/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CSIManager.cpp.o"
   "/Users/mari/work/MPPC/upgrade/cosmi/conv/src/Converter.cpp" "/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/src/Converter.cpp.o"
   "/Users/mari/work/MPPC/upgrade/cosmi/conv/src/CosmicRay.cpp" "/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CosmicRay.cpp.o"
-  "/Users/mari/work/MPPC/upgrade/cosmi/conv/src/CsI.cpp" "/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CsI.cpp.o"
-  "/Users/mari/work/MPPC/upgrade/cosmi/conv/src/CsIManager.cpp" "/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/src/CsIManager.cpp.o"
-  "/Users/mari/work/MPPC/upgrade/cosmi/conv/src/TreeManager.cpp" "/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/src/TreeManager.cpp.o"
-  "/Users/mari/work/MPPC/upgrade/cosmi/conv/src/TriggerCounter.cpp" "/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/src/TriggerCounter.cpp.o"
-  "/Users/mari/work/MPPC/upgrade/cosmi/conv/src/TriggerManager.cpp" "/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/src/TriggerManager.cpp.o"
   "/Users/mari/work/MPPC/upgrade/cosmi/conv/src/Visualizer.cpp" "/Users/mari/work/MPPC/upgrade/cosmi/conv/cmake-build-debug/CMakeFiles/conv.dir/src/Visualizer.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
